@@ -70,11 +70,16 @@ namespace SeedPacket.Generators
         public dynamic ApplyRule (IGenerator generator)
         {
             return rule(generator);
-        } 
+        }
 
-    #endregion
+        public override string ToString ()
+        {
+            return $"{ruleName ?? "Not Named"} ({Description ?? "None"})";
+        }
 
-    #region Private Methods
+        #endregion
+
+        #region Private Methods
 
         private static bool NameMatches(string namematch, string propname)
         {

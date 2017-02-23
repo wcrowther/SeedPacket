@@ -1,15 +1,16 @@
 ﻿@using SeedPacket.Extensions
 @using MvcExamples.Models
 @{
-    // version1: var exampleList = new List<Example>().Seed(20, 100, "~/jsonseedsource.json");
+    // version1:
+    var exampleList = new List<Example>().Seed(20, 100, "~/jsonseedsource.json");
     // version2: var exampleList = new List<Example>().Seed(generator: new MultiGenerator("~/jsonseedsource.json"));
     // version3: 
-    var multi = new MultiGenerator("~/jsonseedsource.json", BaseRandom: new Random(24))
-    {
-        Debug = true
-    };
-    multi.Rules.Add(new Rule(typeof(DateTime), "Create%", g => g.BaseDateTime.AddDays(g.RowRandom.Next(-30, 1)), "DateTime Created In Last Month"));
-    var exampleList = new List<Example>().Seed(generator: multi, seedEnd: 50);
+    //var multi = new MultiGenerator("~/jsonseedsource.json", BaseRandom: new Random(24))
+    //{
+    //    Debugging = true
+    //};
+    //multi.Rules.Add(new Rule(typeof(DateTime), "Create%", g => g.BaseDateTime.AddDays(g.RowRandom.Next(-30, 1)), "DateTime Created In Last Month"));
+    //var exampleList = new List<Example>().Seed(generator: multi, seedEnd: 50);
 
 }
 <div class="row">

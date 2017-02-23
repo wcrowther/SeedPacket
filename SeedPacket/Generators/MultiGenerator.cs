@@ -73,6 +73,7 @@ namespace SeedPacket.Generators
         {
             // Advanced random seeding of common English patterns and DateTimes.
             return new List<Rule>(){
+                new Rule(typeof(string),    "",                             g => RandomStringOrDefault(g),              "String",              "Random string from data or default" ),
                 new Rule(typeof(string),    "%firstname%,%givenname%",      g => RandomElement(g, "FirstName"),         "FirstName",            "Random firstName" ),
                 new Rule(typeof(string),    "%lastname%,%surname%",         g => RandomElement(g, "LastName"),          "LastName",             "Random lastname" ),
                 new Rule(typeof(string),    "%user%",                       g => RandomUserName(g),                     "User",                 "Random username" ),
@@ -89,9 +90,8 @@ namespace SeedPacket.Generators
                 new Rule(typeof(string),    "%email%",                      g => RandomEmail(g),                        "Email",                "Random email" ),
                 new Rule(typeof(int),       "%random%",                     g => g.RowRandomNumber,                     "RowRandomNumber",      "Random number"),
                 new Rule(typeof(string),    "%phone%,%cell%,%mobile%,%fax%",g => RandomPhone(g),                        "Phone/Cell/Mobile/Fax","Random phone/cell/mobile/fax" ),
-                new Rule(typeof(DateTime),  "",                             g => RandomDateTime(g, -17521, -17521),     "DateTime",             "Random Override of DateTime" ),
-                new Rule(typeof(DateTime?), "",                             g => RandomNullDateTime(g, -17521, -17521), "DateTime?",            "Random Override of DateTime?" ),
-                new Rule(typeof(string),   "",                              g => RandomStringOrDefault(g),              "String",              "Random string from data or default" )
+                new Rule(typeof(DateTime),  "",                             g => RandomDateTime(g, -17521, 17521),     "DateTime",             "Random Override of DateTime" ),
+                new Rule(typeof(DateTime?), "",                             g => RandomNullDateTime(g, -17521, 17521), "DateTime?",            "Random Override of DateTime?" )
             };
         }
 
@@ -100,7 +100,6 @@ namespace SeedPacket.Generators
         // Convert
         public string RandomElement (IGenerator generator, string identifier)
         {
-            System.Diagnostics.Debug.WriteLine(generator?.Property?.Name ?? "Unknown");
             var elementList = dataSource.GetElementList(identifier);
             int index = new Random(generator.RowRandomNumber).Next(elementList.Count);
 

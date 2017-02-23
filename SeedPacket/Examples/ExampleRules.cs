@@ -56,7 +56,7 @@ namespace SeedPacket.Examples
         // RULE:  new Rule(typeof(IEnumerable<Item>),"", g => ExampleRules.GenerateList(g), "Advanced List", ""),
         //public static IEnumerable GenerateList (IGenerator generator, int number = 5)
         //{
-        //    if (generator.Debug)
+        //    if (generator.Debugging)
         //    {
         //        Debug.WriteLine(string.Format("=== BEGIN GenerateList for Row {0} ===", generator.RowNumber));
         //    }

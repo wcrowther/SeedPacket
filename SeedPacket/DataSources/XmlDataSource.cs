@@ -64,5 +64,7 @@ namespace SeedPacket.DataSources
             }
             return new List<string>();
         }
+
+        public bool Debugging { get; set; }
     }
 }

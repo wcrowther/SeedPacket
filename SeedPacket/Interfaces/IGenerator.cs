@@ -12,7 +12,7 @@ namespace SeedPacket
 
         // Base 
         DateTime BaseDateTime { get; }
-        bool Debug { get; set; }
+        bool Debugging { get; set; }
 
         // Row Info
         int RowNumber { get; set; }

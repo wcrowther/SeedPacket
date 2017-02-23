@@ -31,7 +31,7 @@ namespace SeedPacket
             var seedList = new List<T>();
             bool firstRow = true;
 
-            if (_generator.Debug) {
+            if (_generator.Debugging) {
                 Debug.WriteLine("Begin Seed Creation for Type: " + typeof(T).Name);
             }
 
@@ -78,12 +78,10 @@ namespace SeedPacket
                 rule = generator.Rules.GetRuleByTypeAndName(property.PropertyType, property.Name);
                 cachedRules.Add(propertyNumber, rule);
 
-                if (generator.Debug)
-                {
-                    string ruleName = (rule.Is() ? rule.RuleName.ifBlank() : "No matching Rule");
-                    string ruleDebug = string.Format("First Seed RowNumber PropertyValue for {0}({1}) using rule: {2}.", property.Name, property.PropertyType, ruleName);
-                    Debug.WriteLine(ruleDebug); 
-                }
+                // Show rule used in console
+                string ruleName = (rule.Is() ? rule.RuleName.ifBlank() : "No matching Rule");
+                string ruleDebug = string.Format("First Seed RowNumber PropertyValue for {0}({1}) using rule: {2}.", property.Name, property.PropertyType, ruleName);
+                Debug.WriteLine(ruleDebug); 
             }
             else
             {

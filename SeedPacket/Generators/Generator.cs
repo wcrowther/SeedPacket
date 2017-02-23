@@ -26,7 +26,7 @@ namespace SeedPacket.Generators
         private Dictionary<string, object> currentRowValues = new Dictionary<string, object>();
         private int defaultSeed = 1234;
         private DateTime defaultDateTime = DateTime.Parse("1/1/2018");
-        private bool debug; // True to show debug messages
+        private bool debugging; // True to show Debug messages
 
         #endregion
 
@@ -38,10 +38,10 @@ namespace SeedPacket.Generators
             set { baseDateTime = value; }
         }
 
-        public bool Debug
+        public bool Debugging
         {
-            get { return debug; }
-            set { debug = value; }
+            get { return debugging; }
+            set { debugging = value; }
         }
 
         public int RowNumber { get; set; }
@@ -69,6 +69,5 @@ namespace SeedPacket.Generators
             rowRandomNumber = baseRandom.Next();
             rowRandom = new Random(rowRandomNumber);
         }
-
     }
 } 

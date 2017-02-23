@@ -12,7 +12,7 @@ namespace MvcExamples.Helpers
         {
             var rules = new CustomGenerator("~/Helpers/XmlGeneratorSource.xml", DateTime.Parse("1/1/2020"), new Random(44444))
             {
-                Debug = true
+                Debugging = true
             };
             var seedPacket = new SeedCore(rules);
             return seedPacket.SeedList(iEnumerable, seedBegin, seedEnd);
