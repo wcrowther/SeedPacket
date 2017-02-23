@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>NewLibrary Extensions for C#</h2>
+        <p>
+            This website is to provide documentation for the NewLibrary Nuget package that adds useful extension methods for C#,
+            including a new IEnumerable "Seed" methods that quickly generates customized poco seed data for any IEnumerable list.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h3>IEnumerable Seed Extension</h3>
+        <p>
+            The IEnumerable Seed extension method allows a developer to rapidly create seed data for prototyping and tests using the following
+            markup: <b>var items = new List&lt;items&gt;().Seed(5);</b> This will create and populate five Items to the list that will be
+            popluated with example data for each property on the class. These defaults are readily customized by a simple
+            rules engine that is differentiated by property type and field name.
+        </p>
+        <a class="btn btn-default" href="/Seed">Seed Examples &raquo;</a>
+    </div>
+    <div class="col-md-4">
+        <h3>Other IEnumerable Extensions</h3>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a>
+    </div>
+    <div class="col-md-4">
+        <h3>Useful String Extensions</h3>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a>
+    </div>
+</div>

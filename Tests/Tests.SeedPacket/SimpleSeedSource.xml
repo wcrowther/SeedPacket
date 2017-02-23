@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SimpleSeed>
+
+  <FirstName>Bob</FirstName>
+  <FirstName>Patricia</FirstName>
+  <FirstName>Michael</FirstName>
+  <FirstName>Susan</FirstName>
+  <FirstName>William</FirstName>
+  <FirstName>Mary</FirstName>
+  <FirstName>Robert</FirstName>
+
+  <LastName>Smith</LastName>
+  <LastName>Johnson</LastName>
+  <LastName>Williams</LastName>
+  <LastName>Jones</LastName>
+  <LastName>Brown</LastName>
+  <LastName>Davis</LastName>
+  <LastName>Miller</LastName>
+  <LastName>Wilson</LastName>
+  <LastName>Moore</LastName>
+  <LastName>Taylor</LastName>
+  <LastName>Anderson</LastName>
+  
+  <Product>dooHickey</Product>
+  <Product>gadget</Product>
+  <Product>widget</Product>
+  <Product>thingamajig</Product>
+  <Product>gizmo</Product>
+  <Product>whatchamacallit</Product>
+  <Product>doodad</Product>
+  <Product>gimmick</Product>
+  <Product>thingamabob</Product>
+  <Product>whatnot</Product>
+
+</SimpleSeed>

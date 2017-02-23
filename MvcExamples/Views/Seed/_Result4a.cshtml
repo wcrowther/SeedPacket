@@ -1,0 +1,40 @@
+﻿@using NewLibrary.ForType
+@using SeedPacket.Extensions
+@using MvcExamples.Models
+
+@{
+    var items3 = new List<Example>().Seed(7);
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            @foreach (var column in typeof(Example).GetMetaProperties())
+            {
+                <th>@column.Name</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in items3)
+        {
+            <tr>
+                @foreach (var prop in item.GetMetaProperties())
+                {
+                    object val = prop.GetInstanceValue();
+                    <td>@Html.ValueFor(a => val)</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+

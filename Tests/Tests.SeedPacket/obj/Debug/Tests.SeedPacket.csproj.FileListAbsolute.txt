@@ -1,0 +1,13 @@
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\bin\Debug\Tests.SeedPacket.dll.config
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\bin\Debug\Tests.SeedPacket.dll
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\bin\Debug\Tests.SeedPacket.pdb
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\bin\Debug\NewLibrary.dll
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\bin\Debug\Newtonsoft.Json.dll
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\bin\Debug\nunit.framework.dll
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\bin\Debug\SeedPacket.dll
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\bin\Debug\SeedPacket.pdb
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\bin\Debug\Newtonsoft.Json.xml
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\bin\Debug\nunit.framework.xml
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\obj\Debug\Tests.SeedPacket.csprojResolveAssemblyReference.cache
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\obj\Debug\Tests.SeedPacket.dll
+C:\Code\Trunk\SeedPacket\Tests\Tests.SeedPacket\obj\Debug\Tests.SeedPacket.pdb

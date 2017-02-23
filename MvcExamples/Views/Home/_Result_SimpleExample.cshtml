@@ -1,0 +1,31 @@
+﻿@using NewLibrary.ForType
+@using MvcExamples.Models
+@model List<User>
+
+<table class="table table-striped topSpace">
+    <thead>
+        <tr>
+            @foreach (var column in typeof(User).GetMetaProperties())
+            {
+                <th>@column.Name</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                @foreach (var prop in user.GetMetaProperties())
+                {
+                    object val = prop.GetInstanceValue();
+                    <td>@Html.ValueFor(a => val)</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+

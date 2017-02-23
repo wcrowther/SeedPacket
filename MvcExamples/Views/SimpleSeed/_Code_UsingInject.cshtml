@@ -1,0 +1,22 @@
+﻿
+<div class="codeExample topSpace">
+    <label class="codeLabelBlue">CODE:</label>
+    <div class="codeTitle codeTitleBlue">Be sure to import the <b>SeedPacket</b> namespace.</div>
+<code>
+<i>// Gets data from the referenced .xml file</i>
+var ss = new SimpleSeed("~/seedsource.xml");
+var userList = Enumerable.Range(100, 20)
+.Select(n => new User {
+        UserId    = n,
+        FirstName = ss.Inject("FirstName", n),
+        LastName  = ss.Inject("LastName", n),
+        Email     = ss.Inject("FirstName", n).FirstOrDefault() + 
+                    ss.Inject("LastName", n) + "@@" +
+                    ss.Inject("CompanyName", n) +
+                    ss.Inject("DomainExtension", n),
+        Created   = DateTime.Now.AddMonths(n)
+}).ToList();
+</code>
+</div>
+
+

@@ -1,0 +1,27 @@
+﻿using MvcExamples.Models;
+using SeedPacket;
+using System;
+using System.Linq;
+using System.Web.Mvc;
+
+
+namespace MvcExamples.Controllers
+{
+    public class SimpleSeedController : Controller
+    {
+        public ActionResult Index()
+        {
+            var simpleSeed = new SimpleSeed("~/seedsource.xml");
+            var itemList = Enumerable.Range(1, 10)
+                .Select(n => new Item
+                {
+                    ItemId = n,
+                    // ItemName = simpleSeed.GetRandom("FirstName"),
+                    ItemName = $"{simpleSeed.GetNext("FirstName", n)} {simpleSeed.GetNext("LastName", n)}",
+                    Created = DateTime.Now.AddHours(n)
+                });
+
+            return View(itemList.ToList());
+        }
+    }
+}
