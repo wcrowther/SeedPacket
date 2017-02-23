@@ -16,9 +16,11 @@ namespace SeedPacket.Generators
         protected IDataSource dataSource; 
         protected RulesSet rulesSet;
 
-        public MultiGenerator(  string sourceFilepath = null, string sourceString = null, 
+        public MultiGenerator(  string sourceFilepath = null,
+                                string sourceString = null, 
                                 RulesSet rulesSet = RulesSet.Advanced,
-                                DateTime? BaseDateTime = null, Random BaseRandom = null,
+                                DateTime? BaseDateTime = null,
+                                Random BaseRandom = null,
                                 SeedInputType seedInputType = SeedInputType.Auto )
             : base( BaseDateTime, BaseRandom )
         {

@@ -73,9 +73,8 @@ namespace SeedPacket.DataSources
                     jsonDataSource.Load(sourceFilePath);
                     sourceData = jsonDataSource;
                 }
-                catch (InvalidSourceFileException ex)
+                catch (InvalidSourceFileException)
                 {
-                    Debug.WriteLine(ex.Message);
                     try
                     {
                         xmlDataSource.Load(sourceFilePath);
@@ -101,7 +100,6 @@ namespace SeedPacket.DataSources
                 }
                 catch (InvalidSourceStringException ex)
                 {
-                    Debug.WriteLine(ex.Message);
                     try
                     {
                         xmlDataSource.Parse(sourceString);

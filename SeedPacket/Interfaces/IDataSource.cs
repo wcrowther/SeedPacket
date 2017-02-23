@@ -6,7 +6,6 @@ namespace SeedPacket.Interfaces
     public interface IDataSource 
     {
         List<string> GetElementList(string identifier);
-        bool Debugging { get; set; }
     }
 } 
 
