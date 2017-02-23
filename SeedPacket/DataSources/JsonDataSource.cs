@@ -45,8 +45,8 @@ namespace SeedPacket.DataSources
             {
                 return jsonData
                     .SelectToken($"..{identifier}")
-                    .Select(p => p.Value<string>())
-                    .ToList();
+                    ?.Select(p => p.Value<string>())
+                    ?.ToList() ?? new List<string>();
             }
             return new List<string>();
         }

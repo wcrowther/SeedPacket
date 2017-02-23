@@ -52,24 +52,25 @@ namespace SeedPacket.Examples
             return new List<T>().Seed(1, itemsToAdd);
         }
 
-        //// Match on an interface. This creates five items if IEnumerable (ignoring string).
-        //// RULE:  new Rule(typeof(IEnumerable<Item>),"", g => ExampleRules.GenerateList(g), "Advanced List", ""),
-        //public static IEnumerable GenerateList(IGenerator generator, int number = 5)
+        // Match on an interface. This creates five items if IEnumerable (ignoring string).
+        // RULE:  new Rule(typeof(IEnumerable<Item>),"", g => ExampleRules.GenerateList(g), "Advanced List", ""),
+        //public static IEnumerable GenerateList (IGenerator generator, int number = 5)
         //{
-        //    if (generator.Debug) {
+        //    if (generator.Debug)
+        //    {
         //        Debug.WriteLine(string.Format("=== BEGIN GenerateList for Row {0} ===", generator.RowNumber));
         //    }
         //    dynamic newItem = Activator.CreateInstance(generator.Property.PropertyType);
 
         //    // Use a new Rules based on the current row's RowRandom so that values are different in this loop
-        //    var rules = new MultiGenerator(BaseRandom: generator.RowRandom);
+        //    var nestedGenerator = new MultiGenerator(BaseRandom: generator.RowRandom);
 
         //    // NOTE: Extension method does not work on dynamics at runtime so use normal function call
-        //    var list = SeedExtensions.Seed(newItem, number, Rules: rules);
+        //    var list = SeedExtensions.Seed(newItem, number, generator: nestedGenerator);
 
         //    return list;
         //}
-    }
+   }
 } 
 
  

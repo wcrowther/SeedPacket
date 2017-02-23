@@ -90,8 +90,8 @@ namespace SeedPacket.Generators
                 new Rule(typeof(int),       "%random%",                     g => g.RowRandomNumber,                     "RowRandomNumber",      "Random number"),
                 new Rule(typeof(string),    "%phone%,%cell%,%mobile%,%fax%",g => RandomPhone(g),                        "Phone/Cell/Mobile/Fax","Random phone/cell/mobile/fax" ),
                 new Rule(typeof(DateTime),  "",                             g => RandomDateTime(g, -17521, -17521),     "DateTime",             "Random Override of DateTime" ),
-                new Rule(typeof(DateTime?), "",                             g => RandomNullDateTime(g, -17521, -17521), "DateTime?",            "Random Override of DateTime?" )
-                ,new Rule(typeof(string),   "",                            g => RandomStringOrDefault(g),               "String",               "Random string from data or default" )
+                new Rule(typeof(DateTime?), "",                             g => RandomNullDateTime(g, -17521, -17521), "DateTime?",            "Random Override of DateTime?" ),
+                new Rule(typeof(string),   "",                              g => RandomStringOrDefault(g),              "String",              "Random string from data or default" )
             };
         }
 

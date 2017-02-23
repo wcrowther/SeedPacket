@@ -4,14 +4,13 @@
 
 @{
     // inline in view to RAD or web pages purposes
-    var generator = new MultiGenerator(BaseDateTime: Convert.ToDateTime("1/1/2020"));
-    generator.Rules.AddRange(new List<Rule> {
-        new Rule(typeof(List<Item>), "", g => ExampleRules.AddItems<Item>(g, 5), "Nested List", "Calls nested seed function on list."),
-        new Rule( typeof(DateTime), "Create%", g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTime Created In Last Month")
-    });
-
-
-
+    var generator = new MultiGenerator(BaseDateTime: Convert.ToDateTime("1/1/2020"))
+    {
+        Rules = {
+            new Rule(typeof(List<Item>), "",        g => ExampleRules.AddItems<Item>(g, 5),                 "NestedList"),
+            new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth")
+        }
+    };
     var items = new List<Example>().Seed(100, 107, generator);
 }
 <table class="table table table-striped topSpace">
@@ -43,11 +42,11 @@
     </tbody>
 </table>
 
-@helper PropertiesList(List<Item> itemList){    
+@helper PropertiesList(List<Item> itemList){
 
-   if (itemList.Any()) {
-        @Html.DropDownList("Properties", itemList.Select(f => new SelectListItem { Value = f.ItemId.ToString(), Text = f.ItemName }), new { style = "width: 100px;" });
-    } else {
+        if (itemList.Any()) {
+            @Html.DropDownList("Properties", itemList.Select(f => new SelectListItem { Value = f.ItemId.ToString(), Text = f.ItemName }), new { style = "width: 100px;" });
+        } else {
         @:None  
     }
 }
