@@ -38,7 +38,7 @@ namespace MvcExamples.Controllers
 
             lists.Add(list0);
 
-            var seed1 = new SimpleSeed("~/jsonseedsource2.json", seedinputtype: SeedInputType.JsonFile);
+            var seed1 = new SimpleSeed("~/SourceFiles/jsonseedsource2.json", seedinputtype: SeedInputType.JsonFile);
             var list1 = Enumerable.Range(1, 8)
                 .Select(n => new Item
                 {
@@ -49,7 +49,7 @@ namespace MvcExamples.Controllers
 
             lists.Add(list1);
 
-            var seed2 = new SimpleSeed("~/seedsource.xml", seedinputtype: SeedInputType.XmlFile);
+            var seed2 = new SimpleSeed("~/SourceFiles/seedsource.xml", seedinputtype: SeedInputType.XmlFile);
             var list2 = Enumerable.Range(1, 3)
                 .Select(n => new Item
                 {
@@ -82,7 +82,7 @@ namespace MvcExamples.Controllers
 
             lists.Add(list4);
 
-            var seed5 = new SimpleSeed("~/jsonseedsource.json");
+            var seed5 = new SimpleSeed("~/SourceFiles/jsonseedsource.json");
             var list5 = Enumerable.Range(2, 4)
                 .Select(n => new Item
                 {
@@ -104,7 +104,7 @@ namespace MvcExamples.Controllers
 
             lists.Add(list6);
 
-            var seed7 = new SimpleSeed("~/seedsource.xml");
+            var seed7 = new SimpleSeed("~/SourceFiles/seedsource.xml");
             var list7 = Enumerable.Range(1, 5)
                 .Select(n => new Item
                 {

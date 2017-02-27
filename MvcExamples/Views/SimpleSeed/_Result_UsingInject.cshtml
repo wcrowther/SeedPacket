@@ -1,7 +1,7 @@
 ﻿@using SeedPacket
 @using MvcExamples.Models
 @{ 
-    var ss = new SimpleSeed("~/seedsource.xml");
+    var ss = new SimpleSeed("~/SourceFiles/seedsource.xml");
     var userList = Enumerable.Range(100, 20)
     .Select(n => new User
     {

@@ -68,7 +68,7 @@ namespace SeedPacket
         {
             Rule rule = null;
             MetaProperty property = metaProperties[propertyNumber];
-            generator.Property = property;  // Put property in generator current property
+            generator.CurrentProperty = property;  // Put property in generator current property
 
             if (!property.CanWrite)
                 return;

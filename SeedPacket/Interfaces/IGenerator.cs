@@ -21,7 +21,7 @@ namespace SeedPacket
         Dictionary<string, object> CurrentRowValues { get; }
         void GetNextRowRandom ();
 
-        // Current Property
-        MetaProperty Property { get; set; }
+        // Current CurrentProperty
+        MetaProperty CurrentProperty { get; set; }
     }
 }

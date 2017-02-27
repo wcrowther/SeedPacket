@@ -16,8 +16,8 @@ namespace SeedPacket.Examples
         public static object AlternatingFormat(IGenerator generator)
         {
             string seed = generator.RowNumber.ToString();
-            string format1 = generator.Property.Name + "/" + seed;
-            string format2 = generator.Property.Name + "_" + seed;
+            string format1 = generator.CurrentProperty.Name + "/" + seed;
+            string format2 = generator.CurrentProperty.Name + "_" + seed;
 
             return (generator.RowNumber % 2 == 0) ? format1 : format2;
         }
@@ -60,7 +60,7 @@ namespace SeedPacket.Examples
         //    {
         //        Debug.WriteLine(string.Format("=== BEGIN GenerateList for Row {0} ===", generator.RowNumber));
         //    }
-        //    dynamic newItem = Activator.CreateInstance(generator.Property.PropertyType);
+        //    dynamic newItem = Activator.CreateInstance(generator.CurrentProperty.PropertyType);
 
         //    // Use a new Rules based on the current row's RowRandom so that values are different in this loop
         //    var nestedGenerator = new MultiGenerator(BaseRandom: generator.RowRandom);

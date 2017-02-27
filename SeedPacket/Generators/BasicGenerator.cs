@@ -17,7 +17,7 @@ namespace SeedPacket.Generators
         public List<Rule> GetRules()
         {
              return new List<Rule>(){
-                    new Rule(typeof(string),     "", g => g.Property.Name + g.RowNumber.ToString(),   "Basic string",   "Returns propertyName + RowNumber."),
+                    new Rule(typeof(string),     "", g => g.CurrentProperty.Name + g.RowNumber.ToString(),   "Basic string",   "Returns propertyName + RowNumber."),
                     new Rule(typeof(bool),       "", g => g.RowNumber % 2 == 0 ? true : false,        "Basic bool",     "Alternating true & false."),
                     new Rule(typeof(int),        "", g => g.RowNumber,                                "Basic int",      "Returns RowNumber"),
                     new Rule(typeof(long),       "", g => (long) g.RowNumber,                         "Basic long",     "Returns RowNumber"),

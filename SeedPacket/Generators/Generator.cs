@@ -62,7 +62,7 @@ namespace SeedPacket.Generators
             get { return currentRowValues; }
         }
 
-        public MetaProperty Property { get; set; }
+        public MetaProperty CurrentProperty { get; set; }
 
         public void GetNextRowRandom ()
         {

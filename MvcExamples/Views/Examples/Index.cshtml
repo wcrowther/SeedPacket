@@ -2,10 +2,10 @@
 @using MvcExamples.Models
 @{
     // version1:
-    var exampleList = new List<Example>().Seed(20, 100, "~/jsonseedsource.json");
-    // version2: var exampleList = new List<Example>().Seed(generator: new MultiGenerator("~/jsonseedsource.json"));
+    var exampleList = new List<Example>().Seed(20, 100, "~/SourceFiles/jsonseedsource.json");
+    // version2: var exampleList = new List<Example>().Seed(generator: new MultiGenerator("~/SourceFiles/jsonseedsource.json"));
     // version3: 
-    //var multi = new MultiGenerator("~/jsonseedsource.json", BaseRandom: new Random(24))
+    //var multi = new MultiGenerator("~/SourceFiles/jsonseedsource.json", BaseRandom: new Random(24))
     //{
     //    Debugging = true
     //};
@@ -26,6 +26,7 @@
                     <th>LastName</th>
                     <th>Email</th>
                     <th>Investments</th>
+                    <th>State</th>
                     <th>Created</th>
                     <th>New Field</th>
                 </tr>
@@ -39,6 +40,7 @@
                         <td>@example.LastName</td>
                         <td>@example.Email</td>
                         <td>@example.Investments</td>
+                        <td>@example.State</td>
                         <td>@example.Created</td>
                         <td>@example.Properties</td>
                     </tr>

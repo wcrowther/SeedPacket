@@ -12,6 +12,8 @@ namespace MvcExamples.Models
         public string LastName { get; set; }
         public decimal NetWorth { get; set; }
         public decimal? Investments { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
         public string Email { get; set; }
         public Guid ExampleGuid { get; set; }
         public DateTime Created { get; set; }
