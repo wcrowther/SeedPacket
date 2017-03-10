@@ -32,7 +32,9 @@ namespace SeedPacket
             bool firstRow = true;
 
             if (_generator.Debugging) {
+                Debug.WriteLine("-----------------------------------------------------");
                 Debug.WriteLine("Begin Seed Creation for Type: " + typeof(T).Name);
+                Debug.WriteLine("-----------------------------------------------------");
             }
 
             for (int rowNumber = _generator.SeedBegin; rowNumber <= _generator.SeedEnd; rowNumber++)
@@ -40,6 +42,12 @@ namespace SeedPacket
                 CreateRow(seedList, metaProperties, firstRow, _generator, cachedRules, rowNumber);
                 firstRow = false;
             }
+
+            if (_generator.Debugging)
+            {
+                Debug.WriteLine("-----------------------------------------------------");
+            }
+
             iEnumerable = seedList;
 
             return iEnumerable;
@@ -80,7 +88,7 @@ namespace SeedPacket
 
                 // Show rule used in console
                 string ruleName = (rule.Is() ? rule.RuleName.ifBlank() : "No matching Rule");
-                string ruleDebug = string.Format("First Seed RowNumber PropertyValue for {0}({1}) using rule: {2}.", property.Name, property.PropertyType, ruleName);
+                string ruleDebug = string.Format("Property: {0}({1}) using rule: {2}.", property.Name, property.PropertyType, ruleName);
                 Debug.WriteLine(ruleDebug); 
             }
             else
