@@ -13,25 +13,30 @@ namespace SeedPacket.Generators
 {
     public class MultiGenerator : Generator, IGenerator 
     {
-        protected IDataSource dataSource; 
-        protected RulesSet rulesSet;
+        protected IDataSource _dataSource; 
+        protected RulesSet _rulesSet;
 
         public MultiGenerator(  string sourceFilepath = null,
                                 string sourceString = null, 
-                                RulesSet rulesSet = RulesSet.Advanced,
-                                DateTime? BaseDateTime = null,
-                                Random BaseRandom = null,
-                                SeedInputType seedInputType = SeedInputType.Auto )
-            : base( BaseDateTime, BaseRandom )
+                                SeedInputType seedInputType = SeedInputType.Auto,
+                                RulesSet rulesSet = RulesSet.Advanced
+                                )
         {
-            dataSource = new MultiDataSource(sourceFilepath, sourceString, seedInputType);
-            this.rulesSet = rulesSet;
+            _dataSource = new MultiDataSource(sourceFilepath, sourceString, seedInputType);
+            _rulesSet = rulesSet;
+            GetRules();
+        }
+
+        public MultiGenerator ( IDataSource datasource, RulesSet rulesSet = RulesSet.Advanced )
+        {
+            _dataSource = datasource;
+            _rulesSet = rulesSet;
             GetRules();
         }
 
         private void GetRules()
         {
-            switch (rulesSet)
+            switch (_rulesSet)
             {
                 case RulesSet.None:
                     // No rules loaded. Add rules manually
@@ -101,7 +106,7 @@ namespace SeedPacket.Generators
         // Convert
         public string RandomElement (IGenerator generator, string identifier)
         {
-            var elementList = dataSource.GetElementList(identifier);
+            var elementList = _dataSource.GetElementList(identifier);
             int index = new Random(generator.RowRandomNumber).Next(elementList.Count);
 
             return elementList?.ElementAtOrDefault(index);
@@ -109,7 +114,7 @@ namespace SeedPacket.Generators
 
         public dynamic RandomElement (IGenerator generator, string identifier, TypeCode typeCode)
         {
-            var elementList = dataSource.GetElementList(identifier);
+            var elementList = _dataSource.GetElementList(identifier);
             int index = new Random(generator.RowRandomNumber).Next(elementList.Count);
 
             return Convert.ChangeType(elementList?.ElementAtOrDefault(index), typeCode);
@@ -119,7 +124,7 @@ namespace SeedPacket.Generators
         {
             var propertyName = generator.CurrentProperty?.Name ?? "";
             string defaultValue = propertyName + generator.RowNumber.ToString();
-            var elementList = dataSource.GetElementList(propertyName);
+            var elementList = _dataSource.GetElementList(propertyName);
             int index = new Random(generator.RowRandomNumber).Next(elementList.Count);
 
             return elementList?.ElementAtOrDefault(index) ?? defaultValue;
@@ -129,7 +134,7 @@ namespace SeedPacket.Generators
         {
             // Will loop back to beginning if rownumber is greater than number of elements in list
 
-            List<string> strings = dataSource.GetElementList(identifier);
+            List<string> strings = _dataSource.GetElementList(identifier);
             int count = strings.Count;
             if (count == 0)
                 return "";
@@ -173,7 +178,6 @@ namespace SeedPacket.Generators
         }
 
         #endregion
-
 
         #region Random Generate Methods
 
@@ -237,7 +241,6 @@ namespace SeedPacket.Generators
         }
 
         #endregion
-
     }
 
     public static class DictionaryHelper

@@ -8,11 +8,7 @@ namespace SeedPacket.Generators
 {
     public class BasicGenerator : Generator, IGenerator 
     {
-        public BasicGenerator ( DateTime? BaseDateTime = null, Random BaseRandom = null, bool Debug = false) 
-                                : base(BaseDateTime, BaseRandom)
-        {
-
-        }
+        public BasicGenerator ( ) {}
 
         public List<Rule> GetRules()
         {

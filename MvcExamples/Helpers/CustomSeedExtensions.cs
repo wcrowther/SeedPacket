@@ -10,20 +10,24 @@ namespace MvcExamples.Helpers
     {
         public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin = 1, int seedEnd = 10) where T : new()
         {
-            var rules = new CustomGenerator("~/Helpers/XmlGeneratorSource.xml", DateTime.Parse("1/1/2020"), new Random(44444))
+            var rules = new CustomGenerator("~/Helpers/XmlGeneratorSource.xml")
             {
-                Debugging = true
+                Debugging = true,
+                SeedBegin = seedBegin,
+                SeedEnd = seedEnd,
+                BaseDateTime = DateTime.Parse("1/1/2020"),
+                BaseRandom = new Random(44444)
             };
             var seedPacket = new SeedCore(rules);
-            return seedPacket.SeedList(iEnumerable, seedBegin, seedEnd);
+            return seedPacket.SeedList(iEnumerable);
         }
 
         public class CustomGenerator : MultiGenerator
         {
-            public CustomGenerator (string sourceFilepath = null, DateTime? baseDateTime = null,
-                                    Random baseRandom = null, RulesSet rulesSet = RulesSet.Advanced) 
-                : base(sourceFilepath, BaseRandom: baseRandom, BaseDateTime: baseDateTime, rulesSet: rulesSet )
+            public CustomGenerator (string sourceFilepath = null, RulesSet rulesSet = RulesSet.Advanced) 
+                : base(sourceFilepath, rulesSet: rulesSet )
             {
+
                 // Base multigenerator defaults to Advanced RuleSet
                 Rules.AddRange(new List<Rule>{
                     new Rule (typeof(string), "action%", g => NextElement(g, "Action"),                           "Custom Action",    "Fills any string fields named Action"),

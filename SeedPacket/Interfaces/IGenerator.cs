@@ -4,13 +4,18 @@ using System;
 using NewLibrary.ForType;
 using SeedPacket.Interfaces;
 
-namespace SeedPacket
+namespace SeedPacket.Interfaces
 {
     public interface IGenerator
     {
         Rules Rules { get; }
 
+        // Seed Range
+        int SeedBegin { get; set; }
+        int SeedEnd { get; set; }
+
         // Base 
+        Random BaseRandom { get; }
         DateTime BaseDateTime { get; }
         bool Debugging { get; set; }
 

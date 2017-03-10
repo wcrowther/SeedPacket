@@ -19,14 +19,19 @@ namespace SeedPacket.Extensions
 
         public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin, int seedEnd, string filePath) where T : new()
         {
-            var seedCore = new SeedCore(new MultiGenerator(filePath));
-            return seedCore.SeedList(iEnumerable, seedBegin, seedEnd);
+            var seedCore = new SeedCore(
+                    new MultiGenerator(filePath) { SeedBegin = seedBegin, SeedEnd = seedEnd }
+                );
+            return seedCore.SeedList(iEnumerable);
         }
 
-        public static IEnumerable<T> Seed<T>(this IEnumerable<T> iEnumerable, int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) where T : new()
+        public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) where T : new()
         {
             var seedCore = new SeedCore(generator);
-            return seedCore.SeedList(iEnumerable, seedBegin, seedEnd);
+            generator.SeedBegin = seedBegin;
+            generator.SeedEnd = seedEnd;
+
+            return seedCore.SeedList(iEnumerable);
         }
     }
 } 

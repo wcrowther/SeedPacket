@@ -20,7 +20,7 @@ namespace SeedPacket
             _generator = generator ?? new MultiGenerator(); 
         }
 
-        public  IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable, int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) where T : new()
+        public  IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable, IGenerator generator = null) where T : new()
         {
             if (generator.Is())
                 _generator = generator;
@@ -35,7 +35,7 @@ namespace SeedPacket
                 Debug.WriteLine("Begin Seed Creation for Type: " + typeof(T).Name);
             }
 
-            for (int rowNumber = seedBegin; rowNumber <= seedEnd; rowNumber++)
+            for (int rowNumber = _generator.SeedBegin; rowNumber <= _generator.SeedEnd; rowNumber++)
             {
                 CreateRow(seedList, metaProperties, firstRow, _generator, cachedRules, rowNumber);
                 firstRow = false;

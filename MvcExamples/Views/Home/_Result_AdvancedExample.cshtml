@@ -4,8 +4,9 @@
 
 @{
     // inline in view to RAD or web pages purposes
-    var generator = new MultiGenerator(BaseDateTime: Convert.ToDateTime("1/1/2020"))
+    var generator = new MultiGenerator()
     {
+        BaseDateTime = Convert.ToDateTime("1/1/2020"),
         Rules = {
             new Rule(typeof(List<Item>), "",        g => ExampleRules.AddItems<Item>(g, 5),                 "NestedList"),
             new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth")

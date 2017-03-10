@@ -11,8 +11,12 @@ namespace MvcExamples.Controllers
     {
         public ActionResult Index(int rows = 20, bool fromFile = false)
         {
-            var generator = fromFile ? new MultiGenerator(sourceFilepath: "~/Code/sourceData2.xml") : new MultiGenerator(sourceString: GetXmlString() );
-            generator.Rules.Add(  new Rule(typeof(List<Item>), "", g => ExampleRules.AddItems<Item>(g))  );
+            var fileGenerator = new MultiGenerator(sourceFilepath: "~/Code/sourceData2.xml");
+            var sourceGenerator = new MultiGenerator(sourceString: GetXmlString());
+            var generator = fromFile ? fileGenerator : sourceGenerator;
+
+            generator.Rules.Add(  new Rule(typeof(List<Item>), "", g => ExampleRules.AddItems<Item>(g)) );
+
             var users = new List<User>().Seed(1, rows , generator);
 
             return View("Index", users);

@@ -121,6 +121,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\CustomExtensions.cs" />
     <Compile Include="Code\CustomGenerator.cs" />
     <Compile Include="Controllers\ExtendingController.cs" />
     <Compile Include="Controllers\ExamplesController.cs" />

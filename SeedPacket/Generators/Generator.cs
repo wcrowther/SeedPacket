@@ -9,33 +9,52 @@ namespace SeedPacket.Generators
     public abstract class Generator : IGenerator 
     {
 
-        public Generator (  DateTime? BaseDateTime = null,
-                            Random BaseRandom = null )
+        public Generator ()
         {
-            baseRandom = BaseRandom ?? new Random(defaultSeed);
-            baseDateTime = BaseDateTime;
             GetNextRowRandom();
         }
 
-   #region Private Fields
+        #region Private Fields
 
+        private int seedBegin = 1;
+        private int seedEnd = 10;
         private Random baseRandom;
         private Random rowRandom;
         private int rowRandomNumber;
         private DateTime? baseDateTime;
         private Dictionary<string, object> currentRowValues = new Dictionary<string, object>();
-        private int defaultSeed = 1234;
+        private int defaultSeed = 12345;
         private DateTime defaultDateTime = DateTime.Parse("1/1/2018");
         private bool debugging; // True to show Debug messages
 
         #endregion
 
+        public int SeedBegin
+        {
+            get { return seedBegin; }
+            set { seedBegin = value; }
+        }
+
+        public int SeedEnd
+        {
+            get { return seedEnd; }
+            set { seedEnd = value; }
+        }
+
         public Rules Rules { get; set; } = new Rules();
+
+        public Random BaseRandom
+        {
+            get {
+                return baseRandom ?? new Random(defaultSeed);
+            }
+            set { baseRandom = value; }
+        }
 
         public DateTime BaseDateTime
         {
             get { return baseDateTime ?? defaultDateTime; }
-            set { baseDateTime = value; }
+            set { baseDateTime = value ; }
         }
 
         public bool Debugging
@@ -66,7 +85,7 @@ namespace SeedPacket.Generators
 
         public void GetNextRowRandom ()
         {
-            rowRandomNumber = baseRandom.Next();
+            rowRandomNumber = BaseRandom.Next();
             rowRandom = new Random(rowRandomNumber);
         }
     }
