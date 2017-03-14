@@ -1,0 +1,22 @@
+
+1. Add "bool AppendToDefaultData {get;}" to IDataSource interface
+2. Add AppendToDefaultData property to json and xml datasources
+3. Add json default imbedded file
+4. In Parse add code along the lines of 
+
+var mergeSettings = new JsonMergeSettings
+{
+    MergeArrayHandling = MergeArrayHandling.Union
+};
+var mergedArray = dataObject1.SelectToken("data") as JArray;
+
+see:
+http://stackoverflow.com/questions/21160337/how-can-i-merge-two-jobject
+
+5. Similar code in XML version
+
+maybe:
+http://stackoverflow.com/questions/4937875/merging-two-xml-files-linq
+
+6. Add bool param on constructor
+7. Pass param down to Xml and Json constructors
