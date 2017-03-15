@@ -125,9 +125,9 @@
     <Compile Include="Code\CustomGenerator.cs" />
     <Compile Include="Controllers\ExtendingController.cs" />
     <Compile Include="Controllers\ExamplesController.cs" />
+    <Compile Include="Controllers\SeedController.cs" />
     <Compile Include="Controllers\SimpleSeedController.cs" />
     <Compile Include="Controllers\RulesEngineController.cs" />
-    <Compile Include="Controllers\SeedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -204,27 +204,18 @@
     <Content Include="Views\Seed\SeedExamples.cshtml" />
     <Content Include="Views\Seed\SeedTests.cshtml" />
     <Content Include="Views\Shared\_HtmlCircle.cshtml" />
-    <Content Include="Views\Seed\_Code1a.cshtml" />
-    <Content Include="Views\Seed\_Result1.cshtml" />
-    <Content Include="Views\Seed\_Code2.cshtml" />
     <Content Include="Views\Home\_Result_SimpleExample.cshtml" />
-    <Content Include="Views\Seed\_Code3.cshtml" />
-    <Content Include="Views\Seed\_Result3.cshtml" />
-    <Content Include="Views\Seed\_Code4.cshtml" />
-    <Content Include="Views\Seed\_Code4a.cshtml" />
     <Content Include="Views\Home\_Result_AdvancedExample.cshtml" />
-    <Content Include="Views\Seed\_Code1a.cshtml" />
-    <Content Include="Views\Home\_Code_SimpleExample.cshtml" />
-    <Content Include="Views\Seed\_Result4a.cshtml" />
-    <Content Include="Views\Home\_Code_AdvancedExample.cshtml" />
+    <Content Include="Views\Home\_Example_SimpleExample.cshtml" />
+    <Content Include="Views\Home\_Example_AdvancedExample.cshtml" />
     <Content Include="Views\Extending\Index.cshtml" />
-    <Content Include="Views\Extending\_Code_UserClass.cshtml" />
-    <Content Include="Views\Extending\_Code_SimpleExamples.cshtml" />
+    <Content Include="Views\Extending\_Example_UserClass.cshtml" />
+    <Content Include="Views\Extending\_Example_SimpleExamples.cshtml" />
     <Content Include="Views\RulesEngine\Index.cshtml" />
     <Content Include="Views\SimpleSeed\Index.cshtml" />
-    <Content Include="Views\SimpleSeed\_Code_LinqRange.cshtml" />
+    <Content Include="Views\SimpleSeed\_Example_LinqRange.cshtml" />
     <Content Include="Views\SimpleSeed\_Result_LinqRange.cshtml" />
-    <Content Include="Views\SimpleSeed\_Code_UsingInject.cshtml" />
+    <Content Include="Views\SimpleSeed\_Example_UsingInject.cshtml" />
     <Content Include="Views\SimpleSeed\_Result_UsingInject.cshtml" />
     <Content Include="Views\Examples\Index.cshtml" />
   </ItemGroup>

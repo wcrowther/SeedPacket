@@ -17,7 +17,8 @@
     };
 
     seedExamples.refreshRowResults = function (evt) {
-        $results.load("/Home/GetResultRows/" + $resultsNumber.val() + "?seed=" + $randomSeed.val());
+        var seed = $randomSeed.val() || 1234;
+        $results.load("/Home/GetResultRows/" + $resultsNumber.val() + "?seed=" + seed );
     }
 
 })(window.seedExamples = window.seedExamples || {}, jQuery);

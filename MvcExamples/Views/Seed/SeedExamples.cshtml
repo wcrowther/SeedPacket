@@ -7,19 +7,18 @@
 
 <!DOCTYPE html>
 @{
-        Layout = null;
-        var gen = new BasicGenerator(Convert.ToDateTime("1/1/2014"));
-        gen.Rules.AddRange(new List<Rule> {
-            new Rule(typeof(DateTime), "create%", g => g.BaseDateTime.AddDays(g.RowNumber), "Example DateTime with nameMatch.", "Adds a day for each row."),
-            new Rule(typeof(ICollection<Link>), "", g => ExampleRule3(g), "Example Collection", "Calls nested seed function.")
-        }) ;
+    Layout = null;
+    var gen = new BasicGenerator() { BaseDateTime = Convert.ToDateTime("1/1/2014") };
+    gen.Rules.AddRange(new List<Rule> {
+        new Rule(typeof(DateTime), "create%", g => g.BaseDateTime.AddDays(g.RowNumber), "Example DateTime with nameMatch.", "Adds a day for each row."),
+        new Rule(typeof(ICollection<Link>), "", g => ExampleRule3(g), "Example Collection", "Calls nested seed function.")
+    });
 
     var words = new List<Word>().Seed(gen).ToList();
     var grid = new WebGrid(source: words, rowsPerPage: 10);
     var patterns = new List<Pattern>().Seed(15);
-}
 
-@functions{
+    @functions{
     public static object ExampleRule3(IGenerator generator)
     {
         int linksToAdd = generator.RowRandom.Next(0, 5);

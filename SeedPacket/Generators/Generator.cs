@@ -11,11 +11,13 @@ namespace SeedPacket.Generators
 
         public Generator ()
         {
+            baseRandom = new Random(defaultSeed);
             GetNextRowRandom();
         }
 
         #region Private Fields
 
+        private int defaultSeed = 12345;
         private int seedBegin = 1;
         private int seedEnd = 10;
         private Random baseRandom;
@@ -23,7 +25,6 @@ namespace SeedPacket.Generators
         private int rowRandomNumber;
         private DateTime? baseDateTime;
         private Dictionary<string, object> currentRowValues = new Dictionary<string, object>();
-        private int defaultSeed = 12345;
         private DateTime defaultDateTime = DateTime.Parse("1/1/2018");
         private bool debugging; // True to show Debug messages
 
@@ -45,9 +46,7 @@ namespace SeedPacket.Generators
 
         public Random BaseRandom
         {
-            get {
-                return baseRandom ?? new Random(defaultSeed);
-            }
+            get { return baseRandom;  }
             set { baseRandom = value; }
         }
 

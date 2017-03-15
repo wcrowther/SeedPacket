@@ -1,8 +1,8 @@
 ﻿
 <div class="row">
     <div class="col-md-12">
-        <img class="pull-right" src="/Content/Images/SeedPacket%20shadows.png" alt="SeedPacket Illustration" />
-        <h2>SeedPacket</h2>
+        <img class="pull-right" style="margin-top: 20px;" src="/Content/Images/SeedPacket%20shadows.png" alt="SeedPacket Illustration" />
+        <h2>SeedPacket 2</h2>
         <p>Created by Will Crowther</p>
         <h3>Overview</h3>
         <p>
@@ -12,9 +12,9 @@
         </p>
         <h3>How It Works</h3>
         <p>
-            SeedPacket adds a .seed() extension method onto IEnumerable so that you create a list of elements very easily. 
+            SeedPacket <b>adds a .seed() extension method</b> onto IEnumerable so that you create a list of elements very easily. 
             The rules engine keys off the datatype or interface, and name of an item's properties so that the data is appropriate to the type.
-            That is to say, "out-of-the-box" - email properties will be filled with valid emails, phone numbers filled with phone numbers,
+            That is to say, "out-of-the-box" email properties will be filled with valid emails, phone numbers filled with phone numbers,
             and names are names etc. By default, the rules engine loads up about 30 rules for common situations and will degrade to more generic 
             rules necessary. If you need to modify the default generated data, the rules are simple to create and modify,
             and come with a many examples, including a data generator that pulls from an xml file. The randomly generated data can be
@@ -37,7 +37,7 @@
             Creating seed data is as simple as importing SeedPacket from Nuget, adding the SeedPacket namespace, and calling .Seed()
             on an existing an IEnumerable such as List, etc. The <b>table on the right</b> was generated the code int he second example below.
         </p>
-        @{ Html.RenderPartial("_Code_SimpleExample"); }
+        @{ Html.RenderPartial("_Example_SimpleExample"); }
         <div class="randomSeed">
             Seed<input id="randomSeed" type="text" value="1234" maxlength="4" style="width:44px; text-align: center;" />
         </div>
@@ -81,7 +81,7 @@
             that get applied to each property on each class that is being seeded. The rules match first on data-type, then on match on property name
             with a last-added prioritization. By default, GenRules loads the "Advanced" ruleset which contains about thirty common rules.
         </p>
-        @{ Html.RenderPartial("_Code_AdvancedExample"); }
+        @{ Html.RenderPartial("_Example_AdvancedExample"); }
         @{ Html.RenderPartial("_Result_AdvancedExample"); }
     </div>
 </div>
