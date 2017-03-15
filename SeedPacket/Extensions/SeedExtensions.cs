@@ -27,11 +27,11 @@ namespace SeedPacket.Extensions
 
         public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) where T : new()
         {
-            var seedCore = new SeedCore(generator);
-            generator.SeedBegin = seedBegin;
-            generator.SeedEnd = seedEnd;
+            var gen = generator ?? new MultiGenerator();
+            gen.SeedBegin = seedBegin;
+            gen.SeedEnd = seedEnd;
 
-            return seedCore.SeedList(iEnumerable);
+            return new SeedCore(gen).SeedList(iEnumerable);
         }
     }
 } 
