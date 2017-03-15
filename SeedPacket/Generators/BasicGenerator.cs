@@ -25,12 +25,12 @@ namespace SeedPacket.Generators
                     new Rule(typeof(DateTime),   "", g => g.BaseDateTime,                                       "Basic DateTime",   "Uses BaseDateTime"),
                     new Rule(typeof(Guid),       "", g => RandomGuid(g),                                        "Basic Guid",       "Returns a Guid"),
 
-                    new Rule(typeof(bool?),      "", g => DiceRoll(g) ? (bool?) null : g.RowNumber % 2 == 0,    "Basic bool?",      "Returns alternating true & false (1 in 5 NULL)"),                                 
-                    new Rule(typeof(int?),       "", g => DiceRoll(g) ? (int?) null  :  g.RowNumber,            "Basic int?",       "Returns RowNumber (1 in 5 NULL)"),                                 
-                    new Rule(typeof(long?),      "", g => DiceRoll(g) ? (long?) null  : g.RowNumber,            "Basic long?",      "Returns RowNumber (1 in 5 NULL)"),
-                    new Rule(typeof(double?),    "", g => DiceRoll(g) ? (double?) null  : g.RowNumber,          "Basic double?",    "Returns RowNumber (1 in 5 NULL)"),
-                    new Rule(typeof(decimal?),   "", g => DiceRoll(g) ? (decimal?) null  : g.RowNumber,         "Basic decimal?",   "Returns RowNumber (1 in 5 NULL)"),                                 
-                    new Rule(typeof(DateTime?),  "", g => DiceRoll(g) ? (DateTime?) null  : g.BaseDateTime,     "Basic DateTime?",  "Returns BaseDateTime (1 in 5 NULL)")                             
+                    new Rule(typeof(bool?),      "", g => DiceRoll(g) ? (bool?) null : g.RowNumber % 2 == 0,    "Basic bool?",      "Returns alternating true & false (1 in 6 NULL)"),                                 
+                    new Rule(typeof(int?),       "", g => DiceRoll(g) ? (int?) null  :  g.RowNumber,            "Basic int?",       "Returns RowNumber (1 in 6 NULL)"),                                 
+                    new Rule(typeof(long?),      "", g => DiceRoll(g) ? (long?) null  : g.RowNumber,            "Basic long?",      "Returns RowNumber (1 in 6 NULL)"),
+                    new Rule(typeof(double?),    "", g => DiceRoll(g) ? (double?) null  : g.RowNumber,          "Basic double?",    "Returns RowNumber (1 in 6 NULL)"),
+                    new Rule(typeof(decimal?),   "", g => DiceRoll(g) ? (decimal?) null  : g.RowNumber,         "Basic decimal?",   "Returns RowNumber (1 in 6 NULL)"),                                 
+                    new Rule(typeof(DateTime?),  "", g => DiceRoll(g) ? (DateTime?) null  : g.BaseDateTime,     "Basic DateTime?",  "Returns BaseDateTime (1 in 6 NULL)")                             
                 };
         }
 
