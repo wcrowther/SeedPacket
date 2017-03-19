@@ -28,27 +28,24 @@ namespace Tests.SeedPacket
         [Test]
         public void SimpleSeed_Throws_With_Incorrect_Xml_File_Name ()
         {
-            SimpleSeed simpleSeed;
-            var exception = Assert.Throws<InvalidSourceFileException>(
-                () => simpleSeed = new SimpleSeed("NonExistingFile.xml")
+            Assert.Throws<InvalidSourceFileException>(
+                () => new SimpleSeed("NonExistingFile.xml")
             );
         }
 
         [Test]
         public void SimpleSeed_Throws_With_Invalid_XmlString ()
         {
-            SimpleSeed simpleSeed;
-            var exception = Assert.Throws<InvalidSourceStringException>(
-                () => simpleSeed = new SimpleSeed(sourcestring: "not Xml")
+            Assert.Throws<InvalidSourceStringException>(
+                () => new SimpleSeed(sourcestring: "not Xml")
             );
         }
 
         [Test]
         public void SimpleSeed_Throws_When_Both_XmlFilePath_And_XmlString_Are_Supplied ()
         {
-            SimpleSeed simpleSeed;
-            var exception = Assert.Throws<MultipleSourceException>(
-                () => simpleSeed = new SimpleSeed(pathToTestXmlFile, testEmptyXml)
+            Assert.Throws<MultipleSourceException>(
+                () =>  new SimpleSeed(pathToTestXmlFile, testEmptyXml)
             );
         }
 
@@ -101,19 +98,11 @@ namespace Tests.SeedPacket
 
         private string GetTestDirectory ()
         {
-
             // returns bin directory of this test project
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             // go up 2 levels to root of this test project
             return Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\"));
         }
-    }
-
-    public class Item
-    {
-        public int ItemId { get; set; }
-        public string ItemName { get; set; }
-        public DateTime Created { get; set; }
     }
 }

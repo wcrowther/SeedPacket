@@ -21,15 +21,15 @@
   <LastName>Taylor</LastName>
   <LastName>Anderson</LastName>
   
-  <Product>dooHickey</Product>
-  <Product>gadget</Product>
-  <Product>widget</Product>
-  <Product>thingamajig</Product>
-  <Product>gizmo</Product>
-  <Product>whatchamacallit</Product>
-  <Product>doodad</Product>
-  <Product>gimmick</Product>
-  <Product>thingamabob</Product>
-  <Product>whatnot</Product>
+  <ProductName>dooHickey</ProductName>
+  <ProductName>gadget</ProductName>
+  <ProductName>widget</ProductName>
+  <ProductName>thingamajig</ProductName>
+  <ProductName>gizmo</ProductName>
+  <ProductName>whatchamacallit</ProductName>
+  <ProductName>doodad</ProductName>
+  <ProductName>gimmick</ProductName>
+  <ProductName>thingamabob</ProductName>
+  <ProductName>whatnot</ProductName>
 
 </SimpleSeed>

@@ -16,7 +16,7 @@ namespace SeedPacket
     {
         private IGenerator _generator; 
 
-        public SeedCore (IGenerator generator) {
+        public SeedCore (IGenerator generator = null) {
             _generator = generator ?? new MultiGenerator(); 
         }
 
@@ -105,6 +105,5 @@ namespace SeedPacket
                 generator.CurrentRowValues.Add(property.Name, seedValue);
             }
         }
-
     }
 }

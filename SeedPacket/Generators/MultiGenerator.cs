@@ -79,7 +79,7 @@ namespace SeedPacket.Generators
         {
             // Advanced random seeding of common English patterns and DateTimes.
             return new List<Rule>(){
-                new Rule(typeof(string),    "",                             g => RandomStringOrDefault(g),             "String",               "Random string from data or default" ),
+                new Rule(typeof(string),    "",                             g => RandomElement(g),                     "String",               "Random string from data or default" ),
                 new Rule(typeof(string),    "%firstname%,%givenname%",      g => RandomElement(g, "FirstName"),        "FirstName",            "Random firstName" ),
                 new Rule(typeof(string),    "%lastname%,%surname%",         g => RandomElement(g, "LastName"),         "LastName",             "Random lastname" ),
                 new Rule(typeof(string),    "%user%",                       g => RandomUserName(g),                    "User",                 "Random username" ),
@@ -104,12 +104,15 @@ namespace SeedPacket.Generators
         #region Generic Random Generate Methods
 
         // Convert
-        public string RandomElement (IGenerator generator, string identifier)
+        public string RandomElement (IGenerator generator, string identifier = null)
         {
-            var elementList = _dataSource.GetElementList(identifier);
+            var propertyName = generator.CurrentProperty?.Name ?? "";
+            string defaultValue = propertyName + generator.RowNumber.ToString();
+
+            var elementList = _dataSource.GetElementList(identifier ?? propertyName);
             int index = new Random(generator.RowRandomNumber).Next(elementList.Count);
 
-            return elementList?.ElementAtOrDefault(index);
+            return elementList?.ElementAtOrDefault(index) ?? defaultValue;
         }
 
         public dynamic RandomElement (IGenerator generator, string identifier, TypeCode typeCode)
@@ -118,16 +121,6 @@ namespace SeedPacket.Generators
             int index = new Random(generator.RowRandomNumber).Next(elementList.Count);
 
             return Convert.ChangeType(elementList?.ElementAtOrDefault(index), typeCode);
-        }
-
-        public string RandomStringOrDefault (IGenerator generator)
-        {
-            var propertyName = generator.CurrentProperty?.Name ?? "";
-            string defaultValue = propertyName + generator.RowNumber.ToString();
-            var elementList = _dataSource.GetElementList(propertyName);
-            int index = new Random(generator.RowRandomNumber).Next(elementList.Count);
-
-            return elementList?.ElementAtOrDefault(index) ?? defaultValue;
         }
 
         public string NextElement (IGenerator generator, string identifier)

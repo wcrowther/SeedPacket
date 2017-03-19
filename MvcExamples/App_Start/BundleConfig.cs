@@ -29,6 +29,7 @@ namespace MvcExamples
                           "~/Content/grid.css",
                           "~/Content/site.css"
                       ));
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
