@@ -11,12 +11,12 @@ using SeedPacket.Enums;
 
 namespace SeedPacket.Generators
 {
-    public class MultiGenerator : Generator, IGenerator 
+    public class DualGenerator : Generator, IGenerator 
     {
         protected IDataSource _dataSource; 
         protected RulesSet _rulesSet;
 
-        public MultiGenerator(  string sourceFilepath = null,
+        public DualGenerator(  string sourceFilepath = null,
                                 string sourceString = null, 
                                 SeedInputType seedInputType = SeedInputType.Auto,
                                 RulesSet rulesSet = RulesSet.Advanced
@@ -27,7 +27,7 @@ namespace SeedPacket.Generators
             GetRules();
         }
 
-        public MultiGenerator ( IDataSource datasource, RulesSet rulesSet = RulesSet.Advanced )
+        public DualGenerator ( IDataSource datasource, RulesSet rulesSet = RulesSet.Advanced )
         {
             _dataSource = datasource;
             _rulesSet = rulesSet;

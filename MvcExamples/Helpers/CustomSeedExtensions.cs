@@ -22,7 +22,7 @@ namespace MvcExamples.Helpers
             return seedPacket.SeedList(iEnumerable);
         }
 
-        public class CustomGenerator : MultiGenerator
+        public class CustomGenerator : DualGenerator
         {
             public CustomGenerator (string sourceFilepath = null, RulesSet rulesSet = RulesSet.Advanced) 
                 : base(sourceFilepath, rulesSet: rulesSet )

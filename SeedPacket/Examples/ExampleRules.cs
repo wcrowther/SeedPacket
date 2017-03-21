@@ -63,7 +63,7 @@ namespace SeedPacket.Examples
         //    dynamic newItem = Activator.CreateInstance(generator.CurrentProperty.PropertyType);
 
         //    // Use a new Rules based on the current row's RowRandom so that values are different in this loop
-        //    var nestedGenerator = new MultiGenerator(){BaseRandom = generator.RowRandom};
+        //    var nestedGenerator = new DualGenerator(){BaseRandom = generator.RowRandom};
 
         //    // NOTE: Extension method does not work on dynamics at runtime so use normal function call
         //    var list = SeedExtensions.Seed(newItem, number, generator: nestedGenerator);

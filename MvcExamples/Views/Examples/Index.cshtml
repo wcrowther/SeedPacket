@@ -3,9 +3,9 @@
 @{
     // version1:
     var exampleList = new List<Example>().Seed(20, 100, "~/SourceFiles/jsonseedsource.json");
-    // version2: var exampleList = new List<Example>().Seed(generator: new MultiGenerator("~/SourceFiles/jsonseedsource.json"));
+    // version2: var exampleList = new List<Example>().Seed(generator: new DualGenerator("~/SourceFiles/jsonseedsource.json"));
     // version3: 
-    //var multi = new MultiGenerator("~/SourceFiles/jsonseedsource.json")
+    //var multi = new DualGenerator("~/SourceFiles/jsonseedsource.json")
     //{
     //    Debugging = true,
     //    BaseRandom = new Random(24)
