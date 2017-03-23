@@ -5,13 +5,13 @@
     var exampleList = new List<Example>().Seed(20, 100, "~/SourceFiles/jsonseedsource.json");
     // version2: var exampleList = new List<Example>().Seed(generator: new DualGenerator("~/SourceFiles/jsonseedsource.json"));
     // version3: 
-    //var multi = new DualGenerator("~/SourceFiles/jsonseedsource.json")
+    //var dual = new DualGenerator("~/SourceFiles/jsonseedsource.json")
     //{
     //    Debugging = true,
     //    BaseRandom = new Random(24)
     //};
-    //multi.Rules.Add(new Rule(typeof(DateTime), "Create%", g => g.BaseDateTime.AddDays(g.RowRandom.Next(-30, 1)), "DateTime Created In Last Month"));
-    //var exampleList = new List<Example>().Seed(generator: multi, seedEnd: 50);
+    //dual.Rules.Add(new Rule(typeof(DateTime), "Create%", g => g.BaseDateTime.AddDays(g.RowRandom.Next(-30, 1)), "DateTime Created In Last Month"));
+    //var exampleList = new List<Example>().Seed(generator: dual, seedEnd: 50);
 
 }
 <div class="row">

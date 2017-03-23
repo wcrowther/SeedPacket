@@ -45,9 +45,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="NewLibrary, Version=0.9.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NewLibrary.dll</HintPath>
+    <Reference Include="NewLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NewLibrary.Extensions.1.0.0\lib\NewLibrary.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -136,6 +136,7 @@
     <Compile Include="Helpers\CustomSeedExtensions.cs" />
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Models\ActionViewModel.cs" />
+    <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\Example.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\User.cs" />
@@ -219,6 +220,8 @@
     <Content Include="Views\SimpleSeed\_Example_UsingInject.cshtml" />
     <Content Include="Views\SimpleSeed\_Result_UsingInject.cshtml" />
     <Content Include="Views\Examples\Index.cshtml" />
+    <Content Include="Views\Examples\Test2.cshtml" />
+    <Content Include="Views\Examples\Test3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeedPacket\SeedPacket.csproj">

@@ -45,9 +45,12 @@
 
 @helper PropertiesList(List<Item> itemList){
 
-        if (itemList.Any()) {
-            @Html.DropDownList("Properties", itemList.Select(f => new SelectListItem { Value = f.ItemId.ToString(), Text = f.ItemName }), new { style = "width: 100px;" });
-        } else {
+    if (itemList.Any())
+    {
+        @Html.DropDownList("Properties", itemList.Select(f => new SelectListItem { Value = f.ItemId.ToString(), Text = f.ItemName }), new { style = "width: 100px;" });
+    }
+    else
+    {
         @:None  
     }
 }

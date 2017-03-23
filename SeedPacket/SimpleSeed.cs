@@ -19,7 +19,7 @@ namespace SeedPacket
         // Default Constructor
         public SimpleSeed(string sourcefilepath = null, string sourcestring = null, SeedInputType seedinputtype = SeedInputType.Auto)
         {
-            dataSource = new MultiDataSource(sourcefilepath, sourcestring, seedinputtype);
+            dataSource = new DualDataSource(sourcefilepath, sourcestring, seedinputtype);
         }
 
         // Alternative and unit testing constructor
