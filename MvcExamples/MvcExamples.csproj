@@ -135,9 +135,12 @@
     </Compile>
     <Compile Include="Helpers\CustomSeedExtensions.cs" />
     <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Models\InvoiceItem.cs" />
+    <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\ActionViewModel.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\Example.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Pattern.cs" />

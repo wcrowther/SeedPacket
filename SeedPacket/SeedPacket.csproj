@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSources\MultiDataSource.cs" />
+    <Compile Include="DataSources\DualDataSource.cs" />
     <Compile Include="DataSources\JsonDataSource.cs" />
     <Compile Include="DataSources\XmlDataSource.cs" />
     <Compile Include="Enums\SeedInputType.cs" />
@@ -58,9 +58,9 @@
     <Compile Include="Exceptions\InvalidSourceFileException.cs" />
     <Compile Include="Exceptions\NoSourceException.cs" />
     <Compile Include="Exceptions\InvalidSourceStringException.cs" />
-    <Compile Include="Exceptions\SingleSourceException.cs" />
+    <Compile Include="Exceptions\MultipleSourceException.cs" />
     <Compile Include="Generators\Generator.cs" />
-    <Compile Include="Generators\MultiGenerator.cs" />
+    <Compile Include="Generators\DualGenerator.cs" />
     <Compile Include="Generators\Rule.cs" />
     <Compile Include="Generators\Rules.cs" />
     <Compile Include="Interfaces\IGenerator.cs" />
