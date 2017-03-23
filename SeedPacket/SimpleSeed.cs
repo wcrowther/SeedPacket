@@ -31,7 +31,7 @@ namespace SeedPacket
         /// <summary>Gets the next named element looping back to the start if beyond last element</summary>
         public string Next(string identifier, int number, string ifNull = null)
         {
-            List<string> strings = dataSource.GetElementList(identifier);
+            List<string> strings = dataSource.GetElementList<string>(identifier);
             int count = strings.Count;
             if (count == 0)
             {
@@ -47,7 +47,7 @@ namespace SeedPacket
         /// <summary>Gets a 'random' element based on seeded random so will always be same sequence. Pass in unseeded random for different elements each time.</summary>
         public string Randomize(string identifier, string ifNull = null)
         {
-            List<string> strings = dataSource.GetElementList(identifier);
+            List<string> strings = dataSource.GetElementList<string>(identifier);
             int index = DefaultRandom.Next(strings.Count);
 
             return strings?.ElementAtOrDefault(index) ?? ifNull ?? Default;

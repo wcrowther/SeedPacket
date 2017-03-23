@@ -39,16 +39,16 @@ namespace SeedPacket.DataSources
             }
         }
 
-        public List<string> GetElementList(string identifier)
+        public List<T> GetElementList<T>(string identifier)
         {
             if (jsonData != null)
             {
                 return jsonData
                     .SelectToken($"..{identifier}")
-                    ?.Select(p => p.Value<string>())
-                    ?.ToList() ?? new List<string>();
+                    ?.Select(p => p.Value<T>())
+                    ?.ToList() ?? new List<T>();
             }
-            return new List<string>();
+            return new List<T>();
         }
     }
 }

@@ -123,10 +123,10 @@ namespace SeedPacket.DataSources
             }
         }
 
-        public List<string> GetElementList(string identifier)
+        public List<T> GetElementList<T>(string identifier)
         {
             // TODO ADD CACHING OF LIST?
-            return sourceData.GetElementList(identifier);
+            return sourceData.GetElementList<T>(identifier);
         }
     }
 }
