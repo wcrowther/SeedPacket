@@ -2,7 +2,7 @@
 
 namespace SeedPacket
 {
-    public class CustomGenerator : DualGenerator 
+    public class CustomGenerator : MultiGenerator 
     {
         public CustomGenerator( string xmlfilepath = null, string xmlstring = null)
                                 : base(xmlfilepath, xmlstring)

@@ -13,7 +13,7 @@ namespace MvcExamples.Code
     {
             public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin = 1, int seedEnd = 10, string filePath = null) where T : new()
             {
-                var generator = new DualGenerator(filePath) {
+                var generator = new MultiGenerator(filePath) {
                     SeedBegin = seedBegin,
                     SeedEnd = seedEnd,
                     BaseDateTime = DateTime.Now,

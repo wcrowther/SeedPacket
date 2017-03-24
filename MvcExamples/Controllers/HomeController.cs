@@ -20,7 +20,7 @@ namespace MvcExamples.Controllers
 
         public ActionResult GetResultRows(int? rows, int seed)
         {
-            var generator = new DualGenerator() { BaseRandom = new Random(seed)};
+            var generator = new MultiGenerator() { BaseRandom = new Random(seed)};
             var users = new List<User>().Seed(1, rows ?? 15, generator);
 
             return PartialView("_Result_SimpleExample", users);

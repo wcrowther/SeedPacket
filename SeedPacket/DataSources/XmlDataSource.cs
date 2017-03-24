@@ -56,13 +56,13 @@ namespace SeedPacket.DataSources
             }
         }
 
-        public List<T> GetElementList<T>(string identifier)
+        public List<string> GetElementList(string identifier)
         {
             if (sourceData != null && !identifier.isNullOrEmpty())
             {
-                return sourceData.Descendants(identifier).Select(x => x).OfType<T>().ToList();
+                return sourceData.Descendants(identifier).Select(x => (string)x).ToList();
             }
-            return new List<T>();
+            return new List<string>();
         }
     }
 }
