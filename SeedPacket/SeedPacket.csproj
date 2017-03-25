@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NewLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NewLibrary.Extensions.1.0.0\lib\NewLibrary.dll</HintPath>
+    <Reference Include="NewLibrary, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NewLibrary.Extensions.1.0.1\lib\NewLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSources\DualDataSource.cs" />
+    <Compile Include="DataSources\MultiDataSource.cs" />
     <Compile Include="DataSources\JsonDataSource.cs" />
     <Compile Include="DataSources\XmlDataSource.cs" />
     <Compile Include="Enums\SeedInputType.cs" />
@@ -60,7 +60,7 @@
     <Compile Include="Exceptions\InvalidSourceStringException.cs" />
     <Compile Include="Exceptions\MultipleSourceException.cs" />
     <Compile Include="Generators\Generator.cs" />
-    <Compile Include="Generators\DualGenerator.cs" />
+    <Compile Include="Generators\MultiGenerator.cs" />
     <Compile Include="Generators\Rule.cs" />
     <Compile Include="Generators\Rules.cs" />
     <Compile Include="Interfaces\IGenerator.cs" />

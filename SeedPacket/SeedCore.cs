@@ -17,7 +17,7 @@ namespace SeedPacket
         private IGenerator _generator; 
 
         public SeedCore (IGenerator generator = null) {
-            _generator = generator ?? new DualGenerator(); 
+            _generator = generator ?? new MultiGenerator(); 
         }
 
         public  IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable, IGenerator generator = null) where T : new()

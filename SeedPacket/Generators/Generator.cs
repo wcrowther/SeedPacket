@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using NewLibrary.ForType;
 using SeedPacket.Interfaces;
+using System.Dynamic;
 
 namespace SeedPacket.Generators
 {
@@ -27,6 +28,7 @@ namespace SeedPacket.Generators
         private Dictionary<string, object> currentRowValues = new Dictionary<string, object>();
         private DateTime defaultDateTime = DateTime.Parse("1/1/2018");
         private bool debugging; // True to show Debug messages
+        private ExpandoObject cache = new ExpandoObject();
 
         #endregion
 
@@ -40,6 +42,17 @@ namespace SeedPacket.Generators
         {
             get { return seedEnd; }
             set { seedEnd = value; }
+        }
+
+        public int RowCount
+        {
+            get { return SeedEnd - SeedBegin; }
+        }
+
+        public dynamic Cache
+        {
+            get { return cache; }
+            set { cache = value; }
         }
 
         public Rules Rules { get; set; } = new Rules();
