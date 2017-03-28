@@ -61,6 +61,7 @@
     <Compile Include="Exceptions\InvalidSourceStringException.cs" />
     <Compile Include="Exceptions\MultipleSourceException.cs" />
     <Compile Include="Functions\CacheExtensions.cs" />
+    <Compile Include="Functions\NextCacheItems.cs" />
     <Compile Include="Functions\RandomPhones.cs" />
     <Compile Include="Functions\RandomAddress.cs" />
     <Compile Include="Functions\RandomZip.cs" />
@@ -86,7 +87,7 @@
     <Compile Include="Extensions\SeedExtensions.cs" />
     <Compile Include="Enums\GenRulesSet.cs" />
     <Compile Include="Generators\BasicGenerator.cs" />
-    <Compile Include="Functions\RandomItemsFromCache.cs" />
+    <Compile Include="Functions\RandomCacheItems.cs" />
     <Compile Include="SeedCore.cs" />
     <Compile Include="SimpleSeed.cs" />
   </ItemGroup>

@@ -37,23 +37,13 @@ namespace SeedPacket.Generators
         public int SeedBegin
         {
             get { return seedBegin; }
-            set {
-                    if (value > seedEnd)
-                        throw new InvalidSeedParameters();
-                    else
-                        seedBegin = value;
-            }
+            set { seedBegin = value; }
         }
 
         public int SeedEnd
         {
             get { return seedEnd; }
-            set {
-                    if (value < seedBegin)
-                        throw new InvalidSeedParameters();
-                    else
-                        seedEnd = value;
-            }
+            set { seedEnd = value; }
         }
 
         public IDataSource Datasource

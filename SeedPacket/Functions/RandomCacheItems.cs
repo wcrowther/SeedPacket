@@ -9,15 +9,15 @@ namespace SeedPacket.Functions
 {
     public static partial class func
     {
-        public static List<T> RandomItemsFromCache<T> (IGenerator generator, string cacheListName, int min, int max, bool remove = true)
+        public static List<T> RandomCacheItems<T> (IGenerator generator, string cacheListName, int min, int max, bool remove = true)
         {
             ExpandoObject cache = generator.Cache;
             var cacheList = cache.GetByItemName<List<T>>(cacheListName);
 
-            return RandomItemsFromCache<T>(generator, cacheList, min, max, remove);
+            return RandomCacheItems<T>(generator, cacheList, min, max, remove);
         }
 
-        public static List<T> RandomItemsFromCache<T> (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true)
+        public static List<T> RandomCacheItems<T> (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true)
         {
             int count = new Random(generator.RowNumber).Next(min, max + 1);
             List<T> itemList = cacheList;

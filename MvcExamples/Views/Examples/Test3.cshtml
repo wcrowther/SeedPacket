@@ -26,60 +26,21 @@
         var generator = new MultiGenerator()
         {
             Rules =  {
-                new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth" ),
-                new Rule(typeof(List<InvoiceItem>), "", g => GetNextInvoiceItems(g), "GetNextInvoiceItems"),
-                new Rule(typeof(List<Invoice>), "",     g => func.RandomItemsFromCache<Invoice>(g, g.Cache.Invoices, 0, 5, true), "GetRandomInvoices", ""),
+                new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)),          "DateTimeInLastMonth" ),
+                new Rule(typeof(List<InvoiceItem>), "", g => func.NextCacheItems<InvoiceItem>(g, "InvoiceItems", 0, 15), "GetNextInvoiceItems"),
+                new Rule(typeof(List<Invoice>), "",     g => func.RandomCacheItems<Invoice>(g, g.Cache.Invoices, 0, 5),  "GetRandomInvoices", "")
             }
         };
-
         generator.Cache.InvoiceItems = new List<InvoiceItem>().Seed(1033333, 1033333 + (rowCount * 15), generator);
         generator.Cache.Invoices = new List<Invoice>().Seed(10234, 10234 + (rowCount * 5), generator);
 
         return new List<Account>().Seed(1, rowCount, generator).ToList(); ;
     }
 
-    // =============================================================================
-    // 1000 records * 5 invoices * 15 invoiceItems in 630 ms
-    // =============================================================================
-
-    //public List<Invoice> GetRandomInvoices (IGenerator generator)
-    //{
-    //    List<Invoice> invoices = generator.Cache.Invoices;
-    //    int count = new Random(generator.RowNumber).Next(0, 6);
-
-    //    return invoices.TakeRandom(generator.RowRandom, count).ToList();
-    //}
-
-    public List<T> RandomCacheItems<T> (IGenerator generator, dynamic cache, int min, int max, bool remove = true)
-    {
-        int count = new Random(generator.RowNumber).Next(min, max + 1);
-        List<T> itemList = cache;
-        return itemList.TakeRandomItems(generator.RowRandom, count).ToList();
-    }
-
-    public List<InvoiceItem> GetRandomInvoiceItems (IGenerator generator)
-    {
-        List<InvoiceItem> invoiceItems = generator.Cache.InvoiceItems;
-        int count = new Random(generator.RowNumber).Next(0, 6);
-
-        return invoiceItems.TakeRandomItems(generator.RowRandom, count).ToList();
-    }
-
-    // =============================================================================
-    // NEXT - Sequential example
-    // 1000 records random * 5 'next' invoices * 15 'next' invoiceItems in 350 ms
-    // =============================================================================
-
-    public List<InvoiceItem> GetNextInvoiceItems (IGenerator generator)
-    {
-        List<InvoiceItem> invoiceItems = generator.Cache.InvoiceItems;
-        int count = generator.RowRandom.Next(1, 7);
-
-        var rowInvoiceItems = invoiceItems.Take(count).ToList();
-        rowInvoiceItems.ForEach(i => invoiceItems.Remove(i));
-
-        return rowInvoiceItems;
-    }
+    // =======================================================================================
+    // RANDOM =>> 1000 records * 5 invoices * 15 invoiceItems in 630 ms
+    // NEXT   =>> 1000 records random * 5 'next' invoices * 15 'next' invoiceItems in 350 ms
+    // =======================================================================================
 }
 
 <h3>SeedPacket</h3>
