@@ -158,6 +158,7 @@
     <Content Include="Content\grid.css" />
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\SeedPacket shadows.png" />
+    <Content Include="Content\Images\SeedPacketImage.png" />
     <Content Include="Content\Images\seedpacket_Icon.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
