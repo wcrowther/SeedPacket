@@ -6,19 +6,19 @@
         <p>Created by Will Crowther</p>
         <h3>Overview</h3>
         <p>
-            SeedPacket is for the quick seeding of data on a List (or most types that implement IEnumerable). 
-            It is easy to use out of the box for prototyping, data generation, and unit testing. It customizable
-            with a powerful rules engine that can pull data from an external source such as an Xml file or string.
+            SeedPacket is for the quick seeding of data on a List (or most types that implement IEnumerable) that
+            works well with LINQ. It is easy to use, out of the box, for prototyping, data generation, and unit testing.
+            The customizable and powerful rules engine can pull data from an external source such as an Xml/Json file or string.
         </p>
         <h3>How It Works</h3>
         <p>
             SeedPacket <b>adds a .seed() extension method</b> onto IEnumerable so that you create a list of elements very easily. 
-            The rules engine keys off the datatype or interface, and name of an item's properties so that the data is appropriate to the type.
+            The rules engine keys off the datatype or interface, and name of an item's properties so that the data is appropriate to that type.
             That is to say, "out-of-the-box" email properties will be filled with valid emails, phone numbers filled with phone numbers,
             and names are names etc. By default, the rules engine loads up about 30 rules for common situations and will degrade to more generic 
             rules if necessary. If you need to modify the default generated data, the rules are simple to create and modify,
-            and come with a many examples, including a data generator that pulls from an xml file. The randomly generated data can be
-            set to always be static or to be random on each request.
+            and come with a many examples, including a data generator that pulls from an external source. The randomly generated data
+            can be set to always be static accross requests or to be random on each time.
         </p>
     </div>
     <div class="col-md-8">
@@ -34,7 +34,7 @@
     <div class="col-md-6">
         <h3>Simple Examples</h3>
         <p>
-            Creating seed data is as simple as importing SeedPacket from Nuget, adding the SeedPacket namespace, and calling .Seed()
+            Creating seed data is as simple as importing SeedPacket from Nuget, adding the SeedPacket.Extensions namespace, and calling .Seed()
             on an existing an IEnumerable such as List, etc. The <b>table on the right</b> was generated the code int he second example below.
         </p>
         @{ Html.RenderPartial("_Example_SimpleExample"); }

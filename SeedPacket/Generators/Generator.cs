@@ -4,6 +4,7 @@ using System.Globalization;
 using NewLibrary.ForType;
 using SeedPacket.Interfaces;
 using System.Dynamic;
+using SeedPacket.Exceptions;
 
 namespace SeedPacket.Generators
 {
@@ -26,27 +27,38 @@ namespace SeedPacket.Generators
         private int rowRandomNumber;
         private DateTime? baseDateTime;
         private Dictionary<string, object> currentRowValues = new Dictionary<string, object>();
-        private DateTime defaultDateTime = DateTime.Parse("1/1/2018");
+        private DateTime defaultDateTime = DateTime.Parse("1/1/2020");
         private bool debugging; // True to show Debug messages
         private ExpandoObject cache = new ExpandoObject();
+        protected IDataSource dataSource;
 
         #endregion
 
         public int SeedBegin
         {
             get { return seedBegin; }
-            set { seedBegin = value; }
+            set {
+                    if (value > seedEnd)
+                        throw new InvalidSeedParameters();
+                    else
+                        seedBegin = value;
+            }
         }
 
         public int SeedEnd
         {
             get { return seedEnd; }
-            set { seedEnd = value; }
+            set {
+                    if (value < seedBegin)
+                        throw new InvalidSeedParameters();
+                    else
+                        seedEnd = value;
+            }
         }
 
-        public int RowCount
+        public IDataSource Datasource
         {
-            get { return SeedEnd - SeedBegin; }
+            get { return dataSource; }
         }
 
         public dynamic Cache
@@ -73,6 +85,11 @@ namespace SeedPacket.Generators
         {
             get { return debugging; }
             set { debugging = value; }
+        }
+
+        public int RowCount
+        {
+            get { return (SeedEnd - SeedBegin) + 1; }
         }
 
         public int RowNumber { get; set; }

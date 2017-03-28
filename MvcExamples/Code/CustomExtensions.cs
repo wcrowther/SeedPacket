@@ -25,7 +25,7 @@ namespace MvcExamples.Code
                 generator.Rules.AddRange
                 (
                     new List<Rule> {
-                        new Rule(typeof(List<Item>), "", g => ExampleRules.AddItems<Item>(g))
+                        new Rule(typeof(List<Item>), "", g => ExampleRules.AddItems<Item>(g), "ListOfItems")
                         // OTHER CUSTOM RULES HERE
                     }
                 );

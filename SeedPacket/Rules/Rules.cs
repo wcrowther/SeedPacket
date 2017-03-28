@@ -1,12 +1,11 @@
-﻿using System;
+﻿using NewLibrary.ForString;
+using SeedPacket.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using NewLibrary.ForString;
-using NewLibrary.ForObject;
-using SeedPacket.Interfaces;
 
-namespace SeedPacket.Generators
+namespace SeedPacket
 {
     public class Rules : Collection<Rule>, IRules
     {
@@ -35,9 +34,8 @@ namespace SeedPacket.Generators
 
         public void Add(Rule rule, bool overwrite = true)
         {
-            // Should a RuleName be required?
-            // if (rule.RuleName.isNullOrEmpty() && rule.RuleName.Length <= 3)
-                // throw new Exception("Rule RuleName must be at least 3 characters in length.");
+            if (rule.RuleName.isNullOrEmpty() && rule.RuleName.Length <= 3)
+                throw new Exception("All Rules must have a RuleName at least 3 characters in length.");
 
             if (this.Any(a => a.RuleName == rule.RuleName))
             {
@@ -63,7 +61,7 @@ namespace SeedPacket.Generators
 
         public void RemoveRuleByName(string ruleName)
         {
-            var rule = this.Where(a => a.RuleName == ruleName).FirstOrDefault();
+            var rule = this.Where(a => a.RuleName.Trim() == ruleName).FirstOrDefault();
             if (rule != null)
             {
                 base.Remove(rule);
@@ -71,5 +69,6 @@ namespace SeedPacket.Generators
         }
 
     #endregion
+
     }
 } 

@@ -6,7 +6,7 @@ using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace SeedPacket.Generators
+namespace SeedPacket
 {
     public class Rule 
     {
@@ -22,7 +22,7 @@ namespace SeedPacket.Generators
 
     #region Constructor
 
-        public Rule(Type typeMatch, string nameMatch, Func<IGenerator, dynamic> rule, string ruleName = "", string description = "")
+        public Rule(Type typeMatch, string nameMatch, Func<IGenerator, dynamic> rule, string ruleName, string description = "")
         {
             this.typeMatch = typeMatch;
             this.nameMatch = nameMatch.ifBlank().ToLower();
@@ -79,7 +79,7 @@ namespace SeedPacket.Generators
 
         #endregion
 
-        #region Private Methods
+    #region Private Methods
 
         private static bool NameMatches(string namematch, string propname)
         {
@@ -133,6 +133,7 @@ namespace SeedPacket.Generators
         } 
 
     #endregion
+
     }
 } 
 

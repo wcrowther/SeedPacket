@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SeedPacket.Generators;
 using SeedPacket;
 using SeedPacket.Interfaces;
+using SeedPacket.Functions;
 
 namespace MvcExamples.Helpers
 {
@@ -30,7 +31,7 @@ namespace MvcExamples.Helpers
 
                 // Base dualgenerator defaults to Advanced RuleSet
                 Rules.AddRange(new List<Rule>{
-                    new Rule (typeof(string), "action%", g => NextElement(g, "Action"),                           "Custom Action",    "Fills any string fields named Action"),
+                    new Rule (typeof(string), "action%", g => func.NextElement(g, "Action"),                           "Custom Action",    "Fills any string fields named Action"),
                     new Rule (typeof(DateTime), "", g => g.BaseDateTime.AddHours(g.RowRandom.Next(-17521, 17521)),  "Custom DateTime",  "Random DateTime. BaseDateTime +- 2 years by hour. Overrides 'Basic DateTime'")
                 });
             }

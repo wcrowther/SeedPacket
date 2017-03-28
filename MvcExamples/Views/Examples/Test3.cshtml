@@ -1,0 +1,141 @@
+﻿@using SeedPacket.Examples
+@using SeedPacket.Interfaces
+@using SeedPacket.Generators
+@using SeedPacket.Extensions
+@using SeedPacket.Functions
+@using MvcExamples.Models
+@using System.Diagnostics
+@{
+    ViewBag.Title = "Home Page";
+
+    var stopwatch = Stopwatch.StartNew();
+
+    var accounts = GetAccounts(1000);
+
+    stopwatch.Stop();
+    Debug.WriteLine("Elapsed Milliseconds: " + stopwatch.ElapsedMilliseconds);
+}
+
+@functions{
+
+    // Main Generate logic
+    // =============================================================================
+
+    public List<Account> GetAccounts (int rowCount)
+    {
+        var generator = new MultiGenerator()
+        {
+            Rules =  {
+                new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth" ),
+                new Rule(typeof(List<InvoiceItem>), "", g => GetNextInvoiceItems(g), "GetNextInvoiceItems"),
+                new Rule(typeof(List<Invoice>), "",     g => func.RandomItemsFromCache<Invoice>(g, g.Cache.Invoices, 0, 5, true), "GetRandomInvoices", ""),
+            }
+        };
+
+        generator.Cache.InvoiceItems = new List<InvoiceItem>().Seed(1033333, 1033333 + (rowCount * 15), generator);
+        generator.Cache.Invoices = new List<Invoice>().Seed(10234, 10234 + (rowCount * 5), generator);
+
+        return new List<Account>().Seed(1, rowCount, generator).ToList(); ;
+    }
+
+    // =============================================================================
+    // 1000 records * 5 invoices * 15 invoiceItems in 630 ms
+    // =============================================================================
+
+    //public List<Invoice> GetRandomInvoices (IGenerator generator)
+    //{
+    //    List<Invoice> invoices = generator.Cache.Invoices;
+    //    int count = new Random(generator.RowNumber).Next(0, 6);
+
+    //    return invoices.TakeRandom(generator.RowRandom, count).ToList();
+    //}
+
+    public List<T> RandomCacheItems<T> (IGenerator generator, dynamic cache, int min, int max, bool remove = true)
+    {
+        int count = new Random(generator.RowNumber).Next(min, max + 1);
+        List<T> itemList = cache;
+        return itemList.TakeRandomItems(generator.RowRandom, count).ToList();
+    }
+
+    public List<InvoiceItem> GetRandomInvoiceItems (IGenerator generator)
+    {
+        List<InvoiceItem> invoiceItems = generator.Cache.InvoiceItems;
+        int count = new Random(generator.RowNumber).Next(0, 6);
+
+        return invoiceItems.TakeRandomItems(generator.RowRandom, count).ToList();
+    }
+
+    // =============================================================================
+    // NEXT - Sequential example
+    // 1000 records random * 5 'next' invoices * 15 'next' invoiceItems in 350 ms
+    // =============================================================================
+
+    public List<InvoiceItem> GetNextInvoiceItems (IGenerator generator)
+    {
+        List<InvoiceItem> invoiceItems = generator.Cache.InvoiceItems;
+        int count = generator.RowRandom.Next(1, 7);
+
+        var rowInvoiceItems = invoiceItems.Take(count).ToList();
+        rowInvoiceItems.ForEach(i => invoiceItems.Remove(i));
+
+        return rowInvoiceItems;
+    }
+}
+
+<h3>SeedPacket</h3>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table table-striped topSpace">
+            <thead>
+                <tr>
+                    <th>AccountId</th>
+                    <th>AccountName</th>
+                    <th>Invoices</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var account in accounts)
+                {
+                    <tr style="background-color: #c4d7ec;">
+                        <td style="background-color: inherit;">@account.AccountId</td>
+                        <td style="background-color: inherit;">@account.AccountName</td>
+                        <td style="background-color: inherit;">@account.Invoices.Count</td>
+                        <td style="background-color: inherit;">@account.Created</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <table style="width: 100%;background-color: #dde0ef;">
+                                @foreach (var invoice in account.Invoices)
+                                {
+                                    <tr>
+                                        <td>@invoice.InvoiceId</td>
+                                        <td>@invoice.InvoiceDate</td>
+                                        <td>@invoice.InvoiceItems.Count</td>
+                                        <td>@invoice.Created</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table style="width: 100%;">
+                                                @foreach (var invoiceItem in invoice.InvoiceItems)
+                                                {
+                                                    <tr>
+                                                        <td>@invoiceItem.InvoiceItemId</td>
+                                                        <td>@invoiceItem.Amount</td>
+                                                        <td>@invoiceItem.Description</td>
+                                                        <td>@invoiceItem.Created</td>
+                                                    </tr>
+                                                }
+                                            </table>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

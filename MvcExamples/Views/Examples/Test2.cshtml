@@ -1,0 +1,62 @@
+﻿@using SeedPacket.Examples
+@using SeedPacket.Interfaces
+@using SeedPacket.Generators
+@using SeedPacket.Extensions
+@using MvcExamples.Models
+@{
+    ViewBag.Title = "Home Page";
+
+    var generator = new MultiGenerator()
+    {
+        Rules =  {
+            new Rule(typeof(IList<Object>), "", g => EmptyList(g), "Empty List", ""),
+            new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth" )
+        }
+    };
+    var users = new List<AppUser>().Seed(1,12, generator);
+}
+
+@functions{
+    public IEnumerable<Object> EmptyList (IGenerator generator)
+    {
+        dynamic emptyList = Activator.CreateInstance(generator.CurrentProperty.PropertyType);
+
+        return emptyList;
+    }
+}
+
+<h3>SeedPacket</h3>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table table-striped topSpace">
+            <thead>
+                <tr>
+                    <th>UserId</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Email</th>
+                    <th>Items</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in users)
+                {
+                    <tr>
+                        <td>@user.UserId</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Email</td>
+                        <td>@foreach (var item in user.Items)
+                            {
+                                @item.ItemName<br />
+                            }
+                        </td>
+                        <td>@user.Created</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -17,8 +17,9 @@
     var words = new List<Word>().Seed(gen).ToList();
     var grid = new WebGrid(source: words, rowsPerPage: 10);
     var patterns = new List<Pattern>().Seed(15);
+}
 
-    @functions{
+@functions{
     public static object ExampleRule3(IGenerator generator)
     {
         int linksToAdd = generator.RowRandom.Next(0, 5);

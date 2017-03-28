@@ -1,7 +1,7 @@
 ﻿using SeedPacket.Interfaces;
 using SeedPacket.Generators;
 using System.Collections.Generic;
-
+using System.Dynamic;
 
 namespace SeedPacket.Extensions
 {

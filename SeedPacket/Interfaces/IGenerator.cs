@@ -22,12 +22,15 @@ namespace SeedPacket.Interfaces
         // Cache (dynamic)
         dynamic Cache { get; set; }
 
+        // DataSource (dynamic)
+        IDataSource Datasource { get;  }
+
         // Row Info
         int RowNumber { get; set; }
         int RowRandomNumber { get; }
         Random RowRandom { get; }
-        Dictionary<string, object> CurrentRowValues { get; }
         int RowCount { get; }
+        Dictionary<string, object> CurrentRowValues { get; }
         void GetNextRowRandom ();
 
         // Current CurrentProperty
