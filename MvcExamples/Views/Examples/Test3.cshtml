@@ -18,8 +18,10 @@
 
 @functions{
 
-    // Main Generate logic
-    // =============================================================================
+    // =======================================================================================
+    // RANDOM =>> 1000 records * 5 invoices * 15 invoiceItems in 630 ms
+    // NEXT   =>> 1000 records random * 5 'next' invoices * 15 'next' invoiceItems in 350 ms
+    // =======================================================================================
 
     public List<Account> GetAccounts (int rowCount)
     {
@@ -36,11 +38,6 @@
 
         return new List<Account>().Seed(1, rowCount, generator).ToList(); ;
     }
-
-    // =======================================================================================
-    // RANDOM =>> 1000 records * 5 invoices * 15 invoiceItems in 630 ms
-    // NEXT   =>> 1000 records random * 5 'next' invoices * 15 'next' invoiceItems in 350 ms
-    // =======================================================================================
 }
 
 <h3>SeedPacket</h3>

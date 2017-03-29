@@ -13,7 +13,7 @@ namespace MvcExamples.Controllers
     {
         public ActionResult Index()
         {
-            var users = new List<User>().Seed(15);
+            var users = new List<User>().Seed(20);
 
             return View(users);
         }
@@ -21,7 +21,7 @@ namespace MvcExamples.Controllers
         public ActionResult GetResultRows(int? rows, int seed)
         {
             var generator = new MultiGenerator() { BaseRandom = new Random(seed)};
-            var users = new List<User>().Seed(1, rows ?? 15, generator);
+            var users = new List<User>().Seed(1, rows ?? 20, generator);
 
             return PartialView("_Result_SimpleExample", users);
         }

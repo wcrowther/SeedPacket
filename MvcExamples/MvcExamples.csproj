@@ -185,7 +185,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\Custom\SeedExamples.js" />
+    <Content Include="ScriptApp\SeedExamples.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -204,7 +204,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\SimpleSeed\EightExamples.cshtml" />
-    <Content Include="Views\Home\OldIndex.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Seed\SeedExamples.cshtml" />
@@ -226,6 +225,7 @@
     <Content Include="Views\Examples\Index.cshtml" />
     <Content Include="Views\Examples\Test2.cshtml" />
     <Content Include="Views\Examples\Test3.cshtml" />
+    <Content Include="Views\Home\_HotBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeedPacket\SeedPacket.csproj">

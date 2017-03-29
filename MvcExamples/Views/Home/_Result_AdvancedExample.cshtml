@@ -1,19 +1,26 @@
 ﻿@using SeedPacket.Extensions
 @using SeedPacket.Examples
+@using SeedPacket.Functions
+@using SeedPacket.Interfaces
 @using MvcExamples.Models
 
 @{
-    // inline in view to RAD or web pages purposes
+    // inline in view for RAD or web pages purposes
     var generator = new MultiGenerator()
     {
         BaseDateTime = Convert.ToDateTime("1/1/2020"),
         Rules = {
-            new Rule(typeof(List<Item>), "",        g => ExampleRules.AddItems<Item>(g, 5),                 "NestedList"),
-            new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth")
-        }
+            new Rule(typeof(int), "SelectedProperty", g => g.RowRandom.Next(1, 11), "ItemList"),
+            new Rule(typeof(List<Item>), "",          g => func.NextCacheItems<Item>(g, g.Cache.Items, 10, 10, false), "ItemList"),
+            new Rule(typeof(DateTime), "Create%",     g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth")
+        },
+        Debugging = true
     };
-    var items = new List<Example>().Seed(100, 107, generator);
+    generator.Cache.Items = new List<Item>().Seed(1, 10, generator);
+
+    var examples = new List<Example>().Seed(100, 107, generator);
 }
+
 <table class="table table table-striped topSpace">
     <thead>
         <tr>
@@ -28,16 +35,19 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in items){
+    @foreach (var ex in examples)
+    {
         <tr>
-            <td>@item.Id</td>
-            <td>@item.FirstName @item.LastName</td>
-            <td>@(string.Format("{0:C}", item.NetWorth))</td>
-            <td>@(string.Format("{0:C}", item.Investments))</td>
-            <td>@item.Email</td>
-            <td>@item.ExampleGuid</td>
-            <td>@item.Created.ToShortDateString()</td>
-            <td>@PropertiesList(item.Properties)</td>
+            <td>@ex.Id</td>
+            <td>@ex.FirstName @ex.LastName</td>
+            <td>@(string.Format("{0:C}", ex.NetWorth))</td>
+            <td>@(string.Format("{0:C}", ex.Investments))</td>
+            <td>@ex.Email</td>
+            <td>@ex.ExampleGuid</td>
+            <td>@ex.Created.ToShortDateString()</td>
+            <td>
+                @Html.DropDownListFor(a => ex.SelectedProperty, new SelectList(ex.Properties, "ItemId", "ItemName"))
+            </td>
         </tr>
     }
     </tbody>

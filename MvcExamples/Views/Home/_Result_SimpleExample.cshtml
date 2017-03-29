@@ -2,28 +2,31 @@
 @using MvcExamples.Models
 @model List<User>
 
-<table class="table table-striped topSpace">
-    <thead>
-        <tr>
-            @foreach (var column in typeof(User).GetMetaProperties())
-            {
-                <th>@column.Name</th>
-            }
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
+<div id="rowResults">
+    <table class="table table-striped topSpace" style="width: 570px;">
+        <thead>
             <tr>
-                @foreach (var prop in user.GetMetaProperties())
-                {
-                    object val = prop.GetInstanceValue();
-                    <td>@Html.ValueFor(a => val)</td>
-                }
+                <th>UserId</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Created</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserId</td>
+                    <td>@(!string.IsNullOrEmpty(user.FirstName) ? user.FirstName : "---")</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Created.ToString("MM/dd/yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 
 

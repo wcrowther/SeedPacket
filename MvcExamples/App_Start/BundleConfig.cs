@@ -20,8 +20,8 @@ namespace MvcExamples
                           "~/Scripts/bootstrap.js",
                           "~/Scripts/respond.js"
                       ));
-            bundles.Add(new ScriptBundle("~/bundles/custom").Include(
-                          "~/Scripts/Custom/SeedExamples.js"
+            bundles.Add(new ScriptBundle("~/bundles/ScriptApp").Include(
+                          "~/ScriptApp/SeedExamples.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

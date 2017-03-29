@@ -17,6 +17,7 @@ namespace MvcExamples.Models
         public string Email { get; set; }
         public Guid ExampleGuid { get; set; }
         public DateTime Created { get; set; }
+        public int SelectedProperty { get; set; }
         public List<Item> Properties {
             get { return properties ?? new List<Item>(); }
             set { properties = value; }
