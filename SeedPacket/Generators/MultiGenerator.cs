@@ -82,7 +82,8 @@ namespace SeedPacket.Generators
                 new Rule(typeof(string),    "%address%",                        g => func.RandomAddress(g),                     "Address",              "Random address" ),
                 new Rule(typeof(string),    "%county%",                         g => func.RandomElement(g, "City"),             "City",                 "Random city" ),
                 new Rule(typeof(string),    "%country%",                        g => func.RandomElement(g, "CountyName"),       "County",               "Random county" ),
-                new Rule(typeof(string),    "%state%",                          g => func.RandomElement(g, "StateName"),        "State",                "Random state" ),
+                new Rule(typeof(string),    "%state%",                          g => func.RandomElement(g, "State"),            "State",                "Random state" ),
+                new Rule(typeof(string),    "%statename%",                      g => func.RandomElement(g, "StateName"),        "StateName",            "Random state name" ),
                 new Rule(typeof(string),    "%country%",                        g => func.RandomElement(g, "Country"),          "Country",              "Random country" ),
                 new Rule(typeof(string),    "%zip%",                            g => func.RandomZip(g),                         "Zip",                  "Random zip" ),
                 new Rule(typeof(decimal),   "%fee%,%tax%",                      g => func.RandomFee(g),                         "Fee/Tax",              "Random fee/tax" ),
@@ -93,7 +94,7 @@ namespace SeedPacket.Generators
                 new Rule(typeof(int),       "%random%",                         g => g.RowRandomNumber,                         "RowRandomNumber",      "Random number"),
                 new Rule(typeof(string),    "%phone%,%cell%,%mobile%,%fax%",    g => func.RandomPhone(g),                       "Phone/Cell/Mobile/Fax","Random phone/cell/mobile/fax" ),
                 new Rule(typeof(DateTime),  "",                                 g => func.RandomDateTime(g, -17521, 17521),     "DateTime",             "Random Override of DateTime" ),
-                new Rule(typeof(DateTime?), "",                                 g => func.RandomDateTimeNull(g, -17521, 17521), "DateTime?",        "Random Override of DateTime?" )
+                new Rule(typeof(DateTime?), "",                                 g => func.RandomDateTimeNull(g, -17521, 17521), "DateTime?",            "Random Override of DateTime?" )
             };
         }
 

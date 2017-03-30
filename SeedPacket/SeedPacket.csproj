@@ -95,7 +95,7 @@
     <EmbeddedResource Include="Source\XmlGeneratorSource.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Source\JsonGeneratorSource.json" />
+    <EmbeddedResource Include="Source\JsonGeneratorSource.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -41,7 +41,8 @@ namespace SeedPacket.Functions
         public static T GetByItemName<T> (this ExpandoObject expando, string name)
         {
             var dictionary = (IDictionary<string, object>) expando;
-            return (T) dictionary[name];
+
+            return dictionary.ContainsKey(name) ? (T) dictionary[name] : default(T);
         }
 
         // FOR ROW DICTIONARY CONVERT DICTIONARY TO DYNAMIC SIMILAR to CACHE??

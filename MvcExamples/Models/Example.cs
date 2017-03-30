@@ -5,7 +5,7 @@ namespace MvcExamples.Models
 {
     public class Example
     {
-        private List<Item> properties;
+        private List<Item> products;
         
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -17,10 +17,10 @@ namespace MvcExamples.Models
         public string Email { get; set; }
         public Guid ExampleGuid { get; set; }
         public DateTime Created { get; set; }
-        public int SelectedProperty { get; set; }
-        public List<Item> Properties {
-            get { return properties ?? new List<Item>(); }
-            set { properties = value; }
+        public int SelectedProduct { get; set; }
+        public List<Item> Products {
+            get { return products ?? new List<Item>(); }
+            set { products = value; }
         }
     }
 }

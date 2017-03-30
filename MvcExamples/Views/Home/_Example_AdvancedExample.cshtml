@@ -1,14 +1,20 @@
 ﻿
 <div class="codeExample topSpace">
 <label class="codeLabelBlue">CODE:</label>
-<div class="codeTitle codeTitleBlue">This example passes in a custom GenRules with two new rules and sets the BaseDateTime to 1/1/2020</div>
+<div class="codeTitle codeTitleBlue">This example passes in 4 additional custom rules into the Rules engine</div>
 <code>
-<i>// The 'Nested List' rule seeds a list with up to 5 Items whenever it encounters a List of Item</i>
-var generatorRules = new GenRules(Convert.ToDateTime("1/1/2020"))
+var generator = new MultiGenerator()
 {
-    new GenRule("Nested List", typeof(List&lt;Item&gt;), "", (rules, prop) => ExampleGenRules.AddItems&lt;Item&gt;(rules, prop, 5), "Calls nested seed function on list."),
-    new GenRule("DateTime Created In Last Month", typeof(DateTime), "Create%", (rules, prop) => rules.BaseDateTime.AddDays (rules.RowRandom.Next(-30, 1)))
+    BaseDateTime = DateTime.Today,
+    Rules = {
+        new Rule(typeof(DateTime), "Create%",     g =&gt; g.BaseDateTime.AddHours (g.RowRandom.Next(-30 * 24, 1)), "DateTimeInLastMonth"),
+        new Rule(typeof(int), "ItemName",         g =&gt; func.NextElement(g, "ProductName"), "ItemName"),
+        new Rule(typeof(string),"SelectedProduct",g =&gt; g.RowRandom.Next(0, 11), "Random product id"),
+        new Rule(typeof(List&lt;Item&gt;), "",    g =&gt; func.NextCacheItems&lt;Item&gt;(g, g.Cache.Items, 10, 10, false), "ItemList")
+    }
 };
-var list = new List&lt;Item&gt;().Seed(1, 107, generatorRules);
+
+generator.Cache.Items = new List&lt;Item&gt;().Seed(1, 10, generator);
+var examples = new List&lt;Example&gt;().Seed(100, 115, generator);
 </code>
 </div>

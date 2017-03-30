@@ -19,7 +19,7 @@ namespace SeedPacket.Generators
 
         #region Private Fields
 
-        private int defaultSeed = 12345;
+        private int defaultSeed = 123456789;
         private int seedBegin = 1;
         private int seedEnd = 10;
         private Random baseRandom;

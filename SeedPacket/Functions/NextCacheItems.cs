@@ -14,6 +14,9 @@ namespace SeedPacket.Functions
             ExpandoObject cache = generator.Cache;
             var cacheList = cache.GetByItemName<List<T>>(cacheListName);
 
+            if (cacheList == null)
+                return null;
+
             return NextCacheItems<T>(generator, cacheList, min, max, remove);
         }
 
