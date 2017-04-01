@@ -16,12 +16,15 @@ namespace SeedPacket.DataSources
 
         private string sourceFilePath;
         private string sourceString;
+        private bool appendToDefault;
 
         public MultiDataSource(string sourcefilepath = null, string sourcestring = null, SeedInputType seedinputtype = SeedInputType.Auto)
         {
             sourceFilePath = sourcefilepath;
             sourceString = sourcestring;
             seedInputType = seedinputtype;
+            appendToDefault = true; 
+
             jsonDataSource = new JsonDataSource();
             xmlDataSource = new XmlDataSource();
             LoadSource();
@@ -41,12 +44,12 @@ namespace SeedPacket.DataSources
             }
             else if (seedInputType == SeedInputType.XmlString)
             {
-                xmlDataSource.Parse(sourceString);
+                xmlDataSource.Parse(sourceString, appendToDefault);
                 sourceData = xmlDataSource;
             }
             else if (seedInputType == SeedInputType.XmlFile)
             {
-                xmlDataSource.Load(sourceFilePath);
+                xmlDataSource.Load(sourceFilePath, appendToDefault);
                 sourceData = xmlDataSource;
             }
             else if (seedInputType == SeedInputType.Default)
@@ -77,7 +80,7 @@ namespace SeedPacket.DataSources
                 {
                     try
                     {
-                        xmlDataSource.Load(sourceFilePath);
+                        xmlDataSource.Load(sourceFilePath, appendToDefault);
                         sourceData = xmlDataSource;
                     }
                     catch
@@ -98,11 +101,11 @@ namespace SeedPacket.DataSources
                     jsonDataSource.Parse(sourceString);
                     sourceData = jsonDataSource;
                 }
-                catch (InvalidSourceStringException ex)
+                catch (InvalidSourceStringException)
                 {
                     try
                     {
-                        xmlDataSource.Parse(sourceString);
+                        xmlDataSource.Parse(sourceString, appendToDefault);
                         sourceData = xmlDataSource;
                     }
                     catch
@@ -125,7 +128,6 @@ namespace SeedPacket.DataSources
 
         public List<string> GetElementList(string identifier)
         {
-            // TODO ADD CACHING OF LIST?
             return sourceData.GetElementList(identifier);
         }
     }

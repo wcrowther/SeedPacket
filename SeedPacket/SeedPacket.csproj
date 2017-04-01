@@ -92,7 +92,9 @@
     <Compile Include="SimpleSeed.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\XmlGeneratorSource.xml" />
+    <EmbeddedResource Include="Source\XmlGeneratorSource.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Source\JsonGeneratorSource.json" />
