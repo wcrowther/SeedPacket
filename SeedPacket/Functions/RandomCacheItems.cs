@@ -9,6 +9,7 @@ namespace SeedPacket.Functions
 {
     public static partial class func
     {
+        // This overload passes in a cacheList by name string like: "Items" -> (will throw NOT an error if does not exist)
         public static List<T> RandomCacheItems<T> (IGenerator generator, string cacheListName, int min, int max, bool remove = true)
         {
             ExpandoObject cache = generator.Cache;
@@ -17,10 +18,11 @@ namespace SeedPacket.Functions
             return RandomCacheItems<T>(generator, cacheList, min, max, remove);
         }
 
+        // This overload passes in a cacheList like: g.Cache.Items -> (will throw an error if does not exist)
+        // Adds 1 to random max so that max parameter is included. IE: 1-3 will include 1,2,3 
         public static List<T> RandomCacheItems<T> (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true)
         {
-            // Adds 1 to random max so that max parameter is included. IE: 1-3 will include 1,2,3 
-            int count = new Random(generator.RowNumber).Next(min, max + 1); 
+            int count = new Random(generator.RowNumber).Next(min, max + 1);
             List<T> itemList = cacheList;
 
             return itemList.TakeRandomItems<T>(generator.RowRandom, count, remove).ToList();

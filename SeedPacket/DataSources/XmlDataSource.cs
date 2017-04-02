@@ -13,26 +13,12 @@ namespace SeedPacket.DataSources
     {
         private XDocument sourceData;
         private const string defaultXml = "SeedPacket.Source.XmlGeneratorSource.xml";
-        private bool appendToDefaultData;
-
-        public XmlDataSource (bool appendtodefaultdata = false)
-        {
-            appendToDefaultData = appendtodefaultdata;
-        }
 
         public void Parse(string xml)
         {
             try
             {
-                if (appendToDefaultData)
-                {
-                    LoadDefaultData();
-                    sourceData.Root.Add(XElement.Parse(xml).Elements());
-                }
-                else
-                {
-                    sourceData = XDocument.Parse(xml); 
-                }
+                sourceData = XDocument.Parse(xml); 
             }
             catch
             {

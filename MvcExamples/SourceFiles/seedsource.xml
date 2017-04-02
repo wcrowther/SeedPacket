@@ -123,57 +123,110 @@
     <CountyName>Turner</CountyName>
   </CountyNames>
 
+  <States>
+    <State>AL</State>
+    <State>AK</State>
+    <State>AZ</State>
+    <State>AR</State>
+    <State>CA</State>
+    <State>CO</State>
+    <State>CT</State>
+    <State>DE</State>
+    <State>FL</State>
+    <State>GA</State>
+    <State>HI</State>
+    <State>ID</State>
+    <State>IL</State>
+    <State>IN</State>
+    <State>IA</State>
+    <State>KS</State>
+    <State>KY</State>
+    <State>LA</State>
+    <State>ME</State>
+    <State>MD</State>
+    <State>MA</State>
+    <State>MI</State>
+    <State>MN</State>
+    <State>MS</State>
+    <State>MO</State>
+    <State>MT</State>
+    <State>NE</State>
+    <State>NV</State>
+    <State>NH</State>
+    <State>NJ</State>
+    <State>NM</State>
+    <State>NY</State>
+    <State>NC</State>
+    <State>ND</State>
+    <State>OH</State>
+    <State>OK</State>
+    <State>OR</State>
+    <State>PA</State>
+    <State>RI</State>
+    <State>SC</State>
+    <State>SD</State>
+    <State>TN</State>
+    <State>TX</State>
+    <State>UT</State>
+    <State>VT</State>
+    <State>VA</State>
+    <State>WA</State>
+    <State>WV</State>
+    <State>WI</State>
+    <State>WY</State>
+  </States>
+
   <StateNames>
-		<StateName>AL</StateName>
-		<StateName>AK</StateName>
-		<StateName>AZ</StateName>
-		<StateName>AR</StateName>
-		<StateName>CA</StateName>
-		<StateName>CO</StateName>
-		<StateName>CT</StateName>
-		<StateName>DE</StateName>
-		<StateName>FL</StateName>
-		<StateName>GA</StateName>
-		<StateName>HI</StateName>
-		<StateName>ID</StateName>
-		<StateName>IL</StateName>
-		<StateName>IN</StateName>
-		<StateName>IA</StateName>
-		<StateName>KS</StateName>
-		<StateName>KY</StateName>
-		<StateName>LA</StateName>
-		<StateName>ME</StateName>
-		<StateName>MD</StateName>
-		<StateName>MA</StateName>
-		<StateName>MI</StateName>
-		<StateName>MN</StateName>
-		<StateName>MS</StateName>
-		<StateName>MO</StateName>
-		<StateName>MT</StateName>
-		<StateName>NE</StateName>
-		<StateName>NV</StateName>
-		<StateName>NH</StateName>
-		<StateName>NJ</StateName>
-		<StateName>NM</StateName>
-		<StateName>NY</StateName>
-		<StateName>NC</StateName>
-		<StateName>ND</StateName>
-		<StateName>OH</StateName>
-		<StateName>OK</StateName>
-		<StateName>OR</StateName>
-		<StateName>PA</StateName>
-		<StateName>RI</StateName>
-		<StateName>SC</StateName>
-		<StateName>SD</StateName>
-		<StateName>TN</StateName>
-		<StateName>TX</StateName>
-		<StateName>UT</StateName>
-		<StateName>VT</StateName>
-		<StateName>VA</StateName>
-		<StateName>WA</StateName>
-		<StateName>WV</StateName>
-		<StateName>WI</StateName>
-		<StateName>WY</StateName>
+    <StateName>Alabama</StateName>
+    <StateName>Alaska</StateName>
+    <StateName>Arizona</StateName>
+    <StateName>Arkansas</StateName>
+    <StateName>California</StateName>
+    <StateName>Colorado</StateName>
+    <StateName>Connecticut</StateName>
+    <StateName>Delaware</StateName>
+    <StateName>Florida</StateName>
+    <StateName>Georgia</StateName>
+    <StateName>Hiwaii</StateName>
+    <StateName>Idaho</StateName>
+    <StateName>Illinois</StateName>
+    <StateName>Indiana</StateName>
+    <StateName>Iowa</StateName>
+    <StateName>Kansas</StateName>
+    <StateName>Kentucky</StateName>
+    <StateName>Louisiana</StateName>
+    <StateName>Maine</StateName>
+    <StateName>Maryland</StateName>
+    <StateName>Massachusetts</StateName>
+    <StateName>Michigan</StateName>
+    <StateName>Minnesota</StateName>
+    <StateName>Mississippi</StateName>
+    <StateName>Missouri</StateName>
+    <StateName>Montana</StateName>
+    <StateName>Nebraska</StateName>
+    <StateName>Nevada</StateName>
+    <StateName>New Hampshire</StateName>
+    <StateName>New Jersey</StateName>
+    <StateName>New Mexico</StateName>
+    <StateName>New York</StateName>
+    <StateName>North Carolina</StateName>
+    <StateName>North Dakota</StateName>
+    <StateName>Ohio</StateName>
+    <StateName>Oklahoma</StateName>
+    <StateName>Oregon</StateName>
+    <StateName>Pennsylvania</StateName>
+    <StateName>Rhode Island</StateName>
+    <StateName>South Carolina</StateName>
+    <StateName>South Dakota</StateName>
+    <StateName>Tennessee</StateName>
+    <StateName>Texas</StateName>
+    <StateName>Utah</StateName>
+    <StateName>Vermont</StateName>
+    <StateName>Virginia</StateName>
+    <StateName>Washington</StateName>
+    <StateName>West Virginia</StateName>
+    <StateName>Wisconsin</StateName>
+    <StateName>Wyoming</StateName>
   </StateNames>
 
   <ProductNames>

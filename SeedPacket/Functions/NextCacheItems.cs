@@ -21,7 +21,9 @@ namespace SeedPacket.Functions
             return NextCacheItems<T>(generator, cacheList, min, max, remove);
         }
 
+
         // This overload passes in a cacheList like: g.Cache.Items -> (will throw an error if does not exist)
+        // Adds 1 to random max so that max parameter is included. IE: 1-3 will include 1,2,3 
         public static List<T> NextCacheItems<T> (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true)
         {
             int count = new Random(generator.RowNumber).Next(min, max + 1);

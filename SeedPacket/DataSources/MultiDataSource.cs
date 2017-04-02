@@ -16,18 +16,14 @@ namespace SeedPacket.DataSources
 
         private string sourceFilePath;
         private string sourceString;
-        private bool appendToDefaults;
 
-        public MultiDataSource( string sourcefilepath = null, string sourcestring = null, 
-                                SeedInputType seedinputtype = SeedInputType.Auto, bool appendtodefaultdata = false)
+        public MultiDataSource(string sourcefilepath = null, string sourcestring = null, SeedInputType seedinputtype = SeedInputType.Auto)
         {
             sourceFilePath = sourcefilepath;
             sourceString = sourcestring;
             seedInputType = seedinputtype;
-            appendToDefaults = appendtodefaultdata; 
-
-            jsonDataSource = new JsonDataSource(appendtodefaultdata);
-            xmlDataSource = new XmlDataSource(appendtodefaultdata);
+            jsonDataSource = new JsonDataSource();
+            xmlDataSource = new XmlDataSource();
             LoadSource();
         }
 
@@ -74,8 +70,6 @@ namespace SeedPacket.DataSources
             {
                 try
                 {
-                    // THE PROBLEM IS HERE. IT TRIES TO LOAD JSON AND SUCCEEDS EVEN THOUGH IT IS
-                    // ACTUALLY THE XML DEFAULT DATA....
                     jsonDataSource.Load(sourceFilePath);
                     sourceData = jsonDataSource;
                 }
@@ -86,7 +80,7 @@ namespace SeedPacket.DataSources
                         xmlDataSource.Load(sourceFilePath);
                         sourceData = xmlDataSource;
                     }
-                    catch(Exception)
+                    catch
                     {
                         throw new InvalidSourceFileException("XML", sourceFilePath);
                     }
@@ -104,7 +98,7 @@ namespace SeedPacket.DataSources
                     jsonDataSource.Parse(sourceString);
                     sourceData = jsonDataSource;
                 }
-                catch (InvalidSourceStringException)
+                catch (InvalidSourceStringException ex)
                 {
                     try
                     {
@@ -131,6 +125,7 @@ namespace SeedPacket.DataSources
 
         public List<string> GetElementList(string identifier)
         {
+            // TODO ADD CACHING OF LIST?
             return sourceData.GetElementList(identifier);
         }
     }

@@ -25,13 +25,13 @@
 
     public List<Account> GetAccounts (int rowCount)
     {
-        var generator = new MultiGenerator("~/SourceFiles/additionalData.xml", appendToDefaultData: true)
+        var generator = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml")
         {
             Rules =  {
-                new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)),          "DateTimeInLastMonth" ),
-                new Rule(typeof(List<InvoiceItem>), "", g => func.NextCacheItems<InvoiceItem>(g, "InvoiceItems", 0, 15), "GetNextInvoiceItems"),
-                new Rule(typeof(List<Invoice>), "",     g => func.RandomCacheItems<Invoice>(g, g.Cache.Invoices, 0, 5),  "GetRandomInvoices"),
-                new Rule(typeof(string),"Description%", g => func.RandomElement(g, "Description"),  "Get Description from additionalData.xml" )
+                new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth"  ),
+                new Rule(typeof(List<InvoiceItem>), "", g => func.NextCacheItems<InvoiceItem>(g, "InvoiceItems", 0, 15), "GetNextInvoiceItems"  ),
+                new Rule(typeof(List<Invoice>), "",     g => func.RandomCacheItems<Invoice>(g, g.Cache.Invoices, 0, 5), "GetRandomInvoices", ""),
+                new Rule(typeof(string),"Description%", g => func.RandomElement(g, "Description"), "Description", "Gets Description from custom XML file" )
             }
         };
         generator.Cache.InvoiceItems = new List<InvoiceItem>().Seed(1033333, 1033333 + (rowCount * 15), generator);
