@@ -16,17 +16,18 @@ namespace SeedPacket.DataSources
 
         private string sourceFilePath;
         private string sourceString;
-        private bool appendToDefault;
+        private bool appendToDefaults;
 
-        public MultiDataSource(string sourcefilepath = null, string sourcestring = null, SeedInputType seedinputtype = SeedInputType.Auto)
+        public MultiDataSource( string sourcefilepath = null, string sourcestring = null, 
+                                SeedInputType seedinputtype = SeedInputType.Auto, bool appendtodefaultdata = false)
         {
             sourceFilePath = sourcefilepath;
             sourceString = sourcestring;
             seedInputType = seedinputtype;
-            appendToDefault = true; 
+            appendToDefaults = appendtodefaultdata; 
 
-            jsonDataSource = new JsonDataSource();
-            xmlDataSource = new XmlDataSource();
+            jsonDataSource = new JsonDataSource(appendtodefaultdata);
+            xmlDataSource = new XmlDataSource(appendtodefaultdata);
             LoadSource();
         }
 
@@ -44,12 +45,12 @@ namespace SeedPacket.DataSources
             }
             else if (seedInputType == SeedInputType.XmlString)
             {
-                xmlDataSource.Parse(sourceString, appendToDefault);
+                xmlDataSource.Parse(sourceString);
                 sourceData = xmlDataSource;
             }
             else if (seedInputType == SeedInputType.XmlFile)
             {
-                xmlDataSource.Load(sourceFilePath, appendToDefault);
+                xmlDataSource.Load(sourceFilePath);
                 sourceData = xmlDataSource;
             }
             else if (seedInputType == SeedInputType.Default)
@@ -73,6 +74,8 @@ namespace SeedPacket.DataSources
             {
                 try
                 {
+                    // THE PROBLEM IS HERE. IT TRIES TO LOAD JSON AND SUCCEEDS EVEN THOUGH IT IS
+                    // ACTUALLY THE XML DEFAULT DATA....
                     jsonDataSource.Load(sourceFilePath);
                     sourceData = jsonDataSource;
                 }
@@ -80,10 +83,10 @@ namespace SeedPacket.DataSources
                 {
                     try
                     {
-                        xmlDataSource.Load(sourceFilePath, appendToDefault);
+                        xmlDataSource.Load(sourceFilePath);
                         sourceData = xmlDataSource;
                     }
-                    catch
+                    catch(Exception)
                     {
                         throw new InvalidSourceFileException("XML", sourceFilePath);
                     }
@@ -105,7 +108,7 @@ namespace SeedPacket.DataSources
                 {
                     try
                     {
-                        xmlDataSource.Parse(sourceString, appendToDefault);
+                        xmlDataSource.Parse(sourceString);
                         sourceData = xmlDataSource;
                     }
                     catch

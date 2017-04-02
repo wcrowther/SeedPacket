@@ -13,15 +13,21 @@ namespace SeedPacket.DataSources
     {
         private XDocument sourceData;
         private const string defaultXml = "SeedPacket.Source.XmlGeneratorSource.xml";
+        private bool appendToDefaultData;
 
-        public void Parse(string xml, bool appendToDefault = false)
+        public XmlDataSource (bool appendtodefaultdata = false)
+        {
+            appendToDefaultData = appendtodefaultdata;
+        }
+
+        public void Parse(string xml)
         {
             try
             {
-                if (appendToDefault)
+                if (appendToDefaultData)
                 {
                     LoadDefaultData();
-                    sourceData.Root.Add(XDocument.Parse(xml));
+                    sourceData.Root.Add(XElement.Parse(xml).Elements());
                 }
                 else
                 {
@@ -34,14 +40,14 @@ namespace SeedPacket.DataSources
             }
         }
 
-        public void Load(string sourceFilePath, bool appendToDefault = false)
+        public void Load(string sourceFilePath)
         {
             string pathToFile = null;
             try
             {
                 pathToFile = sourceFilePath.StartsWith("~") ? sourceFilePath.ToMapPath() : sourceFilePath;
                 string xml = File.ReadAllText(pathToFile);
-                Parse(xml, appendToDefault);
+                Parse(xml);
             }
             catch
             {

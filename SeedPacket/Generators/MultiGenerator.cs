@@ -15,10 +15,11 @@ namespace SeedPacket.Generators
         public MultiGenerator(  string sourceFilepath = null,
                                 string sourceString = null, 
                                 SeedInputType seedInputType = SeedInputType.Auto,
-                                RulesSet rulesSet = RulesSet.Advanced
-                                )
+                                RulesSet rulesSet = RulesSet.Advanced,
+                                bool appendToDefaultData = false
+                                ) 
         {
-            dataSource = new MultiDataSource(sourceFilepath, sourceString, seedInputType);
+            dataSource = new MultiDataSource(sourceFilepath, sourceString, seedInputType, appendToDefaultData);
             GetRules(rulesSet);
         }
 

@@ -19,7 +19,8 @@ namespace SeedPacket.Functions
 
         public static List<T> RandomCacheItems<T> (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true)
         {
-            int count = new Random(generator.RowNumber).Next(min, max + 1);
+            // Adds 1 to random max so that max parameter is included. IE: 1-3 will include 1,2,3 
+            int count = new Random(generator.RowNumber).Next(min, max + 1); 
             List<T> itemList = cacheList;
 
             return itemList.TakeRandomItems<T>(generator.RowRandom, count, remove).ToList();
