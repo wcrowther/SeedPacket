@@ -212,11 +212,11 @@
         "Avenue"
       ]
     },
-    "CityNames": {
-      "CityName": [
+    "Cities": {
+      "City": [
         "Greenville",
         "Washington",
-        "Lincoln",
+        "Jefferson",
         "Lincolnton",
         "Pinetown",
         "Athens",
@@ -247,8 +247,8 @@
         ""
       ]
     },
-    "CountyNames": {
-      "CountyName": [
+    "Counties": {
+      "County": [
         "Baker",
         "Baldwin",
         "Banks",

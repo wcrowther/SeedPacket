@@ -74,11 +74,11 @@
 <div class="row">
     <div class="col-md-12">
         <h3>Advanced Example</h3>
-        <p>
+        <p>NEEDS WORK STILL
             For more advanced situations, you can pass in a generator class that contains a customizable rules engine.  By default,  the "Advanced" ruleset is
             used which contains about thirty common rules and the data is loaded from an internal resource. 
             
-            In the example below a "MultiGenerator" is injected into the Seed method. We are adding four new rules to modify how the data is created. In this 
+            In the example below a "MultiGenerator" is injected into the Seed method. We are adding five new rules to modify how the data is created. In this 
             example, the first added rule applies to the DateTime type "Created" field to create dates in the last 30 days. The second rule applies to the 
             "ItemName" field and overrides a rule that gets random (fake) products and replaces it with one that gets the next item in the sequence. This
             insures the values will all be unique, assuming that the number in the list is less than the number in the source list. The third rule, randomly 

@@ -8,10 +8,10 @@ namespace MvcExamples.Models
         private List<Item> products;
         
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public decimal NetWorth { get; set; }
-        public decimal? Investments { get; set; }
+        public string CompanyName { get; set; }
+        public string Ceo { get; set; }
+        public decimal? NetWorth { get; set; }
+        public string Description { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Email { get; set; }

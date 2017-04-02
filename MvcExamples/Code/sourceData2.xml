@@ -53,25 +53,23 @@
 		<RoadTypes>Avenue</RoadTypes>
   </RoadTypes>
 
-  <CityNames>
-    <CityName>Greenville</CityName>
-    <CityName>Washington</CityName>
-    <CityName>Lincoln</CityName>
+  <Cities>
+    <City>Greenville</City>
+    <City>Washington</City>
+    <City>Lincoln</City>
+    <City>Pinetown</City>
+    <City>Athens</City>
+    <City>York</City>
+    <City>London</City>
+</Cities>
 
-    <CityName>Pinetown</CityName>
-    <CityName>Athens</CityName>
-    <CityName>York</CityName>
-    <CityName>London</CityName>
-
-  </CityNames>
-
-  <CountyNames>
-    <CountyName>Banks</CountyName>
-    <CountyName>Dade</CountyName>
-    <CountyName>Madison</CountyName>
-    <CountyName>Stewart</CountyName>
-    <CountyName>Turner</CountyName>
-  </CountyNames>
+  <Counties>
+    <County>Banks</County>
+    <County>Dade</County>
+    <County>Madison</County>
+    <County>Stewart</County>
+    <County>Turner</County>
+ </Counties>
 
   <StateNames>
 		<StateName>AL</StateName>

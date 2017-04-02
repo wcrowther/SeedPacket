@@ -225,56 +225,56 @@
 		<RoadTypes>Avenue</RoadTypes>
   </RoadTypes>
 
-  <CityNames>
-    <CityName>Greenville</CityName>
-    <CityName>Washington</CityName>
-    <CityName>Lincoln</CityName>
-    <CityName>Lincolnton</CityName>
-    <CityName>Pinetown</CityName>
-    <CityName>Athens</CityName>
-    <CityName>York</CityName>
-    <CityName>London</CityName>
-    <CityName>Peachtree</CityName>
-    <CityName>Brighton</CityName>,
-    <CityName>HillTown</CityName>
-    <CityName>Port Jackson</CityName>
-    <CityName>Jackson</CityName>
-    <CityName>Austin</CityName>
-    <CityName>Metropolis</CityName>
-    <CityName>Gotham</CityName>
-    <CityName>Sierra</CityName>
-    <CityName>WestLake</CityName>
-    <CityName>Stone Bridge</CityName>
-    <CityName>Oakleaf</CityName>,
-    <CityName>Franklin</CityName>
-    <CityName>Kingston</CityName>
-    <CityName>Eastdale</CityName>
-    <CityName>Winterspring</CityName>
-    <CityName>Westmoor</CityName>
-  </CityNames>
+  <Cities>
+    <City>Greenville</City>
+    <City>Washington</City>
+    <City>Lincoln</City>
+    <City>Lincolnton</City>
+    <City>Pinetown</City>
+    <City>Athens</City>
+    <City>York</City>
+    <City>London</City>
+    <City>Peachtree</City>
+    <City>Brighton</City>,
+    <City>HillTown</City>
+    <City>Port Jackson</City>
+    <City>Jackson</City>
+    <City>Austin</City>
+    <City>Metropolis</City>
+    <City>Gotham</City>
+    <City>Sierra</City>
+    <City>WestLake</City>
+    <City>Stone Bridge</City>
+    <City>Oakleaf</City>,
+    <City>Franklin</City>
+    <City>Kingston</City>
+    <City>Eastdale</City>
+    <City>Winterspring</City>
+    <City>Westmoor</City>
+  </Cities>
 
-  <CountyNames>
-    <CountyName>Baker</CountyName>
-    <CountyName>Baldwin</CountyName>
-    <CountyName>Banks</CountyName>
-    <CountyName>Camden</CountyName>
-    <CountyName>Chandler</CountyName>
-    <CountyName>Clarke</CountyName>
-    <CountyName>Dade</CountyName>
-    <CountyName>Douglas</CountyName>
-    <CountyName>Franklin</CountyName>
-    <CountyName>Jackson</CountyName>
-    <CountyName>Madison</CountyName>
-    <CountyName>Mitchell</CountyName>
-    <CountyName>Pierce</CountyName>
-    <CountyName>Stewart</CountyName>
-    <CountyName>Turner</CountyName>
-    <CountyName>Towns</CountyName>
-    <CountyName>Warren</CountyName>
-    <CountyName>Webster</CountyName>
-    <CountyName>White</CountyName>
-    <CountyName>Worth</CountyName>
-  </CountyNames>
+  <Counties>
+    <County>Baker</County>
+    <County>Baldwin</County>
+    <County>Banks</County>
+    <County>Camden</County>
+    <County>Chandler</County>
+    <County>Clarke</County>
+    <County>Dade</County>
+    <County>Douglas</County>
+    <County>Franklin</County>
+    <County>Jackson</County>
+    <County>Madison</County>
+    <County>Mitchell</County>
+    <County>Pierce</County>
+    <County>Stewart</County>
+    <County>Turner</County>
+    <County>Towns</County>
+    <County>Warren</County>
+    <County>Webster</County>
+    <County>White</County>
+    <County>Worth</County>
+  </Counties>
 
   <StateNames>
 		<StateName>AL</StateName>

@@ -212,8 +212,8 @@
         "Avenue"
       ]
     },
-    "CityNames": {
-      "CityName": [
+    "Cities": {
+      "City": [
         "Greenville",
         "Washington",
         "Lincoln",
@@ -241,8 +241,8 @@
         "Westmoor"
       ]
     },
-    "CountyNames": {
-      "CountyName": [
+    "Counties": {
+      "County": [
         "Baker",
         "Baldwin",
         "Banks",
