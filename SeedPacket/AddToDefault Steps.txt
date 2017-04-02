@@ -1,3 +1,12 @@
+// NEW Approach (if I decide to do it..)
+1. Add new DefaultDataSource that gets the data from the default xml.
+2. Injects it into the MultiDataSource directly into the GetElementList (list of string)
+3. Is feature really needed?
+
+
+// OLD Approach
+// See Revision 152 for some code that was working exception for the 
+// mismatch between xml and json.
 
 1. Add "bool AppendToDefaultData {get;}" to IDataSource interface
 2. Add AppendToDefaultData property to json and xml datasources
@@ -20,3 +29,4 @@ http://stackoverflow.com/questions/4937875/merging-two-xml-files-linq
 
 6. Add bool param on constructor
 7. Pass param down to Xml and Json constructors
+
