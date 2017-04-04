@@ -11,7 +11,7 @@ namespace MvcExamples.Code
 {
     public static class CustomExtensions
     {
-            public static IList<T> Seed<T> (this IList<T> iList, int seedBegin = 1, int seedEnd = 10, string filePath = null) where T : new()
+            public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin = 1, int seedEnd = 10, string filePath = null) where T : new()
             {
                 var generator = new MultiGenerator(filePath) {
                     SeedBegin = seedBegin,
@@ -29,7 +29,7 @@ namespace MvcExamples.Code
                         // OTHER CUSTOM RULES HERE
                     }
                 );
-                return seedCore.SeedList(iList);
+                return seedCore.SeedList(iEnumerable);
             }
      }
  }

@@ -20,7 +20,7 @@ namespace SeedPacket
             _generator = generator ?? new MultiGenerator(); 
         }
 
-        public  IList<T> SeedList<T> (IList<T> iEnumerable, IGenerator generator = null) where T : new()
+        public  IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable, IGenerator generator = null) where T : new()
         {
             if (generator.Is())
                 _generator = generator;

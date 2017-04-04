@@ -128,7 +128,7 @@
     <Compile Include="Controllers\ExamplesController.cs" />
     <Compile Include="Controllers\SeedController.cs" />
     <Compile Include="Controllers\SimpleSeedController.cs" />
-    <Compile Include="Controllers\RulesEngineController.cs" />
+    <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -217,7 +217,7 @@
     <Content Include="Views\Extending\Index.cshtml" />
     <Content Include="Views\Extending\_Example_UserClass.cshtml" />
     <Content Include="Views\Extending\_Example_SimpleExamples.cshtml" />
-    <Content Include="Views\RulesEngine\Index.cshtml" />
+    <Content Include="Views\Documentation\Index.cshtml" />
     <Content Include="Views\SimpleSeed\Index.cshtml" />
     <Content Include="Views\SimpleSeed\_Example_LinqRange.cshtml" />
     <Content Include="Views\SimpleSeed\_Result_LinqRange.cshtml" />
