@@ -9,7 +9,7 @@ namespace MvcExamples.Helpers
 {
     public static class SeedExtensions
     {
-        public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin = 1, int seedEnd = 10) where T : new()
+        public static IList<T> Seed<T> (this IList<T> iList, int seedBegin = 1, int seedEnd = 10) where T : new()
         {
             var rules = new CustomGenerator("~/Helpers/XmlGeneratorSource.xml")
             {
@@ -20,7 +20,7 @@ namespace MvcExamples.Helpers
                 BaseRandom = new Random(44444)
             };
             var seedPacket = new SeedCore(rules);
-            return seedPacket.SeedList(iEnumerable);
+            return seedPacket.SeedList(iList);
         }
 
         public class CustomGenerator : MultiGenerator

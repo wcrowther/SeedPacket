@@ -98,7 +98,7 @@ namespace SeedPacket.DataSources
                     jsonDataSource.Parse(sourceString);
                     sourceData = jsonDataSource;
                 }
-                catch (InvalidSourceStringException ex)
+                catch (InvalidSourceStringException)
                 {
                     try
                     {

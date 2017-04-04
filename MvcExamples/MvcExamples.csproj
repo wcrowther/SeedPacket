@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MvcExamples</RootNamespace>
     <AssemblyName>MvcExamples</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
@@ -223,9 +223,8 @@
     <Content Include="Views\SimpleSeed\_Result_LinqRange.cshtml" />
     <Content Include="Views\SimpleSeed\_Example_UsingInject.cshtml" />
     <Content Include="Views\SimpleSeed\_Result_UsingInject.cshtml" />
-    <Content Include="Views\Examples\Index.cshtml" />
     <Content Include="Views\Examples\Test2.cshtml" />
-    <Content Include="Views\Examples\Test3.cshtml" />
+    <Content Include="Views\Examples\Index.cshtml" />
     <Content Include="Views\Home\_HotBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
