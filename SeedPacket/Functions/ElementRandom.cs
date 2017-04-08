@@ -6,7 +6,7 @@ namespace SeedPacket.Functions
 {
     public static partial class func
     {
-        public static string RandomElement (IGenerator generator, string identifier = null)
+        public static string ElementRandom (IGenerator generator, string identifier = null)
         {
             // Set default in case it is needed
             var propertyName = generator.CurrentProperty?.Name ?? "";
@@ -19,7 +19,7 @@ namespace SeedPacket.Functions
             return element;
         }
 
-        public static dynamic RandomElement (IGenerator generator, string identifier, TypeCode typeCode)
+        public static dynamic ElementRandom (IGenerator generator, string identifier, TypeCode typeCode)
         {
             var elementList = generator.Datasource.GetElementList(identifier);
             int index = new Random(generator.RowRandomNumber).Next(elementList.Count);

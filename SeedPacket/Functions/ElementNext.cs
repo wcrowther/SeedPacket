@@ -7,7 +7,7 @@ namespace SeedPacket.Functions
 {
     public static partial class func
     {
-        public static string NextElement (IGenerator generator, string identifier)
+        public static string ElementNext (IGenerator generator, string identifier)
         {
             // Will loop back to beginning if rownumber is greater than number of elements in list
 

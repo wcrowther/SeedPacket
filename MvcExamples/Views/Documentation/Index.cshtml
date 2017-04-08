@@ -1,0 +1,348 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        <h2>Documentation</h2>
+        <p>TEXT TO COME Customizing data creation for SeedPacket</p>
+        <h3>Overview</h3>
+        <p> TEXT TO COME 
+            SeedPacket is for the quick seeding of data on a List (or most types that implement IEnumerable). 
+            It is easy to use out of the box for prototyping, data generation, and unit testing. It customizable
+            with a powerful rules engine that can pull data from an external source such as an Xml file or string.
+        </p>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket Namespace</h3>
+        <ul>
+            <li>
+                <h4>SeedCore Class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    sdfsdfsssss
+                </p>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>SeedList&lt;T&gt; (IEnumerable&lt;T&gt; iEnumerable, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>Rules Class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    sdfsdfsssss
+                </p>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>GetRuleByTypeAndName(Type propertyType, string propertyName) : returns Rule</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>Add(Rule rule, bool overwrite = true): returns void</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>AddRange(IEnumerable&lt;Rule&gt;rules, bool overwrite = true) : returns void</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>RemoveRuleByName(string ruleName) : returns void</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>Rule Class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    sdfsdfsssss
+                </p>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>SeedList&lt;T&gt; (IEnumerable&lt;T&gt; iEnumerable, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>SimpleSeed Class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    sdfsdfsssss
+                </p>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>SeedList&lt;T&gt; (IEnumerable&lt;T&gt; iEnumerable, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Extensions Namespace</h3>
+        <ul>
+            <li>
+                <h4>SeedExtesions (static)</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Generators Namespace</h3>
+        <ul>
+            <li>
+                <h4>Generator (abstract)</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>BasicGenerator</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>MultiGenerator</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.DataSources Namespace</h3>
+        <ul>
+            <li>
+                <h4>JsonDataSource</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>XmlDataSource</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>MultiDataSource</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Interfaces Namespace</h3>
+        <ul>
+            <li>
+                <h4>IGenerator</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>IDataSource</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>IRules</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Functions Namespace</h3>
+        <ul>
+            <li>
+                <h4>CacheExtensions (static)</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.CacheItemsNext</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.CacheItemsRandom</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.ElementNext</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.ElementRandom</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.RandomAddress</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.RandomCompany</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.RandomCost</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.RandomDateTime</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.RandomEmail</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.RandomFee</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.RandomGuid</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.RandomPhones</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.RandomUserName</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.RandomZip</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>func.DiceRoll</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Enums Namespace</h3>
+        <ul>
+            <li>
+                <h4>RulesSet (enum)</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>SeedInputType (enum)</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Exceptions Namespace</h3>
+        <ul>
+            <li>
+                <h4>InvalidDefaultDataException</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>InvalidSeedParametersException</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>InvalidSourceFileException</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>InvalidSourceStringException</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>MultipleSourceException</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h4>NoSourceException</h4>
+                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>Debugging</h3>
+        Information to come
+    </div>
+</div>

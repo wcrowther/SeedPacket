@@ -14,36 +14,32 @@ namespace SeedPacket
 {
     public class SeedCore
     {
-        private IGenerator _generator; 
+        private IGenerator generator; 
 
         public SeedCore (IGenerator generator = null) {
-            _generator = generator ?? new MultiGenerator(); 
+            this.generator = generator ?? new MultiGenerator(); 
         }
 
-        public  IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable, IGenerator generator = null) where T : new()
+        public  IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable) where T : new()
         {
-            if (generator.Is())
-                _generator = generator;
-
             var cachedRules = new Dictionary<int, Rule>();
-            var metaType = typeof(T).GetMetaModel();
-            var metaProperties = metaType.GetMetaProperties();
             var seedList = new List<T>();
-            bool firstRow = true;
+            bool isFirstRow = true;
 
-            if (_generator.Debugging) {
+            if (generator.Debugging) {
                 Debug.WriteLine("-----------------------------------------------------");
                 Debug.WriteLine("Begin Seed Creation for Type: " + typeof(T).Name);
                 Debug.WriteLine("-----------------------------------------------------");
             }
 
-            for (int rowNumber = _generator.SeedBegin; rowNumber <= _generator.SeedEnd; rowNumber++)
+            for (int rowNumber = generator.SeedBegin; rowNumber <= generator.SeedEnd; rowNumber++)
             {
-                CreateRow(seedList, metaProperties, firstRow, _generator, cachedRules, rowNumber);
-                firstRow = false;
+                var newRow = CreateRow<T>(generator, rowNumber, cachedRules, isFirstRow);
+                seedList.Add(newRow);
+                isFirstRow = false;
             }
 
-            if (_generator.Debugging)
+            if (generator.Debugging)
             {
                 Debug.WriteLine("-----------------------------------------------------");
             }
@@ -53,22 +49,25 @@ namespace SeedPacket
             return iEnumerable;
         }
 
-        private static void CreateRow<T> (List<T> seedlist, List<MetaProperty> metaProperties, bool isFirstRow, IGenerator generator,
-                                          Dictionary<int, Rule> cachedRules, int rowNumber) where T : new()
+        private static T CreateRow<T> ( IGenerator generator, int rowNumber,
+                                        Dictionary<int, Rule> cachedRules, bool isFirstRow) where T : new()
         {
             generator.GetNextRowRandom();
 
             // Create each seed item
-            dynamic newItem = Activator.CreateInstance(typeof (T)); // new T(); // 
+            dynamic newItem = Activator.CreateInstance(typeof (T)); //OR new T(); // 
+            var metaType = typeof(T).GetMetaModel();
+            var metaProperties = metaType.GetMetaProperties();
 
             for (int propertyNumber = 0; propertyNumber <= metaProperties.Count - 1; propertyNumber++)
             {
                 SetSeedPropertyValue<T>(newItem, metaProperties, propertyNumber, isFirstRow, generator, cachedRules, rowNumber);
             }
-            seedlist.Add(newItem);
 
             // Temp dictionary of other values in this seed. Cleared after loop.
             generator.CurrentRowValues.Clear();
+
+            return newItem;
         }
 
         private static void SetSeedPropertyValue<T> (dynamic newItem, List<MetaProperty> metaProperties, int propertyNumber, bool isFirstRow,

@@ -55,7 +55,7 @@ namespace Tests.SeedPacket
             // Uses MultilGenerator by default
             Assert.AreEqual(10, list.Count());
             Assert.AreEqual(10, list[9].ItemId);
-            Assert.AreEqual("gadget", list[9].ItemName);
+            Assert.AreEqual("gear", list[9].ItemName);
             Assert.IsInstanceOf<Item>(list[0]);
         }
 
@@ -70,7 +70,7 @@ namespace Tests.SeedPacket
             // Uses MultiGenerator by default
             Assert.AreEqual(10, list.Count());
             Assert.AreEqual(1, list[0].ItemId);
-            Assert.AreEqual("dooHickey", list[0].ItemName);
+            Assert.AreEqual("thingamajig", list[0].ItemName);
             Assert.IsInstanceOf<Item>(list[0]);
         }
 

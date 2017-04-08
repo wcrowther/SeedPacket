@@ -8,32 +8,26 @@ body {
 html {
     overflow-y: scroll
 } 
-
 html, body {
     height: 100%;
 }
-
-p, h1, h2, h3, h4, h5, h6, 
+ p, h1, h2, h3, h4, h5, h6, 
 .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Merriweather', serif;
 }
-
-h2, .h2 {
+ h2, .h2 {
     margin-top: 50px;
     margin-bottom: 4px;
     font-size: 40px; 
     font-weight: 500;   
 }
-
-p {
+ p, ul, li {
     font-weight: 100;
 }
-
-hr {
+ hr {
     border-top: 1px solid #83A8D1;
 }
-
-a {
+ a {
     font-weight: bold;
 }
 
@@ -73,10 +67,6 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
-}
-
-li strong {
-    display: block;
 }
 
 .row li {
@@ -241,3 +231,25 @@ table thead {
     font-weight: bold;
     padding: 20px 0 0 0;
 }
+
+/*  
+=========================================================================== 
+    Documentation
+=========================================================================== 
+*/
+
+.documentation h4, .documentation h5, .documentation strong {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.documentation h4 {
+    font-size: 18px;
+    font-weight: bold;
+}
+.documentation h5 {
+    font-size: 16px;
+}
+.documentation strong {
+    font-size: 16px;
+}
+
+

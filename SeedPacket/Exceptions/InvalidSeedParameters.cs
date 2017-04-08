@@ -2,9 +2,9 @@
 
 namespace SeedPacket.Exceptions
 {
-    public class InvalidSeedParameters : Exception
+    public class InvalidSeedParametersException : Exception
     {
-        public InvalidSeedParameters () 
+        public InvalidSeedParametersException () 
             : base("Invalid Parameters: SeedBegin must be less than or equal to SeedEnd.")
         {
         }

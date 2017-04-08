@@ -10,7 +10,7 @@ var generator = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml")
         new Rule(typeof(int), "SelectedProduct",  g =&gt; g.RowRandom.Next(0, 11), "Random product id"),
         new Rule(typeof(string), "Ceo",           g =&gt; func.NextElement(g, "FirstName") + " " + func.NextElement(g, "LastName"), "Random CEO Name"),
         new Rule(typeof(string),"Description%",   g =&gt; func.RandomElement(g, "Description"), "Description", "Gets Description from custom XML file" ),
-        new Rule(typeof(List&lt;Item&gt;), "",          g =&gt; func.NextCacheItems&lt;Item&gt;(g, g.Cache.Items, 10, 10, false), "ItemList"),
+        new Rule(typeof(List&lt;Item&gt;), "",          g =&gt; func.CacheItemsNext&lt;Item&gt;(g, g.Cache.Items, 10, 10, false), "ItemList"),
     },
     BaseDateTime = DateTime.Today,
     BaseRandom = new Random(1234567)
