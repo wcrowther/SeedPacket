@@ -20,88 +20,91 @@ namespace SeedPacket
             this.generator = generator ?? new MultiGenerator(); 
         }
 
-        public  IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable) where T : new()
+        public IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable) where T : new()
         {
-            var cachedRules = new Dictionary<int, Rule>();
             var seedList = new List<T>();
+            var cachedRules = new Dictionary<int, Rule>();
             bool isFirstRow = true;
 
-            if (generator.Debugging) {
-                Debug.WriteLine("-----------------------------------------------------");
-                Debug.WriteLine("Begin Seed Creation for Type: " + typeof(T).Name);
-                Debug.WriteLine("-----------------------------------------------------");
-            }
+            DebugWrite("-----------------------------------------------------");
+            DebugWrite("Begin Seed Creation for Type: " + typeof(T).Name);
+            DebugWrite("-----------------------------------------------------");
 
             for (int rowNumber = generator.SeedBegin; rowNumber <= generator.SeedEnd; rowNumber++)
             {
-                var newRow = CreateRow<T>(generator, rowNumber, cachedRules, isFirstRow);
+                generator.RowNumber = rowNumber;
+                generator.GetNextRowRandom();
+
+                var newRow = CreateRow<T>(generator, cachedRules, isFirstRow);
+
                 seedList.Add(newRow);
                 isFirstRow = false;
             }
 
-            if (generator.Debugging)
-            {
-                Debug.WriteLine("-----------------------------------------------------");
-            }
+            DebugWrite("-----------------------------------------------------");
 
             iEnumerable = seedList;
-
             return iEnumerable;
         }
 
-        private static T CreateRow<T> ( IGenerator generator, int rowNumber,
-                                        Dictionary<int, Rule> cachedRules, bool isFirstRow) where T : new()
+        private T CreateRow<T> ( IGenerator generator, Dictionary<int, Rule> cachedRules, bool isFirstRow) where T : new()
         {
-            generator.GetNextRowRandom();
-
-            // Create each seed item
-            dynamic newItem = Activator.CreateInstance(typeof (T)); //OR new T(); // 
             var metaType = typeof(T).GetMetaModel();
             var metaProperties = metaType.GetMetaProperties();
 
-            for (int propertyNumber = 0; propertyNumber <= metaProperties.Count - 1; propertyNumber++)
-            {
-                SetSeedPropertyValue<T>(newItem, metaProperties, propertyNumber, isFirstRow, generator, cachedRules, rowNumber);
-            }
+            dynamic newItem = Activator.CreateInstance(typeof (T)); // OR new T();
 
-            // Temp dictionary of other values in this seed. Cleared after loop.
-            generator.CurrentRowValues.Clear();
+            for (int i = 0; i <= metaProperties.Count - 1; i++)
+            {
+                var property = metaProperties[i];
+                generator.CurrentProperty = property;
+
+                if (!property.CanWrite)
+                    continue;
+
+                var rule = GetRuleForProperty(generator, i, cachedRules, isFirstRow);
+
+                SetPropertyValue(newItem, property, rule, generator);
+            }
+            generator.CurrentRowValues.Clear();  // Dictionary of other values in this seed row. Cleared after loop.
 
             return newItem;
         }
 
-        private static void SetSeedPropertyValue<T> (dynamic newItem, List<MetaProperty> metaProperties, int propertyNumber, bool isFirstRow,
-                                                     IGenerator generator, Dictionary<int, Rule> cachedRules, int rowNumber) where T : new()
+        private Rule GetRuleForProperty (IGenerator generator, int propInt, Dictionary<int, Rule> cachedRules, bool isFirstRow)
         {
-            Rule rule = null;
-            MetaProperty property = metaProperties[propertyNumber];
-            generator.CurrentProperty = property;  // Put property in generator current property
-
-            if (!property.CanWrite)
-                return;
+            Rule rule;
+            var property = generator.CurrentProperty;
 
             if (isFirstRow) // Cache rules for first row
             {
                 rule = generator.Rules.GetRuleByTypeAndName(property.PropertyType, property.Name);
-                cachedRules.Add(propertyNumber, rule);
+                cachedRules.Add(propInt, rule);
 
-                // Show rule used in console
-                string ruleName = (rule.Is() ? rule.RuleName.ifBlank() : "No matching Rule");
-                string ruleDebug = string.Format("Property: {0}({1}) using rule: {2}.", property.Name, property.PropertyType, ruleName);
-                Debug.WriteLine(ruleDebug); 
+                DebugWrite($"Property: {property.Name }({property.PropertyType}) using rule: {rule.RuleName ?? "No matching Rule"}.");
             }
             else
             {
-                rule = cachedRules[propertyNumber];
-                // Debug.WriteLine("using cachedRule " + rule.RuleName);
+                rule = cachedRules[propInt];
             }
+            return rule;
+        }
 
-            if (rule.Is())
+        private void SetPropertyValue (dynamic newItem, MetaProperty property, Rule rule, IGenerator generator)
+        {
+            if (property != null && rule != null)
             {
-                generator.RowNumber = rowNumber;
                 dynamic seedValue = rule.ApplyRule(generator);
                 property.SetInstanceValue(seedValue, newItem);
                 generator.CurrentRowValues.Add(property.Name, seedValue);
+            }
+        }
+
+        private void DebugWrite (string str)
+        {
+            if (generator.Debugging)
+            {
+                Debug.WriteLine(str);
             }
         }
     }

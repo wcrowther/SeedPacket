@@ -28,7 +28,7 @@ namespace SeedPacket.Generators
         private DateTime? baseDateTime;
         private Dictionary<string, object> currentRowValues = new Dictionary<string, object>();
         private DateTime defaultDateTime = DateTime.Parse("1/1/2020");
-        private bool debugging; // True to show Debug messages
+        private bool debugging = true; // shows in console
         private ExpandoObject cache = new ExpandoObject();
         protected IDataSource dataSource;
 
