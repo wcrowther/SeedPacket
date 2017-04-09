@@ -153,7 +153,7 @@
                 <strong>Extension Methods:</strong>
                 <ul>
                     <li>
-                        <h5>static AddAdvancedRules (this Rules rules) : returns void</h5>
+                        <h5>static AddBasicRules (this Rules rules) : returns void</h5>
                         <p>Some information...</p>
                     </li>
                     <li>
@@ -505,33 +505,103 @@
                 <strong>Extension Methods:</strong>
                 <ul>
                     <li>
-                        <h5>Parse(string json) : returns void</h5>
+                        <h5>static TakeRandomItems&lt;T&gt; (this IList&lt;T&gt; sourceList, Random random, int count = 1, bool remove = true) : returns IList&lt;T&gt;</h5>
+                        <p>where T : new() Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static T GetByItemName&lt;T&gt; (this ExpandoObject expando, string name) : returns T</h5>
                         <p>Some information...</p>
                     </li>
                     <li>
-                        <h5>Load(string sourceFilePath) : returns void</h5>
-                        <p>Some information...</p>
-                    </li>
-                    <li>
-                        <h5>GetElementList(string identifier) : returns List&lt;string&gt;</h5>
+                        <h5>static Get&lt;TKey, TVal&gt; (this Dictionary&lt;TKey, TVal&gt; dictionary, TKey key, TVal defaultVal = default(TVal)) : returns TVal</h5>
                         <p>Some information...</p>
                     </li>
                 </ul>
             </li>
             <li class="class">
-                <h4>func.CacheItemsNext</h4>
+                <h4>func (static)</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    sdfsdfsssss
+                </p>
                 <strong>Methods:</strong>
                 <ul>
                     <li>
-                        <h5>Parse(string json) : returns void</h5>
+                        <h5>static CacheItemsNext&lt;T&gt; (IGenerator generator, string cacheListName, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
                         <p>Some information...</p>
                     </li>
                     <li>
-                        <h5>Load(string sourceFilePath) : returns void</h5>
+                        <h5>static CacheItemsNext&lt;T&gt; (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
                         <p>Some information...</p>
                     </li>
                     <li>
-                        <h5>GetElementList(string identifier) : returns List&lt;string&gt;</h5>
+                        <h5>static List&lt;T&gt; CacheItemsRandom&lt;T&gt; (IGenerator generator, string cacheListName, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static List&lt;T&gt; CacheItemsRandom&lt;T&gt; (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static DiceRoll (IGenerator generator, int diceSides = 6, int numberOfDice = 1) : returns int</h5>
+                        <p>Simulates rolling a 6-sided dice (16.6%). Use a higher diceSides to decrease chances in a linear progression.
+                           Increasing numberOfDice creates a bell-curve of probability ie: 3d6 is 3 to 18 w/ 7 most likely possiblity.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>static ElementNext (IGenerator generator, string identifier) : returns string</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static ElementRandom (IGenerator generator, string identifier = null) : returns string</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static ElementRandom (IGenerator generator, string identifier, TypeCode typeCode) : returns dynamic</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static OnceEvery (IGenerator generator, int count = 10) : returns bool</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static RandomAddress (IGenerator generator) : returns string</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static RandomCompany (IGenerator generator) : returns string</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static RandomCost (IGenerator generator) : returns decimal</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static RandomDateTime (IGenerator generator, int hoursBefore, int hoursAfter) : returns DateTime</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static RandomEmail (IGenerator generator) : returns string</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static RandomFee (IGenerator generator) : returns decimal</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static RandomGuid (IGenerator generator) : returns Guid</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static RandomPhone (IGenerator generator) : returns string</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static RandomUserName (IGenerator generator) : returns string</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static RandomZip (IGenerator generator) : returns string</h5>
                         <p>Some information...</p>
                     </li>
                 </ul>
@@ -545,28 +615,64 @@
         <h3>SeedPacket.Exceptions Namespace</h3>
         <ul class="namespaceList">
             <li class="class">
-                <h4>InvalidDefaultDataException</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+                <h4>InvalidDefaultDataException class</h4>
+                Message: Not able to retrieve valid default data from the embedded resource file.
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
             </li>
             <li class="class">
-                <h4>InvalidSeedParametersException</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+                <h4>InvalidSeedParametersException class</h4>
+                Message: Invalid Parameters: SeedBegin must be less than or equal to SeedEnd.
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
             </li>
             <li class="class">
-                <h4>InvalidSourceFileException</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+                <h4>InvalidSourceFileException class</h4>
+                Message: Not able to retrieve valid {source} data from the supplied file path ("{filepath}").
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
             </li>
             <li class="class">
                 <h4>InvalidSourceStringException</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+                Message: Not able to retrieve valid {source}data from the supplied source string.
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
             </li>
             <li class="class">
-                <h4>MultipleSourceException</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+                <h4>MultipleSourceException class</h4>
+               Message: You can only define one source, either the path to a file OR explicitly pass in a string.
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
             </li>
             <li class="class">
-                <h4>NoSourceException</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+                <h4>NoSourceException class</h4>
+                Message: You MUST either define the path to a source file OR explicitly pass in a string.
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

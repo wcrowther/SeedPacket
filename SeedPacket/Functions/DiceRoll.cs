@@ -8,7 +8,7 @@ namespace SeedPacket.Functions
     public static partial class func
     {
         // Simulates rolling a 6-sided dice (16.6%). Use a higher diceSides to decrease chances in a linear progression.
-        // Increasing numberOfDice creates a bell-curve of probability ie: 3d6 is 3 to 18 w/ 7 most likely.
+        // Increasing numberOfDice creates a bell-curve of probability ie: 3d6 is 3 to 18 w/ 7 most likely possiblity.
         public static int DiceRoll (IGenerator generator, int diceSides = 6, int numberOfDice = 1)
         {
             int diceSum = 0;

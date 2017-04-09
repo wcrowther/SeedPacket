@@ -45,7 +45,6 @@ namespace SeedPacket.Functions
             return dictionary.ContainsKey(name) ? (T) dictionary[name] : default(T);
         }
 
-        // FOR ROW DICTIONARY CONVERT DICTIONARY TO DYNAMIC SIMILAR to CACHE??
         public static TVal Get<TKey, TVal> (this Dictionary<TKey, TVal> dictionary, TKey key, TVal defaultVal = default(TVal))
         {
             TVal val;
