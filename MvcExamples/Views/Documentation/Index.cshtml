@@ -15,13 +15,20 @@
 <div class="row documentation">
     <div class="col-md-12">
         <h3>SeedPacket Namespace</h3>
-        <ul>
-            <li>
+        <ul class="namespaceList">
+            <li class="class">
                 <h4>SeedCore Class</h4>
                 <p>
                     <strong>Purpose:</strong>
                     sdfsdfsssss
                 </p>
+                <strong>Constructor:</strong>
+                <ul>
+                    <li>
+                        <h5>SeedCore (IGenerator generator = null)</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
                 <strong>Methods:</strong>
                 <ul>
                     <li>
@@ -30,14 +37,57 @@
                     </li>
                 </ul>
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
+                <h4>SimpleSeed Class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    sdfsdfsssss
+                </p>
+                <strong>Constructor:</strong>
+                <ul>
+                    <li>
+                        <h5>SimpleSeed(string sourcefilepath = null, string sourcestring = null, DataInputType seedinputtype = DataInputType.Auto)</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
+                <strong>Properties:</strong>
+                <ul>
+                    <li>
+                        <h5>Default : string</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>DefaultRandom:  Random</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>Next(string identifier, int number, string ifNull = null) : returns string</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>Randomize(string identifier, string ifNull = null) : returns string</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
                 <h4>Rules Class</h4>
                 <p>
                     <strong>Purpose:</strong>
                     sdfsdfsssss
                 </p>
+                <strong>Implements:</strong>
+                <ul>
+                    <li>
+                        <h5>Collection&lt;Rule&gt;</h5>
+                    </li>
+                    <li>
+                        <h5>IRules</h5>
+                    </li>
+                </ul>
                 <strong>Methods:</strong>
                 <ul>
                     <li>
@@ -58,34 +108,38 @@
                     </li>
                 </ul>
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>Rule Class</h4>
                 <p>
                     <strong>Purpose:</strong>
                     sdfsdfsssss
                 </p>
-                <strong>Methods:</strong>
+                <strong>Constructor:</strong>
                 <ul>
                     <li>
-                        <h5>SeedList&lt;T&gt; (IEnumerable&lt;T&gt; iEnumerable, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <h5>Rule(Type typeMatch, string nameMatch, Func&lt;IGenerator, dynamic&gt; rule, string ruleName, string description = "")</h5>
                         <p>Some information...</p>
                     </li>
                 </ul>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <h4>SimpleSeed Class</h4>
-                <p>
-                    <strong>Purpose:</strong>
-                    sdfsdfsssss
-                </p>
+                <strong>Properties:</strong>
+                <ul>
+                    <li>
+                        <h5>RuleName : returns string</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>Description : returns string</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
                 <strong>Methods:</strong>
                 <ul>
                     <li>
-                        <h5>SeedList&lt;T&gt; (IEnumerable&lt;T&gt; iEnumerable, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <h5>IsMatch (Type propType, string propName) : returns bool</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>ApplyRule (IGenerator generator) : returns dynamic</h5>
                         <p>Some information...</p>
                     </li>
                 </ul>
@@ -97,10 +151,28 @@
 <div class="row documentation">
     <div class="col-md-12">
         <h3>SeedPacket.Extensions Namespace</h3>
-        <ul>
-            <li>
-                <h4>SeedExtesions (static)</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+        <ul class="namespaceList">
+            <li class="class">
+                <h4>SeedExtensions (static) Class</h4>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>static Seed&lt;T&gt;(this IEnumerable&lt;T&gt; iEnumerable, int count) : returns IEnumerable&lt;T&gt;</h5>
+                        <p> where T : new() Some information...</p>
+                    </li>
+                    <li>
+                        <h5>staticSeed&lt;T&gt;(this IEnumerable&lt;T&gt; iEnumerable, IGenerator generator) : returns IEnumerable&lt;T&gt;</h5>
+                        <p> where T : new() Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static Seed&lt;T&gt; (this IEnumerable&lt;T&gt; iEnumerable, int seedBegin, int seedEnd, string filePath) : returns IEnumerable&lt;T&gt;</h5>
+                        <p> where T : new() Some information...</p>
+                    </li>
+                    <li>
+                        <h5>static Seed&lt;T&gt; (this IEnumerable&lt;T&gt; iEnumerable, int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <p> where T : new() Some information...</p>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
@@ -109,22 +181,109 @@
 <div class="row documentation">
     <div class="col-md-12">
         <h3>SeedPacket.Generators Namespace</h3>
-        <ul>
-            <li>
-                <h4>Generator (abstract)</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+        <ul class="namespaceList">
+            <li class="class">
+                <h4>Generator (abstract) Class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    sdfsdfsssss
+                </p>
+                <strong>Implements:</strong>
+                <ul>
+                    <li>
+                        <h5>IGenerator</h5>
+                    </li>
+                </ul>
+                <strong>Properties:</strong>
+                <ul>
+                    <li>
+                        <h5>SeedBegin : int</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>SeedEnd : int</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>Datasource : readOnly IDataSource</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>Rules : Rules</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>BaseRandom : Random</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>BaseDateTime : DateTime</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>Debugging : bool</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>RowCount : readOnly int</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>RowNumber : int</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>RowRandom : readOnly Random</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>RowRandomNumber : readOnly int</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>CurrentRowValues : readOnly Dictionary&lt;string, object&gt;</h5>
+                        <p>Some information...</p>
+                    </li>
+                    <li>
+                        <h5>CurrentProperty : MetaProperty</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>GetNextRowRandom : returns void</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>BasicGenerator</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+                <p>
+                    <strong>Purpose:</strong>
+                    sdfsdfsssss
+                </p>
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>MultiGenerator</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
+                <p>
+                    <strong>Purpose:</strong>
+                    sdfsdfsssss
+                </p>
+                <strong>Constructor:</strong>
+                <ul>
+                    <li>
+                        <h5>SeedCore (IGenerator generator = null)</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>SeedList&lt;T&gt; (IEnumerable&lt;T&gt; iEnumerable, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Some information...</p>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
@@ -133,20 +292,16 @@
 <div class="row documentation">
     <div class="col-md-12">
         <h3>SeedPacket.DataSources Namespace</h3>
-        <ul>
-            <li>
+        <ul class="namespaceList">
+            <li class="class">
                 <h4>JsonDataSource</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>XmlDataSource</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>MultiDataSource</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
@@ -157,20 +312,16 @@
 <div class="row documentation">
     <div class="col-md-12">
         <h3>SeedPacket.Interfaces Namespace</h3>
-        <ul>
-            <li>
+        <ul class="namespaceList">
+            <li class="class">
                 <h4>IGenerator</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>IDataSource</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>IRules</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
@@ -181,98 +332,68 @@
 <div class="row documentation">
     <div class="col-md-12">
         <h3>SeedPacket.Functions Namespace</h3>
-        <ul>
-            <li>
+        <ul class="namespaceList">
+            <li class="class">
                 <h4>CacheExtensions (static)</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.CacheItemsNext</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.CacheItemsRandom</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.ElementNext</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.ElementRandom</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.RandomAddress</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.RandomCompany</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.RandomCost</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.RandomDateTime</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.RandomEmail</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.RandomFee</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.RandomGuid</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.RandomPhones</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.RandomUserName</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.RandomZip</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>func.DiceRoll</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
@@ -282,57 +403,29 @@
 
 <div class="row documentation">
     <div class="col-md-12">
-        <h3>SeedPacket.Enums Namespace</h3>
-        <ul>
-            <li>
-                <h4>RulesSet (enum)</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <h4>SeedInputType (enum)</h4>
-                Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
-            </li>
-        </ul>
-    </div>
-</div>
-
-<div class="row documentation">
-    <div class="col-md-12">
         <h3>SeedPacket.Exceptions Namespace</h3>
-        <ul>
-            <li>
+        <ul class="namespaceList">
+            <li class="class">
                 <h4>InvalidDefaultDataException</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>InvalidSeedParametersException</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>InvalidSourceFileException</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>InvalidSourceStringException</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>MultipleSourceException</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>
-        </ul>
-        <ul>
-            <li>
+            <li class="class">
                 <h4>NoSourceException</h4>
                 Serves as the basis for generated datetime data. If not set, currently defaults to 1/1/2018.
             </li>

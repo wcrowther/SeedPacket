@@ -3,7 +3,6 @@ using SeedPacket.Interfaces;
 using SeedPacket.Generators;
 using System.Collections.Generic;
 using System;
-using SeedPacket.Enums;
 using MvcExamples.Models;
 using SeedPacket.Examples;
 

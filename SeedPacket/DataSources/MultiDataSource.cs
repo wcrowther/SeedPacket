@@ -1,5 +1,4 @@
-﻿using SeedPacket.Enums;
-using SeedPacket.Exceptions;
+﻿using SeedPacket.Exceptions;
 using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,16 +11,16 @@ namespace SeedPacket.DataSources
         private IDataSource sourceData;
         private JsonDataSource jsonDataSource;
         private XmlDataSource xmlDataSource;
-        private SeedInputType seedInputType;
+        private DataInputType dataInputType;
 
         private string sourceFilePath;
         private string sourceString;
 
-        public MultiDataSource(string sourcefilepath = null, string sourcestring = null, SeedInputType seedinputtype = SeedInputType.Auto)
+        public MultiDataSource(string sourcefilepath = null, string sourcestring = null, DataInputType datainputtype = DataInputType.Auto)
         {
             sourceFilePath = sourcefilepath;
             sourceString = sourcestring;
-            seedInputType = seedinputtype;
+            dataInputType = datainputtype;
             jsonDataSource = new JsonDataSource();
             xmlDataSource = new XmlDataSource();
             LoadSource();
@@ -29,32 +28,32 @@ namespace SeedPacket.DataSources
 
         private void LoadSource()
         {
-            if (seedInputType == SeedInputType.JsonString)
+            if (dataInputType == DataInputType.JsonString)
             {
                 jsonDataSource.Parse(sourceString);
                 sourceData = jsonDataSource;
             }
-            else if (seedInputType == SeedInputType.JsonFile)
+            else if (dataInputType == DataInputType.JsonFile)
             {
                 jsonDataSource.Load(sourceFilePath);
                 sourceData = jsonDataSource;
             }
-            else if (seedInputType == SeedInputType.XmlString)
+            else if (dataInputType == DataInputType.XmlString)
             {
                 xmlDataSource.Parse(sourceString);
                 sourceData = xmlDataSource;
             }
-            else if (seedInputType == SeedInputType.XmlFile)
+            else if (dataInputType == DataInputType.XmlFile)
             {
                 xmlDataSource.Load(sourceFilePath);
                 sourceData = xmlDataSource;
             }
-            else if (seedInputType == SeedInputType.Default)
+            else if (dataInputType == DataInputType.Default)
             {
                 xmlDataSource.LoadDefaultData();
                 sourceData = xmlDataSource;
             }
-            else  // if SeedInputType.Auto determine best option
+            else  // if DataInputType.Auto determine best option
             {
                 AutoSource();
             }

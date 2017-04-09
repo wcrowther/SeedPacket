@@ -4,7 +4,6 @@ using NewLibrary.ForString;
 using System;
 using System.Linq;
 using System.Web.Mvc;
-using SeedPacket.Enums;
 using static System.Configuration.ConfigurationManager;
 using System.Collections.Generic;
 
@@ -38,7 +37,7 @@ namespace MvcExamples.Controllers
 
             lists.Add(list0);
 
-            var seed1 = new SimpleSeed("~/SourceFiles/jsonseedsource2.json", seedinputtype: SeedInputType.JsonFile);
+            var seed1 = new SimpleSeed("~/SourceFiles/jsonseedsource2.json", datainputtype: DataInputType.JsonFile);
             var list1 = Enumerable.Range(1, 8)
                 .Select(n => new Item
                 {
@@ -49,7 +48,7 @@ namespace MvcExamples.Controllers
 
             lists.Add(list1);
 
-            var seed2 = new SimpleSeed("~/SourceFiles/seedsource.xml", seedinputtype: SeedInputType.XmlFile);
+            var seed2 = new SimpleSeed("~/SourceFiles/seedsource.xml", datainputtype: DataInputType.XmlFile);
             var list2 = Enumerable.Range(1, 3)
                 .Select(n => new Item
                 {
@@ -60,7 +59,7 @@ namespace MvcExamples.Controllers
 
             lists.Add(list2);
 
-            var seed3 = new SimpleSeed(sourcestring: GetDemoJson(), seedinputtype: SeedInputType.JsonString);
+            var seed3 = new SimpleSeed(sourcestring: GetDemoJson(), datainputtype: DataInputType.JsonString);
             var list3 = Enumerable.Range(100, 3)
                 .Select(n => new Item
                 {
@@ -71,7 +70,7 @@ namespace MvcExamples.Controllers
 
             lists.Add(list3);
 
-            var seed4 = new SimpleSeed(sourcestring: GetDemoXml(), seedinputtype: SeedInputType.XmlString);
+            var seed4 = new SimpleSeed(sourcestring: GetDemoXml(), datainputtype: DataInputType.XmlString);
             var list4 = Enumerable.Range(20000, 4)
                 .Select(n => new Item
                 {

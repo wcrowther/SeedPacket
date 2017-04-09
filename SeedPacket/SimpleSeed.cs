@@ -1,5 +1,4 @@
 ﻿using SeedPacket.DataSources;
-using SeedPacket.Enums;
 using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,9 +11,9 @@ namespace SeedPacket
         private IDataSource dataSource;
 
         // Default Constructor
-        public SimpleSeed(string sourcefilepath = null, string sourcestring = null, SeedInputType seedinputtype = SeedInputType.Auto)
+        public SimpleSeed(string sourcefilepath = null, string sourcestring = null, DataInputType datainputtype = DataInputType.Auto)
         {
-            dataSource = new MultiDataSource(sourcefilepath, sourcestring, seedinputtype);
+            dataSource = new MultiDataSource(sourcefilepath, sourcestring, datainputtype);
         }
 
         // Alternative and unit testing constructor

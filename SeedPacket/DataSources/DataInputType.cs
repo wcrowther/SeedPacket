@@ -1,7 +1,7 @@
 ﻿
-namespace SeedPacket.Enums
+namespace SeedPacket
 {
-    public enum SeedInputType
+    public enum DataInputType
     {
         Auto,
         XmlString,

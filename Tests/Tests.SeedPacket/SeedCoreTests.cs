@@ -46,6 +46,26 @@ namespace Tests.SeedPacket
         }
 
         [Test]
+        public void SeedCore_SeedList_Default_With_Different_Counts_Should_Return_Same_At_Ordinal()
+        {
+            int ordinal = 2; // Ordinal in both lists
+
+            var iEnumerable = new List<Item>();
+            var gen = new MultiGenerator(){ SeedBegin = 1, SeedEnd = 10};
+            var list1 = new SeedCore(gen).SeedList(iEnumerable).ToList();
+
+            var iEnumerable2 = new List<Item>();
+            var gen2 = new MultiGenerator(){ SeedBegin = 1, SeedEnd = 30};
+            var list2 = new SeedCore(gen2).SeedList(iEnumerable2).ToList();
+
+            Assert.AreEqual(list1[ordinal].ItemId, list2[ordinal].ItemId);
+            Assert.AreEqual(list1[ordinal].ItemName, list2[ordinal].ItemName);
+            Assert.AreEqual(list1[ordinal].Number, list2[ordinal].Number);
+            Assert.AreEqual(list1[ordinal].Created, list2[ordinal].Created);
+        }
+
+
+        [Test]
         public void SeedCore_SeedList_Uses_Default_Generator_If_None_Passed_In_Constructor ()
         {
             var iEnumerable = new List<Item>();
