@@ -45,7 +45,7 @@ namespace SeedPacket
                 }
                 else
                 {
-                    throw new Exception("Rule RuleName already exists.");
+                    throw new Exception($"The Rule with RuleName '{rule.RuleName}' already exists.");
                 }
             }
             base.Add(rule);

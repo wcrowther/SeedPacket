@@ -8,7 +8,7 @@ namespace SeedPacket.Interfaces
 {
     public interface IGenerator
     {
-        Rules Rules { get; }
+        IRules Rules { get; }
 
         // Seed Range
         int SeedBegin { get; set; }

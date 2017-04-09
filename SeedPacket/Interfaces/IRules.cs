@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using SeedPacket.Generators;
+using System.Collections;
 
 namespace SeedPacket.Interfaces
 {
-    public interface IRules 
+    public interface IRules : ICollection
     {
         Rule GetRuleByTypeAndName(Type ruleType, string propertyName);
         void Add (Rule rule);

@@ -10,9 +10,11 @@ namespace SeedPacket.Generators
 {
     public abstract class Generator : IGenerator 
     {
+        IRules rules;
 
-        public Generator ()
+        public Generator (IRules rules =  null)
         {
+            this.rules = rules ?? new Rules();
             baseRandom = new Random(defaultSeed);
             GetNextRowRandom();
         }
@@ -57,7 +59,11 @@ namespace SeedPacket.Generators
             set { cache = value; }
         }
 
-        public Rules Rules { get; set; } = new Rules();
+        public IRules Rules
+        {
+            get { return rules; }
+            set { rules = value; }
+        } 
 
         public Random BaseRandom
         {

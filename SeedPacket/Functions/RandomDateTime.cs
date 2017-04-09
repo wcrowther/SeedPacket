@@ -19,7 +19,7 @@ namespace SeedPacket.Functions
             // BaseDateTime + -2 years by hour is -17521, 17521
             int randomHours = generator.RowRandom.Next(hoursBefore, hoursAfter);
 
-            return DiceRoll(generator, diceRange) ? (DateTime?)null : generator.BaseDateTime.AddHours(randomHours);
+            return DiceRoll(generator, diceRange) == 1 ? (DateTime?)null : generator.BaseDateTime.AddHours(randomHours);
         }
     }
 }

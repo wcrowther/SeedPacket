@@ -1,5 +1,6 @@
 ﻿using NewLibrary.ForString;
 using SeedPacket.Functions;
+using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ namespace SeedPacket
 {
     public static partial class RulesExtensions
     {
-        public static void AddAdvancedRules (this Rules rules)
+        public static void AddAdvancedRules (this IRules rules, bool overwrite =  false )
         {
             var advancedRules = new List<Rule>(){
                 new Rule(typeof(string),    "",                                 g => func.ElementRandom(g),                     "String",               "Random string from data or default" ),
@@ -33,7 +34,7 @@ namespace SeedPacket
             };
 
             rules.AddBasicRules();
-            rules.AddRange(advancedRules);
+            rules.AddRange(advancedRules, true);
         }
     }
 }
