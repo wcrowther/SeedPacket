@@ -36,7 +36,9 @@
                     not specified. The MultiDataSource loads its data from an embedded XML resource if an external source is not specified.
                 </p>
                 <p>Note that some classes that implement IEnumerable may not yet be supported. All implementations are constrained so
-                   that the type T must implement new().</p>
+                   that the type T must implement new().
+                </p>
+                @{ Html.RenderPartial("_01_SeedExtensions"); }
                 <strong>Extension Methods on IEnumerable&lt;T&gt;</strong>
                 <ul>
                     <li>
@@ -58,7 +60,6 @@
                     </li>
                 </ul>
             </li>
-            @{ Html.RenderPartial("_01_SeedExtensions"); }
         </ul>
     </div>
 </div>
@@ -81,21 +82,22 @@
                    separate from the extension method logic in so that writing custom extension methods is trivial. 
                 </p>
                 <p> TIP: Customize your own .Seed() extension methods with your own defaults, rules, and customizations as in the 
-                    example below. Now you can easily add your own rules and data, or even start over yours and data from scratch! 
+                    example below. Now you can easily add your own rules and data, or even clear all the rules and start over from scratch! 
                 </p>
                 @{ Html.RenderPartial("_02_SeedPacket"); }
                 <strong>Constructor:</strong>
                 <ul>
                     <li>
-                        <h5>SeedCore (IGenerator generator = null)</h5>
-                        <p>Some information...</p>
+                        <h5>new SeedCore (IGenerator generator = null)</h5>
+                        <p>The constructor for a new SeedCore excepts an optional IGenerator. If one is not passed in, it will
+                        default to a new MultiGenerator.</p>
                     </li>
                 </ul>
                 <strong>Methods:</strong>
                 <ul>
                     <li>
                         <h5>SeedList&lt;T&gt; (IEnumerable&lt;T&gt; iEnumerable, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
-                        <p>Some information...</p>
+                        <p>The basic call to seed data, you will generally wrap it in a convenience extension method.</p>
                     </li>
                 </ul>
             </li>
@@ -103,35 +105,47 @@
                 <h4>SimpleSeed class</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    The SimpleSeed class uses an alternative way to seed data. It does away with the Rules engine and uses a 
+                    more manual, and Linq-focused, way of creating data, while still leveraging the DataSource classes to utilize 
+                    XML / JSON files and strings. <a href="/SimpleSeed">More Info</a>
                 </p>
+                @{ Html.RenderPartial("_03_SimpleSeed"); }
                 <strong>Constructor:</strong>
                 <ul>
                     <li>
-                        <h5>SimpleSeed(string sourcefilepath = null, string sourcestring = null, DataInputType seedinputtype = DataInputType.Auto)</h5>
-                        <p>Some information...</p>
+                        <h5>new SimpleSeed(string sourcefilepath = null, string sourcestring = null, DataInputType seedinputtype = DataInputType.Auto)</h5>
+                        <p>A simple class that allows you to manually poplate data from an external XML or JSON string or file. The method will
+                        throw an error if both the sourcefilepath and the sourcestring are both populated.</p>
                     </li>
                 </ul>
                 <strong>Properties:</strong>
                 <ul>
                     <li>
                         <h5>Default : string</h5>
-                        <p>Some information...</p>
+                        <p>The string returned if no data is found for the Inject or Random that matches the "Identifier" property.</p>
                     </li>
                     <li>
                         <h5>DefaultRandom:  Random</h5>
-                        <p>Some information...</p>
+                        <p>For the SimpleSeed.Random(), set the initial seed for the random data. If a seed is set in the random, as:  
+                        new Random(3456), then the random sequeces generated will always be the same. If a non-seeded random is used, such as
+                        new Random(), then the values will be different every time.</p>
                     </li>
                 </ul>
                 <strong>Methods:</strong>
                 <ul>
                     <li>
                         <h5>Next(string identifier, int number, string ifNull = null) : returns string</h5>
-                        <p>Some information...</p>
+                        <p>Returns the next value in the datasource for that identifier, if it exists. The number is required and is usually 
+                           created with a LINQ.Range variable. The sequence will loop back if the number parameter is greater than the elments
+                           in the list. The ifNull is an optional parameter that will be returned if no elements match the identifier
+                           in the datasource.</p>
                     </li>
                     <li>
                         <h5>Randomize(string identifier, string ifNull = null) : returns string</h5>
-                        <p>Some information...</p>
+                        <p>Returns a random value from the datasource for that identifier, if it exists. Is slower that the Next() call. 
+                           the ifNull is an optional parameter that will be returned if no elements match the identifier
+                           in the datasource.
+                        </p>
                     </li>
                 </ul>
             </li>
@@ -139,15 +153,25 @@
                 <h4>Rules class</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    The Rules class is a wrapper for a Collection of Rule objects, with additional methods to help manage the Rule classes.
                 </p>
-                <strong>Implements:</strong>
+                <strong>Inherits:</strong>
                 <ul>
                     <li>
                         <h5>Collection&lt;Rule&gt;</h5>
                     </li>
+                </ul>
+                <strong>Implements:</strong>
+                <ul>
                     <li>
                         <h5>IRules</h5>
+                    </li>
+                </ul>
+                <strong>Constructor:</strong>
+                <ul>
+                    <li>
+                        <h5>new Rules()</h5>
+                        <p>A fairly generic constructor no parameters.</p>
                     </li>
                 </ul>
                 <strong>Methods:</strong>
@@ -179,7 +203,7 @@
                 <strong>Constructor:</strong>
                 <ul>
                     <li>
-                        <h5>Rule(Type typeMatch, string nameMatch, Func&lt;IGenerator, dynamic&gt; rule, string ruleName, string description = "")</h5>
+                        <h5>new Rule(Type typeMatch, string nameMatch, Func&lt;IGenerator, dynamic&gt; rule, string ruleName, string description = "")</h5>
                         <p>Some information...</p>
                     </li>
                 </ul>
@@ -349,7 +373,7 @@
                 <strong>Constructor:</strong>
                 <ul>
                     <li>
-                        <h5>MultiGenerator(string sourceFilepath = null, string sourceString = null,<br />
+                        <h5>new MultiGenerator(string sourceFilepath = null, string sourceString = null,<br />
                                            DataInputType dataInputType = DataInputType.Auto,<br />
                                            RulesSet rulesSet = RulesSet.Advanced)</h5>
                         <p>Some information...</p>

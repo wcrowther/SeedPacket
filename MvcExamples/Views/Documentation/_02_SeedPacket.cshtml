@@ -22,6 +22,9 @@ public static class CustomSeedExtensions
        return new SeedCore(gen).SeedList(iEnumerable).ToList();
     }
 }
+
+<i>// Call the CustomSeedExtensions in your project like so to create 100 rows w/ your custom data.</i>
+var userList = new List&lt;AppUser&gt;().Seed();
 </code>
 </div>
 
