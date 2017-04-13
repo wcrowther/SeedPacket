@@ -76,10 +76,12 @@
                     finds the best rule matching that property's name and datatype. Then uses that rule to generate data to fill 
                     that property's value.
                 </p>
-                <p>TIP: Generally, the default method of seeding data is to use the .Seed() extension methods on IEnumerable in the
+                <p>Generally, the default method of seeding data is to use the .Seed() extension methods on IEnumerable in the
                    SeedPacket.Extensions namespace to seed data. The functionality of the SeedCore class has intentionally been kept
-                   separate from the extension method logic in so that writing custom extension methods is trivial. Customize your own
-                   .Seed() extension methods with your own defaults, rules, and customizations
+                   separate from the extension method logic in so that writing custom extension methods is trivial. 
+                </p>
+                <p> TIP: Customize your own .Seed() extension methods with your own defaults, rules, and customizations as in the 
+                    example below. Now you can easily add your own rules and data, or even start over yours and data from scratch! 
                 </p>
                 @{ Html.RenderPartial("_02_SeedPacket"); }
                 <strong>Constructor:</strong>

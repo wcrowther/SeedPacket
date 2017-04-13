@@ -1,7 +1,6 @@
 ﻿using SeedPacket;
 using SeedPacket.Functions;
 using SeedPacket.Generators;
-using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,7 @@ namespace MvcExamples.Extensions
     {
         public static List<T> Seed<T>(this IEnumerable<T> iEnumerable, int seedEnd = 100) where T : new()
         {
-            var gen = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml", dataInputType: DataInputType.Auto)
+            var gen = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml", dataInputType: DataInputType.XmlFile)
             {
                 SeedEnd = seedEnd,
                 BaseRandom = new Random(34561),
