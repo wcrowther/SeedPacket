@@ -1,0 +1,21 @@
+﻿
+<div class="codeExample topSpace">
+<label class="codeLabelBlue">CODE:</label>
+<div class="codeTitle codeTitleBlue">Import the main <b>SeedPacket</b> namespace and not
+    the <b>SeedPacket.Extensions</b> to avoid conflicts with your own new custom extension methods.</div>
+<code>
+<i>// Creates 10 rows (default)</i>
+var users = new List&lt;User&gt;().Seed();
+    
+<i>// Creates 20 rows using new IGenerator</i>
+var users = new List&lt;User&gt;().Seed(1, 20, new MultiGenerator());
+
+<i>// Create 1000 rows by count</i>
+var users = new List&lt;User&gt;().Seed(1000);
+
+<i>// Create rows starting with 100 to 200 with custom datasource file, either XML or JSON.</i>
+var users = new List&lt;User&gt;().Seed(100, 200, "~/Sources/JSONSource.json");
+</code>
+</div>
+
+

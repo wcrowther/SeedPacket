@@ -4,7 +4,7 @@ namespace SeedPacket
     public enum RulesSet {
         None,
         Basic,
-        Advanced,
+        Common,
         Custom
     }
 } 

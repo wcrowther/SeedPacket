@@ -55,13 +55,14 @@
     <Compile Include="DataSources\XmlDataSource.cs" />
     <Compile Include="DataSources\DataInputType.cs" />
     <Compile Include="Exceptions\InvalidDefaultDataException.cs" />
-    <Compile Include="Exceptions\InvalidSeedParameters.cs" />
+    <Compile Include="Exceptions\InvalidSeedParametersException.cs" />
     <Compile Include="Exceptions\InvalidSourceFileException.cs" />
     <Compile Include="Exceptions\NoSourceException.cs" />
     <Compile Include="Exceptions\InvalidSourceStringException.cs" />
     <Compile Include="Exceptions\MultipleSourceException.cs" />
     <Compile Include="Functions\CacheExtensions.cs" />
     <Compile Include="Functions\CacheItemsNext.cs" />
+    <Compile Include="Functions\EmptyList.cs" />
     <Compile Include="Functions\OnceEvery.cs" />
     <Compile Include="Functions\RandomPhone.cs" />
     <Compile Include="Functions\RandomAddress.cs" />

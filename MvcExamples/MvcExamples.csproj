@@ -130,6 +130,7 @@
     <Compile Include="Controllers\SimpleSeedController.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Extensions\CustomSeedExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,6 +227,8 @@
     <Content Include="Views\Examples\Test2.cshtml" />
     <Content Include="Views\Examples\Index.cshtml" />
     <Content Include="Views\Home\_HotBox.cshtml" />
+    <Content Include="Views\Documentation\_01_SeedExtensions.cshtml" />
+    <Content Include="Views\Documentation\_02_SeedPacket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeedPacket\SeedPacket.csproj">

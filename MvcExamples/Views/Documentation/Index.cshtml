@@ -2,13 +2,64 @@
 <div class="row">
     <div class="col-md-12">
         <h2>Documentation</h2>
-        <p>TEXT TO COME Customizing data creation for SeedPacket</p>
+        <p>SeedPacket version 2.01</p>
         <h3>Overview</h3>
-        <p> TEXT TO COME 
-            SeedPacket is for the quick seeding of data on a List (or most types that implement IEnumerable). 
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <p>
+            TEXT TO COME
+            SeedPacket is for the quick seeding of data on a List (or most types that implement IEnumerable).
             It is easy to use out of the box for prototyping, data generation, and unit testing. It customizable
             with a powerful rules engine that can pull data from an external source such as an Xml file or string.
         </p>
+    </div>
+    <div class="col-md-4">
+        <div class="hotBox">
+            The SeedPacket source code will be available on GitHub soon. Check back for a link.
+        </div>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Extensions Namespace</h3>
+        <ul class="namespaceList">
+            <li class="class">
+                <h4>SeedExtensions static class</h4>
+                <p><strong>Purpose:</strong>
+                    This collection of static extension methods adds LINQ-like data generation onto many IEnumerable&lt;T&gt; implementations.
+                    It is the main entry into SeedPacket .Seed() data generation and with 4 overloads for common scenarios. 
+                    If the IGenerator is not specified, the MultiGenerator is used by default, and in turn it uses the MultiDataSource if 
+                    not specified. The MultiDataSource loads its data from an embedded XML resource if an external source is not specified.
+                </p>
+                <p>Note that some classes that implement IEnumerable may not yet be supported. All implementations are constrained so
+                   that the type T must implement new().</p>
+                <strong>Extension Methods on IEnumerable&lt;T&gt;</strong>
+                <ul>
+                    <li>
+                        <h5>.Seed (int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>If no parameters are provided, creates 10 rows from 1 to 10. If IGenerator is null, defaults to the MultiGenerator.</p>
+                    </li>
+                    <li>
+                        <h5>.Seed (int count) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Seeds {count} rows of data using the MultiGenerator.</p>
+                    </li>
+                    <li>
+                        <h5>.Seed (IGenerator generator) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Seeds rows totally based on the IGenerator and its parameters that is passed in.</p>
+                    </li>
+                    <li>
+                        <h5>.Seed (int seedBegin, int seedEnd, string filePath) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Seeds rows beginning with {SeedBegin} to {SeedEnd}, passing in the path to an external file of data, either
+                        XML or JSON (which it will automatically detect).</p>
+                    </li>
+                </ul>
+            </li>
+            @{ Html.RenderPartial("_01_SeedExtensions"); }
+        </ul>
     </div>
 </div>
 
@@ -18,10 +69,19 @@
         <ul class="namespaceList">
             <li class="class">
                 <h4>SeedCore class</h4>
-                <p>
-                    <strong>Purpose:</strong>
-                    sdfsdfsssss
+                <p><strong>Purpose:</strong>
+                    As it's name suggests, the SeedCore class is the heart of SeedPacket data generation and is responsible for taking
+                    the rules engine and pairing it with the generator that is passed to it when it is initialized. Internally, it creates
+                    multiple rows of data based on a particular type, goes through the public properties on that type one by one and
+                    finds the best rule matching that property's name and datatype. Then uses that rule to generate data to fill 
+                    that property's value.
                 </p>
+                <p>TIP: Generally, the default method of seeding data is to use the .Seed() extension methods on IEnumerable in the
+                   SeedPacket.Extensions namespace to seed data. The functionality of the SeedCore class has intentionally been kept
+                   separate from the extension method logic in so that writing custom extension methods is trivial. Customize your own
+                   .Seed() extension methods with your own defaults, rules, and customizations
+                </p>
+                @{ Html.RenderPartial("_02_SeedPacket"); }
                 <strong>Constructor:</strong>
                 <ul>
                     <li>
@@ -182,36 +242,6 @@
 
 <div class="row documentation">
     <div class="col-md-12">
-        <h3>SeedPacket.Extensions Namespace</h3>
-        <ul class="namespaceList">
-            <li class="class">
-                <h4>SeedExtensions static class</h4>
-                <strong>Extension Methods:</strong>
-                <ul>
-                    <li>
-                        <h5>static Seed&lt;T&gt;(this IEnumerable&lt;T&gt; iEnumerable, int count) : returns IEnumerable&lt;T&gt;</h5>
-                        <p> where T : new() Some information...</p>
-                    </li>
-                    <li>
-                        <h5>static Seed&lt;T&gt;(this IEnumerable&lt;T&gt; iEnumerable, IGenerator generator) : returns IEnumerable&lt;T&gt;</h5>
-                        <p> where T : new() Some information...</p>
-                    </li>
-                    <li>
-                        <h5>static Seed&lt;T&gt; (this IEnumerable&lt;T&gt; iEnumerable, int seedBegin, int seedEnd, string filePath) : returns IEnumerable&lt;T&gt;</h5>
-                        <p> where T : new() Some information...</p>
-                    </li>
-                    <li>
-                        <h5>static Seed&lt;T&gt; (this IEnumerable&lt;T&gt; iEnumerable, int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
-                        <p> where T : new() Some information...</p>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</div>
-
-<div class="row documentation">
-    <div class="col-md-12">
         <h3>SeedPacket.Generators Namespace</h3>
         <ul class="namespaceList">
             <li class="class">
@@ -295,11 +325,14 @@
                     <strong>Purpose:</strong>
                     sdfsdfsssss
                 </p>
-                <strong>Implements:</strong>
+                <strong>Inherits:</strong>
                 <ul>
                     <li>
                         <h5>Generator</h5>
                     </li>
+                </ul>
+                <strong>Implements:</strong>
+                <ul>
                     <li>
                         <h5>IGenerator</h5>
                     </li>
@@ -314,14 +347,26 @@
                 <strong>Constructor:</strong>
                 <ul>
                     <li>
-                        <h5>MultiGenerator(string sourceFilepath = null, string sourceString = null,
-                                           DataInputType dataInputType = DataInputType.Auto,
+                        <h5>MultiGenerator(string sourceFilepath = null, string sourceString = null,<br />
+                                           DataInputType dataInputType = DataInputType.Auto,<br />
                                            RulesSet rulesSet = RulesSet.Advanced)</h5>
                         <p>Some information...</p>
                     </li>
                     <li>
                         <h5>MultiGenerator (IDataSource datasource, RulesSet rulesSet = RulesSet.Advanced)</h5>
                         <p>Some information...</p>
+                    </li>
+                </ul>
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Generator</h5>
+                    </li>
+                </ul>
+                <strong>Implements:</strong>
+                <ul>
+                    <li>
+                        <h5>IGenerator</h5>
                     </li>
                 </ul>
                 <strong>Methods:</strong>

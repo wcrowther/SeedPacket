@@ -53,7 +53,7 @@ namespace SeedPacket.Examples
         }
 
         // Match on an interface. This creates five items if IEnumerable (ignoring string).
-        // RULE:  new Rule(typeof(IEnumerable<Item>),"", g => ExampleRules.GenerateList(g), "Advanced List", ""),
+        // RULE:  new Rule(typeof(IEnumerable<Item>),"", g => ExampleRules.GenerateList(g), "Common List", ""),
         //public static IEnumerable GenerateList (IGenerator generator, int number = 5)
         //{
         //    if (generator.Debugging)

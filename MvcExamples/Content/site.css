@@ -111,7 +111,7 @@ input[type="checkbox"].input-validation-error {
 }
 .codeExample div.codeTitle {
     display: block;
-    padding:  10px 10px 10px 20px;
+    padding:  10px 90px 10px 20px;
     background-color: #eee;
 }
 .codeExample div.codeTitleBlue {
@@ -238,6 +238,8 @@ table thead {
 =========================================================================== 
 */
 
+/* Namespace H3
+.documentation h3 {} */
 
 .documentation h4, .documentation h5, .documentation strong {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -245,12 +247,21 @@ table thead {
 .documentation h4 {
     font-size: 18px;
     font-weight: bold;
+    margin-left: -30px;
 }
 .documentation h5 {
     font-size: 16px;
+    font-weight: bold;
+    color: #1f66b5;
 }
 .documentation strong {
-    font-size: 16px;
+    font-size: 16px;    
 }
+.documentation li.class {
+    /*background-color: white;*/
+    padding: 5px 0 0 30px;
+    list-style-type: square;
+}
+
 
 

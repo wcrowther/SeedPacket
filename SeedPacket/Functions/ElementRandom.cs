@@ -6,11 +6,11 @@ namespace SeedPacket.Functions
 {
     public static partial class func
     {
-        public static string ElementRandom (IGenerator generator, string identifier = null)
+        public static string ElementRandom (IGenerator generator, string identifier = null, bool nullIfEmpty = false)
         {
             // Set default in case it is needed
             var propertyName = generator.CurrentProperty?.Name ?? "";
-            string defaultValue = propertyName + generator.RowNumber.ToString();
+            string defaultValue = nullIfEmpty ? null : propertyName + generator.RowNumber.ToString();
 
             var elementList = generator.Datasource.GetElementList(identifier ?? propertyName);
             int index = new Random(generator.RowRandomNumber).Next(elementList.Count);

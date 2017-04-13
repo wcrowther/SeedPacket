@@ -25,11 +25,11 @@ namespace MvcExamples.Helpers
 
         public class CustomGenerator : MultiGenerator
         {
-            public CustomGenerator (string sourceFilepath = null, RulesSet rulesSet = RulesSet.Advanced) 
+            public CustomGenerator (string sourceFilepath = null, RulesSet rulesSet = RulesSet.Common) 
                 : base(sourceFilepath, rulesSet: rulesSet )
             {
 
-                // Base dualgenerator defaults to Advanced RuleSet
+                // Base dualgenerator defaults to Common RuleSet
                 Rules.AddRange(new List<Rule>{
                     new Rule (typeof(string), "action%", g => func.ElementNext(g, "Action"),                           "Custom Action",    "Fills any string fields named Action"),
                     new Rule (typeof(DateTime), "", g => g.BaseDateTime.AddHours(g.RowRandom.Next(-17521, 17521)),  "Custom DateTime",  "Random DateTime. BaseDateTime +- 2 years by hour. Overrides 'Basic DateTime'")

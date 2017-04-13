@@ -10,14 +10,14 @@ namespace SeedPacket.Generators
         public MultiGenerator(  string sourceFilepath = null,
                                 string sourceString = null, 
                                 DataInputType dataInputType = DataInputType.Auto,
-                                RulesSet rulesSet = RulesSet.Advanced
+                                RulesSet rulesSet = RulesSet.Common
                                 )
         {
             dataSource = new MultiDataSource(sourceFilepath, sourceString, dataInputType);
             GetRules(rulesSet);
         }
 
-        public MultiGenerator ( IDataSource datasource, RulesSet rulesSet = RulesSet.Advanced )
+        public MultiGenerator ( IDataSource datasource, RulesSet rulesSet = RulesSet.Common )
         {
             dataSource = datasource;
             GetRules(rulesSet);
@@ -36,7 +36,7 @@ namespace SeedPacket.Generators
                 case RulesSet.Custom:
                     throw new NotImplementedException("For use in a derived custom Generator");
                 default:
-                    Rules.AddAdvancedRules();
+                    Rules.AddCommonRules();
                     break;
             }
         }

@@ -2,13 +2,14 @@
 using SeedPacket.Functions;
 using SeedPacket.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace SeedPacket
 {
     public static partial class RulesExtensions
     {
-        public static void AddAdvancedRules (this IRules rules, bool overwrite =  false )
+        public static void AddCommonRules (this IRules rules, bool overwrite =  false )
         {
             var advancedRules = new List<Rule>(){
                 new Rule(typeof(string),    "",                                 g => func.ElementRandom(g),                     "String",               "Random string from data or default" ),

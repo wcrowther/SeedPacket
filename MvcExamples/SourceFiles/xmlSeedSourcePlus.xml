@@ -454,5 +454,26 @@
     <Description>Rich!</Description>
     <Description>Who knows</Description>
   </Descriptions>
+  
+
+  <Sports>
+    <Sport>Football</Sport>
+    <Sport>Baseball</Sport>
+    <Sport>Basketball</Sport>
+    <Sport>Soccer</Sport>
+    <Sport>Auto Racing</Sport>
+    <Sport>Hockey</Sport>
+    <Sport>Track</Sport>
+    <Sport>Tennis</Sport>
+    <Sport>Volleyball</Sport>
+    <Sport>Golf</Sport>
+    <Sport>Motocross</Sport>
+    <Sport>Rugby</Sport>
+    <Sport>ESports</Sport>
+    <Sport>Cricket</Sport>
+    <Sport>Equestrian</Sport>
+    <Sport>Swimming</Sport>
+    <Sport>Bicycling</Sport>
+  </Sports>
 
 </Root>

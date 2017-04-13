@@ -81,7 +81,7 @@ namespace SeedPacket
                 rule = generator.Rules.GetRuleByTypeAndName(property.PropertyType, property.Name);
                 cachedRules.Add(propInt, rule);
 
-                DebugWrite($"Property: {property.Name }({property.PropertyType}) using rule: {rule.RuleName ?? "No matching Rule"}.");
+                DebugWrite($"Property: {property.Name }({property.PropertyType}) using rule: {rule?.RuleName ?? "No matching Rule"}.");
             }
             else
             {

@@ -2,6 +2,7 @@
 using SeedPacket.Functions;
 using SeedPacket.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace SeedPacket
@@ -19,6 +20,7 @@ namespace SeedPacket
                 new Rule(typeof(decimal),       "", g => (decimal) g.RowNumber,                                        "Decimal",   "Returns RowNumber" ),
                 new Rule(typeof(DateTime),      "", g => g.BaseDateTime,                                               "DateTime",  "Returns BaseDateTime" ),
                 new Rule(typeof(Guid),          "", g => func.RandomGuid(g),                                           "Guid",      "Returns a Guid" ),
+                new Rule(typeof(IList),         "", g => func.EmptyList(g),                                            "EmptyList", "Returns an empty list"),
                 new Rule(typeof(bool?),         "", g => func.DiceRoll(g) == 1 ? null : (bool?)(g.RowNumber % 2 == 0), "Bool?",     "Returns alternating true & false (1 in 6 NULL)"),
                 new Rule(typeof(int?),          "", g => func.DiceRoll(g) == 1 ? null : (int?) g.RowNumber,            "Int?",      "Returns RowNumber (1 in 6 NULL)"),
                 new Rule(typeof(long?),         "", g => func.DiceRoll(g) == 1 ? null : (long?) g.RowNumber,           "Long?",     "Returns RowNumber (1 in 6 NULL)"),
