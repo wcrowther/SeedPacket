@@ -107,7 +107,7 @@
                     <strong>Purpose:</strong>
                     The SimpleSeed class uses an alternative way to seed data. It does away with the Rules engine and uses a 
                     more manual, and Linq-focused, way of creating data, while still leveraging the DataSource classes to utilize 
-                    XML / JSON files and strings. <a href="/SimpleSeed">More Info</a>
+                    XML / JSON files and strings. <a href="/SimpleSeed">SimpleSeed Info</a>
                 </p>
                 @{ Html.RenderPartial("_03_SimpleSeed"); }
                 <strong>Constructor:</strong>
@@ -126,8 +126,8 @@
                     </li>
                     <li>
                         <h5>DefaultRandom:  Random</h5>
-                        <p>For the SimpleSeed.Random(), set the initial seed for the random data. If a seed is set in the random, as:  
-                        new Random(3456), then the random sequeces generated will always be the same. If a non-seeded random is used, such as
+                        <p>For the SimpleSeed.Random(), sets the initial seed for random data. If a seed is set in the random, as:  
+                        new Random(3456), then the random sequences generated will always be the same. If a non-seeded random is used, such as
                         new Random(), then the values will be different every time.</p>
                     </li>
                 </ul>
@@ -171,26 +171,34 @@
                 <ul>
                     <li>
                         <h5>new Rules()</h5>
-                        <p>A fairly generic constructor no parameters.</p>
+                        <p>A fairly generic constructor with no parameters.</p>
                     </li>
                 </ul>
                 <strong>Methods:</strong>
                 <ul>
                     <li>
                         <h5>GetRuleByTypeAndName(Type propertyType, string propertyName) : returns Rule</h5>
-                        <p>Some information...</p>
+                        <p>This method gets the first Rule that matches the Type and Property name for the property
+                           that is being processed. The Rules are processed from last added to the first. Once a 
+                           rule match is found for a particular property, it is stored in a cache and re-used. See the
+                           Rule class for additional information.
+                        </p>
                     </li>
                     <li>
                         <h5>Add(Rule rule, bool overwrite = true): returns void</h5>
-                        <p>Some information...</p>
+                        <p>Adds a Rules element to the Rules collection. If overwrite is set to true, it will delete 
+                           the Rule that has the same name if it exists before adding the Rule to the end of the 
+                           Rules collection. If overwrite is set to false and a Rule already exists, an exception
+                           will be thrown. RuleNames must be at least 3 characters in length.
+                        </p>
                     </li>
                     <li>
                         <h5>AddRange(IEnumerable&lt;Rule&gt;rules, bool overwrite = true) : returns void</h5>
-                        <p>Some information...</p>
+                        <p>Applies the Add Rule to all the Rules elements in the IEnumerable.</p>
                     </li>
                     <li>
                         <h5>RemoveRuleByName(string ruleName) : returns void</h5>
-                        <p>Some information...</p>
+                        <p>Removes a Rule that matches the ruleName, if one exists.</p>
                     </li>
                 </ul>
             </li>
@@ -198,24 +206,38 @@
                 <h4>Rule class</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    The Rules class encapsulates functionality for matching against a property and it's type, a function that wil be processed, if 
+                    there is a match. The ruleName and decription tells what the rule is for. The function is a Func that takes an IGenerator
+                    and returns a Dynamic type. If the run-time type returned does not match a compatible type, an exception will be thrown.
                 </p>
                 <strong>Constructor:</strong>
                 <ul>
                     <li>
                         <h5>new Rule(Type typeMatch, string nameMatch, Func&lt;IGenerator, dynamic&gt; rule, string ruleName, string description = "")</h5>
-                        <p>Some information...</p>
+                        <p>The typeMatch parameter is a .net Type that must match the property type being filled for a Rule to be valid for that property.
+                            The typeMatch can be an interface that the property type implements.</p>
+                        <p>If the nameMatch parameter is non-null and non-empty, and the typeMatch has matched, the nameMatch parameter is compared
+                            to the seeded property's name. A match occurs if a case-insensitive comparison is true. A wildcard character % can be used for the 
+                            match either on the beginning, end, or both. Multiple matches can be added to the nameMatch string if separated by a comma.
+                        </p>
+                        <p>The func parameter a c# Func&lt;IGenerator, dynamic&gt;, which is to say it takes a function that takes in the generator and uses it
+                           to generate the seed data. As the rule is filtered to a specific Type, it is generally true that the returned Dyanmic is the 
+                           correct type at run-time, but the rule creator should be careful to check that this is true. It is generally better to encapsulate
+                           any complex logic in an external function call, particularily for debugging purposes. The SeedPacket.Functions namespace has
+                           many examples in the func partial classes.</p>
+                        <p>The ruleName parameter gives a specific name to the rule and must be unique.</p>
+                        <p>The optional description parameter provides a way to give additional descriptive information about the rules intent.</p>
                     </li>
                 </ul>
                 <strong>Properties:</strong>
                 <ul>
                     <li>
                         <h5>RuleName : returns string</h5>
-                        <p>Some information...</p>
+                        <p>The name of the Rule. Must be at between 3 and 30 characters in length.</p>
                     </li>
                     <li>
                         <h5>Description : returns string</h5>
-                        <p>Some information...</p>
+                        <p>An optional description of the purpose for the rule.</p>
                     </li>
                 </ul>
                 <strong>Methods:</strong>

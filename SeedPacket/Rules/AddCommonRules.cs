@@ -37,5 +37,10 @@ namespace SeedPacket
             rules.AddBasicRules();
             rules.AddRange(advancedRules, true);
         }
+
+        private static Func<IGenerator, dynamic> RandomeX()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

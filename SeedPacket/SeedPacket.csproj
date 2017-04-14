@@ -79,7 +79,7 @@
     <Compile Include="Functions\ElementRandom.cs" />
     <Compile Include="Generators\Generator.cs" />
     <Compile Include="Generators\MultiGenerator.cs" />
-    <Compile Include="Rules\AddAdvancedRules.cs" />
+    <Compile Include="Rules\AddCommonRules.cs" />
     <Compile Include="Rules\Rule.cs" />
     <Compile Include="Rules\Rules.cs" />
     <Compile Include="Interfaces\IGenerator.cs" />

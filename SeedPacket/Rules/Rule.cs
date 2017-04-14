@@ -13,22 +13,21 @@ namespace SeedPacket
 
     #region Private Fields
 
-        private string ruleName;
         private Type typeMatch;
         private string nameMatch;
-        private Func<IGenerator, dynamic> rule; 
+        private Func<IGenerator, dynamic> func; 
 
     #endregion
 
     #region Constructor
 
-        public Rule(Type typeMatch, string nameMatch, Func<IGenerator, dynamic> rule, string ruleName, string description = "")
+        public Rule(Type typeMatch, string nameMatch, Func<IGenerator, dynamic> func, string ruleName, string description = "")
         {
             this.typeMatch = typeMatch;
             this.nameMatch = nameMatch.ifBlank().ToLower();
-            this.rule = rule;
-            this.ruleName = ruleName;
-            this.Description = description;
+            this.func = func;
+            RuleName = ruleName;
+            Description = description;
         }
 
     #endregion
@@ -36,13 +35,9 @@ namespace SeedPacket
     #region Public
 
         [StringLength(30)]
-        public string RuleName
-        {
-            get { return ruleName; }
-            private set { ruleName = value; }
-        }
+        public string RuleName { get; }
 
-        public string Description { get; set; }
+        public string Description { get; }
 
         public bool IsMatch (Type propType, string propName)
         {
@@ -58,7 +53,7 @@ namespace SeedPacket
                 return NameMatches(nameMatch, propName.ifBlank().ToLower());
             }
 
-            // Must match on type, if not the same then false - no match for this rule
+            // Must match on type, if not the same then false - no match for this func
             if (propType.IsAssignableFrom(typeMatch))
             {
                 // Will except comma-separated list strings for match.
@@ -69,7 +64,7 @@ namespace SeedPacket
 
         public dynamic ApplyRule (IGenerator generator)
         {
-            return rule(generator);
+            return func(generator);
         }
 
         public override string ToString ()
@@ -102,9 +97,9 @@ namespace SeedPacket
 
         private static bool NameMatch(string namematch, string propname)
         {
-            // 1. type matches but propname has not been defined for rule then true
-            // 2. type matches and propname has wildcard. if wildcard matches then true otherwise false
-            // 3. type matches but propName does not match one defined for this rule then false
+            // 1. type matches but namematch has not been defined for func then true
+            // 2. type matches and namematch has wildcard. if wildcard matches then true otherwise false
+            // 3. type matches but namematch does not match the one defined for this func then false
 
             if (namematch.isNullOrEmpty())
             {
