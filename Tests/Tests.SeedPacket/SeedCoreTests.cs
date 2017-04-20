@@ -109,5 +109,49 @@ namespace Tests.SeedPacket
             // and  Name is not in the xml sourcedata so is propertyName + rownumber
             Assert.AreEqual("Name1", list[0].Name);
         }
+
+        [Test]
+        public void SeedCore_SeedList_Default_For_List_of_String()
+        {
+           // var list = new Dictionary<int,Item>();
+            var list = new List<Item>();
+            var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
+            var list1 = new SeedCore(gen).SeedList(list).ToList();
+
+            Assert.AreEqual("thingamabob", list1[0].ItemName);
+        }
+
+        //[Test]
+        //public void SeedCore_SeedList_Seed_Dictionary()
+        //{
+        //    var list = new Dictionary<int, Item>();
+        //    var i = new KeyValuePair<int, Item>(1, new Item { ItemId =  1});
+        //    list.Add(i);
+
+        //    var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
+        //    var list1 = new SeedCore(gen).SeedList(list).ToList();
+
+        //    Assert.AreEqual("thingamabob", list1[0].Value.ItemName);
+        //}
+
+        //[Test]
+        //public void SeedCore_SeedOne()
+        //{
+        //    var list = new Dictionary<int, Item>();
+        //    var item = new Item();
+        //    var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
+        //    var one = new SeedCore(gen).SeedList(item);
+
+        //    Assert.AreEqual(1, one.ItemId);
+        //    Assert.AreEqual("thingamabob", one.ItemName);
+        //    Assert.AreEqual(1, one.Number);
+        //    Assert.AreEqual(DateTime.Parse("2021-08-15 07:00:00.000"), one.Created);
+        //}
+
+        // List<string>
+        // List<int>
+        // List<DateTime>
+        // List<struct<int, string>>
+        // List<Dictionary<int,T>>
     }
 }

@@ -4,6 +4,7 @@ using NewLibrary.ForType;
 using SeedPacket.Generators;
 using SeedPacket.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace SeedPacket
             var seedList = new List<T>();
             var cachedRules = new Dictionary<int, Rule>();
             bool isFirstRow = true;
+            var metaModel = typeof(T).GetMetaModel();
 
             DebugWrite("-----------------------------------------------------");
             DebugWrite("Begin Seed Creation for Type: " + typeof(T).Name);
@@ -34,22 +36,34 @@ namespace SeedPacket
             {
                 generator.RowNumber = rowNumber;
                 generator.GetNextRowRandom();
+                T newRow;
 
-                var newRow = CreateRow<T>(generator, cachedRules, isFirstRow);
+                if (metaModel.IsDictionary)
+                {
+                    throw new NotImplementedException();
 
-                seedList.Add(newRow);
+                    //var dictionaryValueType = metaModel.DictionaryKeyType;
+                    //newRow = CreateRow<T>(generator, metaModel, cachedRules, isFirstRow);
+                    //seedList.Add(newRow);
+                }
+                else
+                {
+                    newRow = CreateRow<T>(generator, metaModel, cachedRules, isFirstRow);
+                    seedList.Add(newRow);
+                }
+
                 isFirstRow = false;
             }
 
             DebugWrite("-----------------------------------------------------");
 
             iEnumerable = seedList;
+
             return iEnumerable;
         }
 
-        private T CreateRow<T> ( IGenerator generator, Dictionary<int, Rule> cachedRules, bool isFirstRow) where T : new()
+        private T CreateRow<T> ( IGenerator generator, MetaModel metaType, Dictionary<int, Rule> cachedRules, bool isFirstRow) where T : new()
         {
-            var metaType = typeof(T).GetMetaModel();
             var metaProperties = metaType.GetMetaProperties();
 
             dynamic newItem = Activator.CreateInstance(typeof (T)); // OR new T();

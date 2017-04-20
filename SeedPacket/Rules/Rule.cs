@@ -69,7 +69,7 @@ namespace SeedPacket
 
         public override string ToString ()
         {
-            return $"{ruleName ?? "Not Named"} ({Description ?? "None"})";
+            return $"{RuleName ?? "Not Named"} ({Description ?? "None"})";
         }
 
         #endregion
