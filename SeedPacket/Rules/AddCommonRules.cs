@@ -34,13 +34,7 @@ namespace SeedPacket
                 new Rule(typeof(DateTime?), "",                                 g => func.RandomDateTimeNull(g, -17521, 17521), "DateTime?",            "Random Override of DateTime?" )
             };
 
-            rules.AddBasicRules();
             rules.AddRange(advancedRules, true);
-        }
-
-        private static Func<IGenerator, dynamic> RandomeX()
-        {
-            throw new NotImplementedException();
         }
     }
 }

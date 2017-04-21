@@ -35,8 +35,10 @@
                     If the IGenerator is not specified, the MultiGenerator is used by default, and in turn it uses the MultiDataSource if 
                     not specified. The MultiDataSource loads its data from an embedded XML resource if an external source is not specified.
                 </p>
-                <p>Note that some classes that implement IEnumerable may not yet be supported. All implementations are constrained so
-                   that the type T must implement new().
+                <p>Note that some classes that implement IEnumerable may not be supported. All implementations are constrained so
+                   that the type T must implement a parameterless constructor at this time. Single value IEnumerables
+                   such as List&lt;string&gt; do not implement new() and will throw an error. IEnumerables Dictionaries are
+                   also not supported.
                 </p>
                 @{ Html.RenderPartial("_01_SeedExtensions"); }
                 <strong>Extension Methods on IEnumerable&lt;T&gt;</strong>
@@ -245,11 +247,20 @@
                 <ul>
                     <li>
                         <h5>IsMatch (Type propType, string propName) : returns bool</h5>
-                        <p>Some information...</p>
+                        <p>The Rules class method GetRuleByTypeAndName() runs the IsMatch() method on each rule in the collection
+                           until it gets a true boolean value or has run all rules in the colletion. When a true value is 
+                           returned then that rule is used to seed that particular property. The rule is cached and used
+                           for all the subsequent rows that are generated.</p>
                     </li>
                     <li>
                         <h5>ApplyRule (IGenerator generator) : returns dynamic</h5>
-                        <p>Some information...</p>
+                        <p>After a rule has been selected as the match, the ApplyRule() method is run to actually generate
+                           a value using the generator and the func() passed in with the rule.</p>
+                        <p>The return signature is a c# dynamic variable, as it is not decided until run-time. Generally,
+                           as the rule will only match a particular datatype, you will not encounter any run-time errors
+                           if you return the same datatype from the func() that you pass in. Nevertheless, some thought needs
+                           to be given in designing rules to make sure the correct datatype is returned, especially if the
+                           rule matches an Interface.</p>
                     </li>
                 </ul>
             </li>
@@ -257,17 +268,24 @@
                 <h4>RuleExtensions static class</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    This collection of static extension methods on the Rules class provides easily discoverable groups
+                    of Rules that can be added to the Rules collection. This class is declared as partial so that additional
+                    extension methods can be added on in other files if necessary. Keep in mind that the last rules added in
+                    are checked for specific matches first.
                 </p>
                 <strong>Extension Methods:</strong>
                 <ul>
                     <li>
                         <h5>static AddBasicRules (this Rules rules) : returns void</h5>
-                        <p>Some information...</p>
+                        <p>Adds a group of rules to the current Rules collection, that apply to basic primitive types,
+                           such as string, int, decimal, etc. There are also nullable versions of these types
+                           where some values returned are null.</p>
                     </li>
                     <li>
                         <h5>static AddAdvancedRules (this Rules rules) : returns void</h5>
-                        <p>Some information...</p>
+                        <p>Adds a different set of more specific rules for things like address, zip codes, phone numbers,
+                           company names, usernames, emails, etc.
+                        </p>
                     </li>
                 </ul>
             </li>
@@ -275,14 +293,16 @@
                 <h4>RulesSet Enum</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    Contains a short list of common sets of Rules. In the MultiGenerator,
+                    this enum governs which groups of Rules are loaded.
                 </p>
             </li>
             <li class="class">
                 <h4>DataTypeInput Enum</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    Contains a list of possible data sources referencing a xml or json file, xml or json string,
+                    automatically pick the type, or use the embedded default data embedded in the project.
                 </p>
             </li>
         </ul>
@@ -297,7 +317,9 @@
                 <h4>Generator abstract class</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    The base class for all SeedPacket generators provide much of the functionality for 
+                    generating data, inclding how many rows, which datasource to use, caching data for other
+                    rules to use, base default, and information and helpers for the current row being processed.
                 </p>
                 <strong>Implements:</strong>
                 <ul>
@@ -309,62 +331,90 @@
                 <ul>
                     <li>
                         <h5>SeedBegin : int</h5>
-                        <p>Some information...</p>
+                        <p>Provides the basic beginning value used for seeding the rownumber. The number does not
+                        have to be 0 or 1 but can be any integer, even one with a negative value. Seed progression
+                        always proceeds in a positive direction, so this value will need to be less than or equal to
+                        the SeedEnd value in order to produce any rows.</p>
                     </li>
                     <li>
                         <h5>SeedEnd : int</h5>
-                        <p>Some information...</p>
+                        <p>Provides the top end of the range of rownumbers in the rows produced. The rownumbers
+                        are less than or equal to this value so if the SeedBegin is equal to the SeedEnd, exactly
+                        on record is produced.</p>
                     </li>
                     <li>
                         <h5>Datasource : readOnly IDataSource</h5>
-                        <p>Some information...</p>
+                        <p>The data source that data is fetched from, usually a class that wraps an xml/json
+                        file or string. The default MultiDataSource wraps both the JsonDataSource and the
+                        XmlDataSources and utilizes whichever is more appropriate depending on the data.</p>
                     </li>
                     <li>
                         <h5>Rules : Rules</h5>
-                        <p>Some information...</p>
+                        <p>This Rules collection of Rule objects is what is picked from when selecting
+                        how to generate seed data. See the Rules entry for more information.</p>
                     </li>
                     <li>
                         <h5>BaseRandom : Random</h5>
-                        <p>Some information...</p>
+                        <p>This c# Random serves as the basis for all the other Random calls that SeedPacket uses. The 
+                           Generator constructor creates a default new Random() using a default seed number of 123456789. As a seed 
+                           value is used when the Random is created, the sequences of numbers that it produces will be 
+                           determinant and always the same. If it is desired for the data to be indeterminant, it is possible 
+                           to pass in a new Random() value (with no seed number) to this parameter and the data will be different 
+                           each time it is generated.
+                        </p>
                     </li>
                     <li>
                         <h5>BaseDateTime : DateTime</h5>
-                        <p>Some information...</p>
+                        <p>This DateTime value is used as the basis for rules that generates DateTimes. Currently, 
+                            the default is set to 1/1/2020, but you can change it to any valid DateTime value.
+                        </p>
                     </li>
                     <li>
                         <h5>Debugging : bool</h5>
-                        <p>Some information...</p>
+                        <p>Writes debugging information to the Console telling which Rules are being used for each property
+                           that is being filled. Is set to true by default as this information can for useful for
+                           troubleshooting and is only seen in the Visual Studio Console.</p>
                     </li>
                     <li>
                         <h5>RowCount : readOnly int</h5>
-                        <p>Some information...</p>
+                        <p>Shows the number of rows being generated. Is useful if the range of RowNumbers is
+                           something like 1233100 to 1345070...</p>
                     </li>
                     <li>
                         <h5>RowNumber : int</h5>
-                        <p>Some information...</p>
+                        <p>Is number generated for each row, starting with the SeedBegin value, incremented by +1
+                           for each row, and ending with the SeedEnd value.</p>
                     </li>
                     <li>
                         <h5>RowRandom : readOnly Random</h5>
-                        <p>Some information...</p>
+                        <p>A c# Random is generated for each row based on the BaseRandom. If you have a determimate 1000
+                           values based on the default seeded BaseRandom, the generated data will be same if you take the 
+                           the same number of items for each row. By using the RowRandom as the basis for data for each
+                           row, it makes easier to keep the data consistent over time.</p>
                     </li>
                     <li>
                         <h5>RowRandomNumber : readOnly int</h5>
-                        <p>Some information...</p>
+                        <p>Is a random number generated for the row.</p>
                     </li>
                     <li>
                         <h5>CurrentRowValues : readOnly Dictionary&lt;string, object&gt;</h5>
-                        <p>Some information...</p>
+                        <p>This readOnly dictionary stores a list of what values have been generated for this row only.
+                           The data can then be accessed by other rules in this row. For instance, if username has already
+                           been generated for this row, the value can be used to build an email address. The values 
+                           are wiped out as when the row finishes processing.
+                        </p>
                     </li>
                     <li>
                         <h5>CurrentProperty : MetaProperty</h5>
-                        <p>Some information...</p>
+                        <p>Contains meta information, including dataType, about the current property that
+                           the generator is seeding.</p>
                     </li>
                 </ul>
                 <strong>Methods:</strong>
                 <ul>
                     <li>
                         <h5>GetNextRowRandom : returns void</h5>
-                        <p>Some information...</p>
+                        <p>Fills the RowRandom with the next Random in the BaseRandom sequence. Called at the beginning of row creation.</p>
                     </li>
                 </ul>
             </li>

@@ -8,6 +8,7 @@ using static Tests.SeedPacket.Common;
 using SeedPacket.Generators;
 using Tests.SeedPacket.Model;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Tests.SeedPacket
 {
@@ -43,6 +44,45 @@ namespace Tests.SeedPacket
             Assert.AreEqual(10, list[9].ItemId);
             Assert.AreEqual("ItemName10", list[9].ItemName);
             Assert.IsInstanceOf<Item>(list[0]);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_With_BasicGenerator_Can_Have_A_Negative_SeedBegin()
+        {
+            var iEnumerable = new List<Item>();
+            var basicGenerator = new BasicGenerator() { SeedBegin = -10};
+            var seedCore = new SeedCore(basicGenerator);
+            var list = seedCore.SeedList(iEnumerable).ToList();
+
+            // 21 elements because 10 negative, 10 positive, 1 zero
+            Assert.AreEqual(21, list.Count());
+            Assert.AreEqual(10, list[20].ItemId);
+            Assert.AreEqual("ItemName10", list[20].ItemName);
+            Assert.IsInstanceOf<Item>(list[0]);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_With_BasicGenerator_With_SeedEnd_GreaterThan_SeedBegin()
+        {
+            var iEnumerable = new List<Item>();
+            var basicGenerator = new BasicGenerator() { SeedBegin = 2, SeedEnd = 1 };
+            var seedCore = new SeedCore(basicGenerator);
+            var list = seedCore.SeedList(iEnumerable).ToList();
+
+            // No elements
+            Assert.AreEqual(0, list.Count());
+        }
+
+        [Test]
+        public void SeedCore_SeedList_With_BasicGenerator_With_SeedBegin_EqualTo_SeedEnd()
+        {
+            var iEnumerable = new List<Item>();
+            var basicGenerator = new BasicGenerator() { SeedBegin = 1, SeedEnd = 1 };
+            var seedCore = new SeedCore(basicGenerator);
+            var list = seedCore.SeedList(iEnumerable).ToList();
+
+            // Should produce 1 row
+            Assert.AreEqual(1, list.Count());
         }
 
         [Test]
@@ -110,28 +150,15 @@ namespace Tests.SeedPacket
             Assert.AreEqual("Name1", list[0].Name);
         }
 
-        [Test]
-        public void SeedCore_SeedList_Default_For_List_of_String()
-        {
-           // var list = new Dictionary<int,Item>();
-            var list = new List<Item>();
-            var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
-            var list1 = new SeedCore(gen).SeedList(list).ToList();
-
-            Assert.AreEqual("thingamabob", list1[0].ItemName);
-        }
 
         //[Test]
         //public void SeedCore_SeedList_Seed_Dictionary()
         //{
-        //    var list = new Dictionary<int, Item>();
-        //    var i = new KeyValuePair<int, Item>(1, new Item { ItemId =  1});
-        //    list.Add(i);
-
+        //    IEnumerable list = new Dictionary<int, Item>();
         //    var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
-        //    var list1 = new SeedCore(gen).SeedList(list).ToList();
+        //    list = new SeedCore(gen).SeedList<int, Item>(list);
 
-        //    Assert.AreEqual("thingamabob", list1[0].Value.ItemName);
+        //    Assert.Throws("thingamabob", list1[0].Value.ItemName);
         //}
 
         //[Test]

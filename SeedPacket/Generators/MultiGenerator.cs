@@ -36,6 +36,7 @@ namespace SeedPacket.Generators
                 case RulesSet.Custom:
                     throw new NotImplementedException("For use in a derived custom Generator");
                 default:
+                    Rules.AddBasicRules();
                     Rules.AddCommonRules();
                     break;
             }
