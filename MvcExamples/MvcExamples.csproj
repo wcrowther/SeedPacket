@@ -229,7 +229,7 @@
     <Content Include="Views\Documentation\_01_SeedExtensions.cshtml" />
     <Content Include="Views\Documentation\_02_SeedPacket.cshtml" />
     <Content Include="Views\Documentation\_03_SimpleSeed.cshtml" />
-    <Content Include="Views\Examples\ValueTypeTest.cshtml" />
+    <Content Include="Views\Examples\PropertyNameTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeedPacket\SeedPacket.csproj">

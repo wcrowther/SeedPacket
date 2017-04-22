@@ -1,8 +1,8 @@
 ﻿@using MvcExamples.Models
-@using SeedPacket.Extensions
+@using MvcExamples.Extensions
 @{
     ViewBag.Title = "Home Page";
-    var list = new List<string>().Seed(1, 10, currentPropertyName: "LastName");
+    var list = new List<string>().Seed(100, propertyName: "Sports");
 }
 
 <h3>SeedPacket</h3>
@@ -12,7 +12,7 @@
         <table class="table table table-striped topSpace">
             <thead>
                 <tr>
-                    <th>String</th>
+                    <th>Names String</th>
                 </tr>
             </thead>
             <tbody>
