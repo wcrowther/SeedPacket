@@ -35,5 +35,6 @@ namespace SeedPacket.Interfaces
 
         // Current CurrentProperty
         MetaProperty CurrentProperty { get; set; }
+        string CurrentPropertyName { get; set; }
     }
 }

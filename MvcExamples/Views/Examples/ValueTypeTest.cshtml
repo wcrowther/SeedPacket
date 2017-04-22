@@ -1,10 +1,10 @@
 ﻿@using MvcExamples.Models
-@using MvcExamples.Extensions
+@using SeedPacket.Extensions
 @{
     ViewBag.Title = "Home Page";
-
-    var list = new List<string>();
+    var list = new List<string>().Seed(1, 10, currentPropertyName: "LastName");
 }
+
 <h3>SeedPacket</h3>
 <br />
 <div class="row">
@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var user in list.Seed())
+                @foreach (var user in list)
                 {
                     <tr>
                         <td>@user</td>

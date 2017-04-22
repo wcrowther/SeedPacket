@@ -52,8 +52,12 @@ namespace SeedPacket
 
         private List<T> CreateValueTypeList<T>()
         {
+            // CurrentPropertyName can be set but returns CurrentProperty.Name unless the MetaProperty is null
+            // This allows you to pass in a PropertyName to match rules on in single type lists like List<string>.
+
             var seedList = new List<T>();
-            Rule rule = generator.Rules.GetRuleByTypeAndName(typeof(T), "");
+
+            Rule rule = generator.Rules.GetRuleByTypeAndName(typeof(T), generator.CurrentPropertyName);
 
             for (int rowNumber = generator.SeedBegin; rowNumber <= generator.SeedEnd; rowNumber++)
             {
@@ -71,8 +75,8 @@ namespace SeedPacket
             var dictionary = new Dictionary<TKey, TValue>();
             var metaModel = typeof(TValue).GetMetaModel();
             var cachedRules = new Dictionary<int, Rule>();
-            Rule keyRule = generator.Rules.GetRuleByTypeAndName(typeof(TKey), "");
-            Rule simpleTypeRule = generator.Rules.GetRuleByTypeAndName(typeof(TValue), "");
+            Rule keyRule = generator.Rules.GetRuleByTypeAndName(typeof(TKey), "" );
+            Rule valueTypeRule = generator.Rules.GetRuleByTypeAndName(typeof(TValue), generator.CurrentPropertyName);
 
             bool isFirstRow = true;
 
@@ -90,14 +94,13 @@ namespace SeedPacket
                 }
                 else
                 {
-                    seedValue = simpleTypeRule.ApplyRule(generator);
+                    seedValue = valueTypeRule.ApplyRule(generator);
                 }
 
                 dictionary.Add(seedKey, seedValue);
 
                 isFirstRow = false;
             }
-
             return dictionary;
         }
 

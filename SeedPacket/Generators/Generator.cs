@@ -32,6 +32,7 @@ namespace SeedPacket.Generators
         private DateTime defaultDateTime = DateTime.Parse("1/1/2020");
         private bool debugging = true; // shows in console
         private ExpandoObject cache = new ExpandoObject();
+        private string currentPropertyName = "";
         protected IDataSource dataSource;
 
         #endregion
@@ -108,7 +109,12 @@ namespace SeedPacket.Generators
 
         public MetaProperty CurrentProperty { get; set; }
 
-        public void GetNextRowRandom ()
+        public string CurrentPropertyName {
+            get { return CurrentProperty != null ? CurrentProperty.Name : currentPropertyName; }
+            set { currentPropertyName = value; }
+        }
+
+        public void GetNextRowRandom()
         {
             rowRandomNumber = BaseRandom.Next();
             rowRandom = new Random(rowRandomNumber);
