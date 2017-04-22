@@ -1,0 +1,37 @@
+﻿@using MvcExamples.Models
+@using MvcExamples.Extensions
+@{
+    ViewBag.Title = "Home Page";
+
+    var list = new List<string>();
+}
+<h3>SeedPacket</h3>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table table-striped topSpace">
+            <thead>
+                <tr>
+                    <th>String</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in list.Seed())
+                {
+                    <tr>
+                        <td>@user</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*@functions{
+    // Inline functions in Razor
+    public IEnumerable<Object> EmptyList(IGenerator generator)
+    {
+        dynamic emptyList = Activator.CreateInstance(generator.CurrentProperty.PropertyType);
+        return emptyList;
+    }
+}*@

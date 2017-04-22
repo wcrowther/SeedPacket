@@ -76,6 +76,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="Model\Unknown.cs" />
     <Compile Include="Model\Item.cs" />
+    <Compile Include="SeedExtensionsTests.cs" />
     <Compile Include="SeedCoreTests.cs" />
     <Compile Include="SimpleSeedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,7 +96,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SimpleSeedSource.xml">
+    <Content Include="Source\SimpleSeedSource.xml">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

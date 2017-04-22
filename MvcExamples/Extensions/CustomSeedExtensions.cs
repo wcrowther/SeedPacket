@@ -9,7 +9,7 @@ namespace MvcExamples.Extensions
 {
     public static class CustomSeedExtensions
     {
-        public static List<T> Seed<T>(this IEnumerable<T> iEnumerable, int seedEnd = 100) where T : new()
+        public static List<T> Seed<T>(this IEnumerable<T> iEnumerable, int seedEnd = 100)
         {
             var gen = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml", dataInputType: DataInputType.XmlFile)
             {

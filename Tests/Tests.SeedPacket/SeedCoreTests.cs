@@ -27,9 +27,9 @@ namespace Tests.SeedPacket
                                             </FirstNames>
                                         </SimpleSeedTests>";
         [SetUp]
-        public void Setup ()
+        public void Setup()
         {
-            pathToTestXmlFile = Path.Combine(GetTestDirectory(), xmlFile);
+            pathToTestXmlFile = Path.Combine(GetTestDirectory() + "/Source/", xmlFile);
         }
 
         [Test]
@@ -193,7 +193,7 @@ namespace Tests.SeedPacket
         [Test]
         public void SeedCore_SeedList_Seed_Dictionary()
         {
-            var list = new Dictionary<int, Item>();
+            IDictionary<int, Item> list = new Dictionary<int, Item>();
             var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
             list = new SeedCore(gen).SeedList(list);
 

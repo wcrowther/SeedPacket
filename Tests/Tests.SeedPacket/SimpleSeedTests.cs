@@ -20,9 +20,9 @@ namespace Tests.SeedPacket
                                             <FirstName>Joe</FirstName>
                                         </SimpleSeedTests>";
         [SetUp]
-        public void Setup ()
+        public void Setup()
         {
-            pathToTestXmlFile = Path.Combine(GetTestDirectory(), xmlFile);
+            pathToTestXmlFile = Path.Combine(GetTestDirectory() + "/Source/", xmlFile);
         }
 
         [Test]
