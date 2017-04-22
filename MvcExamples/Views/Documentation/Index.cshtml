@@ -422,7 +422,9 @@
                 <h4>BasicGenerator class</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    An implementation of a basic IGenerator, using only a set of basic rules for simple data types,
+                    without accessing a DataSource. Remains in the project as a simpler version of an IGenerator for
+                    testing purposes.
                 </p>
                 <strong>Inherits:</strong>
                 <ul>
@@ -441,19 +443,29 @@
                 <h4>MultiGenerator class</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    The MultiGenerator is currently the default IGenerator implementation and adds access to 
+                    the default MulitDataSource. This allows for more complex Rules that can access an external
+                    data source, such as an XML/JSon file or string.
                 </p>
                 <strong>Constructor:</strong>
                 <ul>
                     <li>
                         <h5>new MultiGenerator(string sourceFilepath = null, string sourceString = null,<br />
                                            DataInputType dataInputType = DataInputType.Auto,<br />
-                                           RulesSet rulesSet = RulesSet.Advanced)</h5>
-                        <p>Some information...</p>
+                                           RulesSet rulesSet = RulesSet.Common)</h5>
+                        <p>This constructor defaults to MultiDataSource and passes along the path to a file of data using the
+                           sourceFilepath parameter or a string of data using the sourceString parameter. If neither parameter 
+                           is populated or both parameters are populated, it will throw an exception.</p>
+                        <p>The DataInputType allows for an explcit selection of possible data sources referencing a xml or json file,
+                           xml or json string, automatically pick the type, or use the embedded default data embedded in the project.
+                           The default is Auto which will attempt to use the best match.
+                        </p>
+                        <p>The RuleSet parameter controls which sets of rules are loaded on creation. Defaults to Common.</p>
                     </li>
                     <li>
-                        <h5>MultiGenerator (IDataSource datasource, RulesSet rulesSet = RulesSet.Advanced)</h5>
-                        <p>Some information...</p>
+                        <h5>MultiGenerator (IDataSource datasource, RulesSet rulesSet = RulesSet.Common)</h5>
+                        <p>For this constructor, you must explicitly pass in an IDatasouce as the first parameter. Optionally, you
+                        can also pass in a RuleSet parameter. If one is not passed in, the default Common RuleSet is used.</p>
                     </li>
                 </ul>
                 <strong>Inherits:</strong>

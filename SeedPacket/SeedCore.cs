@@ -21,48 +21,107 @@ namespace SeedPacket
             this.generator = generator ?? new MultiGenerator(); 
         }
 
-        public IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable) where T : new()
+        public IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable) 
+        {
+            DebugSeedType(typeof(T).Name);
+
+            if (typeof(T).GetConstructor(Type.EmptyTypes) != null)
+            {
+                iEnumerable = CreateComplexTypeList<T>();
+            }
+            else
+            {
+                iEnumerable = CreateValueTypeList<T>();
+            }
+
+            DebugLineWrite();
+
+            return iEnumerable;
+        }
+
+        public Dictionary<TKey, TValue> SeedList<TKey, TValue>(Dictionary<TKey, TValue> dictionary)
+        {
+            DebugSeedType($"Dictionary<{typeof(TKey).Name}, {typeof(TValue).Name}>");
+
+            dictionary = CreateDictionaryList<TKey, TValue>();
+
+            DebugLineWrite();
+
+            return dictionary;
+        }
+
+        private List<T> CreateValueTypeList<T>()
         {
             var seedList = new List<T>();
-            var cachedRules = new Dictionary<int, Rule>();
-            bool isFirstRow = true;
-            var metaModel = typeof(T).GetMetaModel();
-
-            DebugWrite("-----------------------------------------------------");
-            DebugWrite("Begin Seed Creation for Type: " + typeof(T).Name);
-            DebugWrite("-----------------------------------------------------");
+            Rule rule = generator.Rules.GetRuleByTypeAndName(typeof(T), "");
 
             for (int rowNumber = generator.SeedBegin; rowNumber <= generator.SeedEnd; rowNumber++)
             {
                 generator.RowNumber = rowNumber;
                 generator.GetNextRowRandom();
-                T newRow;
 
-                if (metaModel.IsDictionary)
+                dynamic seedValue = rule.ApplyRule(generator);
+                seedList.Add(seedValue);
+            }
+            return seedList;
+        }
+
+        private Dictionary<TKey, TValue> CreateDictionaryList<TKey, TValue>()
+        {
+            var dictionary = new Dictionary<TKey, TValue>();
+            var metaModel = typeof(TValue).GetMetaModel();
+            var cachedRules = new Dictionary<int, Rule>();
+            Rule keyRule = generator.Rules.GetRuleByTypeAndName(typeof(TKey), "");
+            Rule simpleTypeRule = generator.Rules.GetRuleByTypeAndName(typeof(TValue), "");
+
+            bool isFirstRow = true;
+
+            for (int rowNumber = generator.SeedBegin; rowNumber <= generator.SeedEnd; rowNumber++)
+            {
+                generator.RowNumber = rowNumber;
+                generator.GetNextRowRandom();
+
+                TKey seedKey = keyRule.ApplyRule(generator);
+                TValue seedValue;
+
+                if (typeof(TValue).GetConstructor(Type.EmptyTypes) != null)
                 {
-                    throw new NotImplementedException();
-
-                    //var dictionaryValueType = metaModel.DictionaryKeyType;
-                    //newRow = CreateRow<T>(generator, metaModel, cachedRules, isFirstRow);
-                    //seedList.Add(newRow);
+                    seedValue = CreateComplexClassRow<TValue>(generator, metaModel, cachedRules, isFirstRow);
                 }
                 else
                 {
-                    newRow = CreateRow<T>(generator, metaModel, cachedRules, isFirstRow);
-                    seedList.Add(newRow);
+                    seedValue = simpleTypeRule.ApplyRule(generator);
                 }
+
+                dictionary.Add(seedKey, seedValue);
 
                 isFirstRow = false;
             }
 
-            DebugWrite("-----------------------------------------------------");
-
-            iEnumerable = seedList;
-
-            return iEnumerable;
+            return dictionary;
         }
 
-        private T CreateRow<T> ( IGenerator generator, MetaModel metaType, Dictionary<int, Rule> cachedRules, bool isFirstRow) where T : new()
+        private List<T> CreateComplexTypeList<T>() 
+        {
+            var seedList = new List<T>();
+            var metaModel = typeof(T).GetMetaModel();
+            var cachedRules = new Dictionary<int, Rule>();
+            bool isFirstRow = true;
+
+            for (int rowNumber = generator.SeedBegin; rowNumber <= generator.SeedEnd; rowNumber++)
+            {
+                generator.RowNumber = rowNumber;
+                generator.GetNextRowRandom();
+
+                var newRow = CreateComplexClassRow<T>(generator, metaModel, cachedRules, isFirstRow);
+                seedList.Add(newRow);
+
+                isFirstRow = false;
+            }
+            return seedList;
+        }
+
+        private T CreateComplexClassRow<T> ( IGenerator generator, MetaModel metaType, Dictionary<int, Rule> cachedRules, bool isFirstRow)  
         {
             var metaProperties = metaType.GetMetaProperties();
 
@@ -114,12 +173,27 @@ namespace SeedPacket
             }
         }
 
-        private void DebugWrite (string str)
+        // Utilities
+
+        private void DebugSeedType(string name)
+        {
+            DebugLineWrite();
+            DebugWrite("Begin Seed Creation for Type: " + name);
+            DebugLineWrite();
+        }
+
+        private void DebugLineWrite()
+        {
+            DebugWrite("-----------------------------------------------------");
+        }
+
+        private void DebugWrite(string str)
         {
             if (generator.Debugging)
             {
                 Debug.WriteLine(str);
             }
         }
+
     }
 }

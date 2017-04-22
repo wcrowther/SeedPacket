@@ -62,6 +62,45 @@ namespace Tests.SeedPacket
         }
 
         [Test]
+        public void SeedCore_SeedList_With_BasicGenerator_For_SimpleValue_Strings()
+        {
+            var iEnumerable = new List<string>();
+            var basicGenerator = new BasicGenerator() { };
+            var seedCore = new SeedCore(basicGenerator);
+            var list = seedCore.SeedList(iEnumerable).ToList();
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual("10", list[9]); // not 10 because list is zero-based
+            Assert.IsInstanceOf<string>(list[0]);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_With_BasicGenerator_For_SimpleValue_Ints()
+        {
+            var iEnumerable = new List<int>();
+            var basicGenerator = new BasicGenerator() { };
+            var seedCore = new SeedCore(basicGenerator);
+            var list = seedCore.SeedList(iEnumerable).ToList();
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list[9]); // not 10 because list is zero-based
+            Assert.IsInstanceOf<int>(list[0]);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_With_BasicGenerator_For_SimpleValue_DateTime()
+        {
+            var iEnumerable = new List<DateTime>();
+            var basicGenerator = new BasicGenerator() { };
+            var seedCore = new SeedCore(basicGenerator);
+            var list = seedCore.SeedList(iEnumerable).ToList();
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(DateTime.Parse("1/11/2020"), list[9]); // not 10 because list is zero-based
+            Assert.IsInstanceOf<DateTime>(list[0]);
+        }
+
+        [Test]
         public void SeedCore_SeedList_With_BasicGenerator_With_SeedEnd_GreaterThan_SeedBegin()
         {
             var iEnumerable = new List<Item>();
@@ -122,10 +161,10 @@ namespace Tests.SeedPacket
         [Test]
         public void SeedCore_SeedList_With_MultiGenerator_Using_Passed_In_Xml_From_File ()
         {
-            var iEnumerable = new List<Item>();
+            var list = new List<Item>();
             var multiGenerator =  new MultiGenerator(sourceFilepath: pathToTestXmlFile);
             var seedCore = new SeedCore(multiGenerator);
-            var list = seedCore.SeedList(iEnumerable).ToList();
+            list = seedCore.SeedList(list).ToList();
 
             // Uses MultiGenerator by default
             Assert.AreEqual(10, list.Count());
@@ -151,15 +190,18 @@ namespace Tests.SeedPacket
         }
 
 
-        //[Test]
-        //public void SeedCore_SeedList_Seed_Dictionary()
-        //{
-        //    IEnumerable list = new Dictionary<int, Item>();
-        //    var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
-        //    list = new SeedCore(gen).SeedList<int, Item>(list);
+        [Test]
+        public void SeedCore_SeedList_Seed_Dictionary()
+        {
+            var list = new Dictionary<int, Item>();
+            var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
+            list = new SeedCore(gen).SeedList(list);
 
-        //    Assert.Throws("thingamabob", list1[0].Value.ItemName);
-        //}
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(1, list[1].ItemId);
+            Assert.AreEqual("thingamabob", list[1].ItemName);
+            Assert.IsInstanceOf<Item>(list[1]);
+        }
 
         //[Test]
         //public void SeedCore_SeedOne()
