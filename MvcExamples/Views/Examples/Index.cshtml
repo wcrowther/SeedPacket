@@ -1,5 +1,4 @@
-﻿@using SeedPacket.Examples
-@using SeedPacket.Interfaces
+﻿@using SeedPacket.Interfaces
 @using SeedPacket.Generators
 @using SeedPacket.Extensions
 @using SeedPacket.Functions
@@ -29,9 +28,9 @@
         {
             Rules =  {
                 new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth"  ),
-                new Rule(typeof(List<InvoiceItem>), "", g => func.CacheItemsNext<InvoiceItem>(g, "InvoiceItems", 1, 8), "GetNextInvoiceItems"  ),
-                new Rule(typeof(List<Invoice>), "",     g => func.CacheItemsNext<Invoice>(g, g.Cache.Invoices, 1, 5), "GetRandomInvoices", ""),
-                new Rule(typeof(string),"Description%", g => func.ElementRandom(g, "Description"), "Description", "Gets Description from custom XML file" )
+                new Rule(typeof(List<InvoiceItem>), "", g => Funcs.CacheItemsNext<InvoiceItem>(g, "InvoiceItems", 1, 8), "GetNextInvoiceItems"  ),
+                new Rule(typeof(List<Invoice>), "",     g => Funcs.CacheItemsNext<Invoice>(g, g.Cache.Invoices, 1, 5), "GetRandomInvoices", ""),
+                new Rule(typeof(string),"Description%", g => Funcs.ElementRandom(g, "Description"), "Description", "Gets Description from custom XML file" )
             }
         };
         generator.Cache.InvoiceItems = new List<InvoiceItem>().Seed(12345, 12345 + (rowCount * 15), generator);

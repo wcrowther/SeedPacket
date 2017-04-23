@@ -11,7 +11,7 @@ namespace SeedPacket.Generators
                                 string sourceString = null, 
                                 DataInputType dataInputType = DataInputType.Auto,
                                 RulesSet rulesSet = RulesSet.Common
-                                )
+                             )
         {
             dataSource = new MultiDataSource(sourceFilepath, sourceString, dataInputType);
             GetRules(rulesSet);
@@ -36,6 +36,7 @@ namespace SeedPacket.Generators
                 case RulesSet.Custom:
                     throw new NotImplementedException("For use in a derived custom Generator");
                 default:
+                    // RulesSet.Common
                     Rules.AddBasicRules();
                     Rules.AddCommonRules();
                     break;

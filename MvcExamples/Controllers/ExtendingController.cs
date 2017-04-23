@@ -1,6 +1,5 @@
 ﻿using MvcExamples.Models;
 using SeedPacket.Extensions;
-using SeedPacket.Examples;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using SeedPacket.Generators;
@@ -15,8 +14,6 @@ namespace MvcExamples.Controllers
             var fileGenerator = new MultiGenerator(sourceFilepath: "~/Code/sourceData2.xml");
             var sourceGenerator = new MultiGenerator(sourceString: GetXmlString());
             var generator = fromFile ? fileGenerator : sourceGenerator;
-
-            generator.Rules.Add(  new Rule(typeof(List<Item>), "", g => ExampleRules.AddItems<Item>(g), "ListOfItem"));
 
             var users = new List<User>().Seed(1, rows , generator);
 
