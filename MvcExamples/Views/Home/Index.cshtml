@@ -89,7 +89,7 @@
             used which contains about thirty common rules and the data is loaded from an internal resource. In the example below a "MultiGenerator" is injected
             into the Seed method. We are adding five new rules to modify how the data is created.
         </p><p>
-            The first rule applies to the "ItemName" field uses a built-in seedpacket function (func) that gets the next element from the datasource list
+            The first rule applies to the "ItemName" field uses a built-in seedpacket function (Func) that gets the next element from the datasource list
             "ProductName". It actually overrides a rule that gets random (fake) products and replaces it with one that gets the next item in the sequence.
             This insures the values will all be unique, if the number of items requested is less than in the source.
         </p><p>
@@ -99,7 +99,7 @@
         </p><p>
             The fourth rule, matches any string starting with "Description" and gets a random value from the datasoure called "Description". This is not in the 
             default lists that are "built-in" in SeedPacket. In the constructor for the MultiGenerator, you will see that we are now passing in a custom xml file
-            that has all the source data for our lists. Now we have complete control of our source data and func.RandomElement() can pull from any named element.
+            that has all the source data for our lists. Now we have complete control of our source data and Funcs.RandomElement() can pull from any named element.
         </p><p>
             The fifth custom rule is the most interesting and makes sure that any List&lt;Item&gt; fields are filled from a generated list that has been saved in
             the generator's Cache. We can populate this generated list from another .Seed call and this allows us to have complex, hierarchical data when needed.

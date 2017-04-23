@@ -222,11 +222,11 @@
                             to the seeded property's name. A match occurs if a case-insensitive comparison is true. A wildcard character % can be used for the 
                             match either on the beginning, end, or both. Multiple matches can be added to the nameMatch string if separated by a comma.
                         </p>
-                        <p>The func parameter a c# Func&lt;IGenerator, dynamic&gt;, which is to say it takes a function that takes in the generator and uses it
+                        <p>The func parameter is a c# Func&lt;IGenerator, dynamic&gt;, which is to say it takes a function that takes in the generator and uses it
                            to generate the seed data. As the rule is filtered to a specific Type, it is generally true that the returned Dyanmic is the 
                            correct type at run-time, but the rule creator should be careful to check that this is true. It is generally better to encapsulate
                            any complex logic in an external function call, particularily for debugging purposes. The SeedPacket.Functions namespace has
-                           many examples in the func partial classes.</p>
+                           many examples in the funcs partial classes.</p>
                         <p>The ruleName parameter gives a specific name to the rule and must be unique.</p>
                         <p>The optional description parameter provides a way to give additional descriptive information about the rules intent
                         .</p>
@@ -255,10 +255,10 @@
                     <li>
                         <h5>ApplyRule (IGenerator generator) : returns dynamic</h5>
                         <p>After a rule has been selected as the match, the ApplyRule() method is run to actually generate
-                           a value using the generator and the func() passed in with the rule.</p>
+                           a value using the generator and the Func() passed in with the rule.</p>
                         <p>The return signature is a c# dynamic variable, as it is not decided until run-time. Generally,
                            as the rule will only match a particular datatype, you will not encounter any run-time errors
-                           if you return the same datatype from the func() that you pass in. Nevertheless, some thought needs
+                           if you return the same datatype from the Func() that you pass in. Nevertheless, some thought needs
                            to be given in designing rules to make sure the correct datatype is returned, especially if the
                            rule matches an Interface.</p>
                     </li>
@@ -675,7 +675,7 @@
                 </ul>
             </li>
             <li class="class">
-                <h4>func (static)</h4>
+                <h4>Func (static)</h4>
                 <p>
                     <strong>Purpose:</strong>
                     sdfsdfsssss

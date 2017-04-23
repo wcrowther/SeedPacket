@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace SeedPacket.Functions
 {
-    public static partial class func
+    public static partial class Funcs
     {
         public static string ElementNext (IGenerator generator, string identifier)
         {

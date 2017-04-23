@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace SeedPacket.Functions
 {
-    public static partial class func
+    public static partial class Funcs
     {
         public static bool OnceEvery (IGenerator generator, int count = 10)
         {

@@ -15,17 +15,17 @@ namespace Tests.SeedPacket
     [TestFixture]
     public class SeedExtensionsTests
     {
-        private string pathToTestXmlFile;
-        private string xmlFile = @"SimpleSeedSource.xml";
-        private string testEmptyXml = @"<SimpleSeedTests></SimpleSeedTests>";
-        private string testValidXml = @"<SimpleSeedTests>
-                                            <FirstNames>
-                                                <FirstName>Bob</FirstName>
-                                                <FirstName>Will</FirstName>
-                                                <FirstName>John</FirstName>
-                                                <FirstName>Joe</FirstName>
-                                            </FirstNames>
-                                        </SimpleSeedTests>";
+        //private string pathToTestXmlFile;
+        //private string xmlFile = @"SimpleSeedSource.xml";
+        //private string testEmptyXml = @"<SimpleSeedTests></SimpleSeedTests>";
+        //private string testValidXml = @"<SimpleSeedTests>
+        //                                    <FirstNames>
+        //                                        <FirstName>Bob</FirstName>
+        //                                        <FirstName>Will</FirstName>
+        //                                        <FirstName>John</FirstName>
+        //                                        <FirstName>Joe</FirstName>
+        //                                    </FirstNames>
+        //                                </SimpleSeedTests>";
         //[SetUp]
         //public void Setup ()
         //{

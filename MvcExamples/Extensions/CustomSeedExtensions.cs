@@ -17,7 +17,7 @@ namespace MvcExamples.Extensions
                 BaseRandom = new Random(34561),
                 Rules =  // Adds rules
                 {                         
-                   new Rule(typeof(string),"%Sport%",   g => func.ElementRandom(g, "Sport"), "Sport", "Custom sport from XML file" )
+                   new Rule(typeof(string),"%Sport%",   g => Funcs.ElementRandom(g, "Sport"), "Sport", "Custom sport from XML file" )
                 },
                 CurrentPropertyName = propertyName
             };

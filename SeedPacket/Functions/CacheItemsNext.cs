@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace SeedPacket.Functions
 {
-    public static partial class func
+    public static partial class Funcs
     {
         // This overload passes in a cacheList by name string like: "Items" -> (will throw NOT an error if does not exist)
         public static List<T> CacheItemsNext<T> (IGenerator generator, string cacheListName, int min, int max, bool remove = true)

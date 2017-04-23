@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace SeedPacket.Functions
 {
-    public static partial class func
+    public static partial class Funcs
     {
         public static string RandomCompany (IGenerator generator)
         {
-            return func.ElementRandom(generator, "CompanyName") + func.ElementRandom(generator, "CompanySuffix") ?? "CompanyName" + generator.RowNumber;
+            return Funcs.ElementRandom(generator, "CompanyName") + Funcs.ElementRandom(generator, "CompanySuffix") ?? "CompanyName" + generator.RowNumber;
         }
     }
 }

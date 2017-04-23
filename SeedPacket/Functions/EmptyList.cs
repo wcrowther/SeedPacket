@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace SeedPacket.Functions
 {
-    public static partial class func
+    public static partial class Funcs
     {
         public static IEnumerable<Object> EmptyList(IGenerator generator)
         {

@@ -53,7 +53,7 @@ namespace SeedPacket
                 return NameMatches(nameMatch, propName.ifBlank().ToLower());
             }
 
-            // Must match on type, if not the same then false - no match for this func
+            // Must match on type, if not the same then false - no match for this Funcs
             if (propType.IsAssignableFrom(typeMatch))
             {
                 // Will except comma-separated list strings for match.
@@ -97,9 +97,9 @@ namespace SeedPacket
 
         private static bool NameMatch(string namematch, string propname)
         {
-            // 1. type matches but namematch has not been defined for func then true
+            // 1. type matches but namematch has not been defined for Rule then true
             // 2. type matches and namematch has wildcard. if wildcard matches then true otherwise false
-            // 3. type matches but namematch does not match the one defined for this func then false
+            // 3. type matches but namematch does not match the one defined for this Rule then false
 
             if (namematch.isNullOrEmpty())
             {
