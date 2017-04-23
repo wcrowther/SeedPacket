@@ -9,6 +9,7 @@ using SeedPacket.Generators;
 using Tests.SeedPacket.Model;
 using System.Collections.Generic;
 using System.Collections;
+using SeedPacket.DataSources;
 
 namespace Tests.SeedPacket
 {
@@ -16,7 +17,9 @@ namespace Tests.SeedPacket
     public class SeedCoreTests
     {
         private string pathToTestXmlFile;
+        private string pathToTestJsonFile;
         private string xmlFile = @"SimpleSeedSource.xml";
+        private string jsonFile = @"JsonSeedSource.json";
         private string testEmptyXml = @"<SimpleSeedTests></SimpleSeedTests>";
         private string testValidXml = @"<SimpleSeedTests>
                                             <FirstNames>
@@ -29,7 +32,8 @@ namespace Tests.SeedPacket
         [SetUp]
         public void Setup()
         {
-            pathToTestXmlFile = Path.Combine(GetTestDirectory() + "/Source/", xmlFile);
+            pathToTestXmlFile = Path.Combine(GetTestDirectory() + "Source\\", xmlFile);
+            pathToTestJsonFile = Path.Combine(GetTestDirectory() + "Source\\", jsonFile);
         }
 
         [Test]
@@ -187,6 +191,32 @@ namespace Tests.SeedPacket
             // 'Name' does not match any specific rules but the basic String rule
             // and  Name is not in the xml sourcedata so is propertyName + rownumber
             Assert.AreEqual("Name1", list[0].Name);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_With_MultiGenerator_Using_XmlDataSource()
+        {
+            var iEnumerable = new List<Item>();
+            var xmlDataSource = new XmlDataSource();
+            xmlDataSource.Load(pathToTestXmlFile);
+            var multiGenerator = new MultiGenerator(xmlDataSource);
+            var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual("thingamajig", list[0].ItemName);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_With_MultiGenerator_Using_JsonDataSource()
+        {
+            var iEnumerable = new List<Item>();
+            var jsonDataSource = new JsonDataSource();
+            jsonDataSource.Load(pathToTestJsonFile);
+            var multiGenerator = new MultiGenerator(jsonDataSource);
+            var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual("thingamajig", list[0].ItemName);
         }
 
 

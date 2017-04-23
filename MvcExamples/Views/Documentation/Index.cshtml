@@ -483,8 +483,10 @@
                 <strong>Methods:</strong>
                 <ul>
                     <li>
-                        <h5>GetRules (RulesSet ruleSet) : returns void</h5>
-                        <p>Is virtual....</p>
+                        <h5>virtual GetRules (RulesSet ruleSet) : returns void</h5>
+                        <p>Uses the parameter ruleSet to load specific sets of Rules. Note that the method is virtual so 
+                           that derived classes can override which rules are loaded for a particular RuleSet in their
+                           own implementation.</p>
                     </li>
                 </ul>
             </li>
@@ -500,7 +502,8 @@
                 <h4>JsonDataSource class</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    To provide a way to access external Json files or strings to use as 
+                    a source for seed data generation.
                 </p>
                 <strong>Implements:</strong>
                 <ul>
@@ -512,15 +515,22 @@
                 <ul>
                     <li>
                         <h5>Parse(string json) : returns void</h5>
-                        <p>Some information...</p>
+                        <p>This method takes in a json string and uses it to populate an internal
+                           list of string elements.</p>
                     </li>
                     <li>
                         <h5>Load(string sourceFilePath) : returns void</h5>
-                        <p>Some information...</p>
+                        <p>This method takes in a path to a file containing json. If the file is successfully
+                           loaded, it popluates an internal list of string elements.</p>
+                        <p>If the path to the file begins with a tilde "~" and is in a web project, it will
+                           will use MapPath to convert into a local path within the project, otherwise an absolute 
+                           path is used.
+                        </p>
                     </li>
                     <li>
                         <h5>GetElementList(string identifier) : returns List&lt;string&gt;</h5>
-                        <p>Some information...</p>
+                        <p>Returns a list of of string elements, that matches the string identifier. If no 
+                           matches are found for that identifier, an empty list is returned.</p>
                     </li>
                 </ul>
             </li>
@@ -528,7 +538,8 @@
                 <h4>XmlDataSource class</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    To provide a way to access external Xml files or strings to use as
+                    a source for seed data generation.
                 </p>
                 <strong>Implements:</strong>
                 <ul>
@@ -540,19 +551,33 @@
                 <ul>
                     <li>
                         <h5>Parse(string xml) : returns void</h5>
-                        <p>Some information...</p>
+                        <p>This method takes in a xml string and uses it to populate an internal 
+                           list of string elements.
+                        </p>
                     </li>
                     <li>
                         <h5>Load(string sourceFilePath) : returns void</h5>
-                        <p>Some information...</p>
+                        <p>
+                            This method takes in a path to a file containing json. If the file is successfully
+                            loaded, it popluates an internal list of string elements.
+                        </p>
+                        <p>
+                            If the path to the file begins with a tilde "~" and is in a web project, it will
+                            will use MapPath to convert into a local path within the project, otherwise an absolute
+                            path is used.
+                        </p>
                     </li>
                     <li>
                         <h5>LoadDefaultData() : returns void</h5>
-                        <p>Some information...</p>
+                        <p>This method can be used to load the embedded xml resource file that serves
+                           as the default data, if no other source is specified.</p>
                     </li>
                     <li>
                         <h5>GetElementList(string identifier) : returns List&lt;string&gt;</h5>
-                        <p>Some information...</p>
+                        <p>
+                            Returns a list of of string elements, that matches the string identifier. If no
+                            matches are found for that identifier, an empty list is returned.
+                        </p>
                     </li>
                 </ul>
             </li>
@@ -560,7 +585,9 @@
                 <h4>MultiDataSource class</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    To provide a way to access multiple dataSources, either the XmlDataSource or the JsonDataSource,
+                    to retrieve data to use as a source for seed data generation. By default, it works in Auto mode
+                    and automatically detects whether the source is Json or Xml.
                 </p>
                 <strong>Implements:</strong>
                 <ul>
@@ -615,6 +642,7 @@
                         <h5>Dictionary&lt;string, object&gt; CurrentRowValues { get; }</h5>
                         <h5>void GetNextRowRandom ()</h5>
                         <h5>MetaProperty CurrentProperty { get; set; }</h5>
+                        <h5>string CurrentPropertyName { get; set; }</h5>
                     </li>
                 </ul>
             </li>
@@ -675,7 +703,7 @@
                 </ul>
             </li>
             <li class="class">
-                <h4>Func (static)</h4>
+                <h4>Funcs (static)</h4>
                 <p>
                     <strong>Purpose:</strong>
                     sdfsdfsssss

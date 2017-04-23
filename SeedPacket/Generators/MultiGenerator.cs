@@ -33,13 +33,12 @@ namespace SeedPacket.Generators
                 case RulesSet.Basic:
                     Rules.AddBasicRules();
                     break;
-                case RulesSet.Custom:
-                    throw new NotImplementedException("For use in a derived custom Generator");
-                default:
-                    // RulesSet.Common
+                case RulesSet.Common:
                     Rules.AddBasicRules();
                     Rules.AddCommonRules();
                     break;
+                default:
+                    throw new NotImplementedException("For use in a derived custom Generator");
             }
         }
     }

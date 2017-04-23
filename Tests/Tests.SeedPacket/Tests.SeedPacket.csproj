@@ -84,6 +84,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <Content Include="Source\JsonSeedSource.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvcExamples\MvcExamples.csproj">

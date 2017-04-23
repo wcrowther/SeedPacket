@@ -5,6 +5,8 @@ namespace SeedPacket
         None,
         Basic,
         Common,
+        Advanced,
+        UnitTest,
         Custom
     }
 } 
