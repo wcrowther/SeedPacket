@@ -11,7 +11,7 @@ namespace MvcExamples.Controllers
     {
         public ActionResult Index(int rows = 20, bool fromFile = false)
         {
-            var fileGenerator = new MultiGenerator(sourceFilepath: "~/Code/sourceData2.xml");
+            var fileGenerator = new MultiGenerator(sourceFilepath: "~/SourceFiles/sourceData2.xml");
             var sourceGenerator = new MultiGenerator(sourceString: GetXmlString());
             var generator = fromFile ? fileGenerator : sourceGenerator;
 

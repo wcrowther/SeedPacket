@@ -16,7 +16,7 @@ public static class CustomSeedExtensions
             BaseRandom = new Random(34561),
             Rules =  <i>// Adds rules</i>
             {
-                new Rule(typeof(string),"%Sport%", g => func.ElementNext(g, "Sport"), "Sport", "Custom sport from XML file" )
+                new Rule(typeof(string),"%Sport%", g => Funcs.ElementNext(g, "Sport"), "Sport", "Custom sport from XML file" )
             }
        };
        return new SeedCore(gen).SeedList(iEnumerable).ToList();

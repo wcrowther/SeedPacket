@@ -2,25 +2,26 @@
 <div class="row">
     <div class="col-md-12">
         <img class="pull-right" style="margin-top: 20px;" src="~/Content/Images/SeedPacketImage.png" alt="SeedPacket Illustration" />
-        <h2>SeedPacket</h2>
+        <h2>SeedPacket 2.0</h2>
+        <h3 class="byline">for rapid prototyping in C#</h3>
         <p>Created by Will Crowther</p>
         <h3>Overview</h3>
         <p>
-            SeedPacket is for the quick seeding of data on a List (or most types that implement IEnumerable) that
-            works well with LINQ. It is easy to use, out of the box, for prototyping, data generation, and unit testing.
-            The customizable and powerful rules engine can pull data from an external source such as an Xml/Json file or string.
+            SeedPacket is for quickly mocking up fake data in C# for Rapid Application Development (RAD), unit testing, graphic mockups, 
+            prototyping, data generation, database seeding, and unit testing. It is easy to use, with a customizable and powerful rules
+            engine can pull data from an external source such as an Xml/Json file or string.
         </p>
         <h3>How It Works</h3>
         <p>
-            SeedPacket adds a <b>.seed() extension method</b> onto IEnumerable so that you create a list of elements very easily. 
-            The rules engine keys off the datatype or interface, and name of an item's properties so that the data is appropriate to that type.
-            That is to say, "out-of-the-box" email properties will be filled with valid emails, phone numbers filled with phone numbers,
-            and names are names etc.
+            Similar to a LINQ statement, SeedPacket adds a <b>.seed() extension method</b> onto C#'s IEnumerable that fills it's
+            elements with trivial effort. The rules engine keys off the datatype or interface, and name of an item's properties
+            so that the data is appropriate to that type. That is to say, "out-of-the-box" email properties will be filled with valid emails, 
+            phone numbers filled with phone numbers, and names are names etc.
         </p>
         <p>By default, the rules engine loads up about 30 rules for common situations and will degrade to more generic 
             rules if necessary. If you need to modify the default generated data, the rules are simple to create and modify,
-            and come with a many examples, including a data generator that pulls from an external source. The randomly generated data
-            can be set to always be static accross requests or to be random on each time.
+            and come with a many examples, including using a data generator that pulls from an external source. The randomly
+            generated data can be set to always be static across requests or to be random for each time.
         </p>
     </div>
     <div class="col-md-8">

@@ -8,12 +8,12 @@ var ss = new SimpleSeed("~/SourceFiles/seedsource.xml");
 var userList = Enumerable.Range(100, 20)
 .Select(n => new User {
         UserId    = n,
-        FirstName = ss.Inject("FirstName", n),
-        LastName  = ss.Inject("LastName", n),
-        Email     = ss.Inject("FirstName", n).FirstOrDefault() + 
-                    ss.Inject("LastName", n) + "@@" +
-                    ss.Inject("CompanyName", n) +
-                    ss.Inject("DomainExtension", n),
+        FirstName = ss.Next("FirstName", n),
+        LastName  = ss.Next("LastName", n),
+        Email     = ss.Next("FirstName", n).FirstOrDefault() + 
+                    ss.Next("LastName", n) + "@@" +
+                    ss.Next("CompanyName", n) +
+                    ss.Next("DomainExtension", n),
         Created   = DateTime.Now.AddMonths(n)
 }).ToList();
 </code>

@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-12">
         <h2>Documentation</h2>
-        <p>SeedPacket version 2.01</p>
+        <h3 class="byline">for SeedPacket version 2.01</h3>
         <h3>Overview</h3>
     </div>
 </div>
@@ -224,7 +224,7 @@
                         </p>
                         <p>The func parameter is a c# Func&lt;IGenerator, dynamic&gt;, which is to say it takes a function that takes in the generator and uses it
                            to generate the seed data. As the rule is filtered to a specific Type, it is generally true that the returned Dyanmic is the 
-                           correct type at run-time, but the rule creator should be careful to check that this is true. It is generally better to encapsulate
+                           correct type at run-time, but the rule creator should be careful to check that this is true. It is better to encapsulate
                            any complex logic in an external function call, particularily for debugging purposes. The SeedPacket.Functions namespace has
                            many examples in the funcs partial classes.</p>
                         <p>The ruleName parameter gives a specific name to the rule and must be unique.</p>
@@ -349,9 +349,19 @@
                         XmlDataSources and utilizes whichever is more appropriate depending on the data.</p>
                     </li>
                     <li>
+                        <h5>dynamic Cache { get; set; }</h5>
+                        <p>As it's name implies, the cache is used to store data for later use in a subsequent Rule using a c# dynamic
+                            ExpandoObject object that works similar to an asp.net web forms viewbag. This is helpful so you can store
+                            an instance of a list that has seeded with data, then retrieve items from that listeither sequentially or randomly.</p>
+                        <p>To assign to the Cache, you simple write: generator.Cache.Items =  new List&lt;Items&gt;().Seed()</p>
+                        <p>To retrieve a cache list by string name, the CacheExtensions method GetByItemName() is provided so use: 
+                           var list = generator.cache.GetByItemName&lt;List&lt;T&gt;&gt;(cacheListName)</p>
+                        <p>To retrieve a cached list directly use: var list = generator.Cache.Items.</p>
+                    </li>
+                    <li>
                         <h5>Rules : Rules</h5>
                         <p>This Rules collection of Rule objects is what is picked from when selecting
-                        how to generate seed data. See the Rules entry for more information.</p>
+                           how to generate seed data. See the Rules entry for more information.</p>
                     </li>
                     <li>
                         <h5>BaseRandom : Random</h5>
@@ -599,14 +609,25 @@
                 <ul>
                     <li>
                         <h5>MultiDataSource(string sourcefilepath = null, string sourcestring = null, DataInputType datainputtype = DataInputType.Auto)</h5>
-                        <p>Some information...</p>
+                        <p>
+                            This constructor sets the path to a file of data using the sourceFilepath parameter or a string of data
+                            using the sourceString parameter. If neither parameter is populated or both parameters are populated, it will throw an exception.
+                        </p>
+                        <p>
+                            The DataInputType allows for an explcit selection of possible data sources referencing a xml or json file,
+                            xml or json string, automatically pick the type, or use the embedded default data embedded in the project.
+                            The default is Auto which will attempt to use the best match.
+                        </p>
                     </li>
                 </ul>
                 <strong>Methods:</strong>
                 <ul>
                     <li>
                         <h5>GetElementList(string identifier) : returns List&lt;string&gt;</h5>
-                        <p>Some information...</p>
+                        <p>
+                            Returns a list of of string elements, that matches the string identifier. If no
+                            matches are found for that identifier, an empty list is returned.
+                        </p>
                     </li>
                 </ul>
             </li>
@@ -622,26 +643,56 @@
                 <h4>IGenerator</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    An interface to provide all the necessary functionality to support data generation and seeding.
                 </p>
                 <strong>Members:</strong>
                 <ul>
                     <li>
-                        <h5>IRules Rules { get; }</h5>
                         <h5>int SeedBegin { get; set; }</h5>
+                    </li>
+                    <li>
                         <h5>int SeedEnd { get; set; }</h5>
+                    </li>
+                    <li>
+                        <h5>IDataSource Datasource { get; }</h5>
+                    </li>
+                    <li>
+                        <h5>IRules Rules { get; }</h5>
+                    </li>
+                    <li>
                         <h5>Random BaseRandom { get; }</h5>
+                    </li>
+                    <li>
                         <h5>DateTime BaseDateTime { get; }</h5>
+                    </li>
+                    <li>
                         <h5>bool Debugging { get; set; }</h5>
+                    </li>
+                    <li>
                         <h5>dynamic Cache { get; set; }</h5>
-                        <h5>IDataSource Datasource { get;  }</h5>
-                        <h5>int RowNumber { get; set; }</h5>
-                        <h5>int RowRandomNumber { get; }</h5>
-                        <h5>Random RowRandom { get; }</h5>
+                    </li>
+                    <li>
                         <h5>int RowCount { get; }</h5>
+                    </li>
+                    <li>
+                        <h5>int RowNumber { get; set; }</h5>
+                    </li>
+                    <li>
+                        <h5>Random RowRandom { get; }</h5>
+                    </li>
+                    <li>
+                        <h5>int RowRandomNumber { get; }</h5>
+                    </li>
+                    <li>
                         <h5>Dictionary&lt;string, object&gt; CurrentRowValues { get; }</h5>
+                    </li>
+                    <li>
                         <h5>void GetNextRowRandom ()</h5>
+                    </li>
+                    <li>
                         <h5>MetaProperty CurrentProperty { get; set; }</h5>
+                    </li>
+                    <li>
                         <h5>string CurrentPropertyName { get; set; }</h5>
                     </li>
                 </ul>
@@ -650,30 +701,37 @@
                 <h4>IDataSource</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    An interface to provide access external files or strings to use as a source for seed data generation.
                 </p>
                 <strong>Members:</strong>
                 <ul>
                     <li>
                         <h5>List&lt;string&gt; GetElementList(string identifier)</h5>
+                        <p>
+                            A method to get a list of string elements matching the identifier category. 
+                        </p>
                     </li>
                 </ul>
-            </li>
+            </li>           
             <li class="class">
-                <h4>IRules</h4>
+                <h4>IRules : ICollection</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    An interface for managing a collection of rule objects and how those rules are selected.
                 </p>
-                <strong>Members:</strong>
+                <strong>Inherits:</strong>
                 <ul>
                     <li>
-                        <h5>Rule GetRuleByTypeAndName(Type ruleType, string propertyName)</h5>
-                        <h5>void Add (Rule rule)</h5>
-                        <h5>void AddRange (IEnumerable<Rule> rules, bool overwrite = false)</h5>
-                        <h5>void RemoveRuleByName (string ruleName)</h5>
-                        <h5>void Clear()</h5>
+                        <h5>Collection&lt;Rule&gt;</h5>
                     </li>
+                </ul>
+                <strong>Members:</strong>
+                <ul>
+                    <li><h5>Rule GetRuleByTypeAndName(Type ruleType, string propertyName)</h5></li>
+                    <li><h5>void Add (Rule rule)</h5></li>
+                    <li><h5>void AddRange (IEnumerable<Rule> rules, bool overwrite = false)</h5></li>
+                    <li><h5>void RemoveRuleByName (string ruleName)</h5></li>
+                    <li><h5>void Clear()</h5></li>
                 </ul>
             </li>
         </ul>
@@ -686,45 +744,87 @@
         <ul class="namespaceList">
             <li class="class">
                 <h4>CacheExtensions (static)</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    A collection of extension method helpers used for accessing the Dynamic Cache. Note
+                    that they are purposefully included in the SeedPacket.Functions namespace as they
+                    relate to the Cache and how it is used in the Funcs methods.
+                </p>
                 <strong>Extension Methods:</strong>
                 <ul>
                     <li>
                         <h5>static TakeRandomItems&lt;T&gt; (this IList&lt;T&gt; sourceList, Random random, int count = 1, bool remove = true) : returns IList&lt;T&gt;</h5>
-                        <p>where T : new() Some information...</p>
-                    </li>
+                        <p>Will randomly take {count} number of items from the sourceList and return them in the new destinationList. If 
+                           {remove} = true, which is the default, then they are removed from the sourceList. This method is useful for
+                           populating seed data from pre-existing seeded lists in the cache. Be mindful that picking data randomly from a 
+                           big list of data can be slower (1/2 as fast) as retrieving sequencial data and may not be necessary, particularily
+                           if the data is random to begin with.</p>
                     <li>
                         <h5>static T GetByItemName&lt;T&gt; (this ExpandoObject expando, string name) : returns T</h5>
-                        <p>Some information...</p>
+                        <p>This extension method method takes advantage of the fact that the ExpandoObject is actually an IDictionary, which
+                           allows us to extract items by a string name.</p>
                     </li>
                     <li>
                         <h5>static Get&lt;TKey, TVal&gt; (this Dictionary&lt;TKey, TVal&gt; dictionary, TKey key, TVal defaultVal = default(TVal)) : returns TVal</h5>
-                        <p>Some information...</p>
+                        <p>This helpful extension method is useful for conditionally getting values from a dictionary. If the 
+                           key does not exist in the Dictionary, it returns the defaultValue for that type. A custom default value for
+                           that type can be passed in using the defaultVal parameter.</p>
                     </li>
                 </ul>
             </li>
             <li class="class">
-                <h4>Funcs (static)</h4>
+                <h4>Funcs (static) - marked partial</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    sdfsdfsssss
+                    A collection of static methods for data generation, particularily useful in the functions passed into a Rule. Note 
+                    that the static classes are marked partial for organization within the SeedLPacket source code and accessibility
+                    using intellisense.
                 </p>
                 <strong>Methods:</strong>
                 <ul>
                     <li>
                         <h5>static CacheItemsNext&lt;T&gt; (IGenerator generator, string cacheListName, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
-                        <p>Some information...</p>
+                        <p>Sequentially gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
+                           <b>generator.Cache</b> where the {cacheListName} parameter is the name of the list. Will not throw an error if
+                            the named element does not exist.
+                        </p>
+                        <p>To get a specific number of items, use the same integer for both the {min} and {max}. Note that the {max} parameter
+                           is inclusive so min: 1 max: 6 is a value from 1 to 6. This is unlike the c# Random.Next where the value returned
+                           is always less than the max.
+                        </p>
                     </li>
                     <li>
                         <h5>static CacheItemsNext&lt;T&gt; (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
-                        <p>Some information...</p>
+                        <p>Sequentially gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
+                           <b>generator.Cache</b> where the {cacheListName} parameter is a C# dynamic item. ex: generator.Cache.Invoices. Will throw 
+                           an error if the element does not exist in the Cache.
+                        </p>
+                        <p>To get a specific number of items, use the same integer for both the {min} and {max}. Note that the {max} parameter
+                           is inclusive so min: 1 max: 6 is a value from 1 to 6. This is unlike the c# Random.Next where the value returned
+                           is always less than the max.
+                        </p>
                     </li>
                     <li>
                         <h5>static List&lt;T&gt; CacheItemsRandom&lt;T&gt; (IGenerator generator, string cacheListName, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
-                        <p>Some information...</p>
+                        <p>Randomly gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
+                           <b>generator.Cache</b> where the {cacheListName} parameter is the name of the list. Will not throw an error if
+                            the named element does not exist.
+                        </p>
+                        <p>To get a specific number of items, use the same integer for both the {min} and {max}. Note that the {max} parameter
+                           is inclusive so min: 1 max: 6 is a value from 1 to 6. Particularily in a big list, retrieving items randomly is slower
+                           than retrieving the items sequentially.
+                        </p>
                     </li>
                     <li>
                         <h5>static List&lt;T&gt; CacheItemsRandom&lt;T&gt; (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
-                        <p>Some information...</p>
+                        <p>Randomly gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
+                           <b>generator.Cache</b> where the {cacheListName} parameter is a C# dynamic item. ex: generator.Cache.Invoices. Will throw
+                           an error if the element does not exist in the Cache.
+                        </p>
+                        <p>To get a specific number of items, use the same integer for both the {min} and {max}. Note that the {max} parameter
+                           is inclusive so min: 1 max: 6 is a value from 1 to 6. This is unlike the c# Random.Next where the value returned
+                           is always less than the max.
+                        </p>
                     </li>
                     <li>
                         <h5>static DiceRoll (IGenerator generator, int diceSides = 6, int numberOfDice = 1) : returns int</h5>

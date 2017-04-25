@@ -6,11 +6,11 @@
 var generator = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml")
 {
     Rules = {
-        new Rule(typeof(string), "ItemName",      g =&gt; func.NextElement(g, "ProductName"), "ItemName"),
+        new Rule(typeof(string), "ItemName",      g =&gt; Funcs.NextElement(g, "ProductName"), "ItemName"),
         new Rule(typeof(int), "SelectedProduct",  g =&gt; g.RowRandom.Next(0, 11), "Random product id"),
-        new Rule(typeof(string), "Ceo",           g =&gt; func.NextElement(g, "FirstName") + " " + func.NextElement(g, "LastName"), "Random CEO Name"),
-        new Rule(typeof(string),"Description%",   g =&gt; func.RandomElement(g, "Description"), "Description", "Gets Description from custom XML file" ),
-        new Rule(typeof(List&lt;Item&gt;), "",          g =&gt; func.CacheItemsNext&lt;Item&gt;(g, g.Cache.Items, 10, 10, false), "ItemList"),
+        new Rule(typeof(string), "Ceo",           g =&gt; Funcs.NextElement(g, "FirstName") + " " + func.NextElement(g, "LastName"), "Random CEO Name"),
+        new Rule(typeof(string),"Description%",   g =&gt; Funcs.RandomElement(g, "Description"), "Description", "Gets Description from custom XML file" ),
+        new Rule(typeof(List&lt;Item&gt;), "",    g =&gt; Funcs.CacheItemsNext&lt;Item&gt;(g, g.Cache.Items, 10, 10, false), "ItemList"),
     },
     BaseDateTime = DateTime.Today,
     BaseRandom = new Random(1234567)

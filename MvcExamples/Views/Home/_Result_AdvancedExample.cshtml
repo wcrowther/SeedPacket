@@ -1,20 +1,17 @@
 ﻿@using SeedPacket.Extensions
-@using SeedPacket.Examples
 @using SeedPacket.Functions
-@using SeedPacket.Interfaces
 @using MvcExamples.Models
-@using System.Collections
 
 @{  // inline in view for RAD or web pages purposes
 
     var generator = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml")
     {
         Rules = {
-            new Rule(typeof(string), "ItemName",      g => func.ElementNext(g, "ProductName"), "ItemName"),
+            new Rule(typeof(string), "ItemName",      g => Funcs.ElementNext(g, "ProductName"), "ItemName"),
             new Rule(typeof(int), "SelectedProduct",  g => g.RowRandom.Next(0, 11), "Random product id"),
-            new Rule(typeof(string), "Ceo",           g => func.ElementNext(g, "FirstName") + " " + func.ElementNext(g, "LastName"), "Random CEO Name"),
-            new Rule(typeof(string),"Description%",   g => func.ElementNext(g, "Description"), "Description", "Gets Description from custom XML file" ),
-            new Rule(typeof(List<Item>), "",          g => func.CacheItemsNext<Item>(g, g.Cache.Items, 10, 10, false), "ItemList")
+            new Rule(typeof(string), "Ceo",           g => Funcs.ElementNext(g, "FirstName") + " " + Funcs.ElementNext(g, "LastName"), "Random CEO Name"),
+            new Rule(typeof(string),"Description%",   g => Funcs.ElementNext(g, "Description"), "Description", "Gets Description from custom XML file" ),
+            new Rule(typeof(List<Item>), "",          g => Funcs.CacheItemsNext<Item>(g, g.Cache.Items, 10, 10, false), "ItemList")
         },
         BaseDateTime = DateTime.Today,
         BaseRandom = new Random(1234567)

@@ -186,6 +186,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="SourceFiles\sourceData2.xml" />
     <Content Include="SourceFiles\xmlSeedSourcePlus.xml" />
     <Content Include="SourceFiles\seedsource.xml" />
     <Content Include="Web.config">

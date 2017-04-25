@@ -2,8 +2,8 @@
 <div class="row">
     <div class="col-md-12">
         <h2>SimpleSeed</h2>
-        <p>by Will Crowther</p>
-
+        <h3 class="byline">for rapid prototyping for LINQ in C#</h3>
+        <p>Created by Will Crowther</p>
     </div>
 </div>
 
@@ -71,10 +71,10 @@
             of returned values will generally be the same unless you initialize a new seed value for the Random or change the size of
             elements that you are drawing from.
         </p>
-        @{ Html.RenderPartial("_Example_UsingInject"); }
+        @{ Html.RenderPartial("_Example_UsingNext"); }
     </div>
     <div class="col-md-6" id="rowResults">
-        @{ Html.RenderPartial("_Result_UsingInject"); }
+        @{ Html.RenderPartial("_Result_UsingNext"); }
     </div>
 </div>
 <div class="row">

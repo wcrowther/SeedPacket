@@ -88,6 +88,11 @@ input[type="checkbox"].input-validation-error {
     margin-right: -15px;
 }
 
+.byline {
+    margin-top: -5px;
+    margin-bottom: 30px;
+}
+
 /* CodeExample */
 /* box-sizing: border-box is in effect from bootstrap */
 

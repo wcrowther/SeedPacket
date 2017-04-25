@@ -9,7 +9,7 @@ namespace SeedPacket.Functions
 {
     public static class CacheExtensions 
     {
-        /// <summary>Will randomly take X number of items from the sourceList and put them in the new destinationList</summary>
+        /// <summary>Will randomly take {count} number of items from the sourceList and return them in the new destinationList</summary>
         public static IList<T> TakeRandomItems<T> (this IList<T> sourceList, Random random, int count = 1, bool remove = true)
         {
             if (sourceList == null)
