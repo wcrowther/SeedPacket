@@ -95,12 +95,12 @@
   </StreetNames>
 
   <RoadTypes>
-		<RoadTypes>St.</RoadTypes>
-		<RoadTypes>Trl.</RoadTypes>
-		<RoadTypes>Blvd</RoadTypes>
-		<RoadTypes>Street</RoadTypes>
-		<RoadTypes>Road</RoadTypes>
-		<RoadTypes>Avenue</RoadTypes>
+		<RoadType>St.</RoadType>
+		<RoadType>Trl.</RoadType>
+		<RoadType>Blvd</RoadType>
+		<RoadType>Street</RoadType>
+		<RoadType>Road</RoadType>
+		<RoadType>Avenue</RoadType>
   </RoadTypes>
 
   <Cities>

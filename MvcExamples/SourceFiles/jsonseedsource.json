@@ -198,7 +198,7 @@
       ]
     },
     "RoadTypes": {
-      "RoadTypes": [
+      "RoadType": [
         "Way",
         "St.",
         "Trl.",

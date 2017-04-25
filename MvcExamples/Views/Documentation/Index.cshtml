@@ -857,15 +857,17 @@
                     </li>
                     <li>
                         <h5>static OnceEvery (IGenerator generator, int count = 10) : returns bool</h5>
-                        <p>As it's names suggests, it returns true once every {count}. For use Funcs and derived functions in rules. The default is 10.</p>
+                        <p>As it's names suggests, it returns true once every {count}. Useful in Funcs and derived functions in rules to vary
+                           data occasiaonally. The default is 10.</p>
                     </li>
-                    <li>
+                    @*<li>
                         <h5>static EmptyList(IGenerator generator) : returns IEnumerable&lt;object&gt;</h5>
-                        <p>DETAILS TO COME............</p>
-                    </li>
+                        <p>This simple function simply returns an empty IEnumerable of &lt;object&gt;</p>
+                    </li>*@
                     <li>
                         <h5>static RandomAddress (IGenerator generator) : returns string</h5>
-                        <p>Some information...</p>
+                        <p>Buids a random address by combining a random int between 1 and 9999, a random "StreetName" from the datasource,
+                           and a random "RoadType"</p>
                     </li>
                     <li>
                         <h5>static RandomCompany (IGenerator generator) : returns string</h5>

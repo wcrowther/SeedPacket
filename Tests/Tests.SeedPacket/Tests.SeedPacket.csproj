@@ -74,8 +74,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="Model\ItemGroup.cs" />
     <Compile Include="Model\Unknown.cs" />
     <Compile Include="Model\Item.cs" />
+    <Compile Include="SeedFunctionsTests.cs" />
     <Compile Include="SeedExtensionsTests.cs" />
     <Compile Include="SeedCoreTests.cs" />
     <Compile Include="SimpleSeedTests.cs" />

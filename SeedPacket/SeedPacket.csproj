@@ -61,7 +61,6 @@
     <Compile Include="Exceptions\MultipleSourceException.cs" />
     <Compile Include="Functions\CacheExtensions.cs" />
     <Compile Include="Functions\CacheItemsNext.cs" />
-    <Compile Include="Functions\EmptyList.cs" />
     <Compile Include="Functions\OnceEvery.cs" />
     <Compile Include="Functions\RandomPhone.cs" />
     <Compile Include="Functions\RandomAddress.cs" />

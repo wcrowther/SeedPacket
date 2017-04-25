@@ -199,17 +199,17 @@
   </StreetNames>
 
   <RoadTypes>
-    <RoadTypes>Way</RoadTypes>
-		<RoadTypes>St.</RoadTypes>
-		<RoadTypes>Trl.</RoadTypes>
-		<RoadTypes>Blvd</RoadTypes>
-		<RoadTypes>Street</RoadTypes>
-		<RoadTypes>Road</RoadTypes>
-		<RoadTypes>Rd.</RoadTypes>
-		<RoadTypes>Lane</RoadTypes>
-		<RoadTypes>Circle</RoadTypes>
-		<RoadTypes>Ave.</RoadTypes>
-		<RoadTypes>Avenue</RoadTypes>
+    <RoadType>Way</RoadType>
+		<RoadType>St.</RoadType>
+		<RoadType>Trl.</RoadType>
+		<RoadType>Blvd</RoadType>
+		<RoadType>Street</RoadType>
+		<RoadType>Road</RoadType>
+		<RoadType>Rd.</RoadType>
+		<RoadType>Lane</RoadType>
+		<RoadType>Circle</RoadType>
+		<RoadType>Ave.</RoadType>
+		<RoadType>Avenue</RoadType>
   </RoadTypes>
 
   <CityNames>

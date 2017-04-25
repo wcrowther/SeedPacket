@@ -10,7 +10,7 @@ namespace SeedPacket.Functions
         {
             int streetNumber = generator.RowRandom.Next(1, 10000);
             string streetName = Funcs.ElementRandom(generator, "StreetName") ?? "StreetName" + generator.RowNumber ;
-            string roadType = Funcs.ElementRandom(generator, "RoadTypes");
+            string roadType = Funcs.ElementRandom(generator, "RoadType");
 
             return $"{streetNumber} {streetName} {roadType}";
         }
