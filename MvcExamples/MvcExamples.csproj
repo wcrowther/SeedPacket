@@ -219,8 +219,8 @@
     <Content Include="Views\SimpleSeed\Index.cshtml" />
     <Content Include="Views\SimpleSeed\_Example_LinqRange.cshtml" />
     <Content Include="Views\SimpleSeed\_Result_LinqRange.cshtml" />
-    <Content Include="Views\SimpleSeed\_Example_UsingInject.cshtml" />
-    <Content Include="Views\SimpleSeed\_Result_UsingInject.cshtml" />
+    <Content Include="Views\SimpleSeed\_Example_UsingNext.cshtml" />
+    <Content Include="Views\SimpleSeed\_Result_UsingNext.cshtml" />
     <Content Include="Views\Examples\Test2.cshtml" />
     <Content Include="Views\Examples\Index.cshtml" />
     <Content Include="Views\Home\_HotBox.cshtml" />

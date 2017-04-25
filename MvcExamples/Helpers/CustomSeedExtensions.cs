@@ -9,7 +9,7 @@ namespace MvcExamples.Helpers
 {
     public static class SeedExtensions
     {
-        public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin = 1, int seedEnd = 10) where T : new()
+        public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin = 1, int seedEnd = 100) where T : new()
         {
             var rules = new CustomGenerator("~/Helpers/XmlGeneratorSource.xml")
             {
@@ -31,7 +31,7 @@ namespace MvcExamples.Helpers
 
                 // Base dualgenerator defaults to Common RuleSet
                 Rules.AddRange(new List<Rule>{
-                    new Rule (typeof(string), "action%", g => Funcs.ElementNext(g, "Action"),                           "Custom Action",    "Fills any string fields named Action"),
+                    new Rule (typeof(string), "action%", g => Funcs.ElementNext(g, "FirstName"),                           "Custom Action",    "Fills any string fields named Action"),
                     new Rule (typeof(DateTime), "", g => g.BaseDateTime.AddHours(g.RowRandom.Next(-17521, 17521)),  "Custom DateTime",  "Random DateTime. BaseDateTime +- 2 years by hour. Overrides 'Basic DateTime'")
                 });
             }

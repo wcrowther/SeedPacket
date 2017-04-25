@@ -14,12 +14,12 @@ namespace SeedPacket.Functions
             List<string> strings = generator.Datasource.GetElementList(identifier);
             int count = strings.Count;
             if (count == 0)
-                return "";
+                return null;
 
             int mod = (generator.RowNumber - 1) % count;
             int position = mod;
 
-            return strings?.ElementAtOrDefault(position) ?? "";
+            return strings?.ElementAtOrDefault(position);
         }
     }
 }

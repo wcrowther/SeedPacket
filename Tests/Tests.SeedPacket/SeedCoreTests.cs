@@ -10,6 +10,7 @@ using Tests.SeedPacket.Model;
 using System.Collections.Generic;
 using System.Collections;
 using SeedPacket.DataSources;
+using SeedPacket.Functions;
 
 namespace Tests.SeedPacket
 {
@@ -36,11 +37,12 @@ namespace Tests.SeedPacket
             pathToTestJsonFile = Path.Combine(GetTestDirectory() + "Source\\", jsonFile);
         }
 
+
         [Test]
-        public void SeedCore_SeedList_With_BasicGenerator_Gets_10_Items_By_Default ()
+        public void SeedCore_SeedList_With_BasicGenerator_Gets_10_Items_By_Default()
         {
             var iEnumerable = new List<Item>();
-            var basicGenerator =  new BasicGenerator();
+            var basicGenerator = new BasicGenerator();
             var seedCore = new SeedCore(basicGenerator);
             var list = seedCore.SeedList(iEnumerable).ToList();
 

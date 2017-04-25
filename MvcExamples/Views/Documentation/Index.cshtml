@@ -828,25 +828,40 @@
                     </li>
                     <li>
                         <h5>static DiceRoll (IGenerator generator, int diceSides = 6, int numberOfDice = 1) : returns int</h5>
-                        <p>Simulates rolling a 6-sided dice (16.6%). Use a higher diceSides to decrease chances in a linear progression.
-                           Increasing numberOfDice creates a bell-curve of probability ie: 3d6 is 3 to 18 w/ 7 most likely possiblity.
+                        <p>Simulates rolling a 6-sided dice (16.6%). Use a higher {diceSides} to decrease chances in a linear progression.
+                           Increasing {numberOfDice} creates a bell-curve of probability ie: 3d6 is 3 to 18 w/ 7 most likely possiblity.
                         </p>
                     </li>
                     <li>
                         <h5>static ElementNext (IGenerator generator, string identifier) : returns string</h5>
-                        <p>Some information...</p>
+                        <p>ElementNext gets the next string from the element list named for the {identifier} from the datasource contained in the
+                           IGenerator passed in from {generator} parameter. If no elements exist in the list, null is returned. If
+                           the number is greater than what exists in the list, then it wraps back around to a string in the list.
+                        </p>
                     </li>
                     <li>
-                        <h5>static ElementRandom (IGenerator generator, string identifier = null) : returns string</h5>
-                        <p>Some information...</p>
+                        <h5>static ElementRandom (IGenerator generator, string identifier = null, bool nullIfEmpty = false) : returns string</h5>
+                        <p>ElementRandom gets a random string from the element list named for the {identifier} from the datasource
+                           contained in the IGenerator passed in from {generator} parameter. If no elements exist in the list, null
+                           is returned.
+                        </p>
+                        <p>If the {identifier} parameter is null, then the method will default to the generator.CurrentPropertyName. If no 
+                           elements are returned from the named element list, then the default will be the generator.CurrentPropertyName + RowNumber.
+                           If the {nullIfEmpty} parameter is set to true, then the default will just be null, instead.
+                        </p>
                     </li>
                     <li>
                         <h5>static ElementRandom (IGenerator generator, string identifier, TypeCode typeCode) : returns dynamic</h5>
-                        <p>Some information...</p>
+                        <p>This overload of the ElementRandom method provides a TypeCode that the string will be converted to. The {nullIfEmpty}
+                           parameter has been removed as the type default is always returned as the default.</p>
                     </li>
                     <li>
                         <h5>static OnceEvery (IGenerator generator, int count = 10) : returns bool</h5>
-                        <p>Some information...</p>
+                        <p>As it's names suggests, it returns true once every {count}. For use Funcs and derived functions in rules. The default is 10.</p>
+                    </li>
+                    <li>
+                        <h5>static EmptyList(IGenerator generator) : returns IEnumerable&lt;object&gt;</h5>
+                        <p>DETAILS TO COME............</p>
                     </li>
                     <li>
                         <h5>static RandomAddress (IGenerator generator) : returns string</h5>
