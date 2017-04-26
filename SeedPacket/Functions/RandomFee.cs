@@ -8,7 +8,7 @@ namespace SeedPacket.Functions
     {
         public static decimal RandomFee (IGenerator generator)
         {
-            decimal fee = generator.RowRandom.Next(1, 200);
+            decimal fee = generator.RowRandom.Next(1, 100);
             decimal dec = generator.RowRandom.Next(0, 100);
             return fee + (dec * .01M);
         }

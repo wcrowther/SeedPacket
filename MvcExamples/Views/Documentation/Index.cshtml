@@ -8,17 +8,23 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8">
-        <p>
-            TEXT TO COME
-            SeedPacket is for the quick seeding of data on a List (or most types that implement IEnumerable).
-            It is easy to use out of the box for prototyping, data generation, and unit testing. It customizable
-            with a powerful rules engine that can pull data from an external source such as an Xml file or string.
+    <div class="col-md-6">
+        <p> SeedPacket is for the quick seeding of data on a List (or most types that implement IEnumerable).
+            It is easy to use out of the box for prototyping, data generation, and unit testing. This 
+            documentation is designed to provide detail on the many features of SeedPacket, including
+            the Generators, the Datasources, the Funcs, Interfaces, Exceptions, etc. 
         </p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="hotBox">
-            The SeedPacket source code will be available on GitHub soon. Check back for a link.
+            <p>
+                One debugging feature that is turned ON by default writes to the useful information to the
+                Debug output window in Visual Studio. The name of each property (with type) that data
+                was generated for is shown with the name of rule that it matched.
+            </p>
+            <p>
+                The SeedPacket source code will be available on GitHub soon. Check back for a link.
+            </p>
         </div>
     </div>
 </div>
@@ -866,44 +872,56 @@
                     </li>*@
                     <li>
                         <h5>static RandomAddress (IGenerator generator) : returns string</h5>
-                        <p>Buids a random address by combining a random int between 1 and 9999, a random "StreetName" from the datasource,
-                           and a random "RoadType"</p>
+                        <p>Buids a random address by combining a random int between 1 and 9999, a random "StreetName"
+                           and a random "RoadType" from the datasource</p>
                     </li>
                     <li>
                         <h5>static RandomCompany (IGenerator generator) : returns string</h5>
-                        <p>Some information...</p>
+                        <p>Builds a random company name from a random "CompanyName" and a random "CompanySuffix" from the datasource.</p>
                     </li>
                     <li>
                         <h5>static RandomCost (IGenerator generator) : returns decimal</h5>
-                        <p>Some information...</p>
+                        <p>Builds a random decimal combining a whole number from 0 to 999 and a decimal between .00 and .99</p>
                     </li>
                     <li>
                         <h5>static RandomDateTime (IGenerator generator, int hoursBefore, int hoursAfter) : returns DateTime</h5>
-                        <p>Some information...</p>
+                        <p>Returns a DateTime value that is a value {hoursBefore} before to {hoursAfter} the BaseDateTime. For 
+                           example 2 years before to 2 years after by hour you would use hoursBefore: -17520 hoursAfter: 17521 </p>
+                    </li>
+                    <li>
+                        <h5>static RandomDateTimeNull (IGenerator generator, int hoursBefore, int hoursAfter, int diceRange = 6) : returns DateTime?</h5>
+                        <p>Works just like the RandomDateTime, except that this version returns a nullable DateTime where a null
+                           value will be returned with a likelihood of 1 in {diceRange}.</p>
                     </li>
                     <li>
                         <h5>static RandomEmail (IGenerator generator) : returns string</h5>
-                        <p>Some information...</p>
+                        <p>Creates an email from a random username, with a random company, and a random domain extension from 
+                           the datasource. If the username, company, and domain, have already been created, they will be
+                           stored in the generator.CurrentRowValues, and these values are used.
+                     </p>
                     </li>
                     <li>
                         <h5>static RandomFee (IGenerator generator) : returns decimal</h5>
-                        <p>Some information...</p>
+                        <p>Builds a random decimal combining a whole number from 1 to 99 and a decimal between .00 and .99</p>
                     </li>
                     <li>
                         <h5>static RandomGuid (IGenerator generator) : returns Guid</h5>
-                        <p>Some information...</p>
+                        <p>Creates a random guid. It is worth noting that, unlike a new Guid, this Guid is generated base on 
+                           the random seed.</p>
                     </li>
                     <li>
                         <h5>static RandomPhone (IGenerator generator) : returns string</h5>
-                        <p>Some information...</p>
+                        <p>Generates a random phone number in the form (100 to 999) - 100 to 999 - 1000 to 9999</p>
                     </li>
                     <li>
                         <h5>static RandomUserName (IGenerator generator) : returns string</h5>
-                        <p>Some information...</p>
+                        <p>Creates a username using the first letter of a random FirstName and a random LastName from the
+                           datasource. If the firstname and/or lastname have already been created, they will be stored 
+                           in the generator.CurrentRowValues, and these values are used.</p>
                     </li>
                     <li>
                         <h5>static RandomZip (IGenerator generator) : returns string</h5>
-                        <p>Some information...</p>
+                        <p>Creates random ZipCode between 10001 and 99999</p>
                     </li>
                 </ul>
             </li>
@@ -979,9 +997,12 @@
     </div>
 </div>
 
-<div class="row documentation">
+@*<div class="row documentation">
     <div class="col-md-12">
         <h3>Debugging</h3>
         Information to come
     </div>
-</div>
+</div>*@
+
+<br />&nbsp;
+<br />&nbsp;

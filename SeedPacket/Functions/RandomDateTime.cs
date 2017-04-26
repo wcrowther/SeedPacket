@@ -14,9 +14,9 @@ namespace SeedPacket.Functions
             return generator.BaseDateTime.AddHours(randomHours);
         }
 
-        public static DateTime? RandomDateTimeNull (IGenerator generator, int hoursBefore, int hoursAfter, int diceRange = 7)
+        public static DateTime? RandomDateTimeNull (IGenerator generator, int hoursBefore, int hoursAfter, int diceRange = 6)
         {
-            // BaseDateTime +-2 years by hour is -17521, 17521
+            // BaseDateTime +-2 years by hour is -17520, 17521
             int randomHours = generator.RowRandom.Next(hoursBefore, hoursAfter);
 
             return DiceRoll(generator, diceRange) == 1 ? (DateTime?)null : generator.BaseDateTime.AddHours(randomHours);
