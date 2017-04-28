@@ -14,6 +14,11 @@ namespace SeedPacket.DataSources
         private XDocument sourceData;
         private const string defaultXml = "SeedPacket.Source.XmlGeneratorSource.xml";
 
+        public XmlDataSource()
+        {
+            LoadDefaultData();
+        }
+
         public void Parse(string xml)
         {
             try
@@ -45,10 +50,12 @@ namespace SeedPacket.DataSources
         {
             try
             {
-                // Gets embedded xml file 1.Update 'Build Action' property to 'embedded Resource'
+                // Gets embedded xml file Update 'Build Action' property to 'embedded Resource'
                 System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
-                var xmlStream = a.GetManifestResourceStream(defaultXml);
-                sourceData = XDocument.Load(xmlStream);
+                using (var xmlStream = a.GetManifestResourceStream(defaultXml))
+                { 
+                    sourceData = XDocument.Load(xmlStream);
+                }
             }
             catch
             {

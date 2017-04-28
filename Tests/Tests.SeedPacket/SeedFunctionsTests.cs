@@ -1,17 +1,6 @@
-﻿using System;
-using NUnit.Framework;
-using System.Linq;
-using SeedPacket;
-using SeedPacket.Exceptions;
-using System.IO;
-using static Tests.SeedPacket.Common;
-using SeedPacket.Generators;
-using Tests.SeedPacket.Model;
-using System.Collections.Generic;
-using System.Collections;
-using SeedPacket.DataSources;
+﻿using NUnit.Framework;
 using SeedPacket.Functions;
-using NewLibrary.ForType;
+using SeedPacket.Generators;
 
 namespace Tests.SeedPacket
 {
@@ -20,12 +9,30 @@ namespace Tests.SeedPacket
     {
 
         [Test]
-        public void SeedFunctions()
+        public void SeedFunctions_DiceRoll_Basic_Roll()
         {
-            //var itemListObj = new Example new List<Item>() };
-            //var meta = itemListObj.GetMetaModel();
+            var gen = new BasicGenerator();
+            int diceRoll = Funcs.DiceRoll(gen);
 
-           // Assert.AreEqual(true, isIList);
+            Assert.AreEqual(4, diceRoll);
+        }
+
+        [Test]
+        public void SeedFunctions_DiceRoll_20_Sided_Dice()
+        {
+            var gen = new BasicGenerator();
+            int diceRoll = Funcs.DiceRoll(gen, 20);
+
+            Assert.AreEqual(13, diceRoll);
+        }
+
+        [Test]
+        public void SeedFunctions_DiceRoll_5d6()
+        {
+            var gen = new BasicGenerator();
+            int diceRoll = Funcs.DiceRoll(gen, 6, 5);
+
+            Assert.AreEqual(22, diceRoll);
         }
     }
 }

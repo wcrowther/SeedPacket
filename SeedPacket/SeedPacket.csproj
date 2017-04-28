@@ -98,6 +98,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Source\JsonGeneratorSource.json" />
     <None Include="packages.config" />
+    <None Include="Source\json1.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddToDefault Steps.txt" />

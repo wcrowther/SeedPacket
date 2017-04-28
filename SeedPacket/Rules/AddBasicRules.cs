@@ -26,6 +26,7 @@ namespace SeedPacket
                 new Rule(typeof(double?),       "", g => Funcs.DiceRoll(g) == 1 ? null : (double?) g.RowNumber,         "Double?",   "Returns RowNumber (1 in 6 NULL)"),
                 new Rule(typeof(decimal?),      "", g => Funcs.DiceRoll(g) == 1 ? null : (decimal?) g.RowNumber,        "Decimal?",  "Returns RowNumber (1 in 6 NULL)"),
                 new Rule(typeof(DateTime?),     "", g => Funcs.DiceRoll(g) == 1 ? null : (DateTime?) g.BaseDateTime,    "DateTime?", "Returns BaseDateTime (1 in 6 NULL)")
+                // new Rule(typeof(IList),      "", g => Funcs.EmptyList(g),                                            "EmptyList", "Returns an empty list"),            };
             };
 
             rules.AddRange(basicRules, overwrite);

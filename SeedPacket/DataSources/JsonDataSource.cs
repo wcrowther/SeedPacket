@@ -12,6 +12,12 @@ namespace SeedPacket.DataSources
     public class JsonDataSource : IDataSource
     {
         private JObject jsonData;
+        private const string defaultJson = "SeedPacket.Source.JsonGeneratorSource.json";
+
+        public JsonDataSource()
+        {
+            LoadDefaultData();
+        }
 
         public void Parse(string json)
         {
@@ -38,6 +44,27 @@ namespace SeedPacket.DataSources
                 throw new InvalidSourceFileException("json");
             }
         }
+
+        public void LoadDefaultData()
+        {
+            try
+            {
+                // Gets embedded json file Update 'Build Action' property to 'embedded Resource'
+                System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
+
+                using (var stream = a.GetManifestResourceStream(defaultJson))
+                using (var reader = new StreamReader(stream))
+                {
+                    string result = reader.ReadToEnd();
+                    Parse(result);
+                }
+            }
+            catch
+            {
+                throw new InvalidDefaultDataException();
+            }
+        }
+
 
         public List<string> GetElementList(string identifier)
         {

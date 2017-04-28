@@ -21,23 +21,24 @@ namespace Tests.SeedPacket
         private string pathToTestJsonFile;
         private string xmlFile = @"SimpleSeedSource.xml";
         private string jsonFile = @"JsonSeedSource.json";
-        private string testEmptyXml = @"<SimpleSeedTests></SimpleSeedTests>";
-        private string testValidXml = @"<SimpleSeedTests>
-                                            <FirstNames>
-                                                <FirstName>Bob</FirstName>
-                                                <FirstName>Will</FirstName>
-                                                <FirstName>John</FirstName>
-                                                <FirstName>Joe</FirstName>
-                                            </FirstNames>
-                                        </SimpleSeedTests>";
+
+        private string testValidXml;
+        private string testEmptyXml;
+        private string testValidJson;
+        private string testEmptyJson;
+
         [SetUp]
         public void Setup()
         {
             pathToTestXmlFile = Path.Combine(GetTestDirectory() + "Source\\", xmlFile);
             pathToTestJsonFile = Path.Combine(GetTestDirectory() + "Source\\", jsonFile);
+
+            testValidXml = GetValidXml();
+            testEmptyXml = GetEmptyXml();
+            testValidJson = GetValidJson();
+            testValidJson = GetValidJson();
         }
-
-
+        
         [Test]
         public void SeedCore_SeedList_With_BasicGenerator_Gets_10_Items_By_Default()
         {
@@ -195,8 +196,23 @@ namespace Tests.SeedPacket
             Assert.AreEqual("Name1", list[0].Name);
         }
 
+        
+        // Test XmlDataSource with MultiGenerator
+
         [Test]
-        public void SeedCore_SeedList_With_MultiGenerator_Using_XmlDataSource()
+        public void SeedCore_SeedList_With_MultiGenerator_Using_XmlDataSource_DefaultData()
+        {
+            var iEnumerable = new List<Item>();
+            var xmlDataSource = new XmlDataSource();
+            var multiGenerator = new MultiGenerator(xmlDataSource);
+            var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual("thingamabob", list[0].ItemName);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_With_MultiGenerator_Using_XmlDataSource_Parse()
         {
             var iEnumerable = new List<Item>();
             var xmlDataSource = new XmlDataSource();
@@ -206,6 +222,59 @@ namespace Tests.SeedPacket
 
             Assert.AreEqual(10, list.Count());
             Assert.AreEqual("thingamajig", list[0].ItemName);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_With_MultiGenerator_Using_XmlDataSource_Load()
+        {
+            var iEnumerable = new List<Item>();
+            var xmlDataSource = new XmlDataSource();
+            xmlDataSource.Parse(testValidXml);
+            var multiGenerator = new MultiGenerator(xmlDataSource);
+            var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual("gadget", list[0].ItemName);
+        }
+
+        // Test JsonDataSource with MultiGenerator
+
+        [Test]
+        public void SeedCore_SeedList_With_MultiGenerator_Using_JsonDataSource_DefaultData()
+        {
+            var iEnumerable = new List<Item>();
+            var jsonDataSource = new JsonDataSource();
+            var multiGenerator = new MultiGenerator(jsonDataSource);
+            var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual("thingamabob", list[0].ItemName);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_With_MultiGenerator_Using_JsonDataSource_Parse()
+        {
+            var iEnumerable = new List<Item>();
+            var jsonDataSource = new JsonDataSource();
+            jsonDataSource.Load(pathToTestJsonFile);
+            var multiGenerator = new MultiGenerator(jsonDataSource);
+            var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual("thingamajig", list[0].ItemName);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_With_MultiGenerator_Using_JsonDataSource_Load()
+        {
+            var iEnumerable = new List<Item>();
+            var jsonDataSource = new JsonDataSource();
+            jsonDataSource.Parse(testValidJson);
+            var multiGenerator = new MultiGenerator(jsonDataSource);
+            var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual("gadget", list[0].ItemName);
         }
 
         [Test]
@@ -220,7 +289,6 @@ namespace Tests.SeedPacket
             Assert.AreEqual(10, list.Count());
             Assert.AreEqual("thingamajig", list[0].ItemName);
         }
-
 
         [Test]
         public void SeedCore_SeedList_Seed_Dictionary()
@@ -254,5 +322,61 @@ namespace Tests.SeedPacket
         // List<DateTime>
         // List<struct<int, string>>
         // List<Dictionary<int,T>>
+
+        /* =====================================================================================
+         * PRIVATE METHODS
+         * ================================================================================== */
+
+        private string GetValidXml()
+        {
+            return @"<Root>
+                        <FirstNames>
+                            <FirstName>Bob</FirstName>
+                            <FirstName>Will</FirstName>
+                            <FirstName>John</FirstName>
+                            <FirstName>Joe</FirstName>
+                        </FirstNames>
+                        <ProductNames>
+		                    <ProductName>dooHickey</ProductName>
+		                    <ProductName>gadget</ProductName>
+		                    <ProductName>widget</ProductName>
+		                    <ProductName>thingamajig</ProductName>
+                        </ProductNames>
+                    </Root>";
+        }
+
+        private string GetEmptyXml()
+        {
+            return @"<Root></Root>";
+        }
+
+        private string GetValidJson()
+        {
+            return @"{ ""Root"": 
+                         {
+                           ""FirstNames"": {
+                              ""FirstName"" :
+                              [
+                                ""John"",
+                                ""Patricia"",
+                                ""Michael"",
+                                ""Susan""
+                              ]},
+                           ""ProductNames"": {
+                              ""ProductName"":
+                              [
+                                ""dooHickey"",
+                                ""gadget"",
+                                ""widget"",
+                                ""thingamajig""
+                              ]}
+                         }
+                    }";
+        }
+
+        private string GetEmptyJson()
+        {
+            return @"{""Root"": {}}";
+        }
     }
 }

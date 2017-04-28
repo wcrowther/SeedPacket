@@ -12,7 +12,7 @@ namespace MvcExamples.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Sport { get; set; }
-        public List<Item> Items { get; set; }
+        public List<Item> Items { get; set; } = new List<Item>();
         public DateTime Created { get; set; }
     }
 }
