@@ -7,5 +7,6 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAgmMTwGt/0EyirTTPTVksagAAAAACAAAAAAAQZgAAAAEAACAAAAAiNUCAoLgSFPN6r3AylZ67seXCCqn4SIVhrbaErc/BNAAAAAAOgAAAAAIAACAAAADF7TL9POwLGnTdalHHE6GFbT4KOmmCIPhnTEDKjStlziAAAACypLE4FieyBn3wqZAbIqaCh5GNITlFyhODYzoWRoWwiEAAAABqwckOBorhUf+chuVkinuppolYosu9eN8A/iWtSjOH/nKRLDJE+3dBGY4XeOz/+QeRh1MubcKogrJQXxRhhx0C</EncryptedPassword>
+    <_PublishTargetUrl>ftp://willcrowther.com.PARSLEY.arvixe.com/seedpacket.net</_PublishTargetUrl>
   </PropertyGroup>
 </Project>
