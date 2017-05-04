@@ -11,7 +11,7 @@ namespace SeedPacket
     {
         public static void AddCommonRules (this IRules rules, bool overwrite =  false )
         {
-            var advancedRules = new List<Rule>(){
+            var commonRules = new List<Rule>(){
                 new Rule(typeof(string),    "",                                 g => Funcs.ElementRandom(g),                     "String",               "Random string from data or default" ),
                 new Rule(typeof(string),    "%firstname%,%givenname%",          g => Funcs.ElementRandom(g, "FirstName"),        "FirstName",            "Random firstName" ),
                 new Rule(typeof(string),    "%lastname%,%surname%",             g => Funcs.ElementRandom(g, "LastName"),         "LastName",             "Random lastname" ),
@@ -31,10 +31,11 @@ namespace SeedPacket
                 new Rule(typeof(int),       "%random%",                         g => g.RowRandomNumber,                         "RowRandomNumber",      "Random number"),
                 new Rule(typeof(string),    "%phone%,%cell%,%mobile%,%fax%",    g => Funcs.RandomPhone(g),                       "Phone/Cell/Mobile/Fax","Random phone/cell/mobile/fax" ),
                 new Rule(typeof(DateTime),  "",                                 g => Funcs.RandomDateTime(g, -17521, 17521),     "DateTime",             "Random Override of DateTime" ),
-                new Rule(typeof(DateTime?), "",                                 g => Funcs.RandomDateTimeNull(g, -17521, 17521), "DateTime?",            "Random Override of DateTime?" )
+                new Rule(typeof(DateTime?), "",                                 g => Funcs.RandomDateTimeNull(g, -17521, 17521), "DateTime?",            "Random Override of DateTime?" ),
+                new Rule(typeof(string),    "%text%,%note%,%locum%",            g => Funcs.LocumsText(g),                       "Phone/Cell/Mobile/Fax","Random phone/cell/mobile/fax" )
             };
 
-            rules.AddRange(advancedRules, true);
+            rules.AddRange(commonRules, true);
         }
     }
 }

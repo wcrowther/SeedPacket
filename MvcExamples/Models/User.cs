@@ -12,6 +12,5 @@ namespace MvcExamples.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public DateTime Created { get; set; }
-
     }
 }

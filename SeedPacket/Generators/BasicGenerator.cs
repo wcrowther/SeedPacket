@@ -6,7 +6,7 @@ namespace SeedPacket.Generators
     {
         // BasicGenerator never populates the datasource so it is always null
 
-        public BasicGenerator ()
+        public BasicGenerator () : base()
         {
             Rules.AddBasicRules();
         }

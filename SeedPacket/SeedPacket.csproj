@@ -61,6 +61,7 @@
     <Compile Include="Exceptions\MultipleSourceException.cs" />
     <Compile Include="Functions\CacheExtensions.cs" />
     <Compile Include="Functions\CacheItemsNext.cs" />
+    <Compile Include="Functions\RandomText.cs" />
     <Compile Include="Functions\OnceEvery.cs" />
     <Compile Include="Functions\RandomPhone.cs" />
     <Compile Include="Functions\RandomAddress.cs" />
@@ -98,7 +99,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Source\JsonGeneratorSource.json" />
     <None Include="packages.config" />
-    <None Include="Source\json1.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddToDefault Steps.txt" />

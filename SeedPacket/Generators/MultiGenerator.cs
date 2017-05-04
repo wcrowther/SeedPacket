@@ -11,17 +11,19 @@ namespace SeedPacket.Generators
                                 string sourceString = null, 
                                 DataInputType dataInputType = DataInputType.Auto,
                                 RulesSet rulesSet = RulesSet.Common
-                             )
+                             ) : base()
         {
             dataSource = new MultiDataSource(sourceFilepath, sourceString, dataInputType);
             GetRules(rulesSet);
         }
 
-        public MultiGenerator ( IDataSource datasource, RulesSet rulesSet = RulesSet.Common )
+        public MultiGenerator ( IDataSource datasource,
+                                RulesSet rulesSet = RulesSet.Common
+                              ) : base()
         {
             dataSource = datasource;
             GetRules(rulesSet);
-        }
+        } 
 
         public virtual void GetRules (RulesSet ruleSet)
         {

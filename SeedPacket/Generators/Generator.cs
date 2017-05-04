@@ -14,6 +14,7 @@ namespace SeedPacket.Generators
 
         public Generator (IRules rules =  null)
         {
+            RowNumber = seedBegin;
             this.rules = rules ?? new Rules();
             baseRandom = new Random(defaultSeed);
             GetNextRowRandom();
