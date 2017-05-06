@@ -36,7 +36,7 @@ namespace Tests.SeedPacket
             testValidXml = GetValidXml();
             testEmptyXml = GetEmptyXml();
             testValidJson = GetValidJson();
-            testValidJson = GetValidJson();
+            testEmptyJson = GetEmptyJson();
         }
         
         [Test]

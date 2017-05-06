@@ -23,5 +23,7 @@ namespace MvcExamples.Models
             get { return products ?? new List<Item>(); }
             set { products = value; }
         }
+        public string Notes { get; set; }
+        public List<string> BodyCopy { get; set; }
     }
 }

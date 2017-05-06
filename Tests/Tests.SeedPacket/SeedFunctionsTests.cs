@@ -45,14 +45,27 @@ namespace Tests.SeedPacket
         }
 
         [Test]
+        public void SeedFunctions_RandomText_With_MultiDataSource_Empty_Data()
+        {
+            var gen = new MultiGenerator(sourceString: GetEmptyXml());
+            string loremText = Funcs.LoremText(gen, 5, 5, 1, 1);
+
+            Assert.AreEqual("Lorem lorem lorem lorem lorem.", loremText);
+        }
+
+        [Test]
         public void SeedFunctions_RandomText_With_Defaults()
         {
             var gen = new MultiGenerator();
             string loremText = Funcs.LoremText(gen);
+            string lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eisumod. Tempor incidicunt ut labore et dolore, magna aliqua ut enim ad minim veniam. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor. In reprehenderit in voluptate velit, esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est. Laborum lorem ipsum dolor sit amet consectetur adipiscing. Elit sed do eisumod tempor incidicunt ut.";
 
             Assert.AreEqual(lorem, loremText);
         }
 
-        string lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eisumod. Tempor incidicunt ut labore et dolore, magna aliqua ut enim ad minim veniam. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor. In reprehenderit in voluptate velit, esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est. Laborum lorem ipsum dolor sit amet consectetur adipiscing. Elit sed do eisumod tempor incidicunt ut.";
+        private string GetEmptyXml()
+        {
+            return @"<Root></Root>";
+        }
     }
 }

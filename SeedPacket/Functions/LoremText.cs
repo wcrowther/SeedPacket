@@ -34,7 +34,9 @@ namespace SeedPacket.Functions
 
             for (int w = 1; w <= wordCount; w++)
             {
-                string text = ElementNext(generator, "Lorem", position);
+                // if datasource Lorem not populated, uses static "lorem"
+                string text = ElementNext(generator, "Lorem", position) ?? "lorem"; 
+
                 text += (w == wordCount) ? ". " : " ";
                 if (w == 1)
                     text = UpperCaseFirstLetter(text);
