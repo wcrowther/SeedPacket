@@ -23,6 +23,14 @@
                     <td>@user.Email</td>
                     <td>@user.Created.ToString("MM/dd/yyyy")</td>
                 </tr>
+                <tr>
+                    <td colspan="5">
+                    @foreach(var paragraph in user.BodyCopy)
+                    {
+                        <p>@paragraph</p>
+                    } 
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

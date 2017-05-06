@@ -28,11 +28,12 @@ namespace SeedPacket
                 new Rule(typeof(string),    "%company%,%business%,%account%",   g => Funcs.RandomCompany(g),                     "Company/Business",     "Random company/business" ),
                 new Rule(typeof(string),    "%product%,%item%",                 g => Funcs.ElementRandom(g, "ProductName"),      "Product/Item",         "Random product/item" ),
                 new Rule(typeof(string),    "%email%",                          g => Funcs.RandomEmail(g),                       "Email",                "Random email" ),
-                new Rule(typeof(int),       "%random%",                         g => g.RowRandomNumber,                         "RowRandomNumber",      "Random number"),
+                new Rule(typeof(int),       "%random%",                         g => g.RowRandomNumber,                          "RowRandomNumber",       "Random number"),
                 new Rule(typeof(string),    "%phone%,%cell%,%mobile%,%fax%",    g => Funcs.RandomPhone(g),                       "Phone/Cell/Mobile/Fax","Random phone/cell/mobile/fax" ),
                 new Rule(typeof(DateTime),  "",                                 g => Funcs.RandomDateTime(g, -17521, 17521),     "DateTime",             "Random Override of DateTime" ),
                 new Rule(typeof(DateTime?), "",                                 g => Funcs.RandomDateTimeNull(g, -17521, 17521), "DateTime?",            "Random Override of DateTime?" ),
-                new Rule(typeof(string),    "%text%,%note%,%locum%",            g => Funcs.LocumsText(g),                       "Phone/Cell/Mobile/Fax","Random phone/cell/mobile/fax" )
+                new Rule(typeof(string),    "%text%,%note%,%lorem%",            g => Funcs.LoremText(g),                        "Text/Note/Lorem",      "Random lorems text paragraph" ),
+                new Rule(typeof(IList<string>),"%body%,%copy%",                 g => Funcs.BodyCopy(g),                          "BodyCopy",             "Random copy list" )
             };
 
             rules.AddRange(commonRules, true);
