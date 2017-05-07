@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedPacket", "SeedPacket\Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.SeedPacket", "Tests\Tests.SeedPacket\Tests.SeedPacket.csproj", "{F341739C-FBB0-4ED6-A1F6-27D1173AC3FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{0C78E5B2-5B85-4FB9-AE7C-EFC062012A49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F341739C-FBB0-4ED6-A1F6-27D1173AC3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F341739C-FBB0-4ED6-A1F6-27D1173AC3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F341739C-FBB0-4ED6-A1F6-27D1173AC3FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C78E5B2-5B85-4FB9-AE7C-EFC062012A49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C78E5B2-5B85-4FB9-AE7C-EFC062012A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C78E5B2-5B85-4FB9-AE7C-EFC062012A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C78E5B2-5B85-4FB9-AE7C-EFC062012A49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
