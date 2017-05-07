@@ -1,0 +1,34 @@
+﻿@using MvcExamples.Models
+@model List<List<Item>>
+
+@{
+    ViewBag.Title = "Contact";
+
+    string[] titles = { "Default","JsonFile","XmlFile","JsonString","XmlString","Auto(JsonFile)","Auto(JsonString)","Auto(XmlFile)","Auto(XmlString)"};
+}
+<br />
+@for (int i = 0; i < Model.Count; i++)
+{
+    var table = Model[i];
+    <div class="SourceDesc">From @titles[i]</div>
+        <table class="table table-striped topSpace">
+            <thead>
+                <tr>
+                    <th>ItemId</th>
+                    <th>Full name</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in table)
+            {
+                <tr>
+                    <td>@Html.ValueFor(a => item.ItemId)</td>
+                    <td>@Html.ValueFor(a => item.ItemName)</td>
+                    <td>@Html.ValueFor(a => item.Created)</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+}
+

@@ -1,0 +1,36 @@
+﻿@using NewLibrary.ForIEnumerable
+@using NewLibrary.ForType
+@using NewLibrary
+@using System.Collections.ObjectModel
+@using MvcExamples.Helpers
+@using MvcExamples.Models
+@using SeedPacket.Extensions
+@using SeedPacket.Interfaces
+
+@{
+    var generator = new BasicGenerator() { BaseDateTime = Convert.ToDateTime("1/1/2014")};
+    //generator.Rules.Add (
+       // Add rules
+    //);
+
+    var examples = new List<Example>().Seed(1, 10, generator);
+    //var rule = generator.Rules.GetRuleByTypeAndName(typeof(decimal?), "Decimal");
+}
+
+   <link href="~/Content/Grid.css" rel="stylesheet" />
+
+   @Html.WebGrid(examples).Auto() 
+
+   @*Rule: @rule.RuleName Description: @rule.Description*@
+
+   @foreach (var r in generator.Rules) {
+        <div>@r.RuleName</div>
+   }
+
+@functions{
+    public static List<Item> ListOfItem(IGenerator generator)
+    {
+        int diceroll = generator.RowRandom.Next(0, 10);
+        return new List<Item>().Seed(diceroll).ToList();
+    }
+}

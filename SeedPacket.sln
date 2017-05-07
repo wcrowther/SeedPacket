@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcExamples", "MvcExamples\MvcExamples.csproj", "{65E02FF3-0E00-450C-9117-EC48D4C6C0FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSite", "WebSite\WebSite.csproj", "{65E02FF3-0E00-450C-9117-EC48D4C6C0FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedPacket", "SeedPacket\SeedPacket.csproj", "{4C111213-E13E-4EDD-B120-6FD6B61A15DC}"
 EndProject

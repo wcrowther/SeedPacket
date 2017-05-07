@@ -1,0 +1,43 @@
+﻿@using SeedPacket
+@using Website.Models
+@{ 
+    var ss = new SimpleSeed("~/SourceFiles/seedsource.xml");
+    var userList = Enumerable.Range(100, 20)
+    .Select(n => new User
+    {
+        UserId =    n,
+        FirstName = ss.Next("FirstName", n),
+        LastName =  ss.Next("LastName", n),
+        Email =     ss.Next("FirstName", n).FirstOrDefault() +
+                    ss.Next("LastName", n) + "@" +
+                    ss.Next("CompanyName", n) +
+                    ss.Next("DomainExtension", n),
+        Created = DateTime.Now.AddMonths(n)
+
+    }).ToList();
+}
+<table class="table table-striped topSpace">
+    <thead>
+        <tr>
+            <th>UserId</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in userList)
+        {
+            <tr>
+                <td>@user.UserId</td>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                <td>@user.Created.ToString("MM/dd/yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

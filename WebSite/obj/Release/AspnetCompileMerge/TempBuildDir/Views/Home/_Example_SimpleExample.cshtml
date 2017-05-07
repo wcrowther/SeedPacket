@@ -1,0 +1,27 @@
+﻿
+<div class="codeExample topSpace">
+    <label class="codeLabelBlue">CODE:</label>
+    <div class="codeTitle codeTitleBlue">Be sure to import the <b>SeedPacket.Extensions</b> namespace.</div>
+<code>
+<i>// Example 'User' Class</i>
+public class User
+{
+    public int UserId { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public DateTime Created { get; set; }
+}
+
+<i>// Creates 10 rows (default)</i>
+var users = new List&lt;User&gt;().Seed();
+
+<i>// Create 20 rows (shown to right)</i>
+var users = new List&lt;User&gt;().Seed(20);
+
+<i>// Create rows starting with 100 to 200</i>
+var users = new List&lt;User&gt;().Seed(100, 200);
+</code>
+</div>
+
+

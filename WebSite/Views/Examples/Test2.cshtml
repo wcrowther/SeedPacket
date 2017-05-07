@@ -1,0 +1,48 @@
+﻿@using Website.Models
+@using Website.Extensions
+@using NewLibrary.ForString
+@{
+    ViewBag.Title = "Home Page";
+}
+<h3>SeedPacket</h3>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table table-striped topSpace">
+            <thead>
+                <tr>
+                    <th>UserId</th>
+                    <th>Full Name</th>
+                    <th>Sport</th>
+                    <th>Email</th>
+                    <th>Items</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in new List<AppUser>().Seed())
+                {
+                    <tr>
+                        <td>@user.UserId</td>
+                        <td>@(user.FirstName + " " + user.LastName)</td>
+                        <td>@user.Sport</td>
+                        <td>@user.Email</td>
+                        <td>@foreach (var item in user.Items)
+                            {
+                                @item.ItemName<br />
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*@functions{
+    // Inline functions in Razor
+    public IEnumerable<Object> EmptyList(IGenerator generator)
+    {
+        dynamic emptyList = Activator.CreateInstance(generator.CurrentProperty.PropertyType);
+        return emptyList;
+    }
+}*@

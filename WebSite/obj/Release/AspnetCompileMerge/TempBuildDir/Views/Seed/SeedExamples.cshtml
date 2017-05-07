@@ -1,0 +1,66 @@
+﻿@using NewLibrary.ForType
+@using MvcExamples.Helpers
+@using MvcExamples.Models
+@using SeedPacket.Extensions
+@using SeedPacket.Interfaces
+
+
+<!DOCTYPE html>
+@{
+    Layout = null;
+    var gen = new BasicGenerator() { BaseDateTime = Convert.ToDateTime("1/1/2014") };
+    gen.Rules.AddRange(new List<Rule> {
+        new Rule(typeof(DateTime), "create%", g => g.BaseDateTime.AddDays(g.RowNumber), "Example DateTime with nameMatch.", "Adds a day for each row."),
+        new Rule(typeof(ICollection<Link>), "", g => ExampleRule3(g), "Example Collection", "Calls nested seed function.")
+    });
+
+    var words = new List<Word>().Seed(gen).ToList();
+    var grid = new WebGrid(source: words, rowsPerPage: 10);
+    var patterns = new List<Pattern>().Seed(15);
+}
+
+@functions{
+    public static object ExampleRule3(IGenerator generator)
+    {
+        int linksToAdd = generator.RowRandom.Next(0, 5);
+        return new List<Link>().Seed(1, linksToAdd, new BasicGenerator()); //String.Join(",", links.Select(n => n.LinkId));
+    }
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SeedTests</title>
+    <link href="~/Content/Grid.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <table style="background-color:lightgray; width: 800px; border: solid 1px #ccc; margin: 20px;">
+            <tr>
+                @foreach (var column in words.GetMetaProperties(exclude: "Links"))
+                {
+                    <th>@column.Name</th>
+                }
+            </tr>
+            @foreach (var item in words)
+            {
+                <tr>
+                    @foreach (var prop in item.GetMetaProperties(exclude: "Links")) 
+                    {
+                        object val = prop.GetInstanceValue();
+                        <td>@Html.ValueFor(a => val)</td>
+
+                        //<td>@Html.DisplayFor(a => val,)</td> // Does not work for object{int}
+                    }
+                </tr>
+            }
+        </table>
+
+        <br />
+        @Html.WebGrid(words).Auto()  @*Links*@
+
+        <br />
+        @Html.WebGrid(patterns).Auto() 
+    </div>
+</body>
+</html>

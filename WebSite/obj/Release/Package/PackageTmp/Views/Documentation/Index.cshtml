@@ -1,0 +1,1005 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        <h2>Documentation</h2>
+        <h3 class="byline">for SeedPacket version 2.01</h3>
+        <h3>Overview</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <p> This documentation is designed to provide detail on the many features of SeedPacket, including
+            the Generators, the Datasources, the Funcs, Interfaces, Exceptions, etc. 
+        </p>
+        <p>
+            <b>Debugging</b> is turned ON by default and writes useful information to the
+            Debug output window in Visual Studio. The name of each property (with type) that data
+            was generated for, is shown with the name of rule that it matched.
+        </p>
+    </div>
+    <div class="col-md-6">
+        <div class="hotBox">
+            <p>The SeedPacket source code will be available on GitHub soon.</p>
+            <p><b>Check back for a link.</b></p>
+        </div>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Extensions Namespace</h3>
+        <ul class="namespaceList">
+            <li class="class">
+                <h4>SeedExtensions static class</h4>
+                <p><strong>Purpose:</strong>
+                    This collection of static extension methods adds LINQ-like data generation onto many IEnumerable&lt;T&gt; implementations.
+                    It is the main entry into SeedPacket .Seed() data generation and with 4 overloads for common scenarios. 
+                    If the IGenerator is not specified, the MultiGenerator is used by default, and in turn it uses the MultiDataSource if 
+                    not specified. The MultiDataSource loads its data from an embedded XML resource if an external source is not specified.
+                </p>
+                <p>Note that some classes that implement IEnumerable may not be supported. All implementations are constrained so
+                   that the type T must implement a parameterless constructor at this time. Single value IEnumerables
+                   such as List&lt;string&gt; do not implement new() and will throw an error. IEnumerables Dictionaries are
+                   also not supported.
+                </p>
+                @{ Html.RenderPartial("_01_SeedExtensions"); }
+                <strong>Extension Methods on IEnumerable&lt;T&gt;</strong>
+                <ul>
+                    <li>
+                        <h5>.Seed (int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>If no parameters are provided, creates 10 rows from 1 to 10. If IGenerator is null, defaults to the MultiGenerator.</p>
+                    </li>
+                    <li>
+                        <h5>.Seed (int count) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Seeds {count} rows of data using the MultiGenerator.</p>
+                    </li>
+                    <li>
+                        <h5>.Seed (IGenerator generator) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Seeds rows totally based on the IGenerator and its parameters that is passed in.</p>
+                    </li>
+                    <li>
+                        <h5>.Seed (int seedBegin, int seedEnd, string filePath) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Seeds rows beginning with {SeedBegin} to {SeedEnd}, passing in the path to an external file of data, either
+                        XML or JSON (which it will automatically detect).</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket Namespace</h3>
+        <ul class="namespaceList">
+            <li class="class">
+                <h4>SeedCore class</h4>
+                <p><strong>Purpose:</strong>
+                    As it's name suggests, the SeedCore class is the heart of SeedPacket data generation and is responsible for taking
+                    the rules engine and pairing it with the generator that is passed to it when it is initialized. Internally, it creates
+                    multiple rows of data based on a particular type, goes through the public properties on that type one by one and
+                    finds the best rule matching that property's name and datatype. Then uses that rule to generate data to fill 
+                    that property's value.
+                </p>
+                <p>Generally, the default method of seeding data is to use the .Seed() extension methods on IEnumerable in the
+                   SeedPacket.Extensions namespace to seed data. The functionality of the SeedCore class has intentionally been kept
+                   separate from the extension method logic in so that writing custom extension methods is trivial. 
+                </p>
+                <p> TIP: Customize your own .Seed() extension methods with your own defaults, rules, and customizations as in the 
+                    example below. Now you can easily add your own rules and data, or even clear all the rules and start over from scratch! 
+                </p>
+                @{ Html.RenderPartial("_02_SeedPacket"); }
+                <strong>Constructor:</strong>
+                <ul>
+                    <li>
+                        <h5>new SeedCore (IGenerator generator = null)</h5>
+                        <p>The constructor for a new SeedCore excepts an optional IGenerator. If one is not passed in, it will
+                        default to a new MultiGenerator.</p>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>SeedList&lt;T&gt; (IEnumerable&lt;T&gt; iEnumerable, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>The basic call to seed data, you will generally wrap it in a convenience extension method.</p>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>SimpleSeed class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    The SimpleSeed class uses an alternative way to seed data. It does away with the Rules engine and uses a 
+                    more manual, and Linq-focused, way of creating data, while still leveraging the DataSource classes to utilize 
+                    XML / JSON files and strings. <a href="/SimpleSeed">SimpleSeed Info</a>
+                </p>
+                @{ Html.RenderPartial("_03_SimpleSeed"); }
+                <strong>Constructor:</strong>
+                <ul>
+                    <li>
+                        <h5>new SimpleSeed(string sourcefilepath = null, string sourcestring = null, DataInputType seedinputtype = DataInputType.Auto)</h5>
+                        <p>A simple class that allows you to manually poplate data from an external XML or JSON string or file. The method will
+                        throw an error if both the sourcefilepath and the sourcestring are both populated.</p>
+                    </li>
+                </ul>
+                <strong>Properties:</strong>
+                <ul>
+                    <li>
+                        <h5>Default : string</h5>
+                        <p>The string returned if no data is found for the Inject or Random that matches the "Identifier" property.</p>
+                    </li>
+                    <li>
+                        <h5>DefaultRandom:  Random</h5>
+                        <p>For the SimpleSeed.Random(), sets the initial seed for random data. If a seed is set in the random, as:  
+                        new Random(3456), then the random sequences generated will always be the same. If a non-seeded random is used, such as
+                        new Random(), then the values will be different every time.</p>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>Next(string identifier, int number, string ifNull = null) : returns string</h5>
+                        <p>Returns the next value in the datasource for that identifier, if it exists. The number is required and is usually 
+                           created with a LINQ.Range variable. The sequence will loop back if the number parameter is greater than the elments
+                           in the list. The ifNull is an optional parameter that will be returned if no elements match the identifier
+                           in the datasource.</p>
+                    </li>
+                    <li>
+                        <h5>Randomize(string identifier, string ifNull = null) : returns string</h5>
+                        <p>Returns a random value from the datasource for that identifier, if it exists. Is slower that the Next() call. 
+                           the ifNull is an optional parameter that will be returned if no elements match the identifier
+                           in the datasource.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>Rules class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    The Rules class is a wrapper for a Collection of Rule objects, with additional methods to help manage the Rule classes.
+                </p>
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Collection&lt;Rule&gt;</h5>
+                    </li>
+                </ul>
+                <strong>Implements:</strong>
+                <ul>
+                    <li>
+                        <h5>IRules</h5>
+                    </li>
+                </ul>
+                <strong>Constructor:</strong>
+                <ul>
+                    <li>
+                        <h5>new Rules()</h5>
+                        <p>A fairly generic constructor with no parameters.</p>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>GetRuleByTypeAndName(Type propertyType, string propertyName) : returns Rule</h5>
+                        <p>This method gets the first Rule that matches the Type and Property name for the property
+                           that is being processed. The Rules are processed from last added to the first. Once a 
+                           rule match is found for a particular property, it is stored in a cache and re-used. See the
+                           Rule class for additional information.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>Add(Rule rule, bool overwrite = true): returns void</h5>
+                        <p>Adds a Rules element to the Rules collection. If overwrite is set to true, it will delete 
+                           the Rule that has the same name if it exists before adding the Rule to the end of the 
+                           Rules collection. If overwrite is set to false and a Rule already exists, an exception
+                           will be thrown. RuleNames must be at least 3 characters in length.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>AddRange(IEnumerable&lt;Rule&gt;rules, bool overwrite = true) : returns void</h5>
+                        <p>Applies the Add Rule to all the Rules elements in the IEnumerable.</p>
+                    </li>
+                    <li>
+                        <h5>RemoveRuleByName(string ruleName) : returns void</h5>
+                        <p>Removes a Rule that matches the ruleName, if one exists.</p>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>Rule class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    The Rules class encapsulates functionality for matching against a property and it's type, a function that wil be processed, if 
+                    there is a match. The ruleName and decription tells what the rule is for. The function is a Func that takes an IGenerator
+                    and returns a Dynamic type. If the run-time type returned does not match a compatible type, an exception will be thrown.
+                </p>
+                <strong>Constructor:</strong>
+                <ul>
+                    <li>
+                        <h5>new Rule(Type typeMatch, string nameMatch, Func&lt;IGenerator, dynamic&gt; rule, string ruleName, string description = "")</h5>
+                        <p>The typeMatch parameter is a .net Type that must match the property type being filled for a Rule to be valid for that property.
+                            The typeMatch can be an interface that the property type implements.</p>
+                        <p>If the nameMatch parameter is non-null and non-empty, and the typeMatch has matched, the nameMatch parameter is compared
+                            to the seeded property's name. A match occurs if a case-insensitive comparison is true. A wildcard character % can be used for the 
+                            match either on the beginning, end, or both. Multiple matches can be added to the nameMatch string if separated by a comma.
+                        </p>
+                        <p>The func parameter is a c# Func&lt;IGenerator, dynamic&gt;, which is to say it takes a function that takes in the generator and uses it
+                           to generate the seed data. As the rule is filtered to a specific Type, it is generally true that the returned Dyanmic is the 
+                           correct type at run-time, but the rule creator should be careful to check that this is true. It is better to encapsulate
+                           any complex logic in an external function call, particularily for debugging purposes. The SeedPacket.Functions namespace has
+                           many examples in the funcs partial classes.</p>
+                        <p>The ruleName parameter gives a specific name to the rule and must be unique.</p>
+                        <p>The optional description parameter provides a way to give additional descriptive information about the rules intent
+                        .</p>
+                    </li>
+                </ul>
+                <strong>Properties:</strong>
+                <ul>
+                    <li>
+                        <h5>RuleName : returns string</h5>
+                        <p>The name of the Rule. Must be at between 3 and 30 characters in length.</p>
+                    </li>
+                    <li>
+                        <h5>Description : returns string</h5>
+                        <p>An optional description of the purpose for the rule.</p>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>IsMatch (Type propType, string propName) : returns bool</h5>
+                        <p>The Rules class method GetRuleByTypeAndName() runs the IsMatch() method on each rule in the collection
+                           until it gets a true boolean value or has run all rules in the colletion. When a true value is 
+                           returned then that rule is used to seed that particular property. The rule is cached and used
+                           for all the subsequent rows that are generated.</p>
+                    </li>
+                    <li>
+                        <h5>ApplyRule (IGenerator generator) : returns dynamic</h5>
+                        <p>After a rule has been selected as the match, the ApplyRule() method is run to actually generate
+                           a value using the generator and the Func() passed in with the rule.</p>
+                        <p>The return signature is a c# dynamic variable, as it is not decided until run-time. Generally,
+                           as the rule will only match a particular datatype, you will not encounter any run-time errors
+                           if you return the same datatype from the Func() that you pass in. Nevertheless, some thought needs
+                           to be given in designing rules to make sure the correct datatype is returned, especially if the
+                           rule matches an Interface.</p>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>RuleExtensions static class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    This collection of static extension methods on the Rules class provides easily discoverable groups
+                    of Rules that can be added to the Rules collection. This class is declared as partial so that additional
+                    extension methods can be added on in other files if necessary. Keep in mind that the last rules added in
+                    are checked for specific matches first.
+                </p>
+                <strong>Extension Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>static AddBasicRules (this Rules rules) : returns void</h5>
+                        <p>Adds a group of rules to the current Rules collection, that apply to basic primitive types,
+                           such as string, int, decimal, etc. There are also nullable versions of these types
+                           where some values returned are null.</p>
+                    </li>
+                    <li>
+                        <h5>static AddAdvancedRules (this Rules rules) : returns void</h5>
+                        <p>Adds a different set of more specific rules for things like address, zip codes, phone numbers,
+                           company names, usernames, emails, etc.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>RulesSet Enum</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    Contains a short list of common sets of Rules. In the MultiGenerator,
+                    this enum governs which groups of Rules are loaded.
+                </p>
+            </li>
+            <li class="class">
+                <h4>DataTypeInput Enum</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    Contains a list of possible data sources referencing a xml or json file, xml or json string,
+                    automatically pick the type, or use the embedded default data embedded in the project.
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Generators Namespace</h3>
+        <ul class="namespaceList">
+            <li class="class">
+                <h4>Generator abstract class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    The base class for all SeedPacket generators provide much of the functionality for 
+                    generating data, inclding how many rows, which datasource to use, caching data for other
+                    rules to use, base default, and information and helpers for the current row being processed.
+                </p>
+                <strong>Implements:</strong>
+                <ul>
+                    <li>
+                        <h5>IGenerator</h5>
+                    </li>
+                </ul>
+                <strong>Properties:</strong>
+                <ul>
+                    <li>
+                        <h5>SeedBegin : int</h5>
+                        <p>Provides the basic beginning value used for seeding the rownumber. The number does not
+                        have to be 0 or 1 but can be any integer, even one with a negative value. Seed progression
+                        always proceeds in a positive direction, so this value will need to be less than or equal to
+                        the SeedEnd value in order to produce any rows.</p>
+                    </li>
+                    <li>
+                        <h5>SeedEnd : int</h5>
+                        <p>Provides the top end of the range of rownumbers in the rows produced. The rownumbers
+                        are less than or equal to this value so if the SeedBegin is equal to the SeedEnd, exactly
+                        on record is produced.</p>
+                    </li>
+                    <li>
+                        <h5>Datasource : readOnly IDataSource</h5>
+                        <p>The data source that data is fetched from, usually a class that wraps an xml/json
+                        file or string. The default MultiDataSource wraps both the JsonDataSource and the
+                        XmlDataSources and utilizes whichever is more appropriate depending on the data.</p>
+                    </li>
+                    <li>
+                        <h5>dynamic Cache { get; set; }</h5>
+                        <p>As it's name implies, the cache is used to store data for later use in a subsequent Rule using a c# dynamic
+                            ExpandoObject object that works similar to an asp.net web forms viewbag. This is helpful so you can store
+                            an instance of a list that has seeded with data, then retrieve items from that listeither sequentially or randomly.</p>
+                        <p>To assign to the Cache, you simple write: generator.Cache.Items =  new List&lt;Items&gt;().Seed()</p>
+                        <p>To retrieve a cache list by string name, the CacheExtensions method GetByItemName() is provided so use: 
+                           var list = generator.cache.GetByItemName&lt;List&lt;T&gt;&gt;(cacheListName)</p>
+                        <p>To retrieve a cached list directly use: var list = generator.Cache.Items.</p>
+                    </li>
+                    <li>
+                        <h5>Rules : Rules</h5>
+                        <p>This Rules collection of Rule objects is what is picked from when selecting
+                           how to generate seed data. See the Rules entry for more information.</p>
+                    </li>
+                    <li>
+                        <h5>BaseRandom : Random</h5>
+                        <p>This c# Random serves as the basis for all the other Random calls that SeedPacket uses. The 
+                           Generator constructor creates a default new Random() using a default seed number of 123456789. As a seed 
+                           value is used when the Random is created, the sequences of numbers that it produces will be 
+                           determinant and always the same. If it is desired for the data to be indeterminant, it is possible 
+                           to pass in a new Random() value (with no seed number) to this parameter and the data will be different 
+                           each time it is generated.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>BaseDateTime : DateTime</h5>
+                        <p>This DateTime value is used as the basis for rules that generates DateTimes. Currently, 
+                            the default is set to 1/1/2020, but you can change it to any valid DateTime value.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>Debugging : bool</h5>
+                        <p>Writes debugging information to the Console telling which Rules are being used for each property
+                           that is being filled. Is set to true by default as this information can for useful for
+                           troubleshooting and is only seen in the Visual Studio Console.</p>
+                    </li>
+                    <li>
+                        <h5>RowCount : readOnly int</h5>
+                        <p>Shows the number of rows being generated. Is useful if the range of RowNumbers is
+                           something like 1233100 to 1345070...</p>
+                    </li>
+                    <li>
+                        <h5>RowNumber : int</h5>
+                        <p>Is number generated for each row, starting with the SeedBegin value, incremented by +1
+                           for each row, and ending with the SeedEnd value.</p>
+                    </li>
+                    <li>
+                        <h5>RowRandom : readOnly Random</h5>
+                        <p>A c# Random is generated for each row based on the BaseRandom. If you have a determimate 1000
+                           values based on the default seeded BaseRandom, the generated data will be same if you take the 
+                           the same number of items for each row. By using the RowRandom as the basis for data for each
+                           row, it makes easier to keep the data consistent over time.</p>
+                    </li>
+                    <li>
+                        <h5>RowRandomNumber : readOnly int</h5>
+                        <p>Is a random number generated for the row.</p>
+                    </li>
+                    <li>
+                        <h5>CurrentRowValues : readOnly Dictionary&lt;string, object&gt;</h5>
+                        <p>This readOnly dictionary stores a list of what values have been generated for this row only.
+                           The data can then be accessed by other rules in this row. For instance, if username has already
+                           been generated for this row, the value can be used to build an email address. The values 
+                           are wiped out as when the row finishes processing.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>CurrentProperty : MetaProperty</h5>
+                        <p>Contains meta information, including dataType, about the current property that
+                           the generator is seeding.</p>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>GetNextRowRandom : returns void</h5>
+                        <p>Fills the RowRandom with the next Random in the BaseRandom sequence. Called at the beginning of row creation.</p>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>BasicGenerator class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    An implementation of a basic IGenerator, using only a set of basic rules for simple data types,
+                    without accessing a DataSource. Remains in the project as a simpler version of an IGenerator for
+                    testing purposes.
+                </p>
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Generator</h5>
+                    </li>
+                </ul>
+                <strong>Implements:</strong>
+                <ul>
+                    <li>
+                        <h5>IGenerator</h5>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>MultiGenerator class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    The MultiGenerator is currently the default IGenerator implementation and adds access to 
+                    the default MulitDataSource. This allows for more complex Rules that can access an external
+                    data source, such as an XML/JSon file or string.
+                </p>
+                <strong>Constructor:</strong>
+                <ul>
+                    <li>
+                        <h5>new MultiGenerator ( string sourceFilepath = null, string sourceString = null, 
+                            <span style="margin-left: 160px; display: block;">DataInputType dataInputType = DataInputType.Auto, </span>
+                            <span style="margin-left: 160px; display: block;">RulesSet rulesSet = RulesSet.Common)</span></h5>
+                        <p>This constructor defaults to MultiDataSource and passes along the path to a file of data using the
+                           sourceFilepath parameter or a string of data using the sourceString parameter. If neither parameter 
+                           is populated or both parameters are populated, it will throw an exception.</p>
+                        <p>The DataInputType allows for an explcit selection of possible data sources referencing a xml or json file,
+                           xml or json string, automatically pick the type, or use the embedded default data embedded in the project.
+                           The default is Auto which will attempt to use the best match.
+                        </p>
+                        <p>The RuleSet parameter controls which sets of rules are loaded on creation. Defaults to Common.</p>
+                    </li>
+                    <li>
+                        <h5>MultiGenerator (IDataSource datasource, RulesSet rulesSet = RulesSet.Common)</h5>
+                        <p>For this constructor, you must explicitly pass in an IDatasouce as the first parameter. Optionally, you
+                        can also pass in a RuleSet parameter. If one is not passed in, the default Common RuleSet is used.</p>
+                    </li>
+                </ul>
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Generator</h5>
+                    </li>
+                </ul>
+                <strong>Implements:</strong>
+                <ul>
+                    <li>
+                        <h5>IGenerator</h5>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>virtual GetRules (RulesSet ruleSet) : returns void</h5>
+                        <p>Uses the parameter ruleSet to load specific sets of Rules. Note that the method is virtual so 
+                           that derived classes can override which rules are loaded for a particular RuleSet in their
+                           own implementation.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.DataSources Namespace</h3>
+        <ul class="namespaceList">
+            <li class="class">
+                <h4>JsonDataSource class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    To provide a way to access external Json files or strings to use as 
+                    a source for seed data generation.
+                </p>
+                <strong>Implements:</strong>
+                <ul>
+                    <li>
+                        <h5>IDataSource</h5>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>Parse(string json) : returns void</h5>
+                        <p>This method takes in a json string and uses it to populate an internal
+                           list of string elements.</p>
+                    </li>
+                    <li>
+                        <h5>Load(string sourceFilePath) : returns void</h5>
+                        <p>This method takes in a path to a file containing json. If the file is successfully
+                           loaded, it popluates an internal list of string elements.</p>
+                        <p>If the path to the file begins with a tilde "~" and is in a web project, it will
+                           will use MapPath to convert into a local path within the project, otherwise an absolute 
+                           path is used.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>GetElementList(string identifier) : returns List&lt;string&gt;</h5>
+                        <p>Returns a list of of string elements, that matches the string identifier. If no 
+                           matches are found for that identifier, an empty list is returned.</p>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>XmlDataSource class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    To provide a way to access external Xml files or strings to use as
+                    a source for seed data generation.
+                </p>
+                <strong>Implements:</strong>
+                <ul>
+                    <li>
+                        <h5>IDataSource</h5>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>Parse(string xml) : returns void</h5>
+                        <p>This method takes in a xml string and uses it to populate an internal 
+                           list of string elements.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>Load(string sourceFilePath) : returns void</h5>
+                        <p>
+                            This method takes in a path to a file containing json. If the file is successfully
+                            loaded, it popluates an internal list of string elements.
+                        </p>
+                        <p>
+                            If the path to the file begins with a tilde "~" and is in a web project, it will
+                            will use MapPath to convert into a local path within the project, otherwise an absolute
+                            path is used.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>LoadDefaultData() : returns void</h5>
+                        <p>This method can be used to load the embedded xml resource file that serves
+                           as the default data, if no other source is specified.</p>
+                    </li>
+                    <li>
+                        <h5>GetElementList(string identifier) : returns List&lt;string&gt;</h5>
+                        <p>
+                            Returns a list of of string elements, that matches the string identifier. If no
+                            matches are found for that identifier, an empty list is returned.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>MultiDataSource class</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    To provide a way to access multiple dataSources, either the XmlDataSource or the JsonDataSource,
+                    to retrieve data to use as a source for seed data generation. By default, it works in Auto mode
+                    and automatically detects whether the source is Json or Xml.
+                </p>
+                <strong>Implements:</strong>
+                <ul>
+                    <li>
+                        <h5>IDataSource</h5>
+                    </li>
+                </ul>
+                <strong>Constructors:</strong>
+                <ul>
+                    <li>
+                        <h5>MultiDataSource(string sourcefilepath = null, string sourcestring = null, DataInputType datainputtype = DataInputType.Auto)</h5>
+                        <p>
+                            This constructor sets the path to a file of data using the sourceFilepath parameter or a string of data
+                            using the sourceString parameter. If neither parameter is populated or both parameters are populated, it will throw an exception.
+                        </p>
+                        <p>
+                            The DataInputType allows for an explcit selection of possible data sources referencing a xml or json file,
+                            xml or json string, automatically pick the type, or use the embedded default data embedded in the project.
+                            The default is Auto which will attempt to use the best match.
+                        </p>
+                    </li>
+                </ul>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>GetElementList(string identifier) : returns List&lt;string&gt;</h5>
+                        <p>
+                            Returns a list of of string elements, that matches the string identifier. If no
+                            matches are found for that identifier, an empty list is returned.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Interfaces Namespace</h3>
+        <ul class="namespaceList">
+            <li class="class">
+                <h4>IGenerator</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    An interface to provide all the necessary functionality to support data generation and seeding.
+                </p>
+                <strong>Members:</strong>
+                <ul>
+                    <li>
+                        <h5>int SeedBegin { get; set; }</h5>
+                    </li>
+                    <li>
+                        <h5>int SeedEnd { get; set; }</h5>
+                    </li>
+                    <li>
+                        <h5>IDataSource Datasource { get; }</h5>
+                    </li>
+                    <li>
+                        <h5>IRules Rules { get; }</h5>
+                    </li>
+                    <li>
+                        <h5>Random BaseRandom { get; }</h5>
+                    </li>
+                    <li>
+                        <h5>DateTime BaseDateTime { get; }</h5>
+                    </li>
+                    <li>
+                        <h5>bool Debugging { get; set; }</h5>
+                    </li>
+                    <li>
+                        <h5>dynamic Cache { get; set; }</h5>
+                    </li>
+                    <li>
+                        <h5>int RowCount { get; }</h5>
+                    </li>
+                    <li>
+                        <h5>int RowNumber { get; set; }</h5>
+                    </li>
+                    <li>
+                        <h5>Random RowRandom { get; }</h5>
+                    </li>
+                    <li>
+                        <h5>int RowRandomNumber { get; }</h5>
+                    </li>
+                    <li>
+                        <h5>Dictionary&lt;string, object&gt; CurrentRowValues { get; }</h5>
+                    </li>
+                    <li>
+                        <h5>void GetNextRowRandom ()</h5>
+                    </li>
+                    <li>
+                        <h5>MetaProperty CurrentProperty { get; set; }</h5>
+                    </li>
+                    <li>
+                        <h5>string CurrentPropertyName { get; set; }</h5>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>IDataSource</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    An interface to provide access external files or strings to use as a source for seed data generation.
+                </p>
+                <strong>Members:</strong>
+                <ul>
+                    <li>
+                        <h5>List&lt;string&gt; GetElementList(string identifier)</h5>
+                        <p>
+                            A method to get a list of string elements matching the identifier category. 
+                        </p>
+                    </li>
+                </ul>
+            </li>           
+            <li class="class">
+                <h4>IRules : ICollection</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    An interface for managing a collection of rule objects and how those rules are selected.
+                </p>
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Collection&lt;Rule&gt;</h5>
+                    </li>
+                </ul>
+                <strong>Members:</strong>
+                <ul>
+                    <li><h5>Rule GetRuleByTypeAndName(Type ruleType, string propertyName)</h5></li>
+                    <li><h5>void Add (Rule rule)</h5></li>
+                    <li><h5>void AddRange (IEnumerable<Rule> rules, bool overwrite = false)</h5></li>
+                    <li><h5>void RemoveRuleByName (string ruleName)</h5></li>
+                    <li><h5>void Clear()</h5></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Functions Namespace</h3>
+        <ul class="namespaceList">
+            <li class="class">
+                <h4>CacheExtensions (static)</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    A collection of extension method helpers used for accessing the Dynamic Cache. Note
+                    that they are purposefully included in the SeedPacket.Functions namespace as they
+                    relate to the Cache and how it is used in the Funcs methods.
+                </p>
+                <strong>Extension Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>static TakeRandomItems&lt;T&gt; (this IList&lt;T&gt; sourceList, Random random, int count = 1, bool remove = true) : returns IList&lt;T&gt;</h5>
+                        <p>Will randomly take {count} number of items from the sourceList and return them in the new destinationList. If 
+                           {remove} = true, which is the default, then they are removed from the sourceList. This method is useful for
+                           populating seed data from pre-existing seeded lists in the cache. Be mindful that picking data randomly from a 
+                           big list of data can be slower (1/2 as fast) as retrieving sequencial data and may not be necessary, particularily
+                           if the data is random to begin with.</p>
+                    <li>
+                        <h5>static T GetByItemName&lt;T&gt; (this ExpandoObject expando, string name) : returns T</h5>
+                        <p>This extension method method takes advantage of the fact that the ExpandoObject is actually an IDictionary, which
+                           allows us to extract items by a string name.</p>
+                    </li>
+                    <li>
+                        <h5>static Get&lt;TKey, TVal&gt; (this Dictionary&lt;TKey, TVal&gt; dictionary, TKey key, TVal defaultVal = default(TVal)) : returns TVal</h5>
+                        <p>This helpful extension method is useful for conditionally getting values from a dictionary. If the 
+                           key does not exist in the Dictionary, it returns the defaultValue for that type. A custom default value for
+                           that type can be passed in using the defaultVal parameter.</p>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>Funcs (static) - marked partial</h4>
+                <p>
+                    <strong>Purpose:</strong>
+                    A collection of static methods for data generation, particularily useful in the functions passed into a Rule. Note 
+                    that the static classes are marked partial for organization within the SeedLPacket source code and accessibility
+                    using intellisense.
+                </p>
+                <strong>Methods:</strong>
+                <ul>
+                    <li>
+                        <h5>static CacheItemsNext&lt;T&gt; (IGenerator generator, string cacheListName, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
+                        <p>Sequentially gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
+                           <b>generator.Cache</b> where the {cacheListName} parameter is the name of the list. Will not throw an error if
+                            the named element does not exist.
+                        </p>
+                        <p>To get a specific number of items, use the same integer for both the {min} and {max}. Note that the {max} parameter
+                           is inclusive so min: 1 max: 6 is a value from 1 to 6. This is unlike the c# Random.Next where the value returned
+                           is always less than the max.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>static CacheItemsNext&lt;T&gt; (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
+                        <p>Sequentially gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
+                           <b>generator.Cache</b> where the {cacheListName} parameter is a C# dynamic item. ex: generator.Cache.Invoices. Will throw 
+                           an error if the element does not exist in the Cache.
+                        </p>
+                        <p>To get a specific number of items, use the same integer for both the {min} and {max}. Note that the {max} parameter
+                           is inclusive so min: 1 max: 6 is a value from 1 to 6. This is unlike the c# Random.Next where the value returned
+                           is always less than the max.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>static List&lt;T&gt; CacheItemsRandom&lt;T&gt; (IGenerator generator, string cacheListName, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
+                        <p>Randomly gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
+                           <b>generator.Cache</b> where the {cacheListName} parameter is the name of the list. Will not throw an error if
+                            the named element does not exist.
+                        </p>
+                        <p>To get a specific number of items, use the same integer for both the {min} and {max}. Note that the {max} parameter
+                           is inclusive so min: 1 max: 6 is a value from 1 to 6. Particularily in a big list, retrieving items randomly is slower
+                           than retrieving the items sequentially.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>static List&lt;T&gt; CacheItemsRandom&lt;T&gt; (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
+                        <p>Randomly gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
+                           <b>generator.Cache</b> where the {cacheListName} parameter is a C# dynamic item. ex: generator.Cache.Invoices. Will throw
+                           an error if the element does not exist in the Cache.
+                        </p>
+                        <p>To get a specific number of items, use the same integer for both the {min} and {max}. Note that the {max} parameter
+                           is inclusive so min: 1 max: 6 is a value from 1 to 6. This is unlike the c# Random.Next where the value returned
+                           is always less than the max.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>static DiceRoll (IGenerator generator, int diceSides = 6, int numberOfDice = 1) : returns int</h5>
+                        <p>Simulates rolling a 6-sided dice (16.6%). Use a higher {diceSides} to decrease chances in a linear progression.
+                           Increasing {numberOfDice} creates a bell-curve of probability ie: 3d6 is 3 to 18 w/ 7 most likely possiblity.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>static ElementNext (IGenerator generator, string identifier) : returns string</h5>
+                        <p>ElementNext gets the next string from the element list named for the {identifier} from the datasource contained in the
+                           IGenerator passed in from {generator} parameter. If no elements exist in the list, null is returned. If
+                           the number is greater than what exists in the list, then it wraps back around to a string in the list.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>static ElementRandom (IGenerator generator, string identifier = null, bool nullIfEmpty = false) : returns string</h5>
+                        <p>ElementRandom gets a random string from the element list named for the {identifier} from the datasource
+                           contained in the IGenerator passed in from {generator} parameter. If no elements exist in the list, null
+                           is returned.
+                        </p>
+                        <p>If the {identifier} parameter is null, then the method will default to the generator.CurrentPropertyName. If no 
+                           elements are returned from the named element list, then the default will be the generator.CurrentPropertyName + RowNumber.
+                           If the {nullIfEmpty} parameter is set to true, then the default will just be null, instead.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>static ElementRandom (IGenerator generator, string identifier, TypeCode typeCode) : returns dynamic</h5>
+                        <p>This overload of the ElementRandom method provides a TypeCode that the string will be converted to. The {nullIfEmpty}
+                           parameter has been removed as the type default is always returned as the default.</p>
+                    </li>
+                    <li>
+                        <h5>static OnceEvery (IGenerator generator, int count = 10) : returns bool</h5>
+                        <p>As it's names suggests, it returns true once every {count}. Useful in Funcs and derived functions in rules to vary
+                           data occasiaonally. The default is 10.</p>
+                    </li>
+                    @*<li>
+                        <h5>static EmptyList(IGenerator generator) : returns IEnumerable&lt;object&gt;</h5>
+                        <p>This simple function simply returns an empty IEnumerable of &lt;object&gt;</p>
+                    </li>*@
+                    <li>
+                        <h5>static RandomAddress (IGenerator generator) : returns string</h5>
+                        <p>Buids a random address by combining a random int between 1 and 9999, a random "StreetName"
+                           and a random "RoadType" from the datasource</p>
+                    </li>
+                    <li>
+                        <h5>static RandomCompany (IGenerator generator) : returns string</h5>
+                        <p>Builds a random company name from a random "CompanyName" and a random "CompanySuffix" from the datasource.</p>
+                    </li>
+                    <li>
+                        <h5>static RandomCost (IGenerator generator) : returns decimal</h5>
+                        <p>Builds a random decimal combining a whole number from 0 to 999 and a decimal between .00 and .99</p>
+                    </li>
+                    <li>
+                        <h5>static RandomDateTime (IGenerator generator, int hoursBefore, int hoursAfter) : returns DateTime</h5>
+                        <p>Returns a DateTime value that is a value {hoursBefore} before to {hoursAfter} the BaseDateTime. For 
+                           example 2 years before to 2 years after by hour you would use hoursBefore: -17520 hoursAfter: 17521 </p>
+                    </li>
+                    <li>
+                        <h5>static RandomDateTimeNull (IGenerator generator, int hoursBefore, int hoursAfter, int diceRange = 6) : returns DateTime?</h5>
+                        <p>Works just like the RandomDateTime, except that this version returns a nullable DateTime where a null
+                           value will be returned with a likelihood of 1 in {diceRange}.</p>
+                    </li>
+                    <li>
+                        <h5>static RandomEmail (IGenerator generator) : returns string</h5>
+                        <p>Creates an email from a random username, with a random company, and a random domain extension from 
+                           the datasource. If the username, company, and domain, have already been created, they will be
+                           stored in the generator.CurrentRowValues, and these values are used.
+                     </p>
+                    </li>
+                    <li>
+                        <h5>static RandomFee (IGenerator generator) : returns decimal</h5>
+                        <p>Builds a random decimal combining a whole number from 1 to 99 and a decimal between .00 and .99</p>
+                    </li>
+                    <li>
+                        <h5>static RandomGuid (IGenerator generator) : returns Guid</h5>
+                        <p>Creates a random guid. It is worth noting that, unlike a new Guid, this Guid is generated base on 
+                           the random seed.</p>
+                    </li>
+                    <li>
+                        <h5>static RandomPhone (IGenerator generator) : returns string</h5>
+                        <p>Generates a random phone number in the form (100 to 999) - 100 to 999 - 1000 to 9999</p>
+                    </li>
+                    <li>
+                        <h5>static RandomUserName (IGenerator generator) : returns string</h5>
+                        <p>Creates a username using the first letter of a random FirstName and a random LastName from the
+                           datasource. If the firstname and/or lastname have already been created, they will be stored 
+                           in the generator.CurrentRowValues, and these values are used.</p>
+                    </li>
+                    <li>
+                        <h5>static RandomZip (IGenerator generator) : returns string</h5>
+                        <p>Creates random ZipCode between 10001 and 99999</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="row documentation">
+    <div class="col-md-12">
+        <h3>SeedPacket.Exceptions Namespace</h3>
+        <ul class="namespaceList">
+            <li class="class">
+                <h4>InvalidDefaultDataException class</h4>
+                Message: Not able to retrieve valid default data from the embedded resource file.
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>InvalidSeedParametersException class</h4>
+                Message: Invalid Parameters: SeedBegin must be less than or equal to SeedEnd.
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>InvalidSourceFileException class</h4>
+                Message: Not able to retrieve valid {source} data from the supplied file path ("{filepath}").
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>InvalidSourceStringException</h4>
+                Message: Not able to retrieve valid {source}data from the supplied source string.
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>MultipleSourceException class</h4>
+               Message: You can only define one source, either the path to a file OR explicitly pass in a string.
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
+            </li>
+            <li class="class">
+                <h4>NoSourceException class</h4>
+                Message: You MUST either define the path to a source file OR explicitly pass in a string.
+                <strong>Inherits:</strong>
+                <ul>
+                    <li>
+                        <h5>Exception</h5>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@*<div class="row documentation">
+    <div class="col-md-12">
+        <h3>Debugging</h3>
+        Information to come
+    </div>
+</div>*@
+
+<br />&nbsp;
+<br />&nbsp;

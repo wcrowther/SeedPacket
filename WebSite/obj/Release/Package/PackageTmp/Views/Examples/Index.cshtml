@@ -1,0 +1,99 @@
+﻿@using SeedPacket.Interfaces
+@using SeedPacket.Generators
+@using SeedPacket.Extensions
+@using SeedPacket.Functions
+@using MvcExamples.Models
+@using System.Diagnostics
+@{
+    ViewBag.Title = "Home Page";
+
+    var stopwatch = Stopwatch.StartNew();
+
+    var accounts = GetAccounts(1000);
+
+    stopwatch.Stop();
+    Debug.WriteLine("Elapsed Milliseconds: " + stopwatch.ElapsedMilliseconds);
+}
+
+@functions{
+
+    // =======================================================================================
+    // RANDOM =>> 1000 records * 5 invoices * 15 invoiceItems in 630 ms
+    // NEXT   =>> 1000 records random * 5 'next' invoices * 15 'next' invoiceItems in 350 ms
+    // =======================================================================================
+
+    public List<Account> GetAccounts (int rowCount)
+    {
+        var generator = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml")
+        {
+            Rules =  {
+                new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth"  ),
+                new Rule(typeof(List<InvoiceItem>), "", g => Funcs.CacheItemsNext<InvoiceItem>(g, "InvoiceItems", 1, 8), "GetNextInvoiceItems"  ),
+                new Rule(typeof(List<Invoice>), "",     g => Funcs.CacheItemsNext<Invoice>(g, g.Cache.Invoices, 1, 5), "GetRandomInvoices", ""),
+                new Rule(typeof(string),"Description%", g => Funcs.ElementRandom(g, "Description"), "Description", "Gets Description from custom XML file" )
+            }
+        };
+        generator.Cache.InvoiceItems = new List<InvoiceItem>().Seed(12345, 12345 + (rowCount * 15), generator);
+        generator.Cache.Invoices = new List<Invoice>().Seed(10234, 10234 + (rowCount * 5), generator);
+
+        return new List<Account>().Seed(1, rowCount, generator).ToList(); ;
+    }
+}
+
+<h3>SeedPacket</h3>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table table-striped topSpace">
+            <thead>
+                <tr>
+                    <th>AccountId</th>
+                    <th>AccountName</th>
+                    <th>Invoices</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var account in accounts)
+                {
+                    <tr style="background-color: #c4d7ec;">
+                        <td style="background-color: inherit;">@account.AccountId</td>
+                        <td style="background-color: inherit;">@account.AccountName</td>
+                        <td style="background-color: inherit;">@account.Invoices.Count</td>
+                        <td style="background-color: inherit;">@account.Created</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <table style="width: 100%;background-color: #dde0ef;">
+                                @foreach (var invoice in account.Invoices)
+                                {
+                                    <tr>
+                                        <td>@invoice.InvoiceId</td>
+                                        <td>@invoice.InvoiceDate</td>
+                                        <td>@invoice.InvoiceItems.Count</td>
+                                        <td>@invoice.Created</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table style="width: 100%;">
+                                                @foreach (var invoiceItem in invoice.InvoiceItems)
+                                                {
+                                                    <tr>
+                                                        <td>@invoiceItem.InvoiceItemId</td>
+                                                        <td>@invoiceItem.Amount</td>
+                                                        <td>@invoiceItem.Description</td>
+                                                        <td>@invoiceItem.Created</td>
+                                                    </tr>
+                                                }
+                                            </table>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
