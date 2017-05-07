@@ -1,0 +1,68 @@
+﻿
+<div class="row">
+    <div class="col-md-8">
+        <img class="pull-right" style="margin: 20px 0; width:178px; height:215px;" src="~/Content/Images/SeedPacketImage.png" alt="SeedPacket Illustration" />
+        <h2>SeedPacket Examples</h2>
+        <h3 class="byline">version 2 in C#</h3>
+        <p>Created by Will Crowther</p>
+        <h3>Overview</h3>
+        <p>
+            This MVC Examples project shows some code examples implementing the SeedPacket methods and techniques, including 
+            the modified examples from the web site. Some of the examples are inline in the page for simplicity. 
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="hotBox">
+            For more information on <b>SeedPacket</b>, go to <b><a href="http://www.seedpacket.net">https://www.seedpacket.net</a></b>
+            or get it from <b>NUGET</b> at: <b><a href="https://www.nuget.org/packages/SeedPacket/2.0.6">https://www.nuget.org/packages/SeedPacket/2.0.6</a></b>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Basic Example 1</h3>
+        <p>
+            This example is the most basic version, simply calling .Seed() on a new List&lt;User&gt;() with no parameters. By default, it creates 10 fully populated instances.
+        </p>
+    </div>
+    <div class="col-md-8">
+        @{ Html.RenderPartial("_BasicExample1"); }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Basic Example 2</h3>
+        <p>
+            This example passes in a parameter to .Seed() that creates 20 records and the call to Seed() is put right into the foreach loop.
+        </p>
+    </div>
+    <div class="col-md-8">
+        @{ Html.RenderPartial("_BasicExample2"); }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Basic Example 3</h3>
+        <p>
+            This example creates a range of User records beginning with SeedBegin 20431 and ending with SeedEnd 20441. The range must move
+            in a positive direction and SeedBegin has to be greater than or equal to SeedEnd.
+        </p>
+    </div>
+    <div class="col-md-8">
+        @{ Html.RenderPartial("_BasicExample3"); }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="nextpage pull-right" href="/AdvancedExamples.cshtml">
+            Advanced<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>
+
