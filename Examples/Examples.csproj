@@ -134,7 +134,7 @@
     <Content Include="SourceFiles\sourceData2.xml" />
     <Content Include="SourceFiles\xmlSeedSourcePlus.xml" />
     <Content Include="Views\Home\_Result_AdvancedExample.cshtml" />
-    <Content Include="Views\Home\_ControllerExample_withJQuery.cshtml" />
+    <Content Include="Views\Home\_JQueryPartial.cshtml" />
     <Content Include="Views\Home\ControllerExamples.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -148,6 +148,7 @@
     <Content Include="Views\Home\_BasicExample2.cshtml" />
     <Content Include="Views\Home\_BasicExample3.cshtml" />
     <Content Include="Views\Home\AdvancedExamples.cshtml" />
+    <Content Include="Views\Home\HighCountExample.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

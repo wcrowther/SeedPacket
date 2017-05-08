@@ -11,7 +11,23 @@ namespace Website.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult AdvancedExamples()
+        {
+            return View();
+        }
+
+        public ActionResult HighCountExamples()
+        {
+            return View();
+        }
+
+        public ActionResult ControllerExamples()
         {
             var users = new List<User>().Seed(20);
 
@@ -23,7 +39,7 @@ namespace Website.Controllers
             var generator = new MultiGenerator() { BaseRandom = new Random(seed)};
             var users = new List<User>().Seed(1, rows ?? 20, generator);
 
-            return PartialView("_Result_SimpleExample", users);
+            return PartialView("_JQueryPartial", users);
         }
     }
 }
