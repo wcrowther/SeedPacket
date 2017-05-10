@@ -148,7 +148,12 @@
     <Content Include="Views\Home\_BasicExample2.cshtml" />
     <Content Include="Views\Home\_BasicExample3.cshtml" />
     <Content Include="Views\Home\AdvancedExamples.cshtml" />
-    <Content Include="Views\Home\HighCountExample.cshtml" />
+    <Content Include="Views\Home\HighCountExamples.cshtml" />
+    <Content Include="Views\Home\_BasicExample4.cshtml" />
+    <Content Include="Views\Home\_BasicExample5.cshtml" />
+    <Content Include="Views\Rules\Index.cshtml" />
+    <Content Include="Views\Rules\_RulesCommon.cshtml" />
+    <Content Include="Views\Rules\_RulesBasic.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -164,6 +169,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

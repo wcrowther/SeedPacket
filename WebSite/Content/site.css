@@ -227,13 +227,14 @@ table thead {
 .table2-striped > tbody > tr:nth-child(odd) > th {
     background-color: #dbf5db;
 }
-
 .nextpage {
     font-weight: bold;
     margin: 10px 0;
 }
-
-.SourceDesc{
+.nextpage span {
+    margin-left: 5px;
+}
+.SourceDesc {
     font-weight: bold;
     padding: 20px 0 0 0;
 }

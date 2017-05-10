@@ -26,8 +26,11 @@ namespace SeedPacket
             this.typeMatch = typeMatch;
             this.nameMatch = nameMatch.ifBlank().ToLower();
             this.func = func;
+
             RuleName = ruleName;
             Description = description;
+            TypeMatch = typeMatch;
+            NameMatch = nameMatch;
         }
 
     #endregion
@@ -38,6 +41,10 @@ namespace SeedPacket
         public string RuleName { get; }
 
         public string Description { get; }
+
+        public Type TypeMatch { get; }
+
+        public string NameMatch { get; }
 
         public bool IsMatch (Type propType, string propName)
         {
@@ -84,7 +91,7 @@ namespace SeedPacket
                 var nameArray = namematch.Split(new[]{','}, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var name in nameArray)
                 {
-                    if (NameMatch(name, propname))
+                    if (IsNameMatch(name, propname))
                     {
                         return true;
                     }
@@ -92,10 +99,10 @@ namespace SeedPacket
                 return false;
             }
 
-            return NameMatch(namematch, propname);
+            return IsNameMatch(namematch, propname);
         } 
 
-        private static bool NameMatch(string namematch, string propname)
+        private static bool IsNameMatch(string namematch, string propname)
         {
             // 1. type matches but namematch has not been defined for Rule then true
             // 2. type matches and namematch has wildcard. if wildcard matches then true otherwise false

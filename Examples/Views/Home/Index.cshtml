@@ -60,6 +60,33 @@
 </div>
 
 <div class="row">
+    <div class="col-md-4">
+        <h3>Basic Example 4</h3>
+        <p>
+            This example expands on the first example but passes in an IGenerator, with custom SeedBegin, SeedEnd, and BaseRandom. The
+            BaseRandom is seed with a different seed, so all the data is different. An additional field called "Notes", that was
+            originally hidden, is displayed filled with "Lorem Ipsum" text.
+        </p>
+    </div>
+    <div class="col-md-8">
+        @{ Html.RenderPartial("_BasicExample4"); }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Basic Example 5</h3>
+        <p>
+            While it may be unlikely that you will have a property consisting of a list of strings named with either "body" or "copy",
+            adding one will allow you to add mockup dummy "paragraph" text, as in the example.
+        </p>
+    </div>
+    <div class="col-md-8">
+        @{ Html.RenderPartial("_BasicExample5"); }
+    </div>
+</div>
+
+<div class="row">
     <div class="col-md-12">
         <a class="nextpage pull-right" href="/Home/AdvancedExamples">
             Advanced<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>

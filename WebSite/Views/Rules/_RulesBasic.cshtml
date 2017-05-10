@@ -1,0 +1,33 @@
+﻿@using SeedPacket.Extensions
+@using Website.Models
+@using SeedPacket
+@using SeedPacket.Generators
+@using NewLibrary.ForString
+
+@{ 
+    var basicRules = new MultiGenerator(rulesSet: RulesSet.Basic).Rules;
+}
+
+<div id="rowResults">
+    <table class="table table-striped topSpace" style="min-width: 570px;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>If Type Is...</th>
+                <th>If Propery Name Matches...</th> 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Rule rule in basicRules)
+            {
+                <tr>
+                    <td>@rule.RuleName</td>
+                    <td>@rule.Description</td>
+                    <td>@rule.TypeMatch</td>
+                    <td>@rule.NameMatch.isBlank("Any")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

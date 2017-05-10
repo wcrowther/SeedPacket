@@ -123,6 +123,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ExtendingController.cs" />
     <Compile Include="Controllers\ExamplesController.cs" />
+    <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\SeedController.cs" />
     <Compile Include="Controllers\SimpleSeedController.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
@@ -229,6 +230,9 @@
     <Content Include="Views\Documentation\_02_SeedPacket.cshtml" />
     <Content Include="Views\Documentation\_03_SimpleSeed.cshtml" />
     <Content Include="Views\Examples\PropertyNameTest.cshtml" />
+    <Content Include="Views\Rules\Index.cshtml" />
+    <Content Include="Views\Rules\_RulesCommon.cshtml" />
+    <Content Include="Views\Rules\_RulesBasic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeedPacket\SeedPacket.csproj">
