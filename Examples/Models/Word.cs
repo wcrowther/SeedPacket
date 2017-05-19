@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Script.Serialization;
 
-namespace Website.Models
+namespace Examples.Models
 {
 	public class Word
 	{

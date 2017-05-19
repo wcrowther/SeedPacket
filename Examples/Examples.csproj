@@ -133,9 +133,8 @@
     <Content Include="SourceFiles\seedsource.xml" />
     <Content Include="SourceFiles\sourceData2.xml" />
     <Content Include="SourceFiles\xmlSeedSourcePlus.xml" />
-    <Content Include="Views\Home\_Result_AdvancedExample.cshtml" />
+    <Content Include="Views\DataSource\_DataSourceExample2.cshtml" />
     <Content Include="Views\Home\_JQueryPartial.cshtml" />
-    <Content Include="Views\Home\ControllerExamples.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Web.config" />
@@ -147,13 +146,20 @@
     <Content Include="Views\Home\_BasicExample1.cshtml" />
     <Content Include="Views\Home\_BasicExample2.cshtml" />
     <Content Include="Views\Home\_BasicExample3.cshtml" />
-    <Content Include="Views\Home\AdvancedExamples.cshtml" />
-    <Content Include="Views\Home\HighCountExamples.cshtml" />
     <Content Include="Views\Home\_BasicExample4.cshtml" />
     <Content Include="Views\Home\_BasicExample5.cshtml" />
     <Content Include="Views\Rules\Index.cshtml" />
-    <Content Include="Views\Rules\_RulesCommon.cshtml" />
-    <Content Include="Views\Rules\_RulesBasic.cshtml" />
+    <Content Include="Views\Rules\_RulesAll.cshtml" />
+    <Content Include="Views\DataSource\Index.cshtml" />
+    <Content Include="Views\Extending\_ExtendingExample1.cshtml" />
+    <Content Include="Views\Extending\Index.cshtml" />
+    <Content Include="Views\JQuery\_RulesBasic.cshtml" />
+    <Content Include="Views\JQuery\_RulesCommon.cshtml" />
+    <Content Include="Views\JQuery\Index.cshtml" />
+    <Content Include="Views\Rows\_3kRowsExample.cshtml" />
+    <Content Include="Views\Rows\Index.cshtml" />
+    <Content Include="Views\DataSource\_DataSourceExample1.cshtml" />
+    <Content Include="Views\DataSource\_DataSourceExample1A.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -169,11 +175,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DataSourceController.cs" />
+    <Compile Include="Controllers\ExtendingController.cs" />
+    <Compile Include="Controllers\jQueryController.cs" />
+    <Compile Include="Controllers\RowsController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Extensions\CustomSeedExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\ActionViewModel.cs" />
     <Compile Include="Models\AppUser.cs" />

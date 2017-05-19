@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Website.Models
+namespace Examples.Models
 {
     public class ActionViewModel
     {

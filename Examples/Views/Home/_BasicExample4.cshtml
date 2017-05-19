@@ -1,0 +1,40 @@
+﻿@using Examples.Models
+@using SeedPacket.Extensions
+@using SeedPacket.Generators
+
+@{ 
+    var gen = new MultiGenerator() {
+        BaseRandom = new Random(1234),
+        SeedBegin = 110, SeedEnd = 117
+    };
+    var users = new List<User>().Seed(gen);
+}
+
+<div id="rowResults">
+    <table class="table table-striped topSpace" style="min-width: 570px;">
+        <thead>
+            <tr>
+                <th>UserId</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.UserId</td>
+                    <td>@(!string.IsNullOrEmpty(user.FirstName) ? user.FirstName : "---")</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Created.ToString("MM/dd/yyyy")</td>
+                </tr>
+                <tr>
+                    <td colspan="5">@user.Notes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

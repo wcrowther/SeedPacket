@@ -1,4 +1,4 @@
-﻿using Website.Models;
+﻿using Examples.Models;
 using SeedPacket.Extensions;
 using SeedPacket.Generators;
 using System;

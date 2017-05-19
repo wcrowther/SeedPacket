@@ -1,0 +1,64 @@
+﻿
+<div class="row">
+    <div class="col-md-8">
+        <img class="pull-right" style="margin: 20px 0; width:178px; height:215px;" src="~/Content/Images/SeedPacketImage.png" alt="SeedPacket Illustration" />
+        <h2>SeedPacket Examples</h2>
+        <h3 class="byline">version 2 in C#</h3>
+        <p>Created by Will Crowther</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <h3>DataSource Example 1</h3>
+
+        <div class="pull-right">
+            <div class="randomSeed">
+                Seed<input id="randomSeed" type="text" value="1234" maxlength="4" style="width:44px; text-align: center;" />
+            </div>
+            <div class="rowCounter">
+                Rows<input id="numberOfRowResults" type="text" value="20" maxlength="4" style="width:44px; text-align: center;" />
+            </div>
+        </div>
+        <p>
+            While it may be unlikely that you will have a property consisting of a list of strings named with either "body" or "copy",
+            adding one will allow you to add mockup dummy "paragraph" text, as in the example.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @{ Html.RenderPartial("_DataSourceExample1"); }
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        seedExamples.init();
+    });
+</script>
+
+<div class="row">
+    <div class="col-md-8">
+        <h3>DataSource Example 2</h3>
+        <p>
+            While it may be unlikely that you will have a property consisting of a list of strings named with either "body" or "copy",
+            adding one will allow you to add mockup dummy "paragraph" text, as in the example.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @{ Html.RenderPartial("_DataSourceExample2"); }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="nextpage pull-right" href="/Extending">
+            Extending<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>

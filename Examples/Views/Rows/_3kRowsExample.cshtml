@@ -1,0 +1,63 @@
+﻿@using SeedPacket
+@using SeedPacket.Generators
+@using SeedPacket.Extensions
+@using SeedPacket.Functions
+@using Examples.Models
+@using System.Diagnostics
+@model  List<Account>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table table-striped topSpace">
+            <thead>
+                <tr>
+                    <th>AccountId</th>
+                    <th>AccountName</th>
+                    <th>Invoices</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var account in Model)
+                {
+                    <tr style="background-color: #c4d7ec;">
+                        <td style="background-color: inherit;">@account.AccountId</td>
+                        <td style="background-color: inherit;">@account.AccountName</td>
+                        <td style="background-color: inherit;">@account.Invoices.Count</td>
+                        <td style="background-color: inherit;">@account.Created</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <table style="width: 100%;background-color: #dde0ef;">
+                                @foreach (var invoice in account.Invoices)
+                                {
+                                    <tr>
+                                        <td>@invoice.InvoiceId</td>
+                                        <td>@invoice.InvoiceDate</td>
+                                        <td>@invoice.InvoiceItems.Count</td>
+                                        <td>@invoice.Created</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table style="width: 100%;">
+                                                @foreach (var invoiceItem in invoice.InvoiceItems)
+                                                {
+                                                    <tr>
+                                                        <td>@invoiceItem.InvoiceItemId</td>
+                                                        <td>@invoiceItem.Amount</td>
+                                                        <td>@invoiceItem.Description</td>
+                                                        <td>@invoiceItem.Created</td>
+                                                    </tr>
+                                                }
+                                            </table>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

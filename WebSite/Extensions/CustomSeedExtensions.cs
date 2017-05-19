@@ -15,10 +15,7 @@ namespace Website.Extensions
             {
                 SeedEnd = seedEnd,
                 BaseRandom = new Random(34561),
-                Rules =  // Adds rules
-                {                         
-                   new Rule(typeof(string),"%Sport%",   g => Funcs.ElementRandom(g, "Sport"), "Sport", "Custom sport from XML file" )
-                },
+
                 CurrentPropertyName = propertyName
             };
             return new SeedCore(gen).SeedList(iEnumerable).ToList();

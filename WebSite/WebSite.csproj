@@ -155,9 +155,11 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\grid.css" />
     <Content Include="Content\Images\favicon.png" />
+    <Content Include="Content\Images\linqSplash.png" />
     <Content Include="Content\Images\SeedPacket shadows.png" />
     <Content Include="Content\Images\SeedPacketImage.png" />
     <Content Include="Content\Images\seedpacket_Icon.png" />
+    <Content Include="Content\Images\simpleSeedSplash.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -175,6 +177,8 @@
     </Content>
     <Content Include="SourceFiles\jsonseedsource2.json" />
     <Content Include="SourceFiles\jsonseedsource.json" />
+    <Content Include="Content\Images\SeedPacket 2.psd" />
+    <Content Include="Content\Images\SeedPacket 2a.psd" />
     <None Include="Properties\PublishProfiles\code.willcrowther.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\code.willcrowther.com.pubxml" />
     <None Include="Properties\PublishProfiles\seedpacket.net - Web Deploy.pubxml" />
@@ -189,6 +193,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="SourceFiles\sourceData2.xml" />
+    <EmbeddedResource Include="SourceFiles\XmlGeneratorSource.xml" />
     <Content Include="SourceFiles\xmlSeedSourcePlus.xml" />
     <Content Include="SourceFiles\seedsource.xml" />
     <Content Include="Web.config">
@@ -233,6 +238,7 @@
     <Content Include="Views\Rules\Index.cshtml" />
     <Content Include="Views\Rules\_RulesCommon.cshtml" />
     <Content Include="Views\Rules\_RulesBasic.cshtml" />
+    <EmbeddedResource Include="SourceFiles\JsonGeneratorSource.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeedPacket\SeedPacket.csproj">

@@ -1,0 +1,36 @@
+﻿
+<div class="row">
+    <div class="col-md-8">
+        <img class="pull-right" style="margin: 20px 0; width:178px; height:215px;" src="~/Content/Images/SeedPacketImage.png" alt="SeedPacket Illustration" />
+        <h2>SeedPacket Examples</h2>
+        <h3 class="byline">version 2 in C#</h3>
+        <p>Created by Will Crowther</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Show All Rules</h3>
+        <p>
+           One of the properties of IDataSource is the Rules collection. As this property collection is public, it is alway possible to output 
+           a list of all the current active rules. Each rule displays name, description (if available), type it matches, and property name it matches (if specified).
+        </p>
+        <p>
+            This list is the default for the MultiDataSource. Keep in mind that rules are always applied last to first.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @{ Html.RenderPartial("_RulesAll"); }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="nextpage pull-right" href="/">
+            Home<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>

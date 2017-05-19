@@ -1,0 +1,62 @@
+﻿@using SeedPacket
+@using SeedPacket.Extensions
+@using SeedPacket.Functions
+@using SeedPacket.Generators
+@using Examples.Models
+
+@{  // inline in view for RAD or web pages purposes
+    var generator = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml")
+    {
+        Rules = {
+            new Rule(typeof(int), "SelectedProduct",  g => g.RowRandom.Next(0, 11), "Random product id"),
+            new Rule(typeof(string), "ItemName",      g => Funcs.ElementNext(g, "ProductName"), "ItemName"),
+            new Rule(typeof(string), "Ceo",           g => Funcs.ElementNext(g, "FirstName") + " " + Funcs.ElementNext(g, "LastName"), "Random CEO Name"),
+            new Rule(typeof(string),"Description%",   g => Funcs.ElementNext(g, "Description"), "Description", "Gets Description from custom XML file" ),
+            new Rule(typeof(List<Item>), "Products",          g => Funcs.CacheItemsNext<Item>(g, g.Cache.Items, 10, 10, false), "ItemList")
+        },
+        BaseDateTime = DateTime.Today,
+        BaseRandom = new Random(1234567)
+    };
+    generator.Cache.Items = new List<Item>().Seed(1, 10, generator);
+
+    var examples = new List<Example>().Seed(100, 115, generator);
+}
+
+<table class="table table table-striped topSpace">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Company</th>
+            <th>City</th>
+            <th>State</th>
+            <th>CEO</th>
+            <th>NetWorth</th>
+            <th>Products</th>
+            <th>Description</th>
+            <th>CompanyGuid</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var ex in examples)
+    {
+        <tr>
+            <td>@ex.Id</td>
+            <td>@ex.CompanyName</td>
+            <td>@ex.City</td>
+            <td>@ex.State</td>
+            <td>@ex.Ceo</td>
+            <td>@(string.Format("{0:C}", ex.NetWorth))M</td>
+            <td>
+                @Html.DropDownListFor(a => ex.SelectedProduct, new SelectList(ex.Products, "ItemId", "ItemName", ex.SelectedProduct), "-None Selected-")
+            </td>
+            <td>@ex.Description</td>
+            <td>@ex.ExampleGuid</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+
+
+

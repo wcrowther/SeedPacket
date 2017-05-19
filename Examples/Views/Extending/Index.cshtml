@@ -1,0 +1,58 @@
+﻿
+<div class="row">
+    <div class="col-md-8">
+        <img class="pull-right" style="margin: 20px 0; width:178px; height:215px;" src="~/Content/Images/SeedPacketImage.png" alt="SeedPacket Illustration" />
+        <h2>SeedPacket Examples</h2>
+        <h3 class="byline">version 2 in C#</h3>
+        <p>Created by Will Crowther</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>
+            The Rules below 
+
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Basic Rules Set</h3>
+        <p>
+            This set of Rules is one of the choices for the default MultiGenerator, is deterministic, and covers the basic default data types.
+            For instance, for a string type, the "String" rule just returns the name of the property that it is running for with the rownumber
+            appended onto the end. Nullable types act in a similar way, but with 1 in 6 null. The nulls will always be in the same position
+            unless the BaseRandom or the number of elements called is changed.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @{ Html.RenderPartial("_RulesBasic"); }
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Common Rules Set</h3>
+        <p>The Basic Rules Set is loaded and then these additional, more specific, rules are loaded after. 
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @{ Html.RenderPartial("_RulesCommon"); }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="nextpage pull-right" href="/">
+            Home<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>

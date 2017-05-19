@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Website.Models
+namespace Examples.Models
 {
 	public class Link
 	{
