@@ -14,9 +14,9 @@ namespace Website
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Home.GetResultRows",
-                url: "Home/GetResultRows/{rows}",
-                defaults: new { controller = "Home", action = "GetResultRows", rows = UrlParameter.Optional }
+                name: "DataSource.GetResultRows",
+                url: "DataSource/GetResultRows/{rows}",
+                defaults: new { controller = "DataSource", action = "GetResultRows", rows = UrlParameter.Optional }
             );
 
             routes.MapRoute(

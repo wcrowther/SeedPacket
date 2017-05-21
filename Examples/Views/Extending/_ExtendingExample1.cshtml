@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var user in new List<AppUser>().Seed())
+                @foreach (var user in new List<AppUser>().Seed(9999).ToList())
                 {
                     <tr>
                         <td>@user.UserId</td>

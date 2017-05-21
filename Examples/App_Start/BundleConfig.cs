@@ -21,7 +21,7 @@ namespace Website
                           "~/Scripts/respond.js"
                       ));
             bundles.Add(new ScriptBundle("~/bundles/ScriptApp").Include(
-                          "~/ScriptApp/SeedExamples.js"
+                          "~/ScriptApp/Examples.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
