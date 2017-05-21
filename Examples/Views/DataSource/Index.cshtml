@@ -21,8 +21,9 @@
             </div>
         </div>
         <p>
-            While it may be unlikely that you will have a property consisting of a list of strings named with either "body" or "copy",
-            adding one will allow you to add mockup dummy "paragraph" text, as in the example.
+           This examples uses the conventional MVC controller standard of passing in a model to the page where the seed data has 
+            already been created by the controller. It has an ajax component that shows how to refresh the table with a dynamically
+            generated list of variable length and custom seed.
         </p>
     </div>
 </div>
@@ -33,18 +34,15 @@
     </div>
 </div>
 
-<script language="javascript" type="text/javascript">
-    $(document).ready(function () {
-        Examples.init();
-    });
-</script>
-
 <div class="row">
     <div class="col-md-8">
         <h3>DataSource Example 2</h3>
         <p>
-            While it may be unlikely that you will have a property consisting of a list of strings named with either "body" or "copy",
-            adding one will allow you to add mockup dummy "paragraph" text, as in the example.
+            This example goes back to putting the code inline in the page and shows a more advanced generator setup. The 
+            first you will notice is that an xml file is being passed into the constructor. This xml file is based on the
+            default xml, with the addition of some extra data such as "Descriptions" and "Sports". "Description" is then 
+            used by the new Description. Also, note how the Items list is seeded and then stored in the generator.Cache
+            for use in the Products list.
         </p>
     </div>
 </div>

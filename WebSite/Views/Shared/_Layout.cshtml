@@ -13,12 +13,10 @@
         <div class="container">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Documentation", "Index", "Documentation")</li>
-                    <li>@Html.ActionLink("Rules", "Index", "Rules")</li>
-                    @*<li>@Html.ActionLink("Extending", "Index", "Extending")</li>
-                    <li>@Html.ActionLink("Examples", "Index", "Examples")</li>*@
-                    <li>@Html.ActionLink("SimpleSeed", "Index", "SimpleSeed")</li>
+                    <li class="@Html.ActiveToggle("Home","Index")">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="@Html.ActiveToggle("Documentation","Index")">@Html.ActionLink("Documentation", "Index", "Documentation")</li>
+                    <li class="@Html.ActiveToggle("Rules","Index")">@Html.ActionLink("Rules", "Index", "Rules")</li>
+                    <li class="@Html.ActiveToggle("SimpleSeed","Index")">@Html.ActionLink("SimpleSeed", "Index", "SimpleSeed")</li>
                 </ul>
             </div>
         </div>

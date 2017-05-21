@@ -436,8 +436,7 @@
     <Id>75</Id>
     <Id>9888</Id>
   </Ids>
-  
-    
+
   <Lorems>
     <Lorem>lorem</Lorem>
     <Lorem>ipsum</Lorem>
@@ -509,7 +508,6 @@
     <Lorem>est</Lorem>
     <Lorem>laborum</Lorem>
   </Lorems>
-
 
   <Descriptions>
     <Description>It was kinda big</Description>

@@ -7,13 +7,6 @@ using NewLibrary.ForType;
 
 namespace Website.Helpers
 {
-    public class CustomWebGrid : WebGrid
-    {
-        // Example
-        // Set defaults etc.
-        // could make Type version WebGrid<T> as alternative.
-    }
-
     public static class HtmlHelpers
     {
 
@@ -41,6 +34,13 @@ namespace Website.Helpers
             var grid = new WebGrid(source: sourceList, columnNames: columns); 
             return grid;
         }
+    }
+
+    public class CustomWebGrid : WebGrid
+    {
+        // Example
+        // Set defaults etc.
+        // could make Type version WebGrid<T> as alternative.
     }
 }
  

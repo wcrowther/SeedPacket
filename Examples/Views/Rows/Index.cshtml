@@ -10,8 +10,29 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h3>Common Rules Set</h3>
-        <p>The Basic Rules Set is loaded and then these additional, more specific, rules are loaded after. 
+        <h3>21,000 Rows Example</h3>
+        <p>
+            This example shows how you can create 1000 Account records, that each have from 1 to 5 Invoices, which each have 
+            from 1 to 8 InvoiceItems. The intention here is to show that you can have some complex nested data structures with
+            large numbers of seeded items and it still be performant. 
+        </p>
+        <p>
+            If you look at the code in the controller, you we are pre-generating list containing 15,000 rows of InvoiceItems
+            and 5000 rows of invoices. These cached lists are then used by the "GetNextInvoiceItems" and "GetNextInvoices" rules
+            which utilize the <b>Funcs.CacheItemsNext()</b> method to get the next items in the cached list. The number of
+            items taken is driven by the min and max parameters. To get a static number of items, just set both parameters to the
+            same number. The item is removed from the cached list by default after being retrieved. Setting the "remove" parmeter
+            to false if will leave the item in cached list if that is desired. If there are no more items in the cached list,
+            the method will fail silently so it is best to manually estimate how many rows are required ahead of time.
+        </p>
+        <p>
+            As an alternative to the <b>Funcs.CacheItemsNext()</b> method, <b>Funcs.CacheItemsRandom()</b> works similarily but picks an item
+            at random from the cached list. Obviously, this takes more programming overhead and seems to take a little less than twice as long.
+            A typical time on an I7 processor took 630 milliseconds (.63 sec) for <b>Funcs.CacheItemsRandom()</b> but only 350 milliseconds
+            (.35 sec) for <b>Funcs.CacheItemsNext()</b> for this example.
+        </p>
+        <p>
+            <b>Calculated on the fly, it took: @ViewBag.ElapsedTime milliseconds to generate 21,000 rows of data.</b>
         </p>
     </div>
 </div>

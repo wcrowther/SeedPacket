@@ -134,7 +134,6 @@
     <Content Include="SourceFiles\sourceData2.xml" />
     <Content Include="SourceFiles\xmlSeedSourcePlus.xml" />
     <Content Include="Views\DataSource\_DataSourceExample2.cshtml" />
-    <Content Include="Views\Home\_JQueryPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Web.config" />

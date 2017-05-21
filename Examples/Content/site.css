@@ -174,11 +174,9 @@ code i {
     margin-top: 15px;
 }
 
-/*  
-=========================================================================== 
+/*  =========================================================================== 
     Bootstrap Overrides / Additions 
-=========================================================================== 
-*/
+=========================================================================== */
 
 table {
     border: solid 1px #83A8D1;
@@ -239,11 +237,9 @@ table thead {
     padding: 20px 0 0 0;
 }
 
-/*  
-=========================================================================== 
+/*  =========================================================================== 
     Documentation
-=========================================================================== 
-*/
+=========================================================================== */
 
 /* Namespace H3
 .documentation h3 {} */
@@ -271,4 +267,51 @@ table thead {
 }
 
 
+/*  =========================================================================== 
+    Rows
+=========================================================================== */
 
+.invoiceTable {
+    width: 100%; 
+    margin-bottom: 20px;
+    border: none;
+}
+.invoiceTable tr {
+
+}
+.invoiceTable td {
+    border-color: #ccc !important;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.invoiceTable tr:last-child {
+    border-bottom: 1px solid #ccc;
+}
+.accountTable {
+    border: solid 1px #83A8D1;
+    border-collapse: initial;
+}
+.accountRow {
+}
+.accountRow td {
+    background-color: #c4d7ec !important;
+}
+.accountTable td {
+    width: 16%;
+    vertical-align: middle !important;
+}
+.thirdWidth {
+    display: inline-block;
+    width: 33%;
+}
+.invoice {
+    border: solid 2px #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.invoiceHeader {
+    background-color: #ccc;
+    margin: -10px -10px 20px -10px;
+    padding: 15px;
+    vertical-align: middle;
+}
