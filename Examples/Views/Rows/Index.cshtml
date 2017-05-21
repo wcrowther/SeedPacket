@@ -19,17 +19,17 @@
         <p>
             If you look at the code in the controller, you we are pre-generating list containing 15,000 rows of InvoiceItems
             and 5000 rows of invoices. These cached lists are then used by the "GetNextInvoiceItems" and "GetNextInvoices" rules
-            which utilize the <b>Funcs.CacheItemsNext()</b> method to get the next items in the cached list. The number of
+            which utilize the <b>Funcs.CacheItemsRandom()</b> method to get a random item from the cached list. The number of
             items taken is driven by the min and max parameters. To get a static number of items, just set both parameters to the
             same number. The item is removed from the cached list by default after being retrieved. Setting the "remove" parmeter
             to false if will leave the item in cached list if that is desired. If there are no more items in the cached list,
             the method will fail silently so it is best to manually estimate how many rows are required ahead of time.
         </p>
         <p>
-            As an alternative to the <b>Funcs.CacheItemsNext()</b> method, <b>Funcs.CacheItemsRandom()</b> works similarily but picks an item
-            at random from the cached list. Obviously, this takes more programming overhead and seems to take a little less than twice as long.
-            A typical time on an I7 processor took 630 milliseconds (.63 sec) for <b>Funcs.CacheItemsRandom()</b> but only 350 milliseconds
-            (.35 sec) for <b>Funcs.CacheItemsNext()</b> for this example.
+            As an alternative to the <b>Funcs.CacheItemsRandom()</b> method is the <b>Funcs.CacheItemsRandom()</b> method which workds
+            similarily but just gets the next item from the cached list. Obviously, this takes less programming overhead and 
+            seems to take a little more than half as long. A typical time on an I7 processor for <b>Funcs.CacheItemsNext()</b>
+            took 350 milliseconds (.35 sec) and 630 milliseconds (.63 sec) for <b>Funcs.CacheItemsNext()</b> for this example.
         </p>
         <p>
             <b>Calculated on the fly, it took: @ViewBag.ElapsedTime milliseconds to generate 21,000 rows of data.</b>
