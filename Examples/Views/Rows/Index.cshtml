@@ -18,7 +18,7 @@
         </p>
         <p>
             If you look at the code in the controller, you we are pre-generating list containing 15,000 rows of InvoiceItems
-            and 5000 rows of invoices. These cached lists are then used by the "GetNextInvoiceItems" and "GetNextInvoices" rules
+            and 5000 rows of invoices. These cached lists are then used by the "GetRandomInvoiceItems" and "GetRandomInvoices" rules
             which utilize the <b>Funcs.CacheItemsRandom()</b> method to get a random item from the cached list. The number of
             items taken is driven by the min and max parameters. To get a static number of items, just set both parameters to the
             same number. The item is removed from the cached list by default after being retrieved. Setting the "remove" parmeter

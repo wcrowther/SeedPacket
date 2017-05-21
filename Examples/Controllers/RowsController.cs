@@ -36,8 +36,8 @@ namespace Website.Controllers
             {
                 Rules =  {
                 new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth"  ),
-                new Rule(typeof(List<InvoiceItem>), "", g => Funcs.CacheItemsRandom<InvoiceItem>(g, "InvoiceItems", 1, 8), "GetNextInvoiceItems"  ),
-                new Rule(typeof(List<Invoice>), "",     g => Funcs.CacheItemsRandom<Invoice>(g, g.Cache.Invoices, 1, 5), "GetNextInvoices", ""),
+                new Rule(typeof(List<InvoiceItem>), "", g => Funcs.CacheItemsRandom<InvoiceItem>(g, "InvoiceItems", 1, 8), "GetRandomInvoiceItems"  ),
+                new Rule(typeof(List<Invoice>), "",     g => Funcs.CacheItemsRandom<Invoice>(g, g.Cache.Invoices, 1, 5), "GetRandomInvoices", ""),
                 new Rule(typeof(string),"Description%", g => Funcs.ElementRandom(g, "Description"), "Description", "Gets Description from custom XML file" )
             }
             };
