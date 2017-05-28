@@ -304,6 +304,10 @@ table thead {
     display: inline-block;
     width: 33%;
 }
+.forthWidth {
+    display: inline-block;
+    width: 24.5%;
+}
 .invoice {
     border: solid 2px #ccc;
     padding: 10px;

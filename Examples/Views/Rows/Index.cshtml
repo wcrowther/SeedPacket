@@ -12,27 +12,31 @@
     <div class="col-md-12">
         <h3>25,000 Rows Example</h3>
         <p>
-            This example shows how you can create 1000 Account records, that each have from 1 to 5 Invoices, which each have 
+            This example shows how you can create 1000 Account records, that each have from 1 to 4 Invoices, which each have 
             from 1 to 8 InvoiceItems. The intention here is to show that you can have some complex nested data structures with
             large numbers of seeded items and it still be performant. 
         </p>
         <p>
-            If you look at the code in the controller, you we are pre-generating list containing 15,000 rows of InvoiceItems
-            and 5000 rows of invoices. These cached lists are then used by the "GetRandomInvoiceItems" and "GetRandomInvoices" rules
-            which utilize the <b>Funcs.CacheItemsRandom()</b> method to get a random item from the cached list. The number of
-            items taken is driven by the min and max parameters. To get a static number of items, just set both parameters to the
-            same number. The item is removed from the cached list by default after being retrieved. Setting the "remove" parmeter
-            to false if will leave the item in cached list if that is desired. If there are no more items in the cached list,
-            the method will fail silently so it is best to manually estimate how many rows are required ahead of time.
+            If you look at the code in the controller, we are pre-generating a list containing 20,000 rows of InvoiceItems
+            and 4000 rows of invoices. These cached lists are then used by the "getRandomInvoiceItems" and "getRandomInvoices" rules
+            which utilize the <b>Funcs.CacheItemsRandom()</b> and <b>Funcs.CacheItemsNext()</b> methods to get either a number of random
+            items or a number of the next sequential items from a cached list. The <b>Funcs.CacheItemsRandom()</b> menthod usually 
+            takes 150% longer (or more) to process due to the overhead of randomizing the order of items returned.
         </p>
         <p>
-            As an alternative to the <b>Funcs.CacheItemsRandom()</b> method is the <b>Funcs.CacheItemsRandom()</b> method which workds
-            similarily but just gets the next item from the cached list. Obviously, this takes less programming overhead and 
-            seems to take a little more than half as long. A typical time on an I7 processor for <b>Funcs.CacheItemsNext()</b>
-            took 350 milliseconds (.35 sec) and 630 milliseconds (.63 sec) for <b>Funcs.CacheItemsNext()</b> for this example.
+            The number of items taken is driven by the min and max parameters. To get a static number of items, just set
+            both parameters to the same number. The item is removed from the cached list by default after being retrieved. 
+            Setting the "remove" parmeter to false if will leave the item in the cached list, if that is desired. If there 
+            are no more items in the cached list, the method will fail silently, so it is best practice to manually estimate
+            how many rows are required ahead of time.
         </p>
         <p>
-            <b>Calculated on the fly, it took: @ViewBag.ElapsedTime milliseconds to generate 21,000 rows of data.</b>
+            <b>Calculated on the fly, it took: @ViewBag.ElapsedTime milliseconds to generate these 25,000 rows of data.</b>
+        </p>
+        <p>
+            The source code also shows an example that breaks out the GetInvoices() rule into an external function. This example shows
+            how to apply extra logic to make the Invoice.AccountId match the actual AccountId in the Account it is nested under. Breaking 
+            the logic into an external function is also useful for debugging the logic...
         </p>
     </div>
 </div>
