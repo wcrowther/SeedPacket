@@ -12,5 +12,10 @@ namespace Examples.Models
         public DateTime InvoiceDate { get; set; }
         public DateTime Created { get; set; }
         public virtual List<InvoiceItem> InvoiceItems { get; set; } = new List<InvoiceItem>();
+        
+        public override string ToString()
+        {
+            return $"{InvoiceId} AccountId: {AccountId}";
+        }
     }
 }

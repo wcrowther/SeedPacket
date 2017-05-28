@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="NewLibrary, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NewLibrary.Extensions.1.0.2\lib\NewLibrary.dll</HintPath>
     </Reference>
@@ -74,10 +75,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="Functions\CacheExtensionsTests.cs" />
     <Compile Include="Model\ItemGroup.cs" />
     <Compile Include="Model\Unknown.cs" />
     <Compile Include="Model\Item.cs" />
-    <Compile Include="SeedFunctionsTests.cs" />
+    <Compile Include="Functions\SeedFunctionsTests.cs" />
     <Compile Include="SeedExtensionsTests.cs" />
     <Compile Include="SeedCoreTests.cs" />
     <Compile Include="SimpleSeedTests.cs" />
@@ -103,6 +105,7 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -152,7 +152,7 @@
     <Content Include="Views\DataSource\Index.cshtml" />
     <Content Include="Views\Extending\_ExtendingExample1.cshtml" />
     <Content Include="Views\Extending\Index.cshtml" />
-    <Content Include="Views\Rows\_21kRowsExample.cshtml" />
+    <Content Include="Views\Rows\_25kRowsExample.cshtml" />
     <Content Include="Views\Rows\Index.cshtml" />
     <Content Include="Views\DataSource\_DataSourceExample1.cshtml" />
     <Content Include="Views\DataSource\_DataSourceExample1A.cshtml" />

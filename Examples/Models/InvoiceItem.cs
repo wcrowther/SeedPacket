@@ -13,5 +13,10 @@ namespace Examples.Models
         public string Product { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }
+
+        public override string ToString()
+        {
+            return $"{InvoiceItemId} Product: {Product} Fee: {Fee}";
+        }
     }
 }
