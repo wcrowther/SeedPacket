@@ -1,0 +1,15 @@
+﻿@using Examples.Extensions
+
+<table class="table table table-striped topSpace">
+    <thead>
+        <tr>
+            <th>StateName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stateName in new List<string>().Seed(10, propertyName: "StateName"))
+        {
+            <tr><td>@stateName</td></tr>
+        }
+    </tbody>
+</table>

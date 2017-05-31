@@ -1,22 +1,9 @@
 ﻿
+@{ Html.RenderPartial("_Header"); }
+
 <div class="row">
-    <div class="col-md-8">
-        <img class="pull-right" style="margin: 20px 0; width:178px; height:215px;" src="~/Content/Images/SeedPacketImage.png" alt="SeedPacket Illustration" />
-        <h2>SeedPacket Examples</h2>
-        <h3 class="byline">version 2.0.6 for .net</h3>
-        <p>Created by Will Crowther</p>
-        <h3>Overview</h3>
-        <p>
-            This .net MVC Examples project shows some code examples in C#, implementing the SeedPacket methods and techniques, including 
-            modified examples from the web site. When looking at the code, be aware that some of the examples are inline
-            in the page and do not use conventional controller techniques. This is intentional for code separation and simplicity,
-            and also to show that in-lining can be sufficient for early prototyping. 
-        </p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-8">
-        <div class="hotBox">
+    <div class="col-md-offset-4 col-md-8" >
+        <div class="hotBox" style="margin-right: 0px;">
             For more information on <b>SeedPacket</b>, go to <b><a href="http://www.seedpacket.net">https://www.seedpacket.net</a></b>
             or get it from <b>NUGET</b> at: <b><a href="https://www.nuget.org/packages/SeedPacket/2.0.6">https://www.nuget.org/packages/SeedPacket/2.0.6</a></b>
         </div>
@@ -25,73 +12,110 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h3>Basic Example 1</h3>
+        <h3>Basic Example</h3>
         <p>
             This example is the most basic version, simply calling .Seed() on a new List&lt;User&gt;() with no parameters. 
             By default, it creates 10 fully populated records.
         </p>
     </div>
     <div class="col-md-8">
-        @{ Html.RenderPartial("_BasicExample1"); }
+        @{ Html.RenderPartial("_HomeBasicExample"); }
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h3>Basic Example 2</h3>
+        <h3>Custom Count</h3>
         <p>
             This example passes in a parameter to .Seed() that creates 20 records and the call to Seed() is put right into the foreach loop.
         </p>
     </div>
     <div class="col-md-8">
-        @{ Html.RenderPartial("_BasicExample2"); }
+        @{ Html.RenderPartial("_HomeCustomCountExample"); }
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h3>Basic Example 3</h3>
+        <h3>Custom Range</h3>
         <p>
             This example creates a range of User records beginning with SeedBegin 20431 and ending with SeedEnd 20441. The range must move
             in a positive direction and SeedBegin has to be greater than or equal to SeedEnd.
         </p>
     </div>
     <div class="col-md-8">
-        @{ Html.RenderPartial("_BasicExample3"); }
+        @{ Html.RenderPartial("_HomeCustomRangeExample"); }
     </div>
 </div>
 
+
 <div class="row">
     <div class="col-md-4">
-        <h3>Basic Example 4</h3>
+        <h3>Dictionary</h3>
         <p>
-            This example expands on the first example but passes in an IGenerator, with custom SeedBegin, SeedEnd, and BaseRandom. The
-            BaseRandom is seeded with a different seed, so all the data is different from the first three examples. An additional
-            field called "Notes", that was originally hidden, is displayed filled with "Lorem Ipsum" text.
+            <b>Dictionary&lt;TKey, TValue&gt;</b> implements IEnumerable and is supported by SeedPacket using the .Seed() method. Note that
+            while the Value object properties are fully mapped by the Rules Engine, the Key only maps to the basic Rule for that type, usually
+            int, string, or datetime, without allowing for a "nameMatch" filter.
         </p>
     </div>
     <div class="col-md-8">
-        @{ Html.RenderPartial("_BasicExample4"); }
+        @{ Html.RenderPartial("_DictionaryExample"); }
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h3>Basic Example 5</h3>
+        <h3>Primitive Lists</h3>
+        <p>
+            <b>IEnumerables</b> with primitive types such as <b>List&lt;string&gt;</b> are supported by SeedPacket using the .Seed() method. As the
+            types are singular and do not have a property name that a Rule can key in on, the .Seed() method has a <b>PropertyName</b>
+            constructor overload parameter that can be passed in. This PropertyName is what a Rule will use to "nameMatch" against,
+            but is ignored for complex types with more than one property. In this example, "StateName" is passed in and populates with random
+            data from the defaults in MultiDataSource. In the Generator examples, you will see how you can easily add custom lists
+            that contain your own values.
+        </p>
+    </div>
+    <div class="col-md-8">
+        @{ Html.RenderPartial("_PrimitiveListsExample"); }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Paragraph Text</h3>
         <p>
             While it may be unlikely that you will have a property consisting of a list of strings named with either "body" or "copy",
             adding one will allow you to add mockup dummy "paragraph" text, as in the example.
         </p>
     </div>
     <div class="col-md-8">
-        @{ Html.RenderPartial("_BasicExample5"); }
+        @{ Html.RenderPartial("_ParagraphTextExample"); }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Defaults</h3>
+        <p>
+            This example expands on the first example but passes in an IGenerator, with custom SeedBegin, SeedEnd, BaseDateTime, and BaseRandom. 
+            The BaseDateTime is what all the DateTime Rules are based upon and in this case is customized to be in the past. BaseRandom is seeded
+            with a different seed than the default, so all the generated data is different from the first three examples, IE: "Tiffany Robinson"
+            is no longer the first name generated. An additional field called "Notes", that was originally hidden, is displayed filled
+            with "Lorem Ipsum" text.
+        </p>
+        <p>
+            We will go into additional detail on Generators, including the default MultiGenerator, in the Generators section.
+        </p>
+    </div>
+    <div class="col-md-8">
+        @{ Html.RenderPartial("_HomeDefaultsExample"); }
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12">
-        <a class="nextpage pull-right" href="/DataSource">
-            DataSource<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+        <a class="nextpage pull-right" href="/Ajax">
+            Ajax<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
         </a>
     </div>
 </div>

@@ -35,7 +35,7 @@ namespace Tests.SeedPacket
             testValidXml = GetValidXml();
             testEmptyXml = GetEmptyXml();
             testValidJson = GetValidJson();
-            testValidJson = GetValidJson();
+            testEmptyJson = GetEmptyJson();
         }
 
         [Test]
@@ -95,6 +95,16 @@ namespace Tests.SeedPacket
             Assert.AreEqual(DateTime.Parse("1/11/2020"), list[9]); // not 10 because list is zero-based
             Assert.IsInstanceOf<DateTime>(list[0]);
         }
+
+        //[Test]
+        //public void SeedExtensions_SeedList_With_MultiGenerator_For_SimpleValue_Strings_With_Custom()
+        //{
+        //    var list = new List<string>().Seed(new BasicGenerator()).ToList();
+
+        //    Assert.AreEqual(10, list.Count());
+        //    Assert.AreEqual("10", list[9]); // not 10 because list is zero-based
+        //    Assert.IsInstanceOf<string>(list[0]);
+        //}
 
         [Test]
         public void SeedExtensions_SeedList_With_BasicGenerator_With_SeedEnd_GreaterThan_SeedBegin()

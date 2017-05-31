@@ -1,5 +1,5 @@
 ﻿@using Examples.Models
-@model List<User>
+@model List<AppUser>
 
 <div id="rowResults">
     <table class="table table-striped topSpace" style="min-width: 570px;">
@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (User user in Model)
+            @foreach (AppUser user in Model)
             {
                 <tr>
                     <td>@user.UserId</td>

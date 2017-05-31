@@ -1,0 +1,95 @@
+﻿
+@{ Html.RenderPartial("_Header"); }
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Custom DataSource</h3>
+            <p>
+
+            </p>
+            <p>
+                The source for this example is in the view and is similar to the earlier Home "Primitive Lists" example except that
+                it uses custom <b>Sport</b> data from a custom Xml (or JSON) file. "XmlSeedSourcePlus.xml" is based on the
+                default source xml, but with the addition of some extra data such as <b>"Descriptions"</b> and <b>"Sports"</b>.
+            </p>
+            <p>
+                Either primitives or complex types will use random data matching the property name of the field
+                (ie: "Sport", not the plural) that is being populated by default. If the property name does not exactly match
+                the data from the source file, a custom Rule can be created that can explicitly name the field.
+            </p>
+            <div class="hotBox">
+                <p>
+                    The default XML datasource file to download (and modify).<br />
+                    <a href="~/SourceFiles/XmlGeneratorSource.xml" download>XmlGeneratorSource.xml</a>
+                </p>
+                <p>
+                    The default JSON datasource file to download (and modify).<br />
+                    <a href="~/SourceFiles/JsonGeneratorSource.json" download>JsonGeneratorSource.json</a>
+                </p>
+                <p>
+                    If you are going to keep the existing default rules such as "StateName", "FirstName", etc. in your
+                    Rules collection, it is generally better to <b>only add to or modify the existing data, rather than deleting it.</b>
+                    If you do delete the source data for an existing Rule, it should not throw an error, but will be very generic.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @{ Html.RenderPartial("_GeneratorCustomDataSource"); }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Customizing the Generator</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                This example is more advanced and has several things going on besides just using the "XmlSeedSourcePlus.xml" source file.
+                It has <b>5 custom rules</b>, which show off a few interesting things.
+            </p>
+            <p>
+                One is that it uses the custom <b>Description</b> data. If you look closely at the <b>Sports</b> example above, you will
+                notice that "Rugby" and "Bicycling" are repeated twice. This is because the data is selected from the source "Randomly" using a method
+                <b>Funcs.ElementRandom()</b> If we want this list to be sequential, we can use a similar method called <b>Funcs.ElementNext()</b>
+                as we are doing for the "Description" Rule. This will take the first item from the source, then go to next, etc. looping back
+                to front when it gets to the end.
+            </p>
+            <p>
+                You might notice that the xml source first element for Description is "It was kinda big" but the first item displayed
+                on the page is "Bumpy". This would not seem to make sense until you realize that the determining number for the ordinal
+                is the current RowNumber, which is 100 and "Bumpy" is the hundredth item in the list. <b>Funcs.ElementNext()</b> does have
+                an optional <b>OffSet</b> parameter so that you can shift the list without having to depend on the RowNumber.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                Another interesting feature is that we are generating a list of Seeded Items that are then stored in the generator.Cache. This
+                is a place to put generated data that can then be accessed by a Rule. The <b>Products</b> Rule is doing just that and is
+                populating a sequential list from the generator.Cache.Items. <b>Funcs.CacheItemsNext</b> works similar to <b>Funcs.ElementNext()</b>
+                except it works at the object level and returns a sequential list of items. Note that the list of Items is always the same as it
+                is pulled from the cache and will alway be unique it the number requested is less or equal to the number number in the source list.
+                More on this in the 25,000 Rows
+            </p>
+            <p>
+                We are generating a "SelectedProduct" in the Example object that is populated by a Random number from 0 to 10 and this is what
+                is being used to populate the selected product in the Products dropdown.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @{ Html.RenderPartial("_GeneratorCustomizingExample"); }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <a class="nextpage pull-right" href="/Extending">
+                Extending<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>

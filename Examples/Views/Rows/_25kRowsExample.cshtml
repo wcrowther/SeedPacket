@@ -1,0 +1,58 @@
+﻿@using SeedPacket
+@using SeedPacket.Generators
+@using SeedPacket.Extensions
+@using SeedPacket.Functions
+@using Examples.Models
+@using System.Diagnostics
+@model  List<Account>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table accountTable table-striped topSpace">
+            <thead>
+                <tr>
+                    <th>AccountName</th>
+                    <th>AccountId</th>
+                    <th>Active Invoices</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var account in Model)
+                {
+                    <tr class="accountRow">
+                        <td><h4>@account.AccountName</h4></td>
+                        <td>@account.AccountId</td>
+                        <td>@account.Invoices.Count</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            @foreach (var invoice in account.Invoices)
+                            {
+                                <div class="invoice">
+                                    <div class="invoiceHeader">
+                                        <div class="thirdWidth"><b>InvoiceId: @invoice.InvoiceId</b></div>
+                                        <div class="thirdWidth">InvoiceDate: @invoice.InvoiceDate.ToShortDateString()</div>
+                                        <div class="thirdWidth">Created: @invoice.Created.ToShortDateString()</div>
+                                    </div>
+                                    <table class="invoiceTable">
+                                        @foreach (var invoiceItem in invoice.InvoiceItems)
+                                        {
+                                            <tr>
+                                                <td>@invoiceItem.InvoiceItemId</td>
+                                                <td>$@invoiceItem.Fee</td>
+                                                <td>@invoiceItem.Product</td>
+                                                <td>@invoiceItem.Description</td>
+                                                <td>@invoiceItem.Created.ToShortDateString()</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </div>
+                            }
+                            </td>
+                     </tr>
+                }
+                </tbody>
+                </table>
+            </div>
+
+</div>

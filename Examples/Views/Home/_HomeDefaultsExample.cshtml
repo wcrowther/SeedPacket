@@ -4,8 +4,9 @@
 
 @{ 
     var gen = new MultiGenerator() {
+        BaseDateTime = DateTime.Parse("12/12/1999"),
         BaseRandom = new Random(1234),
-        SeedBegin = 110, SeedEnd = 117
+        SeedBegin = 110, SeedEnd = 114
     };
     var users = new List<User>().Seed(gen);
 }

@@ -1,0 +1,37 @@
+﻿
+@{ Html.RenderPartial("_Header"); }
+
+<div class="row">
+    <div class="col-md-8">
+        <h3>AJAX Refresh</h3>
+
+        <div class="pull-right">
+            <div class="randomSeed">
+                Seed<input id="randomSeed" type="text" value="1234" maxlength="4" style="width:44px; text-align: center;" />
+            </div>
+            <div class="rowCounter">
+                Rows<input id="numberOfRowResults" type="text" value="20" maxlength="4" style="width:44px; text-align: center;" />
+            </div>
+        </div>
+        <p>
+            Before we go into additional details about customizing data generation in the Generators page lets get interactive with 
+            what we are generating. Here we are using a conventional MVC controller passing in a model to the page where the seed data has 
+            already been created by the controller. By changing the Rows and Seed form values, you can see how an ajax component
+            refreshes the table with a dynamically generated list of variable length and custom seeded data.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @{ Html.RenderPartial("_AjaxExample1"); }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="nextpage pull-right" href="/Generator">
+            Generator<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@using Examples.Models
+@using SeedPacket.Extensions
+
+<div id="rowResults">
+    <table class="table table-striped topSpace" style="min-width: 570px;">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value.ItemId</th>
+                <th>Value.ItemName</th>
+                <th>Value.Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in new Dictionary<int, Item>().Seed(10))
+            {
+                <tr>
+                    <td>@entry.Key</td>
+                    <td>@entry.Value.ItemId</td>
+                    <td>@entry.Value.ItemName</td>
+                    <td>@entry.Value.Created</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

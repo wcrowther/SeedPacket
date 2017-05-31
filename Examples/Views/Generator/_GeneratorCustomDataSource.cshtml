@@ -1,0 +1,22 @@
+﻿@using SeedPacket
+@using SeedPacket.Extensions
+@using SeedPacket.Generators
+
+
+@{ 
+    var gen = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml");
+
+    var sports = new List<string>().Seed(seedEnd: 15, generator: gen, propertyName: "Sport");
+}
+
+<table class="table table table-striped topSpace">
+    <thead>
+        <tr><th>Sports</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var sport in sports)
+        {
+            <tr><td>@sport</td></tr>
+        }
+    </tbody>
+</table>

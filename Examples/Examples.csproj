@@ -133,7 +133,7 @@
     <Content Include="SourceFiles\seedsource.xml" />
     <Content Include="SourceFiles\sourceData2.xml" />
     <Content Include="SourceFiles\xmlSeedSourcePlus.xml" />
-    <Content Include="Views\DataSource\_DataSourceExample2.cshtml" />
+    <Content Include="Views\Generator\_GeneratorCustomizingExample.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Web.config" />
@@ -142,20 +142,25 @@
     <Content Include="SourceFiles\jsonseedsource.json" />
     <Content Include="SourceFiles\jsonseedsource2.json" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\_BasicExample1.cshtml" />
-    <Content Include="Views\Home\_BasicExample2.cshtml" />
-    <Content Include="Views\Home\_BasicExample3.cshtml" />
-    <Content Include="Views\Home\_BasicExample4.cshtml" />
-    <Content Include="Views\Home\_BasicExample5.cshtml" />
+    <Content Include="Views\Home\_HomeBasicExample.cshtml" />
+    <Content Include="Views\Home\_HomeCustomCountExample.cshtml" />
+    <Content Include="Views\Home\_HomeCustomRangeExample.cshtml" />
+    <Content Include="Views\Home\_HomeDefaultsExample.cshtml" />
+    <Content Include="Views\Home\_ParagraphTextExample.cshtml" />
     <Content Include="Views\Rules\Index.cshtml" />
     <Content Include="Views\Rules\_RulesAll.cshtml" />
-    <Content Include="Views\DataSource\Index.cshtml" />
+    <Content Include="Views\Generator\Index.cshtml" />
     <Content Include="Views\Extending\_ExtendingExample1.cshtml" />
     <Content Include="Views\Extending\Index.cshtml" />
     <Content Include="Views\Rows\_25kRowsExample.cshtml" />
     <Content Include="Views\Rows\Index.cshtml" />
-    <Content Include="Views\DataSource\_DataSourceExample1.cshtml" />
-    <Content Include="Views\DataSource\_DataSourceExample1A.cshtml" />
+    <Content Include="Views\Home\_DictionaryExample.cshtml" />
+    <Content Include="Views\Generator\_GeneratorCustomDataSource.cshtml" />
+    <Content Include="Views\Home\_PrimitiveListsExample.cshtml" />
+    <Content Include="Views\Ajax\_AjaxExample1.cshtml" />
+    <Content Include="Views\Ajax\_AjaxExample1A.cshtml" />
+    <Content Include="Views\Ajax\Index.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -171,8 +176,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DataSourceController.cs" />
+    <Compile Include="Controllers\GeneratorController.cs" />
     <Compile Include="Controllers\ExtendingController.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\RowsController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

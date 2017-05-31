@@ -32,11 +32,11 @@ namespace SeedPacket.Extensions
             return seedCore.SeedList(iEnumerable);
         }
 
-        public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin = 1, int seedEnd = 10, IGenerator generator = null, string propertyName = "")
+        public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int? seedBegin = null, int? seedEnd = null, IGenerator generator = null, string propertyName = "")
         {
             var gen = generator ?? new MultiGenerator();
-            gen.SeedBegin = seedBegin;
-            gen.SeedEnd = seedEnd;
+            gen.SeedBegin = seedBegin.HasValue ? seedBegin.Value : gen.SeedBegin;
+            gen.SeedEnd = seedEnd.HasValue ? seedEnd.Value : gen.SeedEnd;
             gen.CurrentPropertyName = propertyName;
 
             return new SeedCore(gen).SeedList(iEnumerable);
