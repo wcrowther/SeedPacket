@@ -8,7 +8,7 @@ namespace SeedPacket.Functions
     {
         public static string RandomCompany (IGenerator generator)
         {
-            return Funcs.ElementRandom(generator, "CompanyName") + Funcs.ElementRandom(generator, "CompanySuffix") ?? "Inc";
+            return Funcs.GetElementRandom(generator, "CompanyName") + Funcs.GetElementRandom(generator, "CompanySuffix") ?? "Inc";
         }
     }
 }

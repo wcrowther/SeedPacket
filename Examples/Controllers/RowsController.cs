@@ -38,9 +38,9 @@ namespace Website.Controllers
                 Rules =  {
                     new Rule(typeof(int), "AccountId",      g => baseAccountId + g.RowNumber, "AccountId"  ),
                     new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth"  ),
-                    new Rule(typeof(string),"Description%", g => Funcs.ElementRandom(g, "Description"), "Description", "Gets Description from custom XML file" ),
-                    new Rule(typeof(List<InvoiceItem>), "", g => Funcs.CacheItemsNext<InvoiceItem>(g, "InvoiceItems", 1, 8), "getInvoiceItems"),
-                    new Rule(typeof(List<Invoice>), "",     g => Funcs.CacheItemsRandom<Invoice>(g, "Invoices", 1, 8), "getInvoices") 
+                    new Rule(typeof(string),"Description%", g => Funcs.GetElementRandom(g, "Description"), "Description", "Gets Description from custom XML file" ),
+                    new Rule(typeof(List<InvoiceItem>), "", g => Funcs.GetCacheItemsNext<InvoiceItem>(g, "InvoiceItems", 1, 8), "getInvoiceItems"),
+                    new Rule(typeof(List<Invoice>), "",     g => Funcs.GetCacheItemsRandom<Invoice>(g, "Invoices", 1, 8), "getInvoices") 
                 }
             };
             generator.Cache.InvoiceItems = new List<InvoiceItem>().Seed(10000, 10000 + (rowCount * 20), generator); 
@@ -59,7 +59,7 @@ namespace Website.Controllers
         private static List<Invoice> GetInvoices(IGenerator g)
         {
             int accountId = Convert.ToInt32(g?.CurrentRowValues["AccountId"]);
-            var invoices = Funcs.CacheItemsNext<Invoice>(g, "Invoices", 1, 8);
+            var invoices = Funcs.GetCacheItemsNext<Invoice>(g, "Invoices", 1, 8);
             if (invoices != null)
                 invoices.ForEach(ii => ii.AccountId = accountId);
 

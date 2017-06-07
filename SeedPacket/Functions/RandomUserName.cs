@@ -7,8 +7,8 @@ namespace SeedPacket.Functions
     {
         public static string RandomUserName (IGenerator generator) // First-Initial LastName
         {
-            string firstName    = generator.CurrentRowValues.Get("FirstName")?.ToString() ?? Funcs.ElementRandom(generator, "FirstName") ?? "F";
-            string lastName     = generator.CurrentRowValues.Get("LastName")?.ToString() ?? Funcs.ElementRandom(generator, "LastName") ?? $"LastName{generator.RowNumber}";
+            string firstName    = generator.CurrentRowValues.Get("FirstName")?.ToString() ?? Funcs.GetElementRandom(generator, "FirstName") ?? "F";
+            string lastName     = generator.CurrentRowValues.Get("LastName")?.ToString() ?? Funcs.GetElementRandom(generator, "LastName") ?? $"LastName{generator.RowNumber}";
 
             return $"{firstName.FirstOrDefault()}{lastName}";
         }

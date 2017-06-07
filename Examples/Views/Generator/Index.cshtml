@@ -54,14 +54,14 @@
             <p>
                 One is that it uses the custom <b>Description</b> data. If you look closely at the <b>Sports</b> example above, you will
                 notice that "Rugby" and "Bicycling" are repeated twice. This is because the data is selected from the source "Randomly" using a method
-                <b>Funcs.ElementRandom()</b> If we want this list to be sequential, we can use a similar method called <b>Funcs.ElementNext()</b>
+                <b>Funcs.GetElementRandom()</b> If we want this list to be sequential, we can use a similar method called <b>Funcs.GetElementNext()</b>
                 as we are doing for the "Description" Rule. This will take the first item from the source, then go to next, etc. looping back
                 to front when it gets to the end.
             </p>
             <p>
                 You might notice that the xml source first element for Description is "It was kinda big" but the first item displayed
                 on the page is "Bumpy". This would not seem to make sense until you realize that the determining number for the ordinal
-                is the current RowNumber, which is 100 and "Bumpy" is the hundredth item in the list. <b>Funcs.ElementNext()</b> does have
+                is the current RowNumber, which is 100 and "Bumpy" is the hundredth item in the list. <b>Funcs.GetElementNext()</b> does have
                 an optional <b>OffSet</b> parameter so that you can shift the list without having to depend on the RowNumber.
             </p>
         </div>
@@ -69,7 +69,7 @@
             <p>
                 Another interesting feature is that we are generating a list of Seeded Items that are then stored in the generator.Cache. This
                 is a place to put generated data that can then be accessed by a Rule. The <b>Products</b> Rule is doing just that and is
-                populating a sequential list from the generator.Cache.Items. <b>Funcs.CacheItemsNext</b> works similar to <b>Funcs.ElementNext()</b>
+                populating a sequential list from the generator.Cache.Items. <b>Funcs.GetCacheItemsNext</b> works similar to <b>Funcs.GetElementNext()</b>
                 except it works at the object level and returns a sequential list of items. Note that the list of Items is always the same as it
                 is pulled from the cache and will alway be unique it the number requested is less or equal to the number number in the source list.
                 More on this in the 25,000 Rows example.

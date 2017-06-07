@@ -793,7 +793,7 @@
                 <strong>Methods:</strong>
                 <ul>
                     <li>
-                        <h5>static CacheItemsNext&lt;T&gt; (IGenerator generator, string cacheListName, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
+                        <h5>static GetCacheItemsNext&lt;T&gt; (IGenerator generator, string cacheListName, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
                         <p>Sequentially gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
                            <b>generator.Cache</b> where the {cacheListName} parameter is the name of the list. Will not throw an error if
                             the named element does not exist.
@@ -804,7 +804,7 @@
                         </p>
                     </li>
                     <li>
-                        <h5>static CacheItemsNext&lt;T&gt; (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
+                        <h5>static GetCacheItemsNext&lt;T&gt; (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
                         <p>Sequentially gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
                            <b>generator.Cache</b> where the {cacheListName} parameter is a C# dynamic item. ex: generator.Cache.Invoices. Will throw 
                            an error if the element does not exist in the Cache.
@@ -815,7 +815,7 @@
                         </p>
                     </li>
                     <li>
-                        <h5>static List&lt;T&gt; CacheItemsRandom&lt;T&gt; (IGenerator generator, string cacheListName, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
+                        <h5>static List&lt;T&gt; GetCacheItemsRandom&lt;T&gt; (IGenerator generator, string cacheListName, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
                         <p>Randomly gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
                            <b>generator.Cache</b> where the {cacheListName} parameter is the name of the list. Will not throw an error if
                             the named element does not exist.
@@ -826,7 +826,7 @@
                         </p>
                     </li>
                     <li>
-                        <h5>static List&lt;T&gt; CacheItemsRandom&lt;T&gt; (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
+                        <h5>static List&lt;T&gt; GetCacheItemsRandom&lt;T&gt; (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true) : returns List&lt;T&gt;</h5>
                         <p>Randomly gets a number of items, with a minimum of {min} and minimum of {max} items, from a list cached in the
                            <b>generator.Cache</b> where the {cacheListName} parameter is a C# dynamic item. ex: generator.Cache.Invoices. Will throw
                            an error if the element does not exist in the Cache.
@@ -843,8 +843,8 @@
                         </p>
                     </li>
                     <li>
-                        <h5>static ElementNext (IGenerator generator, string identifier) : returns string</h5>
-                        <p>ElementNext gets the next string from the element list named for the {identifier} from the datasource contained in the
+                        <h5>static GetElementNext (IGenerator generator, string identifier) : returns string</h5>
+                        <p>GetElementNext gets the next string from the element list named for the {identifier} from the datasource contained in the
                            IGenerator passed in from {generator} parameter. If no elements exist in the list, null is returned. If
                            the number is greater than what exists in the list, then it wraps back around to a string in the list.
                         </p>
