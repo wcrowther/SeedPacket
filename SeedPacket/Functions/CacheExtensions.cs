@@ -7,6 +7,8 @@ using System.Linq;
 
 namespace SeedPacket.Functions
 {
+    // These extension methods are puposefully in the SeedPacket.Functions namespace as they are mostly associated with the functionality here.
+
     public static class CacheExtensions 
     {
         /// <summary>Will randomly take {count} number of items from the sourceList and return them in the new destinationList</summary>
@@ -43,6 +45,23 @@ namespace SeedPacket.Functions
             var dictionary = (IDictionary<string, object>) expando;
 
             return dictionary.ContainsKey(name) ? (T) dictionary[name] : default(T);
+        }
+
+        public static void AddItemByName<T>(this ExpandoObject expando, string name, T value)
+        {
+            var dictionary = (IDictionary<string, object>)expando;
+
+            if (value == null)
+                value = default(T);
+
+            if (dictionary.ContainsKey(name))
+            {
+                dictionary[name] = value;
+            }
+            else
+            {
+                dictionary.Add(name, value);
+            }
         }
 
         public static TVal Get<TKey, TVal> (this Dictionary<TKey, TVal> dictionary, TKey key, TVal defaultVal = default(TVal))

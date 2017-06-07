@@ -3,6 +3,7 @@ using NewLibrary.ForString;
 using NewLibrary.ForType;
 using SeedPacket.Generators;
 using SeedPacket.Interfaces;
+using SeedPacket.Functions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -75,7 +76,6 @@ namespace SeedPacket
         {
             var dictionary = new Dictionary<TKey, TValue>();
             var metaModel = typeof(TValue).GetMetaModel();
-            var cachedRules = new Dictionary<int, Rule>();
             Rule keyRule = generator.Rules.GetRuleByTypeAndName(typeof(TKey), "" );
             Rule valueTypeRule = generator.Rules.GetRuleByTypeAndName(typeof(TValue), generator.CurrentPropertyName);
 
@@ -91,7 +91,7 @@ namespace SeedPacket
 
                 if (typeof(TValue).GetConstructor(Type.EmptyTypes) != null)
                 {
-                    seedValue = CreateComplexClassRow<TValue>(generator, metaModel, cachedRules, isFirstRow);
+                    seedValue = CreateComplexClassRow<TValue>(generator, metaModel, isFirstRow);
                 }
                 else
                 {
@@ -109,7 +109,6 @@ namespace SeedPacket
         {
             var seedList = new List<T>();
             var metaModel = typeof(T).GetMetaModel();
-            var cachedRules = new Dictionary<int, Rule>();
             bool isFirstRow = true;
 
             for (int rowNumber = generator.SeedBegin; rowNumber <= generator.SeedEnd; rowNumber++)
@@ -117,7 +116,7 @@ namespace SeedPacket
                 generator.RowNumber = rowNumber;
                 generator.GetNextRowRandom();
 
-                var newRow = CreateComplexClassRow<T>(generator, metaModel, cachedRules, isFirstRow);
+                var newRow = CreateComplexClassRow<T>(generator, metaModel, isFirstRow);
                 seedList.Add(newRow);
 
                 isFirstRow = false;
@@ -125,7 +124,7 @@ namespace SeedPacket
             return seedList;
         }
 
-        private T CreateComplexClassRow<T> ( IGenerator generator, MetaModel metaType, Dictionary<int, Rule> cachedRules, bool isFirstRow)  
+        private T CreateComplexClassRow<T> ( IGenerator generator, MetaModel metaType, bool isFirstRow)  
         {
             var metaProperties = metaType.GetMetaProperties();
 
@@ -139,7 +138,7 @@ namespace SeedPacket
                 if (!property.CanWrite)
                     continue;
 
-                var rule = GetRuleForProperty(generator, i, cachedRules, isFirstRow);
+                var rule = GetRuleForProperty(generator, i, isFirstRow);
 
                 SetPropertyValue(newItem, property, rule, generator);
             }
@@ -148,7 +147,7 @@ namespace SeedPacket
             return newItem;
         }
 
-        private Rule GetRuleForProperty (IGenerator generator, int propInt, Dictionary<int, Rule> cachedRules, bool isFirstRow)
+        private Rule GetRuleForProperty (IGenerator generator, int propInt, bool isFirstRow)
         {
             Rule rule;
             var property = generator.CurrentProperty;
@@ -156,13 +155,14 @@ namespace SeedPacket
             if (isFirstRow) // Cache rules for first row
             {
                 rule = generator.Rules.GetRuleByTypeAndName(property.PropertyType, property.Name);
-                cachedRules.Add(propInt, rule);
+
+                CacheExtensions.AddItemByName(generator.Cache, "CachedRules." + propInt, rule);
 
                 DebugWrite($"Property: {property.Name }({property.PropertyType}) using rule: {rule?.RuleName ?? "No matching Rule"}.");
             }
             else
             {
-                rule = cachedRules[propInt];
+                rule = CacheExtensions.GetByItemName<Rule>(generator.Cache, "CachedRules." + propInt); 
             }
             return rule;
         }
