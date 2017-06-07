@@ -54,7 +54,7 @@ namespace Website.Controllers
 
         // Example where rule is broken out into a separate function (use: "g => GetInvoices(g)" ):
         // 1) For adding extra logic like making the accountId in the invoice the actual accountId in parent, if that is required
-        // 2) Useful if debugging is needed. Much easier to isolate when in a separate function...
+        // 2) Useful if debugging is needed. Code is much easier to isolate when in a separate function...
 
         private static List<Invoice> GetInvoices(IGenerator g)
         {

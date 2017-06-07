@@ -15,10 +15,15 @@ namespace Examples.Extensions
             {
                 SeedEnd = seedEnd,
                 BaseRandom = new Random(34561),
-
-                CurrentPropertyName = propertyName
+                CurrentPropertyName = propertyName,
+                RowNumber = 444
             };
             return new SeedCore(gen).SeedList(iEnumerable).ToList();
+        }
+
+        public static T SeedOne<T>(this T type) where T : new()
+        {
+            return new List<T>().Seed(seedEnd: 1).Single();
         }
     }
 }

@@ -132,6 +132,7 @@
     <None Include="Scripts\_references.js" />
     <Content Include="SourceFiles\seedsource.xml" />
     <Content Include="SourceFiles\sourceData2.xml" />
+    <EmbeddedResource Include="SourceFiles\XmlGeneratorSource.xml" />
     <Content Include="SourceFiles\xmlSeedSourcePlus.xml" />
     <Content Include="Views\Generator\_GeneratorCustomizingExample.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -161,6 +162,7 @@
     <Content Include="Views\Ajax\_AjaxExample1A.cshtml" />
     <Content Include="Views\Ajax\Index.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
+    <EmbeddedResource Include="SourceFiles\JsonGeneratorSource.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -55,7 +55,8 @@
         <p>
             <b>Dictionary&lt;TKey, TValue&gt;</b> implements IEnumerable and is supported by SeedPacket using the .Seed() method. Note that
             while the Value object properties are fully mapped by the Rules Engine, the Key only maps to the basic Rule for that type, usually
-            int, string, or datetime, without allowing for a "nameMatch" filter.
+            int, string, or datetime, without allowing for a "nameMatch" filter. Be careful if a custom Rule has been applied to the Key datatype
+            that it produces as this has to be unique.
         </p>
     </div>
     <div class="col-md-8">
@@ -71,7 +72,7 @@
             types are singular and do not have a property name that a Rule can key in on, the .Seed() method has a <b>PropertyName</b>
             constructor overload parameter that can be passed in. This PropertyName is what a Rule will use to "nameMatch" against,
             but is ignored for complex types with more than one property. In this example, "StateName" is passed in and populates with random
-            data from the defaults in MultiDataSource. In the Generator examples, you will see how you can easily add custom lists
+            data from the defaults in MultiDataSource. In the <a href="/Generator">Generator</a> examples, you will see how you can easily add custom lists
             that contain your own values.
         </p>
     </div>
@@ -84,8 +85,9 @@
     <div class="col-md-4">
         <h3>Paragraph Text</h3>
         <p>
-            While it may be unlikely that you will have a property consisting of a list of strings named with either "body" or "copy",
-            adding one will allow you to add mockup dummy "paragraph" text, as in the example.
+            A common need when prototyping can be simulating bodycopy. While it may be unlikely that you will have a property consisting
+            of a list of strings named with either "body" or "copy", adding a field to your object class, will allow you to add mockup dummy
+            "paragraph" text, as we have done in this example.
         </p>
     </div>
     <div class="col-md-8">

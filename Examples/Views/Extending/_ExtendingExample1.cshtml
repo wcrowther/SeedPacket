@@ -1,8 +1,13 @@
 ﻿@using Examples.Models
 @using Examples.Extensions
 @{
-    ViewBag.Title = "Home Page";
+
+    var appUser = new User().SeedOne();
 }
+@appUser.UserId<br />
+@appUser.LastName<br />
+
+
 <h3>SeedPacket</h3>
 <br />
 <div class="row">

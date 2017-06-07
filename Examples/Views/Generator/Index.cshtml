@@ -14,7 +14,7 @@
                 default source xml, but with the addition of some extra data such as <b>"Descriptions"</b> and <b>"Sports"</b>.
             </p>
             <p>
-                Either primitives or complex types will use random data matching the property name of the field
+                For either complex types or primitive types like this, string fields will generate random data matching the property name
                 (ie: "Sport", not the plural) that is being populated by default. If the property name does not exactly match
                 the data from the source file, a custom Rule can be created that can explicitly name the field.
             </p>
@@ -30,7 +30,8 @@
                 <p>
                     If you are going to keep the existing default rules such as "StateName", "FirstName", etc. in your
                     Rules collection, it is generally better to <b>only add to or modify the existing data, rather than deleting it.</b>
-                    If you do delete the source data for an existing Rule, it should not throw an error, but will be very generic.
+                    If you do delete the source data for an existing Rule, it should not throw an error, but will be very
+                    generate very generic data.
                 </p>
             </div>
         </div>
@@ -71,10 +72,10 @@
                 populating a sequential list from the generator.Cache.Items. <b>Funcs.CacheItemsNext</b> works similar to <b>Funcs.ElementNext()</b>
                 except it works at the object level and returns a sequential list of items. Note that the list of Items is always the same as it
                 is pulled from the cache and will alway be unique it the number requested is less or equal to the number number in the source list.
-                More on this in the 25,000 Rows
+                More on this in the 25,000 Rows example.
             </p>
             <p>
-                We are generating a "SelectedProduct" in the Example object that is populated by a Random number from 0 to 10 and this is what
+                Finally, we are generating a "SelectedProduct" in the Example object that is populated by a Random number from 0 to 10 and this is what
                 is being used to populate the selected product in the Products dropdown.
             </p>
         </div>
