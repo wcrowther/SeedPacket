@@ -60,9 +60,9 @@
     <Compile Include="Exceptions\InvalidSourceStringException.cs" />
     <Compile Include="Exceptions\MultipleSourceException.cs" />
     <Compile Include="Functions\CacheExtensions.cs" />
-    <Compile Include="Functions\CacheItemsNext.cs" />
-    <Compile Include="Functions\BodyCopy.cs" />
-    <Compile Include="Functions\LoremText.cs" />
+    <Compile Include="Functions\GetCacheItemsNext.cs" />
+    <Compile Include="Functions\RandomBodyCopy.cs" />
+    <Compile Include="Functions\RandomLoremText.cs" />
     <Compile Include="Functions\OnceEvery.cs" />
     <Compile Include="Functions\RandomPhone.cs" />
     <Compile Include="Functions\RandomAddress.cs" />
@@ -74,9 +74,9 @@
     <Compile Include="Functions\RandomEmail.cs" />
     <Compile Include="Functions\RandomGuid.cs" />
     <Compile Include="Functions\DiceRoll.cs" />
-    <Compile Include="Functions\ElementNext.cs" />
+    <Compile Include="Functions\GetElementNext.cs" />
     <Compile Include="Functions\RandomDateTime.cs" />
-    <Compile Include="Functions\ElementRandom.cs" />
+    <Compile Include="Functions\GetElementRandom.cs" />
     <Compile Include="Generators\Generator.cs" />
     <Compile Include="Generators\MultiGenerator.cs" />
     <Compile Include="Rules\AddCommonRules.cs" />
@@ -89,7 +89,7 @@
     <Compile Include="Extensions\SeedExtensions.cs" />
     <Compile Include="Rules\RulesSet.cs" />
     <Compile Include="Generators\BasicGenerator.cs" />
-    <Compile Include="Functions\CacheItemsRandom.cs" />
+    <Compile Include="Functions\GetCacheItemsRandom.cs" />
     <Compile Include="Rules\AddBasicRules.cs" />
     <Compile Include="SeedCore.cs" />
     <Compile Include="SimpleSeed.cs" />
