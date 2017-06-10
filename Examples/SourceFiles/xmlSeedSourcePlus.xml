@@ -510,7 +510,8 @@
   </Lorems>
 
   <Descriptions>
-    <Description>It was kinda big</Description>
+    <Description>Squishy</Description>
+    <Description>Light purple</Description>
     <Description>Yellow, definitely yellow</Description>
     <Description>Hairy and green</Description>
     <Description>Midnight blue</Description>
@@ -525,6 +526,12 @@
     <Description>Awful</Description>
     <Description>Rich!</Description>
     <Description>Who knows</Description>
+    <Description>Bumpy</Description>
+    <Description>Angular</Description>
+    <Description>Complicated</Description>
+    <Description>Angular</Description>
+    <Description>Transparent</Description>
+    <Description>Sunny and bright</Description>
   </Descriptions>
   
   <Sports>
@@ -546,5 +553,92 @@
     <Sport>Swimming</Sport>
     <Sport>Bicycling</Sport>
   </Sports>
+
+  <SongTitles>
+    <SongTitle>Only One</SongTitle>
+    <SongTitle>Groovy Tunes</SongTitle>
+    <SongTitle>His Old Lady</SongTitle>
+    <SongTitle>A Brighter Shade of Gray</SongTitle>
+    <SongTitle>The Man and the Stars</SongTitle>
+    <SongTitle>Take Your Time</SongTitle>
+    <SongTitle>Troubles Will Come</SongTitle>
+    <SongTitle>You Will Find Love</SongTitle>
+    <SongTitle>The Stream</SongTitle>
+    <SongTitle>The Will and the Way</SongTitle>
+    <SongTitle>Life Leasons</SongTitle>
+    <SongTitle>Don't Worry</SongTitle>
+    <SongTitle>Nothing Else</SongTitle>
+    <SongTitle>There is someone above</SongTitle>
+    <SongTitle>Jealous Gold</SongTitle>
+    <SongTitle>Extemporaneous</SongTitle>
+    <SongTitle>The Mighty Orca</SongTitle>
+    <SongTitle>Seredipity2</SongTitle>
+    <SongTitle>Country Shack</SongTitle>
+    <SongTitle>Butterfly Blues</SongTitle>
+  </SongTitles>
+
+  <AlbumNames>
+    <AlbumName>The Black Album</AlbumName>
+    <AlbumName>One at a Time</AlbumName>
+    <AlbumName>Smoke In Your Eyes</AlbumName>
+    <AlbumName>End of Days</AlbumName>
+    <AlbumName>Quartet</AlbumName>
+    <AlbumName>Gangland Frame</AlbumName>
+    <AlbumName>Partial Mission</AlbumName>
+    <AlbumName>Thanks for the Fish</AlbumName>
+    <AlbumName>Fresh</AlbumName>
+    <AlbumName>Purple Passion</AlbumName>
+    <AlbumName>Pop of the Tops</AlbumName>
+    <AlbumName>Time</AlbumName>
+    <AlbumName>Freshly Rejected</AlbumName>
+    <AlbumName>Tin Can Man</AlbumName>
+    <AlbumName>Nothing to Say</AlbumName>
+    <AlbumName>Hope for the Masses</AlbumName>
+    <AlbumName>Know Your Friends</AlbumName>
+    <AlbumName>Does She Care</AlbumName>
+    <AlbumName>Mondo Bondo</AlbumName>
+    <AlbumName>Egg in the Eye</AlbumName>
+    <AlbumName>Gorilla Joint</AlbumName>
+    <AlbumName>Fraz the Queen</AlbumName>
+    <AlbumName>Hip Juice</AlbumName>
+    <AlbumName>The Stream</AlbumName>
+    <AlbumName>The Asking</AlbumName>
+  </AlbumNames>
+
+  <Artists>
+    <Artist>Jozy PussyCat</Artist>
+    <Artist>Christian Frizzle</Artist>
+    <Artist>Audacious Criminal</Artist>
+    <Artist>Fiddly Bits</Artist>
+    <Artist>Rap Crew</Artist>
+    <Artist>Frank Jones</Artist>
+    <Artist>Boodle Jones</Artist>
+    <Artist>Fitzi Louis</Artist>
+    <Artist>The Bad Ones</Artist>
+    <Artist>Stalingrad Cowboys</Artist>
+    <Artist>The Bobs</Artist>
+    <Artist>Dylan Dylan</Artist>
+    <Artist>Veni Vedi Vici</Artist>
+    <Artist>Paragon</Artist>
+    <Artist>The Masters of Nothing</Artist>
+    <Artist>Hurt No More</Artist>
+    <Artist>Sea Lion</Artist>
+    <Artist>Pearly Gates</Artist>
+    <Artist>Joe Jetson</Artist>
+    <Artist>Beltway</Artist>
+    <Artist>Will Work For Food</Artist>
+    <Artist>The Other Will</Artist>
+    <Artist>Dog and Cat</Artist>
+    <Artist>Mac Truck</Artist>
+    <Artist>Germain Jess</Artist>
+    <Artist>Frugal Fritz</Artist>
+    <Artist>Elvis Milkman</Artist>
+    <Artist>Beat The Wind</Artist>
+    <Artist>Like More Water</Artist>
+    <Artist>Jon ColdRidge</Artist>
+    <Artist>Trixy OldHouse</Artist>
+    <Artist>MC Ash</Artist>
+    <Artist>Temper Flare</Artist>
+  </Artists>
 
 </Root>

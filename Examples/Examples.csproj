@@ -163,6 +163,8 @@
     <Content Include="Views\Ajax\Index.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <EmbeddedResource Include="SourceFiles\JsonGeneratorSource.json" />
+    <Content Include="Views\Extending\_ExtendingSeedOneExample.cshtml" />
+    <Content Include="Views\Extending\_ExtendingGeneratorExample.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -185,22 +187,19 @@
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\CustomSeedExtensions.cs" />
+    <Compile Include="Generators\CustomGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\ActionViewModel.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\Example.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\InvoiceItem.cs" />
     <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\Link.cs" />
-    <Compile Include="Models\Pattern.cs" />
-    <Compile Include="Models\PatternDetail.cs" />
+    <Compile Include="Models\Song.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\Word.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

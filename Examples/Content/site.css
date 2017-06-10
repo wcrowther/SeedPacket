@@ -319,3 +319,20 @@ table thead {
     padding: 15px;
     vertical-align: middle;
 }
+.seedOne {
+    border: solid 1px #83A8D1;
+    padding: 10px;
+}
+.seedOne div.name {
+    display: inline-block;
+    width: 150px;
+    margin-right: 20px;
+    font-weight: bold;
+}
+.seedOne div span {
+    display: inline-block;
+    width: 150px;
+    margin-right: 20px;
+    font-weight: bold;
+    text-align: right;
+}

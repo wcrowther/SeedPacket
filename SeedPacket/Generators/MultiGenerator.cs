@@ -25,7 +25,7 @@ namespace SeedPacket.Generators
             GetRules(rulesSet);
         } 
 
-        public virtual void GetRules (RulesSet ruleSet)
+        protected virtual void GetRules (RulesSet ruleSet)
         {
             switch (ruleSet)
             {

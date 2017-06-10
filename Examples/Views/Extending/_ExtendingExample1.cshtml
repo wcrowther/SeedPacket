@@ -1,32 +1,27 @@
 ﻿@using Examples.Models
 @using Examples.Extensions
-@{
 
-    var appUser = new User().SeedOne();
-}
-@appUser.UserId<br />
-@appUser.LastName<br />
-
-
-<h3>SeedPacket</h3>
-<br />
-<div class="row">
+<div class="row topSpace">
     <div class="col-md-12">
         <table class="table table table-striped topSpace">
             <thead>
                 <tr>
-                    <th>UserId</th>
-                    <th>Full Name</th>
-                    <th>Email</th>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Album</th>
+                    <th>Artist</th>
+                    <th>Released</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var user in new List<AppUser>().Seed(99).ToList())
+                @foreach (var song in new List<Song>().Seed().ToList())
                 {
                     <tr>
-                        <td>@user.UserId</td>
-                        <td>@(user.FirstName + " " + user.LastName)</td>
-                        <td>@user.Email</td>
+                        <td>@song.Ranking</td>
+                        <td>@song.SongTitle</td>
+                        <td>@song.AlbumName</td>
+                        <td>@song.Artist</td>
+                        <td>@song.Released.ToShortDateString()</td>
                     </tr>
                 }
             </tbody>

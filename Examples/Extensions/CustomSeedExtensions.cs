@@ -4,28 +4,28 @@ using SeedPacket.Generators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Examples.Generators;
 
 namespace Examples.Extensions
 {
     public static class CustomSeedExtensions
     {
-        public static List<T> Seed<T>(this IEnumerable<T> iEnumerable, int seedEnd = 100, string propertyName = "")
+        public static List<T> Seed<T>(this IEnumerable<T> iEnumerable, int? seedEnd = null, int? seedBegin = null, int? randomSeed = null, string propertyName = null)
         {
-            var gen = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml", dataInputType: DataInputType.XmlFile)
+            var gen = new CustomGenerator("~/SourceFiles/xmlSeedSourcePlus.xml", dataInputType: DataInputType.XmlFile)
             {
-                SeedEnd = seedEnd,
-                BaseRandom = new Random(34561),
-                CurrentPropertyName = propertyName,
-                RowNumber = 444
+                SeedBegin = seedBegin ?? 1,
+                SeedEnd = seedEnd ?? 10,
+                BaseRandom = new Random(randomSeed ?? 3456),
+                BaseDateTime = DateTime.Now,
+                CurrentPropertyName = propertyName
             };
             return new SeedCore(gen).SeedList(iEnumerable).ToList();
         }
 
-        public static T SeedOne<T>(this T type) where T : new()
+        public static T SeedOne<T>(this T type, int? randomSeed = null) where T : new()
         {
-            return new List<T>().Seed(seedEnd: 1).Single();
+            return new List<T>().Seed(seedEnd: 1, randomSeed: randomSeed).Single();
         }
     }
 }
-
-
