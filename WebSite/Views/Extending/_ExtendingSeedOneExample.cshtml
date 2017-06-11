@@ -1,0 +1,28 @@
+﻿@using Website.Models
+@using Website.Extensions
+
+@{
+
+    var example = new Example().SeedOne();
+}
+
+<div class="seedOne topSpace">
+    <div>
+        <span>Id:</span>@example.Id
+    </div>
+    <div>
+        <span>Guid:</span>@example.ExampleGuid
+    </div>
+    <div>
+        <span>Ceo:</span>@example.Ceo
+    </div>
+    <div>
+        <span>CompanyName:</span>@example.CompanyName
+    </div>
+    <div>
+        <span>Net Worth:</span>$@(example.NetWorth)k
+    </div>
+    <div>
+        <span>Notes:</span>@example.Notes
+    </div>
+</div>

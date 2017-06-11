@@ -122,6 +122,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ExtendingController.cs" />
+    <Compile Include="Controllers\ExtendingOldController.cs" />
     <Compile Include="Controllers\ExamplesController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\SeedController.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\CustomSeedExtensions.cs" />
+    <Compile Include="Generators\CustomGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -140,6 +142,7 @@
     <Compile Include="Models\Example.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Song.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Pattern.cs" />
     <Compile Include="Models\PatternDetail.cs" />
@@ -218,9 +221,9 @@
     <Content Include="Views\Home\_Result_AdvancedExample.cshtml" />
     <Content Include="Views\Home\_Example_SimpleExample.cshtml" />
     <Content Include="Views\Home\_Example_AdvancedExample.cshtml" />
-    <Content Include="Views\Extending\Index.cshtml" />
-    <Content Include="Views\Extending\_Example_UserClass.cshtml" />
-    <Content Include="Views\Extending\_Example_SimpleExamples.cshtml" />
+    <Content Include="Views\ExtendingOld\Index.cshtml" />
+    <Content Include="Views\ExtendingOld\_Example_UserClass.cshtml" />
+    <Content Include="Views\ExtendingOld\_Example_SimpleExamples.cshtml" />
     <Content Include="Views\Documentation\Index.cshtml" />
     <Content Include="Views\SimpleSeed\Index.cshtml" />
     <Content Include="Views\SimpleSeed\_Example_LinqRange.cshtml" />
@@ -238,6 +241,10 @@
     <Content Include="Views\Rules\_RulesCommon.cshtml" />
     <Content Include="Views\Rules\_RulesBasic.cshtml" />
     <EmbeddedResource Include="SourceFiles\JsonGeneratorSource.json" />
+    <Content Include="Views\Extending\_ExtendingExample1.cshtml" />
+    <Content Include="Views\Extending\_ExtendingGeneratorExample.cshtml" />
+    <Content Include="Views\Extending\_ExtendingSeedOneExample.cshtml" />
+    <Content Include="Views\Extending\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeedPacket\SeedPacket.csproj">
@@ -250,7 +257,7 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Extending\_Extending_Result1.cshtml" />
+    <Content Include="Views\ExtendingOld\_Extending_Result1.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
