@@ -75,7 +75,6 @@ namespace SeedPacket
 
         {
             var dictionary = new Dictionary<TKey, TValue>();
-            var metaModel = typeof(TValue).GetMetaModel();
             Rule keyRule = generator.Rules.GetRuleByTypeAndName(typeof(TKey), "" );
             Rule valueTypeRule = generator.Rules.GetRuleByTypeAndName(typeof(TValue), generator.CurrentPropertyName);
 
@@ -91,7 +90,7 @@ namespace SeedPacket
 
                 if (typeof(TValue).GetConstructor(Type.EmptyTypes) != null)
                 {
-                    seedValue = CreateComplexClassRow<TValue>(generator, metaModel, isFirstRow);
+                    seedValue = CreateComplexClassRow<TValue>(generator, isFirstRow);
                 }
                 else
                 {
@@ -108,7 +107,6 @@ namespace SeedPacket
         private List<T> CreateComplexTypeList<T>() 
         {
             var seedList = new List<T>();
-            var metaModel = typeof(T).GetMetaModel();
             bool isFirstRow = true;
 
             for (int rowNumber = generator.SeedBegin; rowNumber <= generator.SeedEnd; rowNumber++)
@@ -116,7 +114,7 @@ namespace SeedPacket
                 generator.RowNumber = rowNumber;
                 generator.GetNextRowRandom();
 
-                var newRow = CreateComplexClassRow<T>(generator, metaModel, isFirstRow);
+                var newRow = CreateComplexClassRow<T>(generator, isFirstRow);
                 seedList.Add(newRow);
 
                 isFirstRow = false;
@@ -124,9 +122,9 @@ namespace SeedPacket
             return seedList;
         }
 
-        private T CreateComplexClassRow<T> ( IGenerator generator, MetaModel metaType, bool isFirstRow)  
+        private T CreateComplexClassRow<T> ( IGenerator generator, bool isFirstRow)  
         {
-            var metaProperties = metaType.GetMetaProperties();
+            var metaProperties = typeof(T).GetMetaProperties();
 
             dynamic newItem = Activator.CreateInstance(typeof (T)); // OR new T();
 
@@ -173,7 +171,7 @@ namespace SeedPacket
             {
                 dynamic seedValue = rule.ApplyRule(generator);
                 property.SetInstanceValue(seedValue, newItem);
-                generator.CurrentRowValues.Add(property.Name, seedValue);
+                generator.CurrentRowValues.Add(property.Name, seedValue); // Possibly use: CacheExtensions.AddItemByName(generator.Cache, "RowValues." + property.Name, seedValue);
             }
         }
 
