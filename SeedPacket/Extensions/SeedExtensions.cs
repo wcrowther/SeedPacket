@@ -66,11 +66,11 @@ namespace SeedPacket.Extensions
             return seedCore.SeedList(iDictionary);
         }
 
-        public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int seedBegin = 1, int seedEnd = 10, IGenerator generator = null, string currentPropertyName = "")
+        public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int? seedBegin = null, int? seedEnd = null, IGenerator generator = null, string currentPropertyName = "")
         {
             var gen = generator ?? new MultiGenerator();
-            gen.SeedBegin = seedBegin;
-            gen.SeedEnd = seedEnd;
+            gen.SeedBegin = seedBegin ?? 1;
+            gen.SeedEnd = seedEnd ?? 10;
             gen.CurrentPropertyName = currentPropertyName;
 
             return new SeedCore(gen).SeedList(iDictionary);
