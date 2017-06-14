@@ -8,20 +8,10 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body><div class="mainContent">
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="@Html.ActiveToggle("Home","Index")">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="@Html.ActiveToggle("Documentation","Index")">@Html.ActionLink("Documentation", "Index", "Documentation")</li>
-                    <li class="@Html.ActiveToggle("Extending","Index")">@Html.ActionLink("Extending", "Index", "Extending")</li>
-                    <li class="@Html.ActiveToggle("Rules","Index")">@Html.ActionLink("Rules", "Index", "Rules")</li>
-                    <li class="@Html.ActiveToggle("SimpleSeed","Index")">@Html.ActionLink("SimpleSeed", "Index", "SimpleSeed")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<body>
+<div class="mainContent">
+
+    @{ Html.RenderPartial("_NavBar"); }
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -32,6 +22,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/ScriptApp")
     @RenderSection("scripts", required: false)
+
 </div>
 </body>
 </html>

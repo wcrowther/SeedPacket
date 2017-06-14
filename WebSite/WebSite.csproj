@@ -245,6 +245,7 @@
     <Content Include="Views\Extending\_ExtendingGeneratorExample.cshtml" />
     <Content Include="Views\Extending\_ExtendingSeedOneExample.cshtml" />
     <Content Include="Views\Extending\Index.cshtml" />
+    <Content Include="Views\Shared\_NavBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeedPacket\SeedPacket.csproj">

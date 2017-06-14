@@ -1,0 +1,27 @@
+﻿
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+
+            <!-- Hamburger Menu -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navBarCollapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- NavBar -->
+            <div class="navbar-collapse collapse" id="navBarCollapse">
+                <ul class="nav navbar-nav">
+                    <li class="@Html.ActiveToggle("Home","Index")">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="@Html.ActiveToggle("Rules","Index")">@Html.ActionLink("Rules", "Index", "Rules")</li>
+                    <li class="@Html.ActiveToggle("Extending","Index")">@Html.ActionLink("Extending", "Index", "Extending")</li>
+                    <li class="@Html.ActiveToggle("Documentation","Index")">@Html.ActionLink("Documentation", "Index", "Documentation")</li>
+                    <li class="@Html.ActiveToggle("SimpleSeed","Index")">@Html.ActionLink("SimpleSeed", "Index", "SimpleSeed")</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>

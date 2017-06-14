@@ -86,7 +86,6 @@ input[type="checkbox"].input-validation-error {
     background-color: #F5DEDB;
     min-height: 100px;
     padding: 30px 20px 20px 20px;
-    margin-right: -15px;
 }
 
 .byline {
@@ -171,14 +170,12 @@ code i {
     margin-left:0;
 }
 .topSpace {
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
-/*  
-=========================================================================== 
+/*  =========================================================================== 
     Bootstrap Overrides / Additions 
-=========================================================================== 
-*/
+=========================================================================== */
 
 table {
     border: solid 1px #83A8D1;
@@ -201,6 +198,22 @@ table thead {
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
     background-color: #ECEDF7;
+}
+@media only screen and (max-width: 800px) {
+    .table-collapse {
+        display: block;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 550px) {
+    .table-collapse-sm {
+        display: block;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        width: 100%;
+    }
 }
 
 /* Green table */
@@ -234,30 +247,14 @@ table thead {
 .nextpage span {
     margin-left: 5px;
 }
-.SourceDesc {
+.SourceDesc{
     font-weight: bold;
     padding: 20px 0 0 0;
 }
 
-.linqSplash, .simpleSeedSplash {
-    position: absolute;
-    top: -10px;
-    right: 110px;
-    height: 78px;
-    width: 153px;
-}
-.linqSplash {
-    background: url(Images/linqSplash.png) no-repeat;
-}
-.simpleSeedSplash {
-    background: url(Images/simpleSeedSplash.png) no-repeat;
-}
-
-/*  
-=========================================================================== 
+/*  =========================================================================== 
     Documentation
-=========================================================================== 
-*/
+=========================================================================== */
 
 /* Namespace H3
 .documentation h3 {} */
@@ -285,4 +282,75 @@ table thead {
 }
 
 
+/*  =========================================================================== 
+    Rows
+=========================================================================== */
 
+.invoiceTable {
+    width: 100%; 
+    margin-bottom: 20px;
+    border: none;
+}
+.invoiceTable tr {
+
+}
+.invoiceTable td {
+    border-color: #ccc !important;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.invoiceTable tr:last-child {
+    border-bottom: 1px solid #ccc;
+}
+.accountTable {
+    border: solid 1px #83A8D1;
+    border-collapse: initial;
+}
+.accountRow {
+}
+.accountRow td {
+    background-color: #c4d7ec !important;
+}
+.accountTable td {
+    width: 16%;
+    vertical-align: middle !important;
+}
+.thirdWidth {
+    display: inline-block;
+    width: 30%;
+}
+.forthWidth {
+    display: inline-block;
+    width: 24.5%;
+}
+.invoice {
+    border: solid 2px #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-top-right-radius: 45px
+}
+.invoiceHeader {
+    background-color: #ccc;
+    margin: -10px -10px 20px -10px;
+    padding: 15px;
+    vertical-align: middle;
+    border-top-right-radius: 40px
+}
+.seedOne {
+    border: solid 1px #83A8D1;
+    padding: 10px;
+    background-color: white;
+}
+.seedOne div.name {
+    display: inline-block;
+    width: 150px;
+    margin-right: 20px;
+    font-weight: bold;
+}
+.seedOne div span {
+    display: inline-block;
+    width: 150px;
+    margin-right: 20px;
+    font-weight: bold;
+    text-align: right;
+}
