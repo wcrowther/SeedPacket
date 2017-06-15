@@ -64,6 +64,16 @@ namespace SeedPacket.Functions
             }
         }
 
+        public static void RemoveItemByName(this ExpandoObject expando, string name)
+        {
+            var dictionary = (IDictionary<string, object>)expando;
+
+            if (dictionary.ContainsKey(name))
+            {
+                dictionary.Remove(name);
+            }
+        }
+
         public static TVal Get<TKey, TVal> (this Dictionary<TKey, TVal> dictionary, TKey key, TVal defaultVal = default(TVal))
         {
             TVal val;

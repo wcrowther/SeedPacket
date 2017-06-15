@@ -55,5 +55,55 @@ namespace Tests.SeedPacket
             Assert.AreEqual(10, generator.Cache.InvoiceItems.Count);                 // 100 InvoiceItems created - 90 taken in invoices = 10 left in cache
         }
 
+        [Test]
+        public void TestGetByItemName()
+        {
+            var generator = new BasicGenerator();
+            generator.Cache.Invoice = new Invoice {
+                InvoiceId = 1,
+                AccountId = 7890,
+                InvoiceItems = new List<InvoiceItem> {
+                    new InvoiceItem{ InvoiceItemId = 1234 , Amount = 99.99M },
+                    new InvoiceItem{ InvoiceItemId = 5678 , Amount = 2.22M }
+                }
+            };
+            ExpandoObject cache = generator.Cache;
+
+            Assert.AreEqual(1, cache.GetByItemName<Invoice>("Invoice").InvoiceId);
+            Assert.AreEqual(7890, cache.GetByItemName<Invoice>("Invoice").AccountId);
+            Assert.AreEqual(99.99M, cache.GetByItemName<Invoice>("Invoice").InvoiceItems[0].Amount);
+            Assert.AreEqual(5678, cache.GetByItemName<Invoice>("Invoice").InvoiceItems[1].InvoiceItemId);
+        }
+
+        [Test]
+        public void TestRemoveByItemName()
+        {
+            var generator = new BasicGenerator();
+            var name = "Invoice";
+            generator.Cache.Invoice = new Invoice
+            {
+                InvoiceId = 1
+            };
+            ExpandoObject cache = generator.Cache;
+            cache.RemoveItemByName(name);
+
+            Assert.AreEqual(null, cache.GetByItemName<Invoice>(name));
+        }
+
+        [Test]
+        public void TestAddByItemName()
+        {
+            var generator = new BasicGenerator();
+            string name = "Invoice";
+            var invoice = new Invoice
+            {
+                InvoiceId = 1
+            };
+
+            ExpandoObject cache = generator.Cache;
+            cache.AddItemByName(name, invoice);
+
+            Assert.AreEqual(1, cache.GetByItemName<Invoice>(name).InvoiceId);
+        }
     }
 }

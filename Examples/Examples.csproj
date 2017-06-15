@@ -165,6 +165,7 @@
     <EmbeddedResource Include="SourceFiles\JsonGeneratorSource.json" />
     <Content Include="Views\Extending\_ExtendingSeedOneExample.cshtml" />
     <Content Include="Views\Extending\_ExtendingGeneratorExample.cshtml" />
+    <Content Include="Views\Shared\_NavBar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

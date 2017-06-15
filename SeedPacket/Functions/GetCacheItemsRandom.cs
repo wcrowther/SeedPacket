@@ -11,7 +11,7 @@ namespace SeedPacket.Functions
         // This overload passes in a cacheList by name string like: "Items" -> (will throw NOT an error if does not exist)
         public static List<T> GetCacheItemsRandom<T> (IGenerator generator, string cacheListName, int min, int max, bool remove = true)
         {
-            ExpandoObject cache = generator.Cache;
+            var cache = generator.Cache as ExpandoObject;
             var cacheList = cache.GetByItemName<List<T>>(cacheListName);
 
             return GetCacheItemsRandom<T>(generator, cacheList, min, max, remove);

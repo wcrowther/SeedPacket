@@ -54,21 +54,43 @@
                 <strong>Extension Methods on IEnumerable&lt;T&gt;</strong>
                 <ul>
                     <li>
-                        <h5>.Seed (int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <h5>.Seed &lt;T&gt;(int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
                         <p>If no parameters are provided, creates 10 rows from 1 to 10. If IGenerator is null, defaults to the MultiGenerator.</p>
                     </li>
                     <li>
-                        <h5>.Seed (int count) : returns IEnumerable&lt;T&gt;</h5>
+                        <h5>.Seed &lt;T&gt;(int count) : returns IEnumerable&lt;T&gt;</h5>
                         <p>Seeds {count} rows of data using the MultiGenerator.</p>
                     </li>
                     <li>
-                        <h5>.Seed (IGenerator generator) : returns IEnumerable&lt;T&gt;</h5>
+                        <h5>.Seed &lt;T&gt;(IGenerator generator) : returns IEnumerable&lt;T&gt;</h5>
                         <p>Seeds rows totally based on the IGenerator and its parameters that is passed in.</p>
                     </li>
                     <li>
-                        <h5>.Seed (int seedBegin, int seedEnd, string filePath) : returns IEnumerable&lt;T&gt;</h5>
+                        <h5>.Seed &lt;T&gt;(int seedBegin, int seedEnd, string filePath) : returns IEnumerable&lt;T&gt;</h5>
                         <p>Seeds rows beginning with {SeedBegin} to {SeedEnd}, passing in the path to an external file of data, either
                         XML or JSON (which it will automatically detect).</p>
+                    </li>
+                </ul>
+                <strong>Extension Methods on IDictionary&lt;TKey, TValue&gt;</strong>
+                <ul>
+                    <li>
+                        <h5>.Seed &lt;TKey, TValue&gt;(int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>If no parameters are provided, creates 10 rows from 1 to 10. If IGenerator is null, defaults to the MultiGenerator.</p>
+                    </li>
+                    <li>
+                        <h5>.Seed &lt;TKey, TValue&gt;(int count) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Seeds {count} rows of data using the MultiGenerator.</p>
+                    </li>
+                    <li>
+                        <h5>.Seed &lt;TKey, TValue&gt;(IGenerator generator) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>Seeds rows totally based on the IGenerator and its parameters that is passed in.</p>
+                    </li>
+                    <li>
+                        <h5>.Seed &lt;TKey, TValue&gt;(int seedBegin, int seedEnd, string filePath) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>
+                            Seeds rows beginning with {SeedBegin} to {SeedEnd}, passing in the path to an external file of data, either
+                            XML or JSON (which it will automatically detect).
+                        </p>
                     </li>
                 </ul>
             </li>
@@ -362,7 +384,7 @@
                         <h5>dynamic Cache { get; set; }</h5>
                         <p>As it's name implies, the cache is used to store data for later use in a subsequent Rule using a c# dynamic
                             ExpandoObject object that works similar to an asp.net web forms viewbag. This is helpful so you can store
-                            an instance of a list that has seeded with data, then retrieve items from that listeither sequentially or randomly.</p>
+                            an instance of a list that has seeded with data, then retrieve items from that list either sequentially or randomly.</p>
                         <p>To assign to the Cache, you simple write: generator.Cache.Items =  new List&lt;Items&gt;().Seed()</p>
                         <p>To retrieve a cache list by string name, the CacheExtensions method GetByItemName() is provided so use: 
                            var list = generator.cache.GetByItemName&lt;List&lt;T&gt;&gt;(cacheListName)</p>
@@ -764,21 +786,45 @@
                 <ul>
                     <li>
                         <h5>static TakeRandomItems&lt;T&gt; (this IList&lt;T&gt; sourceList, Random random, int count = 1, bool remove = true) : returns IList&lt;T&gt;</h5>
-                        <p>Will randomly take {count} number of items from the sourceList and return them in the new destinationList. If 
-                           {remove} = true, which is the default, then they are removed from the sourceList. This method is useful for
-                           populating seed data from pre-existing seeded lists in the cache. Be mindful that picking data randomly from a 
-                           big list of data can be slower (1/2 as fast) as retrieving sequencial data and may not be necessary, particularily
-                           if the data is random to begin with.</p>
-                    <li>
-                        <h5>static T GetByItemName&lt;T&gt; (this ExpandoObject expando, string name) : returns T</h5>
-                        <p>This extension method method takes advantage of the fact that the ExpandoObject is actually an IDictionary, which
-                           allows us to extract items by a string name.</p>
+                        <p>
+                            Will randomly take {count} number of items from the sourceList and return them in the new destinationList. If
+                            {remove} = true, which is the default, then they are removed from the sourceList. This method is useful for
+                            populating seed data from pre-existing seeded lists in the cache. Be mindful that picking data randomly from a
+                            big list of data can be slower (1/2 as fast) as retrieving sequencial data and may not be necessary, particularily
+                            if the data is random to begin with.
+                        </p>
                     </li>
                     <li>
                         <h5>static Get&lt;TKey, TVal&gt; (this Dictionary&lt;TKey, TVal&gt; dictionary, TKey key, TVal defaultVal = default(TVal)) : returns TVal</h5>
-                        <p>This helpful extension method is useful for conditionally getting values from a dictionary. If the 
-                           key does not exist in the Dictionary, it returns the defaultValue for that type. A custom default value for
-                           that type can be passed in using the defaultVal parameter.</p>
+                        <p>
+                            This helpful extension method is useful for conditionally getting values from a dictionary. If the
+                            key does not exist in the Dictionary, it returns the defaultValue for that type. A custom default value for
+                            that type can be passed in using the defaultVal parameter.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>static T GetByItemName&lt;T&gt; (this ExpandoObject expando, string name) : returns T</h5>
+                        <p>
+                            This extension method takes advantage of the fact that the ExpandoObject is actually an IDictionary, which
+                            allows us to extract items by a string name. <i>Note:&nbsp;</i>&nbsp;The Generator.Cache is a dynamic and needs to be 
+                            cast as an ExpandoObject to access this extension method.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>static T AddItemByName&lt;T&gt; (this ExpandoObject expando, string name, T value) : returns void</h5>
+                        <p>
+                            This extension method also takes advantage of the fact that the ExpandoObject is actually an IDictionary, and adds
+                            an item {value} of type T to the key {name}. If the value is null, then the value will be the default for T.
+                            If the ExpandoObject already has a key for {name}, then it will update that key with {value}. 
+                            <i>Note:&nbsp;</i>&nbsp;The Generator.Cache is a dynamic and needs to be cast as an ExpandoObject to access this extension method.
+                        </p>
+                    </li>
+                    <li>
+                        <h5>static T RemoveItemByName&lt;T&gt; (this ExpandoObject expando, string name) : returns void</h5>
+                        <p>
+                            This extension method casts it's ExpandoObject to an IDictionary so that it can remove an item when the key is {name}. 
+                            <i>Note:&nbsp;</i>&nbsp;The Generator.Cache is a dynamic and needs to be cast as an ExpandoObject to access this extension method.
+                        </p>
                     </li>
                 </ul>
             </li>
@@ -850,8 +896,8 @@
                         </p>
                     </li>
                     <li>
-                        <h5>static ElementRandom (IGenerator generator, string identifier = null, bool nullIfEmpty = false) : returns string</h5>
-                        <p>ElementRandom gets a random string from the element list named for the {identifier} from the datasource
+                        <h5>static GetElementRandom (IGenerator generator, string identifier = null, bool nullIfEmpty = false) : returns string</h5>
+                        <p>GetElementRandom gets a random string from the element list named for the {identifier} from the datasource
                            contained in the IGenerator passed in from {generator} parameter. If no elements exist in the list, null
                            is returned.
                         </p>
@@ -861,8 +907,8 @@
                         </p>
                     </li>
                     <li>
-                        <h5>static ElementRandom (IGenerator generator, string identifier, TypeCode typeCode) : returns dynamic</h5>
-                        <p>This overload of the ElementRandom method provides a TypeCode that the string will be converted to. The {nullIfEmpty}
+                        <h5>static GetElementRandom (IGenerator generator, string identifier, TypeCode typeCode) : returns dynamic</h5>
+                        <p>This overload of the GetElementRandom method provides a TypeCode that the string will be converted to. The {nullIfEmpty}
                            parameter has been removed as the type default is always returned as the default.</p>
                     </li>
                     <li>
