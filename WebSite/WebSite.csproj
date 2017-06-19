@@ -247,6 +247,7 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Documentation\_SeedPacket_Code.cshtml" />
     <Content Include="Views\Extending\_CustomGenerator_Code.cshtml" />
+    <Content Include="Views\Documentation\_Rule_Code.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeedPacket\SeedPacket.csproj">
