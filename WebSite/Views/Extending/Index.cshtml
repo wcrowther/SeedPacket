@@ -22,6 +22,8 @@
     </div>
 </div>
 
+@{ Html.RenderPartial("_CustomSeedExtensions_Code"); }
+
 <div class="row">
     <div class="col-md-6">
         <h3>Custom Extension Methods</h3>
@@ -32,11 +34,10 @@
             that just works everywhere in you project with your own Rules, defaults and data!         
         </p>
         <p>
-            The actual code on this page is trivial as it just uses the customizations from the example <b>Extensions/CustomSeedExtensions.cs</b> 
-            in this project. This a good starting point for your own custom extensions with default set to your own liking.
-            It simplifies and removes some of the overloads from the <b>SeedPacket.Extensions</b> version, and set your defaults including
-            that that we are getting our source data from our own XML file. Once you have your ideal solution, 
-            you will find it generic enough that you will be able to take it to other projects to use for prototyping.
+            The actual code on this page is trivial as it a streamlined version of the <b>SeedPacket.Extensions</b> that you can find
+            in the SeedPacket source code and is a good starting point for your own custom extensions with but with defaults set to your own liking.
+            It simplifies and removes some of the overloads from the source code version, and sets the source data to come from our own XML file. 
+            Once you have your ideal solution,  you will find it generic enough that you will be able to take it to other projects to use for prototyping.
         </p>
         <p>
             One thing to note is that the namespace <b>Examples.Extensions</b> is imported into the page, but the <b>SeedPacket.Extensions</b>
@@ -53,9 +54,9 @@
     <div class="col-md-6">
         <h3>SeedOne Extension Method</h3>
         <p>
-            An additional method included in <b>Examples.Extensions</b> is <b>SeedOne()</b> which is implementation for just getting back
+            An additional method included in the example is <b>SeedOne()</b> which is implementation for just getting back
             a fully-populated single instance of the type. It is an extension on any class that implements the new() constructor
-            (with no creation parameters).  While perhaps not the most efficient code, it shows how you can create alternative
+            (with no constructor parameters).  While perhaps not the most efficient code, it shows how you can create alternative
             extensions that utilize SeedPacket code generation.
         </p>
     </div>
@@ -64,24 +65,23 @@
     </div>
 </div>
 
+@{ Html.RenderPartial("_CustomGenerator_Code"); }
+
 <div class="row">
     <div class="col-md-6">
         <h3>Custom Generators</h3>
         <p>
-            Another extensibility point demonstrated in the <b>CustomSeedExension.cs</b> class is the custom IGenerator. The <b>CustomGenerator</b>
-            inherits all functionality from the <b>MultiGenerator</b> and adds few new customizations. In this case, it adds a <b>RulesSet.Advanced</b>
+            Another extensibility point is demonstrated in the code above by building a custom IGenerator. The <b>CustomGenerator</b>
+            inherits all functionality from the <b>MultiGenerator</b> and adds few new features. In this case, it adds a <b>RulesSet.Advanced</b>
             option as the default and adds some additional rules, including a Rule that fills the <b>CEO</b> property. Of course these could
-            be more extensive, including a completely new default Rules implementation, etc.
+            be more extensive, including a completely new default Rules implementation, etc. To use this implementation, just paste the code in a 
+            new file for the <b>CustomGenerator</b> and switch out the references, including your own namespace, from MultiGenerator to CustomGenerator.
         </p>
         <p>
             The <b>GetRules()</b> method of the <b>MultiGenerator</b> is declared as virtual so that it can be overriden by a derived class. 
             This method is called by the constructor to load its Rules collection based on the RulesSet enum that it is passed. So be overriding it, you can
             redefine which Rules are loaded for each enum. In fact, 3 values in the enum, Advanced, UnitTest, and Custom do not have an 
             implementation are there purely for customization in derived classes.
-        </p>
-        <p>
-            Customizing multiple RuleSet implementations, gives you a centalized generator that can be used for unit testing by default and another that is for
-            prototyping, etc. 
         </p>
     </div>
     <div class="col-md-6">

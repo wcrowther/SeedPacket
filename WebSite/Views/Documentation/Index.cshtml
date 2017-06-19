@@ -50,17 +50,18 @@
                    such as List&lt;string&gt; do not implement new() and will throw an error. IEnumerables Dictionaries are
                    also not supported.
                 </p>
-                @{ Html.RenderPartial("_01_SeedExtensions"); }
+                @{ Html.RenderPartial("_SeedPacket_Code"); }
                 <strong>Extension Methods on IEnumerable&lt;T&gt;</strong>
                 <ul>
                     <li>
-                        <h5>.Seed &lt;T&gt;(int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
-                        <p>If no parameters are provided, creates 10 rows from 1 to 10. If IGenerator is null, defaults to the MultiGenerator.</p>
-                    </li>
-                    <li>
-                        <h5>.Seed &lt;T&gt;(int count) : returns IEnumerable&lt;T&gt;</h5>
+                        <h5>.Seed &lt;T&gt;(this IEnumerable&lt;T&gt; iEnumerable, int count) : returns IEnumerable&lt;T&gt;</h5>
                         <p>Seeds {count} rows of data using the MultiGenerator.</p>
                     </li>
+                    <li>
+                        <h5>.Seed &lt;T&gt;(this IEnumerable&lt;T&gt; iEnumerable, int seedBegin = 1, int seedEnd = 10, IGenerator generator = null) : returns IEnumerable&lt;T&gt;</h5>
+                        <p>If no parameters are provided, creates 10 rows from 1 to 10. If IGenerator is null, defaults to the MultiGenerator.</p>
+                    </li>
+
                     <li>
                         <h5>.Seed &lt;T&gt;(IGenerator generator) : returns IEnumerable&lt;T&gt;</h5>
                         <p>Seeds rows totally based on the IGenerator and its parameters that is passed in.</p>
@@ -111,14 +112,16 @@
                     finds the best rule matching that property's name and datatype. Then uses that rule to generate data to fill 
                     that property's value.
                 </p>
-                <p>Generally, the default method of seeding data is to use the .Seed() extension methods on IEnumerable in the
+                <p>
+                    Generally, the default method of seeding data is to use the .Seed() extension methods on IEnumerable in the
                    SeedPacket.Extensions namespace to seed data. The functionality of the SeedCore class has intentionally been kept
                    separate from the extension method logic in so that writing custom extension methods is trivial. 
                 </p>
-                <p> TIP: Customize your own .Seed() extension methods with your own defaults, rules, and customizations as in the 
+                <p style="color:#F90E0A">
+                    <i>TIP:</i> Customize your own .Seed() extension methods with your own defaults, rules, and customizations as in the
                     example below. Now you can easily add your own rules and data, or even clear all the rules and start over from scratch! 
+                    See the <a href="/Extending">Extending</a> page for more details.
                 </p>
-                @{ Html.RenderPartial("_02_SeedPacket"); }
                 <strong>Constructor:</strong>
                 <ul>
                     <li>
@@ -139,11 +142,11 @@
                 <h4>SimpleSeed class</h4>
                 <p>
                     <strong>Purpose:</strong>
-                    The SimpleSeed class uses an alternative way to seed data. It does away with the Rules engine and uses a 
-                    more manual, and Linq-focused, way of creating data, while still leveraging the DataSource classes to utilize 
-                    XML / JSON files and strings. <a href="/SimpleSeed">SimpleSeed Info</a>
+                    The SimpleSeed class uses an alternative, simpler way to seed data. While less powerful, it may meet your needs for some basic
+                    purposes. It does away with the Rules engine and uses a more manual, and Linq-focused, way of creating data, 
+                    while still leveraging the DataSource classes to utilize XML / JSON files and strings. <a href="/SimpleSeed">SimpleSeed Info</a>
                 </p>
-                @{ Html.RenderPartial("_03_SimpleSeed"); }
+                @{ Html.RenderPartial("_SimpleSeed_Code"); }
                 <strong>Constructor:</strong>
                 <ul>
                     <li>
@@ -230,7 +233,8 @@
                         <h5>AddRange(IEnumerable&lt;Rule&gt;rules, bool overwrite = true) : returns void</h5>
                         <p>Applies the Add Rule to all the Rules elements in the IEnumerable.</p>
                     </li>
-                    <li>
+                    <!-- Rule offset to compensate for the fixed navbar. -->
+                    <li id="Rule">
                         <h5>RemoveRuleByName(string ruleName) : returns void</h5>
                         <p>Removes a Rule that matches the ruleName, if one exists.</p>
                     </li>
@@ -244,6 +248,9 @@
                     there is a match. The ruleName and decription tells what the rule is for. The function is a Func that takes an IGenerator
                     and returns a Dynamic type. If the run-time type returned does not match a compatible type, an exception will be thrown.
                 </p>
+
+                @{ Html.RenderPartial("_Rule_Code"); }
+
                 <strong>Constructor:</strong>
                 <ul>
                     <li>
@@ -256,9 +263,10 @@
                         </p>
                         <p>The func parameter is a c# Func&lt;IGenerator, dynamic&gt;, which is to say it takes a function that takes in the generator and uses it
                            to generate the seed data. As the rule is filtered to a specific Type, it is generally true that the returned Dyanmic is the 
-                           correct type at run-time, but the rule creator should be careful to check that this is true. It is better to encapsulate
-                           any complex logic in an external function call, particularily for debugging purposes. The SeedPacket.Functions namespace has
-                           many examples in the funcs partial classes.</p>
+                           correct type at run-time, but the rule creator should be careful to check that this is true. If the rule has any sort of
+                           complexity it is ususally better to encapsulate the logic in an external function call, particularily for debugging purposes. 
+                           The SeedPacket.Functions namespace has many examples that have been used to build existing Rules in the <b>funcs</b> partial classes. Often
+                           you can find an existing Rule in the source code on GitHub to pattern your code after.</p>
                         <p>The ruleName parameter gives a specific name to the rule and must be unique.</p>
                         <p>The optional description parameter provides a way to give additional descriptive information about the rules intent
                         .</p>

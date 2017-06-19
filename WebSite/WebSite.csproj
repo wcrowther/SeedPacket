@@ -233,9 +233,8 @@
     <Content Include="Views\Examples\Test2.cshtml" />
     <Content Include="Views\Examples\Index.cshtml" />
     <Content Include="Views\Home\_HotBox.cshtml" />
-    <Content Include="Views\Documentation\_01_SeedExtensions.cshtml" />
-    <Content Include="Views\Documentation\_02_SeedPacket.cshtml" />
-    <Content Include="Views\Documentation\_03_SimpleSeed.cshtml" />
+    <Content Include="Views\Extending\_CustomSeedExtensions_Code.cshtml" />
+    <Content Include="Views\Documentation\_SimpleSeed_Code.cshtml" />
     <Content Include="Views\Examples\PropertyNameTest.cshtml" />
     <Content Include="Views\Rules\Index.cshtml" />
     <Content Include="Views\Rules\_RulesCommon.cshtml" />
@@ -246,6 +245,8 @@
     <Content Include="Views\Extending\_ExtendingSeedOneExample.cshtml" />
     <Content Include="Views\Extending\Index.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Documentation\_SeedPacket_Code.cshtml" />
+    <Content Include="Views\Extending\_CustomGenerator_Code.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeedPacket\SeedPacket.csproj">

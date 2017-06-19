@@ -1,0 +1,16 @@
+﻿
+<div class="codeExample topSpace">
+<label class="codeLabelBlue">CODE:</label>
+<div class="codeTitle codeTitleBlue">Anatomy of a SeedPacket.Rule</div>
+
+<code>
+<i>// 1st parameter is the type that you want the Rule to match</i>
+<i>// 2nd parameter is the string pattern that you want the Rule to match. "" matches all</i>
+<i>// 3rd parameter is lambda function passing the SeedPacket generator and passing out a dynamic type</i>
+<i>// 4th parameter is the name of the Rule</i>
+<i>// 5th parameter is the optional description of the Rule</i>
+
+var rule = new Rule(typeof(string), "ItemName", g =&gt; Funcs.GetNextElement(g, "ProductName"), "ItemName")
+</code>
+
+</div>
