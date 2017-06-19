@@ -179,8 +179,6 @@
     </Content>
     <Content Include="SourceFiles\jsonseedsource2.json" />
     <Content Include="SourceFiles\jsonseedsource.json" />
-    <Content Include="Content\Images\SeedPacket 2.psd" />
-    <Content Include="Content\Images\SeedPacket 2a.psd" />
     <None Include="Properties\PublishProfiles\code.willcrowther.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\code.willcrowther.com.pubxml" />
     <None Include="Properties\PublishProfiles\seedpacket.net - Web Deploy.pubxml" />
