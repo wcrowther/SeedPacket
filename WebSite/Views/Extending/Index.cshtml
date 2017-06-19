@@ -13,8 +13,8 @@
             SeedPacket has been created from the beginning for extensibility. After all, the logic for data generation is contained
             in Rules that can be easily removed, replaced, or expanded. Individual Rules have access to a plethora of functionality that is
             passed in via dependency injection. The Generators are passed in as interfaces that can be easily switched out with new
-            implementations, as can the DataSources and all the source data that popluates the DataSources, can be passed in as 
-            an XML / JSON file or string.
+            implementations, as can the DataSources, and all the source data that popluates the DataSources (in either
+            an XML/JSON file or string).
         </p>
         <p>
             We are going to focus on two extensibility points, <b>Custom Extension Methods</b> and <b>Custom Generators</b>
@@ -27,6 +27,19 @@
 <div class="row">
     <div class="col-md-6">
         <h3>Custom Extension Methods</h3>
+        <div class="hotBox">
+            <p>
+                <b>To Run Code:</b>
+            </p>
+            <p>
+                Create a folder called <b>Extensions</b> and copy the code above into a file called <b>CustomSeedExtensions.cs</b>
+                using the name of your own namespace in place of <b>{YourNamespace}</b>.
+            </p>
+            <p>
+                Create a folder called SourceFiles. Download the file <a href="~/SourceFiles/xmlSeedSourcePlus.xml" download>XmlSeedSourcePlus.xml</a>
+                and save it into this folder.<br />
+            </p>
+        </div>
         <p>
             This example shows a simple yet extremely powerful way to customize data generation for a whole project. The extension method
             overloads in the <b>SeedPacket.Extensions</b> for the main <b>.Seed()</b> methods have purposely been separated from the actual implementations
@@ -70,12 +83,24 @@
 <div class="row">
     <div class="col-md-6">
         <h3>Custom Generators</h3>
+        <div class="hotBox">
+            <p>
+                <b>To Run Code:</b>
+            </p>
+            <p>
+                Create a folder called <b>Generators</b> and copy the code above into a file called <b>CustomGenerator.cs</b>
+                using the name of your own namespace in place of <b>{YourNamespace}</b>.
+            </p>
+            <p>
+                To use in the <b>CustomSeedExtensions</b> above, replace all references to the <b>MultiGenerator</b> class with
+                a reference to the new CustomGenerator in <b>{YourNamespace}</b>.
+            </p>            
+        </div>
         <p>
             Another extensibility point is demonstrated in the code above by building a custom IGenerator. The <b>CustomGenerator</b>
             inherits all functionality from the <b>MultiGenerator</b> and adds few new features. In this case, it adds a <b>RulesSet.Advanced</b>
             option as the default and adds some additional rules, including a Rule that fills the <b>CEO</b> property. Of course these could
-            be more extensive, including a completely new default Rules implementation, etc. To use this implementation, just paste the code in a 
-            new file for the <b>CustomGenerator</b> and switch out the references, including your own namespace, from MultiGenerator to CustomGenerator.
+            be more extensive, including a completely new default Rules implementation, etc. 
         </p>
         <p>
             The <b>GetRules()</b> method of the <b>MultiGenerator</b> is declared as virtual so that it can be overriden by a derived class. 
