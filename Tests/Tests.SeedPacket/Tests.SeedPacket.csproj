@@ -91,10 +91,6 @@
     <Content Include="Source\JsonSeedSource.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WebSite\WebSite.csproj">
-      <Project>{65e02ff3-0e00-450c-9117-ec48d4c6c0fb}</Project>
-      <Name>WebSite</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\SeedPacket\SeedPacket.csproj">
       <Project>{4c111213-e13e-4edd-b120-6fd6b61a15dc}</Project>
       <Name>SeedPacket</Name>
