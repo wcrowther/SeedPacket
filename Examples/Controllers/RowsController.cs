@@ -40,7 +40,7 @@ namespace Website.Controllers
                     new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth"  ),
                     new Rule(typeof(string),"Description%", g => Funcs.GetElementRandom(g, "Description"), "Description", "Gets Description from custom XML file" ),
                     new Rule(typeof(List<InvoiceItem>), "", g => Funcs.GetCacheItemsNext<InvoiceItem>(g, "InvoiceItems", 1, 8), "getInvoiceItems"),
-                    new Rule(typeof(List<Invoice>), "",     g => Funcs.GetCacheItemsRandom<Invoice>(g, "Invoices", 1, 8), "getInvoices") 
+                    new Rule(typeof(List<Invoice>), "",     g => Funcs.GetCacheItemsRandom<Invoice>(g, "Invoices", 1, 5), "getInvoices") 
                 }
             };
             generator.Cache.InvoiceItems = new List<InvoiceItem>().Seed(10000, 10000 + (rowCount * 20), generator); 
@@ -49,10 +49,7 @@ namespace Website.Controllers
             return new List<Account>().Seed(1, rowCount, generator).ToList(); 
         }
 
-
-
-
-        // Example where rule is broken out into a separate function (use: "g => GetInvoices(g)" ):
+        // Example where rule is broken out into a separate function (use: "g => GetInvoices(g)" to replace "Invoices" above. ):
         // 1) For adding extra logic like making the accountId in the invoice the actual accountId in parent, if that is required
         // 2) Useful if debugging is needed. Code is much easier to isolate when in a separate function...
 
