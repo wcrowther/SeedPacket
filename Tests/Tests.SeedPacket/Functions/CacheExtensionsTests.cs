@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Dynamic;
 using Microsoft.CSharp;
-using Website.Models;
+using Examples.Models;
 
 namespace Tests.SeedPacket
 {
@@ -63,15 +63,15 @@ namespace Tests.SeedPacket
                 InvoiceId = 1,
                 AccountId = 7890,
                 InvoiceItems = new List<InvoiceItem> {
-                    new InvoiceItem{ InvoiceItemId = 1234 , Amount = 99.99M },
-                    new InvoiceItem{ InvoiceItemId = 5678 , Amount = 2.22M }
+                    new InvoiceItem{ InvoiceItemId = 1234 , Fee = 99.99M },
+                    new InvoiceItem{ InvoiceItemId = 5678 , Fee = 2.22M }
                 }
             };
             ExpandoObject cache = generator.Cache;
 
             Assert.AreEqual(1, cache.GetByItemName<Invoice>("Invoice").InvoiceId);
             Assert.AreEqual(7890, cache.GetByItemName<Invoice>("Invoice").AccountId);
-            Assert.AreEqual(99.99M, cache.GetByItemName<Invoice>("Invoice").InvoiceItems[0].Amount);
+            Assert.AreEqual(99.99M, cache.GetByItemName<Invoice>("Invoice").InvoiceItems[0].Fee);
             Assert.AreEqual(5678, cache.GetByItemName<Invoice>("Invoice").InvoiceItems[1].InvoiceItemId);
         }
 
