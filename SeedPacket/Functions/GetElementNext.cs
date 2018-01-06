@@ -7,11 +7,12 @@ namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
-        public static string GetElementNext (IGenerator generator, string identifier, int offset = 0)
+        public static string GetElementNext (IGenerator generator, string identifier = null, int offset = 0)
         {
-            // Will loop back to beginning if rownumber is greater than number of elements in list
+            var propertyName = generator.CurrentPropertyName ?? "";
 
-            List<string> strings = generator.Datasource.GetElementList(identifier);
+            // Will loop back to beginning if rownumber is greater than number of elements in list
+            List<string> strings = generator.Datasource.GetElementList(identifier ?? propertyName);
             int count = strings.Count;
             if (count == 0)
                 return null;

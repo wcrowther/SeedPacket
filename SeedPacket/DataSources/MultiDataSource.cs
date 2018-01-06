@@ -124,8 +124,12 @@ namespace SeedPacket.DataSources
 
         public List<string> GetElementList(string identifier)
         {
-            // TODO ADD CACHING OF LIST?
             return sourceData.GetElementList(identifier);
+        }
+
+        public List<T> GetObjectList<T>(string identifier) where T : class, new()
+        {
+            return sourceData.GetObjectList<T>(identifier);
         }
     }
 }

@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System;
 using System.Linq;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using System.Reflection;
+using NewLibrary.ForType;
 
 namespace SeedPacket.Functions
 {
@@ -82,6 +86,42 @@ namespace SeedPacket.Functions
                 return val;
             }
             return defaultVal;
+        }
+
+        public static T ToOject<T>(this XElement element) where T : class, new()
+        {
+            try
+            {
+                T instance = new T();
+                var metaModel = new MetaModel(typeof(T), instance);
+                foreach (var metaProperty in metaModel.GetMetaProperties())
+                {
+                    var xattribute = element.Attribute(metaProperty.Name);
+                    var xelement = element.Element(metaProperty.Name);
+                    var propertyType = Nullable.GetUnderlyingType(metaProperty.PropertyType) ?? metaProperty.PropertyType;
+                    var value = xattribute?.Value ?? xelement.Value;
+
+                    try
+                    {
+                        if (value != null)
+                        {
+                            if (metaProperty.CanWrite)
+                            {
+                                metaProperty.SetInstanceValue(Convert.ChangeType(value, propertyType));
+                            }
+                        }
+                    }
+                    catch  // If Error let the value remain default for that property type
+                    {
+                        Console.WriteLine("Not able to parse value " + value +  " for type '" + metaProperty.PropertyType + "' for property " + metaProperty.Name );
+                    } 
+                }
+                return instance;
+            }
+            catch (Exception ex)
+            {
+                return default(T);
+            }
         }
 
     }

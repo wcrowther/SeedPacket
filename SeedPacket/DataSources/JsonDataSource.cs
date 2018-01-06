@@ -65,7 +65,6 @@ namespace SeedPacket.DataSources
             }
         }
 
-
         public List<string> GetElementList(string identifier)
         {
             if (jsonData != null)
@@ -76,6 +75,19 @@ namespace SeedPacket.DataSources
                     ?.ToList() ?? new List<string>();
             }
             return new List<string>();
+        }
+
+        public List<T> GetObjectList<T>(string identifier) where T : class, new()
+        {
+            if (jsonData != null)
+            {
+                var list = jsonData.SelectToken($"..{identifier}")
+                    .Select(p => p.ToObject<T>())
+                    .ToList() ?? new List<T>();
+
+                return list;
+            }
+            return new List<T>();
         }
     }
 }

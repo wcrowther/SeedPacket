@@ -32,4 +32,13 @@
   <ProductName>thingamabob</ProductName>
   <ProductName>whatnot</ProductName>
 
+  <Items>
+    <Item ItemId="1" ItemName="TestName1" Number="100" Created=""></Item>
+    <Item ItemId="2" ItemName="TestName2" Number="200" Created="2018-02-02 18:25:43.511"></Item>
+    <Item ItemId="3" ItemName="TestName3" Created="">
+      <Number>300</Number>
+    </Item>
+  </Items>
+
 </SimpleSeed>
+

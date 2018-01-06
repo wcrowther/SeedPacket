@@ -1,11 +1,14 @@
 ﻿using NewLibrary.ForString;
 using SeedPacket.Exceptions;
+using SeedPacket.Functions;
 using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace SeedPacket.DataSources
 {
@@ -70,6 +73,19 @@ namespace SeedPacket.DataSources
                 return sourceData.Descendants(identifier).Select(x => (string)x).ToList();
             }
             return new List<string>();
+        }
+
+        public List<T> GetObjectList<T>(string identifier) where T : class, new()
+        {
+            if (sourceData != null && !identifier.isNullOrEmpty())
+            {
+                var list = sourceData.Descendants(identifier)
+                    .Select(p => p.ToOject<T>())
+                    .ToList();
+
+                return list;
+            }
+            return new List<T>();
         }
     }
 }
