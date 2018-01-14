@@ -1,0 +1,29 @@
+﻿@using SeedPacket
+@using SeedPacket.Generators
+@using SeedPacket.Extensions
+@using SeedPacket.Functions
+@using Examples.Models
+@using System.Diagnostics
+@model  List<FootballTeam>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table accountTable table-striped topSpace table-collapse">
+            <thead>
+                <tr>
+                    <th>Home Team</th>
+                    <th>Visiting Team</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var team in Model)
+                {
+                    <tr>
+                        <td>@team.Name</td>   
+                        <td>@team.Name</td>   
+                    </tr>
+                }
+            </tbody>
+         </table>
+     </div>
+</div>

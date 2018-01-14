@@ -12,7 +12,7 @@ namespace Examples.Extensions
     {
         private static int defaultSeed = 3456;
 
-        public static List<T> Seed<T>(this IEnumerable<T> iEnumerable, int? seedEnd = null, int? seedBegin = null, int? randomSeed = null, string propertyName = null)
+        public static List<T> Seed<T>(this IEnumerable<T> iEnumerable, int? seedEnd = null, int? seedBegin = null, int? randomSeed = null, string customPropertyName = null)
         {
             var gen = new CustomGenerator("~/SourceFiles/xmlSeedSourcePlus.xml", dataInputType: DataInputType.XmlFile)
             {
@@ -20,12 +20,12 @@ namespace Examples.Extensions
                 SeedEnd = seedEnd ?? 10,
                 BaseRandom = new Random(randomSeed ?? defaultSeed),
                 BaseDateTime = DateTime.Now,
-                CurrentPropertyName = propertyName
+                CustomPropertyName = customPropertyName
             };
             return new SeedCore(gen).SeedList(iEnumerable).ToList();
         }
 
-        public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int? seedEnd = null, int? seedBegin = null, int? randomSeed = null, string propertyName = null)
+        public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int? seedEnd = null, int? seedBegin = null, int? randomSeed = null, string customPropertyName = null)
         {
             var gen = new CustomGenerator("~/SourceFiles/xmlSeedSourcePlus.xml", dataInputType: DataInputType.XmlFile)
             {
@@ -33,7 +33,7 @@ namespace Examples.Extensions
                 SeedEnd = seedEnd ?? 10,
                 BaseRandom = new Random(randomSeed ?? defaultSeed),
                 BaseDateTime = DateTime.Now,
-                CurrentPropertyName = propertyName
+                CustomPropertyName = customPropertyName
             };
 
             return new SeedCore(gen).SeedList(iDictionary);

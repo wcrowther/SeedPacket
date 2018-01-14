@@ -22,22 +22,22 @@ namespace SeedPacket.Extensions
             return new SeedCore(generator).SeedList(iEnumerable);
         }
 
-        public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin, int seedEnd, string filePath, string propertyName = "")
+        public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int seedBegin, int seedEnd, string filePath, string customPropertyName = null)
         {
             var seedCore = new SeedCore (
                 new MultiGenerator(filePath) {
-                    SeedBegin = seedBegin, SeedEnd = seedEnd, CurrentPropertyName = propertyName
+                    SeedBegin = seedBegin, SeedEnd = seedEnd, CustomPropertyName = customPropertyName
                 }
             );
             return seedCore.SeedList(iEnumerable);
         }
 
-        public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int? seedBegin = null, int? seedEnd = null, IGenerator generator = null, string propertyName = "")
+        public static IEnumerable<T> Seed<T> (this IEnumerable<T> iEnumerable, int? seedBegin = null, int? seedEnd = null, IGenerator generator = null, string customPropertyName = null)
         {
             var gen = generator ?? new MultiGenerator();
             gen.SeedBegin = seedBegin.HasValue ? seedBegin.Value : gen.SeedBegin;
             gen.SeedEnd = seedEnd.HasValue ? seedEnd.Value : gen.SeedEnd;
-            gen.CurrentPropertyName = propertyName;
+            gen.CustomPropertyName = customPropertyName;
 
             return new SeedCore(gen).SeedList(iEnumerable);
         }
@@ -56,22 +56,22 @@ namespace SeedPacket.Extensions
             return new SeedCore(generator).SeedList(iDictionary);
         }
 
-        public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int seedBegin, int seedEnd, string filePath, string propertyName = "")
+        public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int seedBegin, int seedEnd, string filePath, string customPropertyName = null)
         {
             var seedCore = new SeedCore (
                 new MultiGenerator(filePath) {
-                    SeedBegin = seedBegin, SeedEnd = seedEnd, CurrentPropertyName = propertyName
+                    SeedBegin = seedBegin, SeedEnd = seedEnd, CustomPropertyName = customPropertyName
                 }
             );
             return seedCore.SeedList(iDictionary);
         }
 
-        public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int? seedBegin = null, int? seedEnd = null, IGenerator generator = null, string currentPropertyName = "")
+        public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int? seedBegin = null, int? seedEnd = null, IGenerator generator = null, string currentPropertyName = null)
         {
             var gen = generator ?? new MultiGenerator();
             gen.SeedBegin = seedBegin ?? 1;
             gen.SeedEnd = seedEnd ?? 10;
-            gen.CurrentPropertyName = currentPropertyName;
+            gen.CustomPropertyName = currentPropertyName;
 
             return new SeedCore(gen).SeedList(iDictionary);
         }

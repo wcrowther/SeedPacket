@@ -133,6 +133,9 @@
     <Content Include="SourceFiles\seedsource.xml" />
     <Content Include="SourceFiles\sourceData2.xml" />
     <EmbeddedResource Include="SourceFiles\XmlGeneratorSource.xml" />
+    <EmbeddedResource Include="SourceFiles\FootballSource.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="SourceFiles\xmlSeedSourcePlus.xml" />
     <Content Include="Views\Generator\_GeneratorCustomizingExample.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -166,6 +169,8 @@
     <Content Include="Views\Extending\_ExtendingSeedOneExample.cshtml" />
     <Content Include="Views\Extending\_ExtendingGeneratorExample.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Teams\_Games.cshtml" />
+    <Content Include="Views\Teams\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -184,10 +189,13 @@
     <Compile Include="Controllers\GeneratorController.cs" />
     <Compile Include="Controllers\ExtendingController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\RowsController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Extensions\FootballSeedExtensions.cs" />
     <Compile Include="Extensions\CustomSeedExtensions.cs" />
+    <Compile Include="Generators\FootballGenerator.cs" />
     <Compile Include="Generators\CustomGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -199,6 +207,7 @@
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\InvoiceItem.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Teams.cs" />
     <Compile Include="Models\Song.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

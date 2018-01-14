@@ -26,7 +26,12 @@ namespace SeedPacket
         {
             DebugSeedType(typeof(T).Name);
 
-            if (typeof(T).GetConstructor(Type.EmptyTypes) != null)
+
+            if (generator.CustomPropertyName != null)
+            {
+                iEnumerable = CreateValueTypeList<T>(); // for named custom types
+            }
+            else if (typeof(T).GetConstructor(Type.EmptyTypes) != null)            //if(generator.CustomPropertyName == null)
             {
                 iEnumerable = CreateComplexTypeList<T>();
             }
@@ -53,12 +58,12 @@ namespace SeedPacket
 
         private List<T> CreateValueTypeList<T>()
         {
-            // CurrentPropertyName can be set but returns CurrentProperty.Name unless the MetaProperty is null
+            // CustomPropertyName can be set but returns CurrentProperty.Name unless the MetaProperty is null
             // This allows you to pass in a PropertyName to match rules on in single type lists like List<string>.
 
             var seedList = new List<T>();
 
-            Rule rule = generator.Rules.GetRuleByTypeAndName(typeof(T), generator.CurrentPropertyName);
+            Rule rule = generator.Rules.GetRuleByTypeAndName(typeof(T), generator.CustomPropertyName);
 
             for (int rowNumber = generator.SeedBegin; rowNumber <= generator.SeedEnd; rowNumber++)
             {
@@ -76,7 +81,8 @@ namespace SeedPacket
         {
             var dictionary = new Dictionary<TKey, TValue>();
             Rule keyRule = generator.Rules.GetRuleByTypeAndName(typeof(TKey), "" );
-            Rule valueTypeRule = generator.Rules.GetRuleByTypeAndName(typeof(TValue), generator.CurrentPropertyName);
+            string propertyName = generator.CustomPropertyName ?? generator?.CurrentProperty?.Name ?? "";
+            Rule valueTypeRule = generator.Rules.GetRuleByTypeAndName(typeof(TValue), propertyName);
 
             bool isFirstRow = true;
 

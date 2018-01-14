@@ -35,6 +35,8 @@ namespace SeedPacket.Interfaces
 
         // Current CurrentProperty
         MetaProperty CurrentProperty { get; set; }
-        string CurrentPropertyName { get; set; }
+
+        // Use this to set rule name of single element like list<string>
+        string CustomPropertyName { get; set; }
     }
 }

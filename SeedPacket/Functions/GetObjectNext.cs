@@ -7,14 +7,14 @@ namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
-        public static string GetElementNext (IGenerator generator, string identifier = null, int offset = 0)
+        public static T GetObjectNext<T> (IGenerator generator, string identifier = null, int offset = 0) where T : class, new()
         {
             // Get propertyName from generator to use if identfier not set
             var propertyName = identifier ?? generator.CustomPropertyName ?? generator?.CurrentProperty?.Name ?? "";
 
             // Will loop back to beginning if rownumber is greater than number of elements in list
-            List<string> strings = generator.Datasource.GetElementList(propertyName);
-            int count = strings.Count;
+            List<T> objects = generator.Datasource.GetObjectList<T>(propertyName);
+            int count = objects.Count;
             if (count == 0)
                 return null;
 
@@ -24,7 +24,7 @@ namespace SeedPacket.Functions
             int mod = (rowNumberWithOffset) % count;
             int position = mod;
 
-            return strings?.ElementAtOrDefault(position);
+            return objects?.ElementAtOrDefault(position);
         }
     }
 }
