@@ -26,7 +26,7 @@ namespace SeedPacket.Extensions
         {
             var seedCore = new SeedCore (
                 new MultiGenerator(filePath) {
-                    SeedBegin = seedBegin, SeedEnd = seedEnd, CustomPropertyName = customPropertyName
+                    SeedBegin = seedBegin, SeedEnd = seedEnd, CustomName = customPropertyName
                 }
             );
             return seedCore.SeedList(iEnumerable);
@@ -37,7 +37,7 @@ namespace SeedPacket.Extensions
             var gen = generator ?? new MultiGenerator();
             gen.SeedBegin = seedBegin.HasValue ? seedBegin.Value : gen.SeedBegin;
             gen.SeedEnd = seedEnd.HasValue ? seedEnd.Value : gen.SeedEnd;
-            gen.CustomPropertyName = customPropertyName;
+            gen.CustomName = customPropertyName;
 
             return new SeedCore(gen).SeedList(iEnumerable);
         }
@@ -60,7 +60,7 @@ namespace SeedPacket.Extensions
         {
             var seedCore = new SeedCore (
                 new MultiGenerator(filePath) {
-                    SeedBegin = seedBegin, SeedEnd = seedEnd, CustomPropertyName = customPropertyName
+                    SeedBegin = seedBegin, SeedEnd = seedEnd, CustomName = customPropertyName
                 }
             );
             return seedCore.SeedList(iDictionary);
@@ -71,7 +71,7 @@ namespace SeedPacket.Extensions
             var gen = generator ?? new MultiGenerator();
             gen.SeedBegin = seedBegin ?? 1;
             gen.SeedEnd = seedEnd ?? 10;
-            gen.CustomPropertyName = currentPropertyName;
+            gen.CustomName = currentPropertyName;
 
             return new SeedCore(gen).SeedList(iDictionary);
         }

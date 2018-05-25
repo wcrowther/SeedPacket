@@ -147,7 +147,6 @@ namespace Tests.SeedPacket
             //Assert.AreEqual(list1[ordinal].Created, list2[ordinal].Created);
         }
 
-
         [Test]
         public void SeedCore_SeedList_Uses_Default_Generator_If_None_Passed_In_Constructor ()
         {
@@ -192,8 +191,7 @@ namespace Tests.SeedPacket
             // and  Name is not in the xml sourcedata so is propertyName + rownumber
             Assert.AreEqual("Name1", list[0].Name);
         }
-
-        
+       
         // Test XmlDataSource with MultiGenerator
 
         [Test]
@@ -298,6 +296,22 @@ namespace Tests.SeedPacket
             Assert.AreEqual(1, list[1].ItemId);
             Assert.AreEqual("thingamabob", list[1].ItemName);
             Assert.IsInstanceOf<Item>(list[1]);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_Seed_Dictionary_With_CustomName()
+        {
+            int count = 10;
+            IDictionary<string, Item> list = new Dictionary<string, Item>();
+            var gen = new MultiGenerator(pathToTestJsonFile) { SeedBegin = 1, SeedEnd = count, CustomName = "City" };
+            list = new SeedCore(gen).SeedList(list);
+
+            Assert.AreEqual(count, list.Count());
+            // NOTE How 10 rows of a Dictionary using the CustomName 'City' works, 
+            // but CustomName 'County' throws an error. This is because the 'County'
+            // rule is randomly picked from the json datasource and the 4th default 
+            // "County" is a duplicate -> which is not allowed for an index...
+            // Use a 
         }
 
         //[Test]

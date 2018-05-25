@@ -110,7 +110,7 @@ namespace SeedPacket.Generators
 
         public MetaProperty CurrentProperty { get; set; }
 
-        public string CustomPropertyName {
+        public string CustomName {
             get { return currentPropertyName; }
             set { currentPropertyName = value; }
         }

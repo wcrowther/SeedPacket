@@ -10,7 +10,7 @@ namespace SeedPacket.Functions
         public static string GetElementNext (IGenerator generator, string identifier = null, int offset = 0)
         {
             // Get propertyName from generator to use if identfier not set
-            var propertyName = identifier ?? generator.CustomPropertyName ?? generator?.CurrentProperty?.Name ?? "";
+            var propertyName = identifier ?? generator.CustomName ?? generator?.CurrentProperty?.Name ?? "";
 
             // Will loop back to beginning if rownumber is greater than number of elements in list
             List<string> strings = generator.Datasource.GetElementList(propertyName);

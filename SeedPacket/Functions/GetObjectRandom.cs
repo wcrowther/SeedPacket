@@ -10,7 +10,7 @@ namespace SeedPacket.Functions
         {
 
             // Get propertyName from generator to use if identfier not set
-            var propertyName = identifier ?? generator.CustomPropertyName ?? generator?.CurrentProperty?.Name ?? "";
+            var propertyName = identifier ?? generator.CustomName ?? generator?.CurrentProperty?.Name ?? "";
 
             T defaultValue = default(T);
 

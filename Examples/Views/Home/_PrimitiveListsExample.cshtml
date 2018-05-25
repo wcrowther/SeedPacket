@@ -7,7 +7,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var stateName in new List<string>().Seed(10, propertyName: "StateName"))
+        @foreach (var stateName in new List<string>().Seed(10, customPropertyName: "StateName"))
         {
             <tr><td>@stateName</td></tr>
         }

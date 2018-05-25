@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="row">
+@*<div class="row">
     <div class="col-md-4">
         <h3>Basic Example</h3>
         <p>
@@ -35,84 +35,84 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h3>Custom Range</h3>
-        <p>
-            This example creates a range of User records beginning with SeedBegin 20431 and ending with SeedEnd 20441. The range must move
-            in a positive direction and SeedBegin has to be greater than or equal to SeedEnd.
-        </p>
-    </div>
-    <div class="col-md-8">
-        @{ Html.RenderPartial("_HomeCustomRangeExample"); }
-    </div>
-</div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Custom Range</h3>
+            <p>
+                This example creates a range of User records beginning with SeedBegin 20431 and ending with SeedEnd 20441. The range must move
+                in a positive direction and SeedBegin has to be greater than or equal to SeedEnd.
+            </p>
+        </div>
+        <div class="col-md-8">
+            @{ Html.RenderPartial("_HomeCustomRangeExample"); }
+        </div>
+    </div>*@
 
 
-<div class="row">
-    <div class="col-md-4">
-        <h3>Dictionary</h3>
-        <p>
-            <b>Dictionary&lt;TKey, TValue&gt;</b> implements IEnumerable and is supported by SeedPacket using the .Seed() method. Note that
-            while the Value object properties are fully mapped by the Rules Engine, the Key only maps to the basic Rule for that type, usually
-            int, string, or datetime, without allowing for a "nameMatch" filter. Be careful if a custom Rule has been applied to the Key datatype
-            that it produces as this has to be unique.
-        </p>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Dictionary</h3>
+            <p>
+                <b>Dictionary&lt;TKey, TValue&gt;</b> implements IEnumerable and is supported by SeedPacket using the .Seed() method. Note that
+                while the Value object properties are fully mapped by the Rules Engine, the Key only maps to the basic Rule for that type, usually
+                int, string, or datetime, without allowing for a "nameMatch" filter. Be careful if a custom Rule has been applied to the Key datatype
+                that it produces as this has to be unique.
+            </p>
+        </div>
+        <div class="col-md-8">
+            @{ Html.RenderPartial("_DictionaryExample"); }
+        </div>
     </div>
-    <div class="col-md-8">
-        @{ Html.RenderPartial("_DictionaryExample"); }
+@*
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Primitive Lists</h3>
+            <p>
+                <b>IEnumerables</b> with primitive types such as <b>List&lt;string&gt;</b> are supported by SeedPacket using the .Seed() method. As the
+                types are singular and do not have a property name that a Rule can key in on, the .Seed() method has a <b>PropertyName</b>
+                constructor overload parameter that can be passed in. This PropertyName is what a Rule will use to "nameMatch" against,
+                but is ignored for complex types with more than one property. In this example, "StateName" is passed in and populates with random
+                data from the defaults in MultiDataSource. In the <a href="/Generator">Generator</a> examples, you will see how you can easily add custom lists
+                that contain your own values.
+            </p>
+        </div>
+        <div class="col-md-8">
+            @{ Html.RenderPartial("_PrimitiveListsExample"); }
+        </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h3>Primitive Lists</h3>
-        <p>
-            <b>IEnumerables</b> with primitive types such as <b>List&lt;string&gt;</b> are supported by SeedPacket using the .Seed() method. As the
-            types are singular and do not have a property name that a Rule can key in on, the .Seed() method has a <b>PropertyName</b>
-            constructor overload parameter that can be passed in. This PropertyName is what a Rule will use to "nameMatch" against,
-            but is ignored for complex types with more than one property. In this example, "StateName" is passed in and populates with random
-            data from the defaults in MultiDataSource. In the <a href="/Generator">Generator</a> examples, you will see how you can easily add custom lists
-            that contain your own values.
-        </p>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Paragraph Text</h3>
+            <p>
+                A common need when prototyping can be simulating bodycopy. While it may be unlikely that you will have a property consisting
+                of a list of strings named with either "body" or "copy", adding a field to your object class, will allow you to add mockup dummy
+                "paragraph" text, as we have done in this example.
+            </p>
+        </div>
+        <div class="col-md-8">
+            @{ Html.RenderPartial("_ParagraphTextExample"); }
+        </div>
     </div>
-    <div class="col-md-8">
-        @{ Html.RenderPartial("_PrimitiveListsExample"); }
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h3>Paragraph Text</h3>
-        <p>
-            A common need when prototyping can be simulating bodycopy. While it may be unlikely that you will have a property consisting
-            of a list of strings named with either "body" or "copy", adding a field to your object class, will allow you to add mockup dummy
-            "paragraph" text, as we have done in this example.
-        </p>
-    </div>
-    <div class="col-md-8">
-        @{ Html.RenderPartial("_ParagraphTextExample"); }
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h3>Defaults</h3>
-        <p>
-            This example expands on the first example but passes in an IGenerator, with custom SeedBegin, SeedEnd, BaseDateTime, and BaseRandom. 
-            The BaseDateTime is what all the DateTime Rules are based upon and in this case is customized to be in the past. BaseRandom is seeded
-            with a different seed than the default, so all the generated data is different from the first three examples, IE: "Tiffany Robinson"
-            is no longer the first name generated. An additional field called "Notes", that was originally hidden, is displayed filled
-            with "Lorem Ipsum" text.
-        </p>
-        <p>
-            We will go into additional detail on Generators, including the default MultiGenerator, in the Generators section.
-        </p>
-    </div>
-    <div class="col-md-8">
-        @{ Html.RenderPartial("_HomeDefaultsExample"); }
-    </div>
-</div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Defaults</h3>
+            <p>
+                This example expands on the first example but passes in an IGenerator, with custom SeedBegin, SeedEnd, BaseDateTime, and BaseRandom.
+                The BaseDateTime is what all the DateTime Rules are based upon and in this case is customized to be in the past. BaseRandom is seeded
+                with a different seed than the default, so all the generated data is different from the first three examples, IE: "Tiffany Robinson"
+                is no longer the first name generated. An additional field called "Notes", that was originally hidden, is displayed filled
+                with "Lorem Ipsum" text.
+            </p>
+            <p>
+                We will go into additional detail on Generators, including the default MultiGenerator, in the Generators section.
+            </p>
+        </div>
+        <div class="col-md-8">
+            @{ Html.RenderPartial("_HomeDefaultsExample"); }
+        </div>
+    </div>*@
 
 <div class="row">
     <div class="col-md-12">

@@ -20,7 +20,7 @@ namespace Examples.Extensions
                 SeedEnd = seedEnd ?? 10,
                 BaseRandom = new Random(randomSeed ?? defaultSeed),
                 BaseDateTime = DateTime.Now,
-                CustomPropertyName = customPropertyName
+                CustomName = customPropertyName
             };
             return new SeedCore(gen).SeedList(iEnumerable).ToList();
         }
@@ -33,7 +33,7 @@ namespace Examples.Extensions
                 SeedEnd = seedEnd ?? 10,
                 BaseRandom = new Random(randomSeed ?? defaultSeed),
                 BaseDateTime = DateTime.Now,
-                CustomPropertyName = customPropertyName
+                CustomName = customPropertyName
             };
 
             return new SeedCore(gen).SeedList(iDictionary);

@@ -102,9 +102,7 @@ namespace Tests.SeedPacket
             Assert.AreEqual("TestName2", item2.ItemName);
             Assert.AreEqual(200, item2.Number);
             //Assert.AreEqual(DateTime.Parse("2018-02-02 18:25:43.511"), item2.Created);
-
         }
-
 
         [Test]
         public void SeedFunctions_GetObjectNext_FromXML()
@@ -133,7 +131,6 @@ namespace Tests.SeedPacket
             Assert.AreEqual("TestName3", item3.ItemName);
             Assert.AreEqual(300, item3.Number);
             Assert.IsNull(item3.Created);
-
         }
 
         [Test]

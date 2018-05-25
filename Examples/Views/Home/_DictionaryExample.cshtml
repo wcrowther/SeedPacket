@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var entry in new Dictionary<int, Item>().Seed(10))
+            @foreach (var entry in new Dictionary<string, Item>().Seed(10))
             {
                 <tr>
                     <td>@entry.Key</td>

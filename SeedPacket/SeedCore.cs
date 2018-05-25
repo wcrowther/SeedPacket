@@ -26,18 +26,17 @@ namespace SeedPacket
         {
             DebugSeedType(typeof(T).Name);
 
-
-            if (generator.CustomPropertyName != null)
+            if (generator.CustomName != null)
             {
                 iEnumerable = CreateValueTypeList<T>(); // for named custom types
             }
-            else if (typeof(T).GetConstructor(Type.EmptyTypes) != null)            //if(generator.CustomPropertyName == null)
+            else if (typeof(T).GetConstructor(Type.EmptyTypes) != null) // for complex types w/ no CustomName
             {
                 iEnumerable = CreateComplexTypeList<T>();
             }
             else
             {
-                iEnumerable = CreateValueTypeList<T>();
+                iEnumerable = CreateValueTypeList<T>();  // for simpleTypes
             }
 
             DebugLineWrite();
@@ -58,12 +57,12 @@ namespace SeedPacket
 
         private List<T> CreateValueTypeList<T>()
         {
-            // CustomPropertyName can be set but returns CurrentProperty.Name unless the MetaProperty is null
+            // CustomName can be set but returns CurrentProperty.Name unless the MetaProperty is null
             // This allows you to pass in a PropertyName to match rules on in single type lists like List<string>.
 
             var seedList = new List<T>();
 
-            Rule rule = generator.Rules.GetRuleByTypeAndName(typeof(T), generator.CustomPropertyName);
+            Rule rule = generator.Rules.GetRuleByTypeAndName(typeof(T), generator.CustomName);
 
             for (int rowNumber = generator.SeedBegin; rowNumber <= generator.SeedEnd; rowNumber++)
             {
@@ -79,20 +78,27 @@ namespace SeedPacket
         private Dictionary<TKey, TValue> CreateDictionaryList<TKey, TValue>()
 
         {
+            string keyName, valueName;
             var dictionary = new Dictionary<TKey, TValue>();
-            Rule keyRule = generator.Rules.GetRuleByTypeAndName(typeof(TKey), "" );
-            string propertyName = generator.CustomPropertyName ?? generator?.CurrentProperty?.Name ?? "";
-            Rule valueTypeRule = generator.Rules.GetRuleByTypeAndName(typeof(TValue), propertyName);
-
             bool isFirstRow = true;
+
+            GetDictionaryNames(out keyName, out valueName);
+
+            Rule keyRule = generator.Rules.GetRuleByTypeAndName(typeof(TKey), keyName);
+            Rule valueTypeRule = generator.Rules.GetRuleByTypeAndName(typeof(TValue), valueName);
 
             for (int rowNumber = generator.SeedBegin; rowNumber <= generator.SeedEnd; rowNumber++)
             {
                 generator.RowNumber = rowNumber;
                 generator.GetNextRowRandom();
 
+                var singleProperty = new SingleProperty<TKey>().GetMetaProperties()[0];
+                singleProperty.Name = keyName;
+                generator.CurrentProperty = singleProperty;
+
                 TKey seedKey = keyRule.ApplyRule(generator);
                 TValue seedValue;
+
 
                 if (typeof(TValue).GetConstructor(Type.EmptyTypes) != null)
                 {
@@ -108,6 +114,23 @@ namespace SeedPacket
                 isFirstRow = false;
             }
             return dictionary;
+        }
+
+        private void GetDictionaryNames(out string keyName, out string valueName)
+        {
+            string customName = generator.CustomName ?? "";
+            keyName = customName;
+            valueName = "";
+            if (customName.IndexOf(",") > 0)
+            {
+                if (generator.CustomName.IndexOf(",") > 1)
+                {
+                    throw new Exception("Generator.CustomName cannot have more than one comma.");
+                }
+                var strArray = generator.CustomName.Split(',');
+                keyName = strArray[0];
+                valueName = strArray[1];
+            }
         }
 
         private List<T> CreateComplexTypeList<T>() 
@@ -204,4 +227,14 @@ namespace SeedPacket
         }
 
     }
+
+    public class SingleProperty<T>
+    {
+        // This class is a work around that GetMetaProperties() 
+        // may not return anything if there is a single property
+        // but we need a PropertyInfo to construct a MetaProperty
+        // Fix in NewLibrary at some point.
+        public T Type { get; }
+    }
+
 }

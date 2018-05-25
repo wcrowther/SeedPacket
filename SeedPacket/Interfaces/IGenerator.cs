@@ -12,11 +12,14 @@ namespace SeedPacket.Interfaces
 
         // Seed Range
         int SeedBegin { get; set; }
+
         int SeedEnd { get; set; }
 
         // Base 
         Random BaseRandom { get; }
+
         DateTime BaseDateTime { get; }
+
         bool Debugging { get; set; }
 
         // Cache (dynamic)
@@ -27,16 +30,21 @@ namespace SeedPacket.Interfaces
 
         // Row Info
         int RowNumber { get; set; }
+
         int RowRandomNumber { get; }
+
         Random RowRandom { get; }
+
         int RowCount { get; }
+
         Dictionary<string, object> CurrentRowValues { get; }
+
         void GetNextRowRandom ();
 
         // Current CurrentProperty
         MetaProperty CurrentProperty { get; set; }
 
         // Use this to set rule name of single element like list<string>
-        string CustomPropertyName { get; set; }
+        string CustomName { get; set; }
     }
 }
