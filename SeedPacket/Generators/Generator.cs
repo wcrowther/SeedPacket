@@ -12,11 +12,11 @@ namespace SeedPacket.Generators
     {
         IRules rules;
 
-        public Generator (IRules rules =  null)
+        public Generator (IRules rules =  null, Random baseRandom = null)
         {
             RowNumber = seedBegin;
             this.rules = rules ?? new Rules();
-            baseRandom = new Random(defaultSeed);
+            this.baseRandom = baseRandom ?? new Random(defaultSeed);
             GetNextRowRandom();
         }
 
@@ -63,13 +63,13 @@ namespace SeedPacket.Generators
 
         public IRules Rules
         {
-            get { return rules; }
+            get { return rules ?? new Rules(); }
             set { rules = value; }
         } 
 
         public Random BaseRandom
         {
-            get { return baseRandom;  }
+            get { return baseRandom ?? new Random(defaultSeed); }
             set { baseRandom = value; }
         }
 

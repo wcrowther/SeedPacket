@@ -16,9 +16,9 @@ namespace SeedPacket.Interfaces
         int SeedEnd { get; set; }
 
         // Base 
-        Random BaseRandom { get; }
+        Random BaseRandom { get; set; }
 
-        DateTime BaseDateTime { get; }
+        DateTime BaseDateTime { get; set; }
 
         bool Debugging { get; set; }
 

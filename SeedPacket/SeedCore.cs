@@ -18,7 +18,8 @@ namespace SeedPacket
     {
         private IGenerator generator; 
 
-        public SeedCore (IGenerator generator = null) {
+        public SeedCore (IGenerator generator = null)
+        {
             this.generator = generator ?? new MultiGenerator(); 
         }
 

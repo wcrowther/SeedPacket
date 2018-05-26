@@ -29,6 +29,7 @@ namespace Tests.SeedPacket
         [Test]
         public void SeedFunctions_DiceRoll_Basic_Roll()
         {
+            // Uses default seed for Random so value 4 is constant
             var gen = new BasicGenerator();
             int diceRoll = Funcs.DiceRoll(gen);
 
@@ -38,6 +39,8 @@ namespace Tests.SeedPacket
         [Test]
         public void SeedFunctions_DiceRoll_20_Sided_Dice()
         {
+            // Uses default seed for Random so value 4 is constant
+
             var gen = new BasicGenerator();
             int diceRoll = Funcs.DiceRoll(gen, 20);
 
@@ -47,6 +50,8 @@ namespace Tests.SeedPacket
         [Test]
         public void SeedFunctions_DiceRoll_5d6()
         {
+            // Uses default seed for Random so value 4 is constant
+
             var gen = new BasicGenerator();
             int diceRoll = Funcs.DiceRoll(gen, 6, 5);
 

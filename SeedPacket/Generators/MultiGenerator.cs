@@ -10,8 +10,9 @@ namespace SeedPacket.Generators
         public MultiGenerator(  string sourceFilepath = null,
                                 string sourceString = null, 
                                 DataInputType dataInputType = DataInputType.Auto,
-                                RulesSet rulesSet = RulesSet.Common
-                             ) : base()
+                                RulesSet rulesSet = RulesSet.Common,
+                                Random baseRandom = null
+                             ) : base(baseRandom: baseRandom)
         {
             dataSource = new MultiDataSource(sourceFilepath, sourceString, dataInputType);
             GetRules(rulesSet);

@@ -16,5 +16,10 @@ namespace Tests.SeedPacket.Model
         public int Number { get; set; }
 
         public DateTime? Created { get; set; }
+
+        public override string ToString()
+        {
+            return $"{ItemName} ({ItemId})";
+        }
     }
 }
