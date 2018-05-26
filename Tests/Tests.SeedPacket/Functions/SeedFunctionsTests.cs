@@ -139,7 +139,7 @@ namespace Tests.SeedPacket
 
             var xElementString = "<Item ItemId=\"1\" ItemName=\"TestName1\" Number=\"100\" Created=\"\"></Item>";
             var xElement = XElement.Parse(xElementString);
-            var item = xElement.ToOject<Item>();
+            var item = xElement.ToObject<Item>();
 
             Assert.IsNotNull(item);
             Assert.AreEqual(1, item.ItemId);

@@ -6,7 +6,7 @@
 @{ 
     var gen = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml");
 
-    var sports = new List<string>().Seed(seedEnd: 15, generator: gen, propertyName: "Sport");
+    var sports = new List<string>().Seed(seedEnd: 15, generator: gen, customPropertyName: "Sport");
 }
 
 <table class="table table table-striped topSpace">

@@ -1,10 +1,6 @@
-﻿@using SeedPacket
-@using SeedPacket.Generators
-@using SeedPacket.Extensions
-@using SeedPacket.Functions
-@using Examples.Models
-@using System.Diagnostics
-@model  List<FootballTeam>
+﻿@using Examples.Models
+
+@model  List<FootballGame>
 
 <div class="row">
     <div class="col-md-12">
@@ -12,15 +8,17 @@
             <thead>
                 <tr>
                     <th>Home Team</th>
+                    <th></th>
                     <th>Visiting Team</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var team in Model)
+                @foreach (var game in Model)
                 {
                     <tr>
-                        <td>@team.Name</td>   
-                        <td>@team.Name</td>   
+                        <td>@game.HomeTeam</td>
+                        <td>vs</td>
+                        <td>@game.AwayTeam</td>   
                     </tr>
                 }
             </tbody>

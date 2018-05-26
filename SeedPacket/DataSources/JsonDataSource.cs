@@ -85,6 +85,12 @@ namespace SeedPacket.DataSources
                     .Select(p => p.ToObject<T>())
                     .ToList() ?? new List<T>();
 
+                int parsingErrors = list.Count(l => l == null);
+                if (parsingErrors > 0)
+                {
+                    throw new Exception($"Error parsing {parsingErrors} objects with identifier '{identifier}'."); 
+                }
+
                 return list;
             }
             return new List<T>();
