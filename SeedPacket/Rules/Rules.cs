@@ -1,9 +1,10 @@
-﻿using NewLibrary.ForString;
+﻿
 using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using WildHare.Extensions;
 
 namespace SeedPacket
 {
@@ -34,7 +35,7 @@ namespace SeedPacket
 
         public void Add(Rule rule, bool overwrite = true)
         {
-            if (rule.RuleName.isNullOrEmpty() && rule.RuleName.Length <= 3)
+            if (rule.RuleName.IsNullOrEmpty() && rule.RuleName.Length <= 3)
                 throw new Exception("All Rules must have a RuleName at least 3 characters in length.");
 
             if (this.Any(a => a.RuleName == rule.RuleName))

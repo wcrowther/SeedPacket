@@ -10,6 +10,7 @@ using Tests.SeedPacket.Model;
 using System.Collections.Generic;
 using System.Collections;
 using SeedPacket.Extensions;
+using WildHare.Extensions;
 
 namespace Tests.SeedPacket
 {

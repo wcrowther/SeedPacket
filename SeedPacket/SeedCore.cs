@@ -1,7 +1,4 @@
-﻿using NewLibrary.ForObject;
-using NewLibrary.ForString;
-using NewLibrary.ForType;
-using SeedPacket.Generators;
+﻿using SeedPacket.Generators;
 using SeedPacket.Interfaces;
 using SeedPacket.Functions;
 using System;
@@ -11,6 +8,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WildHare.Models;
+using WildHare.Extensions;
+using System.Dynamic;
 
 namespace SeedPacket
 {
@@ -179,18 +179,19 @@ namespace SeedPacket
         {
             Rule rule;
             var property = generator.CurrentProperty;
+            ExpandoObject cache = generator.Cache;
 
             if (isFirstRow) // Cache rules for first row
             {
                 rule = generator.Rules.GetRuleByTypeAndName(property.PropertyType, property.Name);
 
-                CacheExtensions.AddItemByName(generator.Cache, "CachedRules." + propInt, rule);
+                cache.AddItemByName("CachedRules." + propInt, rule);
 
                 DebugWrite($"Property: {property.Name }({property.PropertyType}) using rule: {rule?.RuleName ?? "No matching Rule"}.");
             }
             else
             {
-                rule = CacheExtensions.GetByItemName<Rule>(generator.Cache, "CachedRules." + propInt); 
+                rule = cache.GetByItemName<Rule>("CachedRules." + propInt); 
             }
             return rule;
         }

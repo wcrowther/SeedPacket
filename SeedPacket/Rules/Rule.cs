@@ -1,10 +1,9 @@
-﻿using NewLibrary.ForString;
-using NewLibrary.ForType;
-using SeedPacket.Interfaces;
+﻿using SeedPacket.Interfaces;
 using System;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using WildHare.Extensions;
 
 namespace SeedPacket
 {
@@ -24,7 +23,7 @@ namespace SeedPacket
         public Rule(Type typeMatch, string nameMatch, Func<IGenerator, dynamic> func, string ruleName, string description = "")
         {
             this.typeMatch = typeMatch;
-            this.nameMatch = nameMatch.ifBlank().ToLower();
+            this.nameMatch = nameMatch.IfNullOrEmpty().ToLower();
             this.func = func;
 
             RuleName = ruleName;
@@ -57,14 +56,14 @@ namespace SeedPacket
                     return false;
                 }
                 // Will except comma-separated list strings for match.
-                return NameMatches(nameMatch, propName.ifBlank().ToLower());
+                return NameMatches(nameMatch, propName.IfNullOrEmpty().ToLower());
             }
 
             // Must match on type, if not the same then false - no match for this Funcs
             if (propType.IsAssignableFrom(typeMatch))
             {
                 // Will except comma-separated list strings for match.
-                return NameMatches(nameMatch, propName.ifBlank().ToLower());
+                return NameMatches(nameMatch, propName.IfNullOrEmpty().ToLower());
             }
             return false;
         }
@@ -108,7 +107,7 @@ namespace SeedPacket
             // 2. type matches and namematch has wildcard. if wildcard matches then true otherwise false
             // 3. type matches but namematch does not match the one defined for this Rule then false
 
-            if (namematch.isNullOrEmpty())
+            if (namematch.IsNullOrEmpty())
             {
                 return true;
             }

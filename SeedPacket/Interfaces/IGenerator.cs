@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using SeedPacket.Generators;
 using System;
-using NewLibrary.ForType;
+
 using SeedPacket.Interfaces;
+using WildHare.Models;
 
 namespace SeedPacket.Interfaces
 {

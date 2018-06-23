@@ -5,7 +5,8 @@ using Newtonsoft.Json.Linq;
 using SeedPacket.Exceptions;
 using System.Linq;
 using System.IO;
-using NewLibrary.ForString;
+using WildHare.Extensions;
+
 
 namespace SeedPacket.DataSources
 {

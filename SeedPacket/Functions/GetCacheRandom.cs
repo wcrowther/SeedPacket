@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using WildHare.Extensions;
 
 namespace SeedPacket.Functions
 {
@@ -11,7 +12,7 @@ namespace SeedPacket.Functions
         // This overload passes in a cacheList by name string like: "Items" -> (will throw NOT an error if does not exist)
         public static T GetCacheRandom<T>(IGenerator generator, string cacheListName, bool remove = true)
         {
-            var cache = generator.Cache as ExpandoObject;
+            ExpandoObject cache = generator.Cache;
             var cacheList = cache.GetByItemName<List<T>>(cacheListName);
 
             return GetCacheRandom<T>(generator, cacheList, remove);
@@ -22,7 +23,7 @@ namespace SeedPacket.Functions
         {
             List<T> itemList = cacheList;
 
-            return itemList.TakeRandomItems<T>(generator.RowRandom, 1, remove).FirstOrDefault();
+            return itemList.TakeFromListRandom<T>(generator.RowRandom, 1, remove).FirstOrDefault();
         }
     }
 }

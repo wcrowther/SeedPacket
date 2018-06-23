@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NewLibrary, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NewLibrary.Extensions.1.0.2\lib\NewLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -47,6 +44,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WildHare, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WildHare.0.9.6\lib\net45\WildHare.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSources\MultiDataSource.cs" />
@@ -59,7 +59,6 @@
     <Compile Include="Exceptions\NoSourceException.cs" />
     <Compile Include="Exceptions\InvalidSourceStringException.cs" />
     <Compile Include="Exceptions\MultipleSourceException.cs" />
-    <Compile Include="Functions\CacheExtensions.cs" />
     <Compile Include="Functions\GetCacheNext.cs" />
     <Compile Include="Functions\GetCacheItemsNext.cs" />
     <Compile Include="Functions\GetCacheRandom.cs" />

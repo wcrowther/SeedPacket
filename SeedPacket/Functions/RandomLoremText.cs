@@ -1,8 +1,9 @@
 ﻿using SeedPacket.Interfaces;
 using System.Text;
-using NewLibrary.ForString;
+
 using System;
 using System.Linq;
+using WildHare.Extensions;
 
 namespace SeedPacket.Functions
 {
@@ -24,7 +25,7 @@ namespace SeedPacket.Functions
                 string sentence = CreateSentence(generator, minWords, maxWords, ref position);
                 textBuilder.Append(sentence);
             }
-            return textBuilder.ToString().removeEnd(" ");
+            return textBuilder.ToString().RemoveEnd(" ");
         }
 
         private static string CreateSentence(IGenerator generator, int minWords, int maxWords, ref int position)

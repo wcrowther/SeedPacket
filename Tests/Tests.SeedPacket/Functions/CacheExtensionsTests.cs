@@ -8,6 +8,7 @@ using System.Linq;
 using System.Dynamic;
 using Microsoft.CSharp;
 using Examples.Models;
+using WildHare.Extensions;
 
 namespace Tests.SeedPacket
 {

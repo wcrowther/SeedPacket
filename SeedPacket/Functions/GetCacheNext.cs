@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using WildHare.Extensions;
 
 namespace SeedPacket.Functions
 {

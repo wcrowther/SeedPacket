@@ -1,4 +1,4 @@
-﻿using NewLibrary.ForString;
+﻿
 using SeedPacket.Exceptions;
 using SeedPacket.Functions;
 using SeedPacket.Interfaces;
@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using WildHare.Extensions;
 
 namespace SeedPacket.DataSources
 {
@@ -40,7 +42,7 @@ namespace SeedPacket.DataSources
             string pathToFile = null;
             try
             {
-                pathToFile = sourceFilePath.StartsWith("~") ? sourceFilePath.ToMapPath() : sourceFilePath;
+                pathToFile = sourceFilePath.StartsWith("~") ? sourceFilePath.RemoveStart("~").ToMapPath() : sourceFilePath;
                 string xml = File.ReadAllText(pathToFile);
                 Parse(xml);
             }
@@ -69,7 +71,7 @@ namespace SeedPacket.DataSources
 
         public List<string> GetElementList(string identifier)
         {
-            if (sourceData != null && !identifier.isNullOrEmpty())
+            if (sourceData != null && !identifier.IsNullOrEmpty())
             {
                 return sourceData.Descendants(identifier).Select(x => (string)x).ToList();
             }
@@ -78,7 +80,7 @@ namespace SeedPacket.DataSources
 
         public List<T> GetObjectList<T>(string identifier) where T : class, new()
         {
-            if (sourceData != null && !identifier.isNullOrEmpty())
+            if (sourceData != null && !identifier.IsNullOrEmpty())
             {
                 var list = sourceData.Descendants(identifier)
                     .Select(p => p.ToObject<T>())
