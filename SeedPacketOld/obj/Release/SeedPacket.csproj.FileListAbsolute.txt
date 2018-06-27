@@ -1,0 +1,9 @@
+C:\Code\Trunk\SeedPacket\SeedPacket\bin\Release\SeedPacket.dll
+C:\Code\Trunk\SeedPacket\SeedPacket\bin\Release\SeedPacket.pdb
+C:\Code\Trunk\SeedPacket\SeedPacket\bin\Release\Newtonsoft.Json.dll
+C:\Code\Trunk\SeedPacket\SeedPacket\bin\Release\Newtonsoft.Json.xml
+C:\Code\Trunk\SeedPacket\SeedPacket\obj\Release\SeedPacket.dll
+C:\Code\Trunk\SeedPacket\SeedPacket\obj\Release\SeedPacket.pdb
+C:\Code\Trunk\SeedPacket\SeedPacket\bin\Release\WildHare.dll
+C:\Code\Trunk\SeedPacket\SeedPacket\obj\Release\SeedPacket.csproj.CoreCompileInputs.cache
+C:\Code\Trunk\SeedPacket\SeedPacket\obj\Release\SeedPacket.csproj.CopyComplete
