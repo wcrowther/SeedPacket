@@ -1,116 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4C111213-E13E-4EDD-B120-6FD6B61A15DC}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SeedPacket</RootNamespace>
-    <AssemblyName>SeedPacket</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworks>netstandard2.0;net45;net471</TargetFrameworks>
+    <Authors>WIll Crowther</Authors>
+    <Version>3.0.0</Version>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WildHare, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WildHare.0.9.6\lib\net45\WildHare.dll</HintPath>
-    </Reference>
+    <None Remove="Source\JsonGeneratorSource.json" />
+    <None Remove="Source\XmlGeneratorSource.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="DataSources\MultiDataSource.cs" />
-    <Compile Include="DataSources\JsonDataSource.cs" />
-    <Compile Include="DataSources\XmlDataSource.cs" />
-    <Compile Include="DataSources\DataInputType.cs" />
-    <Compile Include="Exceptions\InvalidDefaultDataException.cs" />
-    <Compile Include="Exceptions\InvalidSeedParametersException.cs" />
-    <Compile Include="Exceptions\InvalidSourceFileException.cs" />
-    <Compile Include="Exceptions\NoSourceException.cs" />
-    <Compile Include="Exceptions\InvalidSourceStringException.cs" />
-    <Compile Include="Exceptions\MultipleSourceException.cs" />
-    <Compile Include="Functions\GetCacheNext.cs" />
-    <Compile Include="Functions\GetCacheItemsNext.cs" />
-    <Compile Include="Functions\GetCacheRandom.cs" />
-    <Compile Include="Functions\GetObjectRandom.cs" />
-    <Compile Include="Functions\GetObjectNext.cs" />
-    <Compile Include="Functions\RandomBodyCopy.cs" />
-    <Compile Include="Functions\RandomLoremText.cs" />
-    <Compile Include="Functions\OnceEvery.cs" />
-    <Compile Include="Functions\RandomPhone.cs" />
-    <Compile Include="Functions\RandomAddress.cs" />
-    <Compile Include="Functions\RandomZip.cs" />
-    <Compile Include="Functions\RandomFee.cs" />
-    <Compile Include="Functions\RandomCost.cs" />
-    <Compile Include="Functions\RandomCompany.cs" />
-    <Compile Include="Functions\RandomUserName.cs" />
-    <Compile Include="Functions\RandomEmail.cs" />
-    <Compile Include="Functions\RandomGuid.cs" />
-    <Compile Include="Functions\DiceRoll.cs" />
-    <Compile Include="Functions\GetElementNext.cs" />
-    <Compile Include="Functions\RandomDateTime.cs" />
-    <Compile Include="Functions\GetElementRandom.cs" />
-    <Compile Include="Generators\Generator.cs" />
-    <Compile Include="Generators\MultiGenerator.cs" />
-    <Compile Include="Rules\AddCommonRules.cs" />
-    <Compile Include="Rules\Rule.cs" />
-    <Compile Include="Rules\Rules.cs" />
-    <Compile Include="Interfaces\IGenerator.cs" />
-    <Compile Include="Interfaces\IDataSource.cs" />
-    <Compile Include="Interfaces\IRules.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions\SeedExtensions.cs" />
-    <Compile Include="Rules\RulesSet.cs" />
-    <Compile Include="Generators\BasicGenerator.cs" />
-    <Compile Include="Functions\GetCacheItemsRandom.cs" />
-    <Compile Include="Rules\AddBasicRules.cs" />
-    <Compile Include="SeedCore.cs" />
-    <Compile Include="SimpleSeed.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Source\XmlGeneratorSource.xml" />
-  </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="Source\JsonGeneratorSource.json" />
-    <None Include="packages.config" />
+    <EmbeddedResource Include="Source\XmlGeneratorSource.xml" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="WildHare" Version="0.9.6" />
+  </ItemGroup>
+
 </Project>
