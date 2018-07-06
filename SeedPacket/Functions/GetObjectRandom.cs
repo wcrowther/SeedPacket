@@ -15,7 +15,7 @@ namespace SeedPacket.Functions
             T defaultValue = default(T);
 
             var elementList = generator.Datasource.GetObjectList<T>(propertyName);
-            int index = new Random(generator.RowRandomNumber).Next(elementList.Count);
+            int index = generator.RowRandom.Next(elementList.Count);
             T element = elementList?.ElementAtOrDefault(index) ?? defaultValue;
 
             return element;

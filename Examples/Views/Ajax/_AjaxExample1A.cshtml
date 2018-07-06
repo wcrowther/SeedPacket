@@ -15,13 +15,13 @@
         <tbody>
             @foreach (AppUser user in Model)
             {
-                <tr>
-                    <td>@user.UserId</td>
-                    <td>@(!string.IsNullOrEmpty(user.FirstName) ? user.FirstName : "---")</td>
-                    <td>@user.LastName</td>
-                    <td>@user.Email</td>
-                    <td>@user.Created.ToString("MM/dd/yyyy")</td>
-                </tr>
+            <tr>
+                <td>@user.UserId</td>
+                <td>@(!string.IsNullOrEmpty(user.FirstName) ? user.FirstName : "---")</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                <td>@user.Created.ToString("MM/dd/yyyy")</td>
+            </tr>
             }
         </tbody>
     </table>

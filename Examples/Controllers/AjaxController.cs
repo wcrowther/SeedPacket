@@ -1,14 +1,8 @@
 ﻿using Examples.Models;
-using SeedPacket;
 using SeedPacket.Extensions;
-using SeedPacket.Functions;
 using SeedPacket.Generators;
-using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Website.Controllers
@@ -17,7 +11,7 @@ namespace Website.Controllers
     {
         public ActionResult Index()
         {
-            var users = new List<AppUser>().Seed(20);
+            var users = new List<AppUser>().Seed(20, new Random(1234));
 
             return View(users);
         }
@@ -27,7 +21,7 @@ namespace Website.Controllers
             var generator = new MultiGenerator() { BaseRandom = new Random(seed) };
             var users = new List<AppUser>().Seed(1, rows ?? 20, generator);
 
-            return PartialView("_AjaxExample1A", users);
+            return PartialView("_AjaxExample1", users);
         }
     }
 }

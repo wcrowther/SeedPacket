@@ -28,7 +28,7 @@ namespace SeedPacket.Functions
             if (!remove)
                 throw new NotImplementedException("Currently only remove = true is supported for GetCacheItemsNext");
 
-            int count = new Random(generator.RowNumber).Next(min, max + 1);
+            int count = generator.RowRandom.Next(min, max + 1);
             List<T> itemList = cacheList;
 
             var rowItems = itemList.Take(count).ToList();
