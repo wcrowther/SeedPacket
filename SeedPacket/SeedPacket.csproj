@@ -3,7 +3,18 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;net471</TargetFrameworks>
     <Authors>WIll Crowther</Authors>
-    <Version>3.0.0</Version>
+    <Version>3.0.1</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageIconUrl>http://www.seedpacket.net/Content/Images/favicon.png</PackageIconUrl>
+    <FileVersion>3.0.1.0</FileVersion>
+    <AssemblyVersion>3.0.1.0</AssemblyVersion>
+    <PackageReleaseNotes>BETA 3.0.1</PackageReleaseNotes>
+    <Description>BETA 3.0.1</Description>
+    <Copyright>Will Crowther</Copyright>
+    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageProjectUrl>http://www.seedpacket.net/</PackageProjectUrl>
+    <PackageTags>seed data generation extension method IEnumerable List rules engine seeding prototyping rad linq c#</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +30,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="WildHare" Version="0.9.6" />
   </ItemGroup>
 
 </Project>

@@ -25,8 +25,7 @@ namespace SeedPacket.Functions
         // Adds 1 to random max so that max parameter is included. IE: 1-3 will include 1,2,3 
         public static List<T> GetCacheItemsNext<T> (IGenerator generator, dynamic cacheList, int min, int max, bool remove = true)
         {
-            if (!remove)
-                throw new NotImplementedException("Currently only remove = true is supported for GetCacheItemsNext");
+            //TODO - should this list wrap?
 
             int count = generator.RowRandom.Next(min, max + 1);
             List<T> itemList = cacheList;

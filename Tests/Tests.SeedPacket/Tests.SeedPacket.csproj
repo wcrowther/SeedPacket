@@ -60,12 +60,15 @@
       <HintPath>..\..\packages\NUnitTestAdapter.2.0.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="SeedPacket, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SeedPacket.3.0.1\lib\net45\SeedPacket.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WildHare, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WildHare.0.9.6\lib\net45\WildHare.dll</HintPath>
+    <Reference Include="WildHare, Version=0.9.8.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WildHare.0.9.8.1\lib\net45\WildHare.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>
@@ -97,10 +100,6 @@
     <ProjectReference Include="..\..\Examples\Examples.csproj">
       <Project>{0c78e5b2-5b85-4fb9-ae7c-efc062012a49}</Project>
       <Name>Examples</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SeedPacket\SeedPacket.csproj">
-      <Project>{2d7b684a-b599-4e6f-b7f4-12cfbd029115}</Project>
-      <Name>SeedPacket</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -42,7 +42,18 @@ namespace SeedPacket.DataSources
             string pathToFile = null;
             try
             {
-                pathToFile = sourceFilePath.StartsWith("~") ? sourceFilePath.RemoveStart("~").ToMapPath() : sourceFilePath;
+                if (sourceFilePath.StartsWith("~"))
+                {
+                    string path = sourceFilePath.RemoveStart("~");
+                    pathToFile = path.ToMapPath();
+                }
+                else
+                {
+                    pathToFile = sourceFilePath;
+                }
+
+
+                // pathToFile = sourceFilePath.StartsWith("~") ? sourceFilePath.RemoveStart("~").ToMapPath() : sourceFilePath;
                 string xml = File.ReadAllText(pathToFile);
                 Parse(xml);
             }

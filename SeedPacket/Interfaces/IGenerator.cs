@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using SeedPacket.Generators;
-using System;
-
-using SeedPacket.Interfaces;
-using WildHare.Models;
+﻿using System;
+using System.Collections.Generic;
+using WildHare;
 
 namespace SeedPacket.Interfaces
 {
