@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WildHare;
+using WildHare.Extensions;
 
 namespace SeedPacket.Interfaces
 {

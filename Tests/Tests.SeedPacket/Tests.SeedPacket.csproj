@@ -67,8 +67,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WildHare, Version=0.9.8.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WildHare.0.9.8.1\lib\net45\WildHare.dll</HintPath>
+    <Reference Include="WildHare, Version=0.9.8.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WildHare.0.9.8.2\lib\net45\WildHare.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>

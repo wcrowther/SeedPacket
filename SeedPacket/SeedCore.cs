@@ -230,7 +230,6 @@ namespace SeedPacket
         // This class is a work around that GetMetaProperties() 
         // may not return anything if there is a single property
         // but we need a PropertyInfo to construct a MetaProperty
-        // Fix in NewLibrary at some point.
         public T Type { get; }
     }
 

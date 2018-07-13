@@ -2,7 +2,7 @@
 @using Examples.Models
 @using SeedPacket
 @using SeedPacket.Generators
-@using NewLibrary.ForString
+@using WildHare.Extensions
 
 <div id="rowResults">
     <table class="table table-striped topSpace table-collapse">
@@ -21,7 +21,7 @@
                     <td>@rule.RuleName</td>
                     <td>@rule.Description</td>
                     <td>@rule.TypeMatch</td>
-                    <td>@rule.NameMatch.isBlank("Any")</td>
+                    <td>@rule.NameMatch.IfNullOrEmpty("Any")</td>
                 </tr>
             }
         </tbody>
