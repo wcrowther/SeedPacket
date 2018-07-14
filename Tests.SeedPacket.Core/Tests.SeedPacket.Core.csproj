@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Source\JsonSeedSource.json" />
+    <None Remove="Source\SimpleSeedSource.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Source\JsonSeedSource.json" />
+    <Content Include="Source\SimpleSeedSource.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.10.1" />
+    <PackageReference Include="NUnitTestAdapter" Version="2.1.1" />
+    <PackageReference Include="SeedPacket" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Examples\Examples.csproj" />
+  </ItemGroup>
+
+</Project>
