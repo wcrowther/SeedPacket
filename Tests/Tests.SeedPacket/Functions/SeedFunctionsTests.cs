@@ -22,8 +22,8 @@ namespace Tests.SeedPacket
         [SetUp]
         public void Setup()
         {
-            pathToTestXmlFile = Path.Combine(GetTestDirectory() + "Source\\", xmlFile);
-            pathToTestJsonFile = Path.Combine(GetTestDirectory() + "Source\\", jsonFile);
+            pathToTestXmlFile = Path.Combine(GetApplicationRoot() + "\\Source\\", xmlFile);
+            pathToTestJsonFile = Path.Combine(GetApplicationRoot() + "\\Source\\", jsonFile);
         }
 
         [Test]

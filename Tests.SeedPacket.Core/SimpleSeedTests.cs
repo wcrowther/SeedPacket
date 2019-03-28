@@ -1,13 +1,13 @@
-﻿using System;
-using NUnit.Framework;
-using System.Linq;
+﻿using NUnit.Framework;
 using SeedPacket;
 using SeedPacket.Exceptions;
 using System.IO;
+using static Tests.SeedPacket.Common;
+
 
 namespace Tests.SeedPacket.Core
 {
-    [TestFixture]
+	[TestFixture]
     public class SimpleSeedTests
     {
         private string pathToTestXmlFile;
@@ -22,7 +22,7 @@ namespace Tests.SeedPacket.Core
         [SetUp]
         public void Setup()
         {
-            pathToTestXmlFile = Path.Combine(GetTestDirectory() + "/Source/", xmlFile);
+            pathToTestXmlFile = Path.Combine(GetApplicationRoot() + "\\Source\\", xmlFile);
         }
 
         [Test]
@@ -96,13 +96,5 @@ namespace Tests.SeedPacket.Core
             Assert.AreEqual("John", simpleSeed.Randomize("FirstName"));
         }
 
-        private string GetTestDirectory ()
-        {
-            // returns bin directory of this test project
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-
-            // go up 2 levels to root of this test project
-            return Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\"));
-        }
     }
 }

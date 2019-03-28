@@ -25,23 +25,23 @@ namespace SeedPacket.Extensions
             return new SeedCore(generator).SeedList(iEnumerable);
         }
 
-        public static IEnumerable<T> Seed<T>(this IEnumerable<T> iEnumerable, int seedBegin, int seedEnd, string filePath, string customPropertyName = null)
+        public static IEnumerable<T> Seed<T>(this IEnumerable<T> iEnumerable, int seedBegin, int seedEnd, string filePath, string customPropertyName = null, List<Rule> addRules = null)
         {
-            var seedCore = new SeedCore(
-                new MultiGenerator(filePath)
-                {
-                    SeedBegin = seedBegin,
-                    SeedEnd = seedEnd,
-                    CustomName = customPropertyName
-                }
-            );
-            return seedCore.SeedList(iEnumerable);
+            var generator = new MultiGenerator(filePath)
+            {
+                SeedBegin = seedBegin,
+                SeedEnd = seedEnd,
+                CustomName = customPropertyName,
+            };
+            generator.Rules.AddRange(addRules);
+
+            return new SeedCore(generator).SeedList(iEnumerable);
         }
 
         public static IEnumerable<T> Seed<T>(this IEnumerable<T> iEnumerable, int? seedBegin = null, int? seedEnd = null, IGenerator generator = null, string customPropertyName = null, Random baseRandom = null)
         {
             if (generator != null && baseRandom != null)
-                throw new Exception("SeedPacket: As you ares passing in an generator to the Seed method, you must set the baseRandom on the IGenerator itself.");
+                throw new Exception("SeedPacket: As you are passing in a generator to the Seed method, you must set the baseRandom on the IGenerator itself.");
 
             var gen = generator ?? new MultiGenerator(baseRandom: baseRandom);
             gen.SeedBegin = seedBegin ?? gen.SeedBegin;
@@ -65,23 +65,23 @@ namespace SeedPacket.Extensions
             return new SeedCore(generator).SeedList(iDictionary);
         }
 
-        public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int seedBegin, int seedEnd, string filePath, string customPropertyName = null)
+        public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int seedBegin, int seedEnd, string filePath = null, string customPropertyName = null, List<Rule> addRules = null)
         {
-            var seedCore = new SeedCore(
-                new MultiGenerator(filePath)
-                {
-                    SeedBegin = seedBegin,
-                    SeedEnd = seedEnd,
-                    CustomName = customPropertyName
-                }
-            );
-            return seedCore.SeedList(iDictionary);
+            var generator = new MultiGenerator(filePath)
+            {
+                SeedBegin = seedBegin,
+                SeedEnd = seedEnd,
+                CustomName = customPropertyName,
+            };
+            generator.Rules.AddRange(addRules);
+
+            return new SeedCore(generator).SeedList(iDictionary);
         }
 
         public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int? seedBegin = null, int? seedEnd = null, IGenerator generator = null, string currentPropertyName = null, Random baseRandom = null)
         {
             if (generator != null && baseRandom != null)
-                throw new Exception("SeedPacket: As you ares passing in an generator to the Seed method, you must set the baseRandom on the IGenerator itself.");
+                throw new Exception("SeedPacket: As you are passing in a generator to the Seed method, you must set the baseRandom on the IGenerator itself.");
 
             var gen = generator ?? new MultiGenerator(baseRandom: baseRandom);
             gen.SeedBegin = seedBegin ?? 1;

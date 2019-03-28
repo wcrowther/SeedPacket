@@ -4,6 +4,8 @@ using System.Linq;
 using SeedPacket;
 using SeedPacket.Exceptions;
 using System.IO;
+using static Tests.SeedPacket.Common;
+
 
 namespace Tests.SeedPacket
 {
@@ -22,7 +24,7 @@ namespace Tests.SeedPacket
         [SetUp]
         public void Setup()
         {
-            pathToTestXmlFile = Path.Combine(GetTestDirectory() + "/Source/", xmlFile);
+            pathToTestXmlFile = Path.Combine(GetApplicationRoot() + "\\Source\\", xmlFile);
         }
 
         [Test]

@@ -56,8 +56,8 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SeedPacket, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SeedPacket.3.0.1\lib\net45\SeedPacket.dll</HintPath>
+    <Reference Include="SeedPacket, Version=3.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SeedPacket.3.0.3\lib\net45\SeedPacket.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -100,8 +100,8 @@
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
     </Reference>
-    <Reference Include="WildHare, Version=0.9.8.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WildHare.0.9.8.2\lib\net45\WildHare.dll</HintPath>
+    <Reference Include="WildHare, Version=0.9.8.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WildHare.0.9.8.3\lib\net45\WildHare.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

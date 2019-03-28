@@ -1,5 +1,4 @@
-﻿using Examples.Models;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SeedPacket;
 using SeedPacket.Extensions;
 using SeedPacket.Functions;
@@ -7,6 +6,7 @@ using SeedPacket.Generators;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using Tests.SeetPacket.Core.Models;
 using WildHare.Extensions;
 
 namespace Tests.SeedPacket.Core

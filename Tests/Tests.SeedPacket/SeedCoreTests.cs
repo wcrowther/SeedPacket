@@ -9,7 +9,7 @@ using System.Linq;
 using Tests.SeedPacket.Model;
 using static Tests.SeedPacket.Common;
 
-namespace Tests.SeedPacket
+namespace Tests.SeedPacket.Core
 {
     [TestFixture]
     public class SeedCoreTests
@@ -27,8 +27,8 @@ namespace Tests.SeedPacket
         [SetUp]
         public void Setup()
         {
-            pathToTestXmlFile = Path.Combine(GetTestDirectory() + "Source\\", xmlFile);
-            pathToTestJsonFile = Path.Combine(GetTestDirectory() + "Source\\", jsonFile);
+            pathToTestXmlFile = Path.Combine(GetApplicationRoot() + "\\Source\\", xmlFile);
+            pathToTestJsonFile = Path.Combine(GetApplicationRoot() + "\\Source\\", jsonFile);
 
             testValidXml = GetValidXml();
             testEmptyXml = GetEmptyXml();

@@ -1,20 +1,16 @@
-﻿using System;
-using NUnit.Framework;
-using System.Linq;
-using SeedPacket;
-using SeedPacket.Exceptions;
-using System.IO;
-using static Tests.SeedPacket.Common;
-using SeedPacket.Generators;
-using Tests.SeedPacket.Model;
-using System.Collections.Generic;
-using System.Collections;
+﻿using NUnit.Framework;
 using SeedPacket.Extensions;
-using WildHare.Extensions;
+using SeedPacket.Generators;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Tests.SeedPacket.Model;
+using static Tests.SeedPacket.Common;
 
 namespace Tests.SeedPacket
 {
-    [TestFixture]
+	[TestFixture]
     public class SeedExtensionsTests
     {
         private string pathToTestXmlFile;
@@ -30,8 +26,8 @@ namespace Tests.SeedPacket
         [SetUp]
         public void Setup()
         {
-            pathToTestXmlFile = Path.Combine(GetTestDirectory() + "Source\\", xmlFile);
-            pathToTestJsonFile = Path.Combine(GetTestDirectory() + "Source\\", jsonFile);
+            pathToTestXmlFile = Path.Combine(GetApplicationRoot() + "\\Source\\", xmlFile);
+            pathToTestJsonFile = Path.Combine(GetApplicationRoot() + "\\Source\\", jsonFile);
 
             testValidXml = GetValidXml();
             testEmptyXml = GetEmptyXml();
