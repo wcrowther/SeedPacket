@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Tests.SeedPacket.Model
+namespace Tests.SeedPacket.Core.Model
 {
     public class Item
     {

@@ -5,8 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Tests.SeedPacket.Model;
-using static Tests.SeedPacket.Common;
+using Tests.SeedPacket.Core.Model;
+using static Tests.SeedPacket.Core.Common;
 
 namespace Tests.SeedPacket
 {

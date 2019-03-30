@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Xml.Linq;
 using Tests.SeedPacket.Model;
+using WildHare.Extensions;
 using static Tests.SeedPacket.Common;
 
 namespace Tests.SeedPacket
@@ -22,7 +23,8 @@ namespace Tests.SeedPacket
         [SetUp]
         public void Setup()
         {
-            pathToTestXmlFile = Path.Combine(GetApplicationRoot() + "\\Source\\", xmlFile);
+			var root = IOExtensions.GetApplicationRoot();
+			pathToTestXmlFile = Path.Combine(GetApplicationRoot() + "\\Source\\", xmlFile);
             pathToTestJsonFile = Path.Combine(GetApplicationRoot() + "\\Source\\", jsonFile);
         }
 

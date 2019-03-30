@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tests.SeedPacket.Model
+namespace Tests.SeedPacket.Core.Model
 {
     public class ItemGroup
     {

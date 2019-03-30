@@ -4,30 +4,42 @@ using SeedPacket.Functions;
 using SeedPacket.Generators;
 using System;
 using System.IO;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using Tests.SeedPacket.Model;
-using static Tests.SeedPacket.Common;
+using Tests.SeedPacket.Core.Model;
+using WildHare.Extensions;
 
-
-namespace Tests.SeedPacket
+namespace Tests.SeedPacket.Core
 {
-    [TestFixture]
+	[TestFixture]
     public class SeedFunctionsTests
     {
 
         private string pathToTestXmlFile;
         private string pathToTestJsonFile;
-        private string xmlFile = @"SimpleSeedSource.xml";
-        private string jsonFile = @"JsonSeedSource.json";
+		private string xmlFile = @"\Source\SimpleSeedSource.xml";
+		private string jsonFile = @"\Source\JsonSeedSource.json";
 
-        [SetUp]
+		[SetUp]
         public void Setup()
         {
-            pathToTestXmlFile = Path.Combine(GetApplicationRoot() + "\\Source\\", xmlFile);
-            pathToTestJsonFile = Path.Combine(GetApplicationRoot() + "\\Source\\", jsonFile);
-        }
+			var root = IOExtensions.GetApplicationRoot();
+			var commonRoot = GetApplicationRoot();
+			pathToTestXmlFile = xmlFile.ToMapPath();
+			pathToTestJsonFile = jsonFile.ToMapPath();
+		}
 
-        [Test]
+		public static string GetApplicationRoot()
+		{
+			var exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+			var appPathMatcher = new Regex(@"(?<!fil)[A-Za-z]:\\+[\S\s]*?(?=\\+bin)");
+			var appRoot = appPathMatcher.Match(exePath).Value;
+
+			return appRoot;
+		}
+
+		[Test]
         public void SeedFunctions_DiceRoll_Basic_Roll()
         {
             // Uses default seed for Random so value 4 is constant
@@ -40,7 +52,7 @@ namespace Tests.SeedPacket
         [Test]
         public void SeedFunctions_DiceRoll_20_Sided_Dice()
         {
-            // Uses default seed for Random so value 4 is constant
+            // Uses default seed for Random so value 13 is constant
 
             var gen = new BasicGenerator();
             int diceRoll = Funcs.DiceRoll(gen, 20);

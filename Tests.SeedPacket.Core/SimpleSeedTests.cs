@@ -2,7 +2,7 @@
 using SeedPacket;
 using SeedPacket.Exceptions;
 using System.IO;
-using static Tests.SeedPacket.Common;
+using static Tests.SeedPacket.Core.Common;
 
 
 namespace Tests.SeedPacket.Core
