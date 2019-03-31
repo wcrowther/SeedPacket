@@ -9,12 +9,14 @@
     <PackageIconUrl>http://www.seedpacket.net/Content/Images/favicon.png</PackageIconUrl>
     <FileVersion>3.0.3.0</FileVersion>
     <AssemblyVersion>3.0.3.0</AssemblyVersion>
-    <PackageReleaseNotes>BETA 3.0.3</PackageReleaseNotes>
+    <PackageReleaseNotes>BETA 3.0.3
+
+- Known issues. Paths to json and xml source files currently must be absolute for Core implementations</PackageReleaseNotes>
     <Description>BETA 3.0.3</Description>
     <Copyright>Will Crowther</Copyright>
     <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
     <PackageProjectUrl>http://www.seedpacket.net/</PackageProjectUrl>
-    <PackageTags>linq data generator seed data generation extension method IEnumerable List rules engine seeding prototyping rad c#</PackageTags>
+    <PackageTags>c# linq data generator seed data generation extension method IEnumerable List rules engine seeding prototyping rad</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
