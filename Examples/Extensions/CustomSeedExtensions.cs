@@ -1,20 +1,28 @@
-﻿using SeedPacket;
+using SeedPacket;
 using SeedPacket.Functions;
 using SeedPacket.Generators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Examples.Generators;
+using System.IO;
+using System.Web.Hosting;
 
 namespace Examples.Extensions
 {
     public static class CustomSeedExtensions
     {
-        private static int defaultSeed = 3456;
+        private static readonly int defaultSeed = 3456;
+        private static readonly string xmlSourcePath;
+
+        static CustomSeedExtensions()
+        {
+            xmlSourcePath = HostingEnvironment.MapPath("~/SourceFiles/xmlSeedSourcePlus.xml");
+        }
 
         public static List<T> Seed<T>(this IEnumerable<T> iEnumerable, int? seedEnd = null, int? seedBegin = null, int? randomSeed = null, string customPropertyName = null)
         {
-            var gen = new CustomGenerator("~/SourceFiles/xmlSeedSourcePlus.xml", dataInputType: DataInputType.XmlFile)
+            var gen = new CustomGenerator(xmlSourcePath, dataInputType: DataInputType.XmlFile)
             {
                 SeedBegin = seedBegin ?? 1,
                 SeedEnd = seedEnd ?? 10,
@@ -27,7 +35,7 @@ namespace Examples.Extensions
 
         public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int? seedEnd = null, int? seedBegin = null, int? randomSeed = null, string customPropertyName = null)
         {
-            var gen = new CustomGenerator("~/SourceFiles/xmlSeedSourcePlus.xml", dataInputType: DataInputType.XmlFile)
+            var gen = new CustomGenerator(xmlSourcePath, dataInputType: DataInputType.XmlFile)
             {
                 SeedBegin = seedBegin ?? 1,
                 SeedEnd = seedEnd ?? 10,

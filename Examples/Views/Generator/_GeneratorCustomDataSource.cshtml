@@ -1,10 +1,11 @@
-﻿@using SeedPacket
+@using SeedPacket
 @using SeedPacket.Extensions
 @using SeedPacket.Generators
-
+@using System
 
 @{ 
-    var gen = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml");
+    string xmlSourcePath = Server.MapPath("~/SourceFiles/xmlSeedSourcePlus.xml");
+    var gen = new MultiGenerator(xmlSourcePath);
 
     var sports = new List<string>().Seed(seedEnd: 15, generator: gen, customPropertyName: "Sport");
 }

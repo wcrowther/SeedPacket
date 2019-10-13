@@ -1,4 +1,4 @@
-﻿
+
 using SeedPacket.Exceptions;
 using SeedPacket.Functions;
 using SeedPacket.Interfaces;
@@ -25,7 +25,7 @@ namespace SeedPacket.DataSources
             LoadDefaultData();
         }
 
-        public void Parse(string xml)
+        public void Parse(string xml, string source = null)
         {
             try
             {
@@ -33,34 +33,29 @@ namespace SeedPacket.DataSources
             }
             catch
             {
-                throw new InvalidSourceStringException("xml");
+                throw new InvalidSourceException("xml", source);
             }
         }
 
         public void Load(string sourceFilePath)
         {
-            string pathToFile = null;
+            string xmlstring;
+
+            if (sourceFilePath.StartsWith("~"))
+            {
+                throw new InvalidTildePathException(sourceFilePath);
+            };
+
             try
             {
-                if (sourceFilePath.StartsWith("~"))
-                {
-                    string path = sourceFilePath.RemoveStart("~");
-                    pathToFile = path.ToMapPath();
-                }
-                else
-                {
-                    pathToFile = sourceFilePath;
-                }
-
-
-                // pathToFile = sourceFilePath.StartsWith("~") ? sourceFilePath.RemoveStart("~").ToMapPath() : sourceFilePath;
-                string xml = File.ReadAllText(pathToFile);
-                Parse(xml);
+                xmlstring = File.ReadAllText(sourceFilePath);
             }
             catch
             {
-                throw new InvalidSourceFileException("xml", pathToFile);
+                throw new InvalidFilePathException(sourceFilePath);
             }
+
+            Parse(xmlstring, "file");
         }
 
         public void LoadDefaultData()

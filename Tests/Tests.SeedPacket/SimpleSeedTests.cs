@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using System.Linq;
 using SeedPacket;
@@ -13,14 +13,14 @@ namespace Tests.SeedPacket
     public class SimpleSeedTests
     {
         private string pathToTestXmlFile;
-        private string xmlFile = @"SimpleSeedSource.xml";
-        private string testEmptyXml = @"<SimpleSeedTests></SimpleSeedTests>";
-        private string testValidXml = @"<SimpleSeedTests>
-                                            <FirstName>Bob</FirstName>
-                                            <FirstName>Will</FirstName>
-                                            <FirstName>John</FirstName>
-                                            <FirstName>Joe</FirstName>
-                                        </SimpleSeedTests>";
+        private readonly string xmlFile      = @"SimpleSeedSource.xml";
+        private readonly string testEmptyXml = @"<SimpleSeedTests></SimpleSeedTests>";
+        private readonly string testValidXml = @"<SimpleSeedTests>
+                                                    <FirstName>Bob</FirstName>
+                                                    <FirstName>Will</FirstName>
+                                                    <FirstName>John</FirstName>
+                                                    <FirstName>Joe</FirstName>
+                                                 </SimpleSeedTests>";
         [SetUp]
         public void Setup()
         {
@@ -30,7 +30,7 @@ namespace Tests.SeedPacket
         [Test]
         public void SimpleSeed_Throws_With_Incorrect_Xml_File_Name ()
         {
-            Assert.Throws<InvalidSourceFileException>(
+            Assert.Throws<InvalidFilePathException>(
                 () => new SimpleSeed("NonExistingFile.xml")
             );
         }
@@ -38,7 +38,7 @@ namespace Tests.SeedPacket
         [Test]
         public void SimpleSeed_Throws_With_Invalid_XmlString ()
         {
-            Assert.Throws<InvalidSourceStringException>(
+            Assert.Throws<InvalidSourceException>(
                 () => new SimpleSeed(sourcestring: "not Xml")
             );
         }

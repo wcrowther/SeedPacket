@@ -1,4 +1,4 @@
-﻿using SeedPacket.Exceptions;
+using SeedPacket.Exceptions;
 using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -67,13 +67,19 @@ namespace SeedPacket.DataSources
             }
             else if (!string.IsNullOrWhiteSpace(sourceFilePath))
             {
+                if (sourceFilePath.StartsWith("~"))
+                {
+                    throw new InvalidTildePathException(sourceFilePath);
+                };
+
                 try
                 {
                     jsonDataSource.Load(sourceFilePath);
                     sourceData = jsonDataSource;
                 }
-                catch (InvalidSourceFileException)
+                catch (InvalidSourceException)
                 {
+                    // If no valid JSON file try XML
                     try
                     {
                         xmlDataSource.Load(sourceFilePath);
@@ -81,13 +87,8 @@ namespace SeedPacket.DataSources
                     }
                     catch
                     {
-                        throw new InvalidSourceFileException("XML", sourceFilePath);
+                        throw new InvalidSourceException("", sourceFilePath);
                     }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                    throw new InvalidSourceFileException(filepath: sourceFilePath);
                 }
             }
             else if (sourceString != null)
@@ -97,7 +98,7 @@ namespace SeedPacket.DataSources
                     jsonDataSource.Parse(sourceString);
                     sourceData = jsonDataSource;
                 }
-                catch (InvalidSourceStringException)
+                catch (InvalidSourceException)
                 {
                     try
                     {
@@ -106,13 +107,8 @@ namespace SeedPacket.DataSources
                     }
                     catch
                     {
-                        throw new InvalidSourceStringException();
+                        throw new InvalidSourceException();
                     }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                    throw new InvalidSourceStringException();
                 }
             }
             else

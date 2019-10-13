@@ -1,11 +1,13 @@
-﻿@using SeedPacket
+@using SeedPacket
 @using SeedPacket.Extensions
 @using SeedPacket.Functions
 @using SeedPacket.Generators
 @using Examples.Models
 
 @{  // inline in view for RAD or web pages purposes
-    var generator = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml")
+    string xmlSourcePath = Server.MapPath("~/SourceFiles/xmlSeedSourcePlus.xml");
+
+    var generator = new MultiGenerator(xmlSourcePath)
     {
         Rules = {
             new Rule(typeof(int), "SelectedProduct",  g => g.RowRandom.Next(0, 11), "Random product id"),

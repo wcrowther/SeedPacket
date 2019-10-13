@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using SeedPacket.Exceptions;
 using SeedPacket.Interfaces;
 using System;
@@ -19,7 +19,7 @@ namespace SeedPacket.DataSources
             LoadDefaultData();
         }
 
-        public void Parse(string json)
+        public void Parse(string json, string source = null)
         {
             try
             {
@@ -27,22 +27,29 @@ namespace SeedPacket.DataSources
             }
             catch
             {
-                throw new InvalidSourceStringException("json");
+                throw new InvalidSourceException("json", source);
             }
         }
 
         public void Load(string sourceFilePath)
         {
+            string jsonString;
+
+            if (sourceFilePath.StartsWith("~"))
+            {
+                throw new InvalidTildePathException(sourceFilePath);
+            };
+ 
             try
             {
-                string pathToFile = sourceFilePath.StartsWith("~") ? sourceFilePath.ToMapPath() : sourceFilePath;
-                string json = File.ReadAllText(pathToFile);
-                Parse(json);
+                jsonString = File.ReadAllText(sourceFilePath);
             }
             catch
             {
-                throw new InvalidSourceFileException("json");
+                throw new InvalidFilePathException(sourceFilePath);
             }
+
+            Parse(jsonString, "file");
         }
 
         public void LoadDefaultData()

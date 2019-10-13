@@ -1,4 +1,4 @@
-﻿using Examples.Models;
+using Examples.Models;
 using SeedPacket;
 using SeedPacket.Extensions;
 using SeedPacket.Functions;
@@ -9,12 +9,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 
 namespace Website.Controllers
 {
     public class RowsController : Controller
     {
+        private readonly string xmlSeedSourcePlus = HostingEnvironment.MapPath("/SourceFiles/XmlGeneratorSource.xml");
+
         public ActionResult Index()
         {
             var stopwatch = Stopwatch.StartNew();
@@ -33,7 +36,7 @@ namespace Website.Controllers
         private List<Account> GetAccounts(int rowCount)
         {
             int baseAccountId = 3464;
-            var generator = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml")
+            var generator = new MultiGenerator(xmlSeedSourcePlus)
             {
                 Rules =  {
                     new Rule(typeof(int), "AccountId",      g => baseAccountId + g.RowNumber, "AccountId"  ),

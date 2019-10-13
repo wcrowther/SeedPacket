@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using SeedPacket.DataSources;
 using SeedPacket.Functions;
 using SeedPacket.Generators;
@@ -18,16 +18,15 @@ namespace Tests.SeedPacket.Core
 
         private string pathToTestXmlFile;
         private string pathToTestJsonFile;
-		private string xmlFile = @"\Source\SimpleSeedSource.xml";
-		private string jsonFile = @"\Source\JsonSeedSource.json";
+		private readonly string xmlFile = @"Source\SimpleSeedSource.xml";
+		private readonly string jsonFile = @"Source\JsonSeedSource.json";
 
 		[SetUp]
         public void Setup()
         {
-			var root = IOExtensions.GetApplicationRoot();
 			var commonRoot = GetApplicationRoot();
-			pathToTestXmlFile = xmlFile.ToMapPath();
-			pathToTestJsonFile = jsonFile.ToMapPath();
+			pathToTestXmlFile = Path.Combine( commonRoot, xmlFile);
+			pathToTestJsonFile = Path.Combine(commonRoot, jsonFile); 
 		}
 
 		public static string GetApplicationRoot()

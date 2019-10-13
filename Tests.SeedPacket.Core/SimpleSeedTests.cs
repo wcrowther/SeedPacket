@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using SeedPacket;
 using SeedPacket.Exceptions;
 using System.IO;
@@ -28,7 +28,7 @@ namespace Tests.SeedPacket.Core
         [Test]
         public void SimpleSeed_Throws_With_Incorrect_Xml_File_Name ()
         {
-            Assert.Throws<InvalidSourceFileException>(
+            Assert.Throws<InvalidFilePathException>(
                 () => new SimpleSeed("NonExistingFile.xml")
             );
         }
@@ -36,7 +36,7 @@ namespace Tests.SeedPacket.Core
         [Test]
         public void SimpleSeed_Throws_With_Invalid_XmlString ()
         {
-            Assert.Throws<InvalidSourceStringException>(
+            Assert.Throws<InvalidSourceException>(
                 () => new SimpleSeed(sourcestring: "not Xml")
             );
         }
