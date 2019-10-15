@@ -1,4 +1,4 @@
-﻿using SeedPacket.Interfaces;
+using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;

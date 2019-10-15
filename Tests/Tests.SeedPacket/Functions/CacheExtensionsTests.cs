@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using SeedPacket;
 using SeedPacket.Extensions;
 using SeedPacket.Functions;
@@ -86,9 +86,12 @@ namespace Tests.SeedPacket
                 InvoiceId = 1
             };
             ExpandoObject cache = generator.Cache;
+
+            Assert.IsNotNull(cache.GetByItemName<Invoice>(name));
+
             cache.RemoveItemByName(name);
 
-            Assert.AreEqual(null, cache.GetByItemName<Invoice>(name));
+            Assert.IsNull(cache.GetByItemName<Invoice>(name));
         }
 
         [Test]

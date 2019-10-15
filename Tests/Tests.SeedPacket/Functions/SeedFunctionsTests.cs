@@ -31,32 +31,36 @@ namespace Tests.SeedPacket
         public void SeedFunctions_DiceRoll_Basic_Roll()
         {
             // Uses default seed for Random so value 4 is constant
+            int expected = 4;
+
             var gen = new BasicGenerator();
             int diceRoll = Funcs.DiceRoll(gen);
 
-            Assert.AreEqual(4, diceRoll);
+            Assert.AreEqual(expected, diceRoll);
         }
 
         [Test]
         public void SeedFunctions_DiceRoll_20_Sided_Dice()
         {
-            // Uses default seed for Random so value 4 is constant
+            // Uses default seed for Random so value 13 is constant
+            int expected = 13;
 
             var gen = new BasicGenerator();
             int diceRoll = Funcs.DiceRoll(gen, 20);
 
-            Assert.AreEqual(13, diceRoll);
+            Assert.AreEqual(expected, diceRoll);
         }
 
         [Test]
         public void SeedFunctions_DiceRoll_5d6()
         {
-            // Uses default seed for Random so value 4 is constant
+            // Uses default seed for Random so value 22 is constant
+            int expected = 22;
 
             var gen = new BasicGenerator();
             int diceRoll = Funcs.DiceRoll(gen, 6, 5);
 
-            Assert.AreEqual(22, diceRoll);
+            Assert.AreEqual(expected, diceRoll);
         }
 
         [Test]
