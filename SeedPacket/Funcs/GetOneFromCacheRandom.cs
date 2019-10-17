@@ -12,7 +12,7 @@ namespace SeedPacket.Functions
         /// <summary>Gets a single item from the generator.cache matching the string [cacheListname] like ('Invoices'). It will throw NOT an error <br/> 
         /// if the named cacheList does not exist. If [remove] is true, it will delete the item from the source.
         /// </summary>
-        public static T GetOneFromCacheRandom<T>(IGenerator generator, string cacheListName, bool remove = true)
+        public static T GetOneFromCacheRandom<T>(this IGenerator generator, string cacheListName, bool remove = true)
         {
             ExpandoObject cache = generator.Cache;
             var cacheList = cache.GetByItemName<List<T>>(cacheListName);
@@ -23,7 +23,7 @@ namespace SeedPacket.Functions
         /// <summary>Gets a single item from the generator.cache matching the dynamic [cacheList] like (generator.cache.Invoices). It WILL throw <br/>
         /// an error if the named cacheList does not exist. If [remove] is true, it will delete the item from the source.
         /// </summary>
-        public static T GetOneFromCacheRandom<T>(IGenerator generator, dynamic cacheList, bool remove = true)
+        public static T GetOneFromCacheRandom<T>(this IGenerator generator, dynamic cacheList, bool remove = true)
         {
             List<T> itemList = cacheList;
 

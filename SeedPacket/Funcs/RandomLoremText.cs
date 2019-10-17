@@ -1,4 +1,4 @@
-﻿using SeedPacket.Interfaces;
+using SeedPacket.Interfaces;
 using System.Text;
 
 using System;
@@ -9,9 +9,10 @@ namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
-        public static string RandomLoremText (IGenerator generator,
-                                         int minWords = 3, int maxWords = 16,
-                                         int minSentences = 3, int maxSentences = 10, int offset = 0)
+        public static string RandomLoremText (  this IGenerator generator,
+                                                int minWords = 3, int maxWords = 16,
+                                                int minSentences = 3, int maxSentences = 10,
+                                                int offset = 0)
         {
             // Gets sentenceCount between minSentences and maxSentences, each consisting
             // of wordCount between minWords and maxWords. Offset governs which starting point int locums sequence.

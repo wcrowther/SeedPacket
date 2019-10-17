@@ -1,14 +1,15 @@
-﻿using SeedPacket.Interfaces;
-using System;
-using System.Linq;
+using SeedPacket.Interfaces;
 
 namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
-        public static string RandomZip (IGenerator generator)
+        public static string RandomZip (this IGenerator generator, bool plusfour = false)
         {
-            return generator.RowRandom.Next(10001, 100000).ToString();
+            string zip   = generator.RowRandom.Next(10001, 100000).ToString();
+            string route = generator.RowRandom.Next(1000, 10000).ToString();
+
+            return zip + (plusfour ? "-" + route : "");
         }
     }
 }

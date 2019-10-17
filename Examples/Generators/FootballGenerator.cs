@@ -1,13 +1,10 @@
-﻿using Examples.Models;
+using Examples.Models;
 using SeedPacket;
-using SeedPacket.DataSources;
 using SeedPacket.Extensions;
 using SeedPacket.Functions;
 using SeedPacket.Generators;
 using SeedPacket.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Examples.Generators
 {
@@ -42,15 +39,15 @@ namespace Examples.Generators
         {
             var game = new FootballGame
             {
-                HomeTeam = Funcs.GetCacheRandom<FootballTeam>(g, Cache.FootballTeams, true),
-                AwayTeam = Funcs.GetCacheRandom<FootballTeam>(g, Cache.FootballTeams, true)
+                HomeTeam = Funcs.GetOneFromCacheRandom<FootballTeam>(g, Cache.FootballTeams, true),
+                AwayTeam = Funcs.GetOneFromCacheRandom<FootballTeam>(g, Cache.FootballTeams, true)
             };
             return game;
         }
 
         public FootballTeam GetTeam(IGenerator gen)
         {
-            return Funcs.GetObjectNext<FootballTeam>(gen, "Team");
+            return gen.GetObjectNext<FootballTeam>("Team");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using SeedPacket.Interfaces;
+using SeedPacket.Interfaces;
 using System;
 using System.Linq;
 
@@ -6,7 +6,7 @@ namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
-        public static Guid RandomGuid (IGenerator generator)
+        public static Guid RandomGuid (this IGenerator generator)
         {
             int seed = generator.RowRandom.Next();
             var r = new Random(seed);

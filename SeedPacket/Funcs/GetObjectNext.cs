@@ -1,4 +1,4 @@
-﻿using SeedPacket.Interfaces;
+using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
-        public static T GetObjectNext<T> (IGenerator generator, string identifier = null, int offset = 0) where T : class, new()
+        public static T GetObjectNext<T> (this IGenerator generator, string identifier = null, int offset = 0) where T : class, new()
         {
             // Get propertyName from generator to use if identfier not set
             var propertyName = identifier ?? generator.CustomName ?? generator?.CurrentProperty?.Name ?? "";

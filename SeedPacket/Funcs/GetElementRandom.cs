@@ -6,7 +6,7 @@ namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
-        public static string GetElementRandom (IGenerator generator, string identifier = null, bool nullIfEmpty = false)
+        public static string GetElementRandom (this IGenerator generator, string identifier = null, bool nullIfEmpty = false)
         {
             // Get propertyName from generator to use if identfier not set
             string propertyName = identifier ?? generator.CustomName ?? generator?.CurrentProperty?.Name ?? "";
@@ -19,7 +19,7 @@ namespace SeedPacket.Functions
             return element;
         }
 
-        public static dynamic GetElementRandom (IGenerator generator, string identifier, TypeCode typeCode)
+        public static dynamic GetElementRandom (this IGenerator generator, string identifier, TypeCode typeCode)
         {
             var elementList = generator.Datasource.GetElementList(identifier);
             int index = generator.RowRandom.Next(elementList.Count);

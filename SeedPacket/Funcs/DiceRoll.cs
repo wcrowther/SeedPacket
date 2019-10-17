@@ -12,11 +12,7 @@ namespace SeedPacket.Functions
         /// Increasing numberOfDice above 1 creates a bell-curve of probability.<br/><br/>
         /// ie: rolling 3 6-sided dice (3d6) returns from 3 to 18 (with 7 the most likely possiblity)
         /// </summary>
-        /// <param name="generator">IGenerator</param>
-        /// <param name="diceSides">Number of sides of dice ie: standard 6-sided, 10-sided, etc;</param>
-        /// <param name="numberOfDice">How many dice to role</param>
-        /// <returns>int</returns>
-        public static int DiceRoll (IGenerator generator, int diceSides = 6, int numberOfDice = 1)
+        public static int DiceRoll (this IGenerator generator, int diceSides = 6, int numberOfDice = 1)
         {
             int diceSum = 0;
 

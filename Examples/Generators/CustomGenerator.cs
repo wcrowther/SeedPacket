@@ -1,4 +1,4 @@
-﻿using Examples.Models;
+using Examples.Models;
 using SeedPacket;
 using SeedPacket.DataSources;
 using SeedPacket.Extensions;
@@ -64,10 +64,11 @@ namespace Examples.Generators
         {
             // Example. Obviously this could be more extensive...
 
-            var advanceRules = new List<Rule>(){
-                new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth"  ),
-                new Rule(typeof(string),"Description%", g => Funcs.GetElementRandom(g, "Description"), "Description", "Gets Description from custom XML file" ),
-                new Rule(typeof(string), "Ceo",         g => Funcs.GetElementNext(g, "FirstName") + " " + Funcs.GetElementNext(g, "LastName"), "Random CEO Name"),
+            var advanceRules = new List<Rule>
+            {
+                new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays(g.RowRandom.Next(-30, 1)),                  "DateTimeInLastMonth"),
+                new Rule(typeof(string),"Description%", g => g.GetElementRandom("Description"), "Description",                  "Gets Description from custom XML file"),
+                new Rule(typeof(string),"Ceo",          g => $"{g.GetElementNext("FirstName")} {g.GetElementNext("LastName")}", "Random CEO Name"),
             };
 
             this.Rules.AddRange(advanceRules, true);

@@ -1,4 +1,4 @@
-﻿using SeedPacket.Interfaces;
+using SeedPacket.Interfaces;
 using System;
 using System.Linq;
 
@@ -6,7 +6,7 @@ namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
-        public static T GetObjectRandom<T> (IGenerator generator, string identifier = null, bool nullIfEmpty = false) where T : class, new()
+        public static T GetObjectRandom<T> (this IGenerator generator, string identifier = null, bool nullIfEmpty = false) where T : class, new()
         {
 
             // Get propertyName from generator to use if identfier not set

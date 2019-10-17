@@ -1,4 +1,4 @@
-﻿using SeedPacket.Interfaces;
+using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,8 @@ namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
-        public static string GetElementNext (IGenerator generator, string identifier = null, int offset = 0)
+        public static string GetElementNext (this IGenerator generator, string identifier = null, int offset = 0)
         {
-            // Get propertyName from generator to use if identfier not set
             var propertyName = identifier ?? generator.CustomName ?? generator?.CurrentProperty?.Name ?? "";
 
             // Will loop back to beginning if rownumber is greater than number of elements in list

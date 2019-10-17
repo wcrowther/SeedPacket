@@ -1,4 +1,4 @@
-﻿using SeedPacket.Interfaces;
+using SeedPacket.Interfaces;
 using System;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +14,7 @@ namespace SeedPacket
 
         private Type typeMatch;
         private string nameMatch;
-        private Func<IGenerator, dynamic> func; 
+        private readonly Func<IGenerator, dynamic> func; 
 
     #endregion
 

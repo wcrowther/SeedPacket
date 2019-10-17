@@ -13,7 +13,7 @@ namespace SeedPacket.Functions
         /// if the named [cacheList] does not exist. If there are available elements in the [cacheList], it will get a random number of items <br/>
         /// from [min] to [max] starting from the beginning of the list. If [remove] is true, it will delete the items from the source.
         /// </summary>
-        public static List<T> GetListFromCacheNext<T> (IGenerator generator, string cacheListName, int min, int max, bool remove = true)
+        public static List<T> GetListFromCacheNext<T> (this IGenerator generator, string cacheListName, int min, int max, bool remove = true)
         {
             ExpandoObject cache = generator.Cache;
             var cacheList = cache.GetByItemName<List<T>>(cacheListName);
