@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Root>
   
   <FirstNames>
@@ -510,38 +510,38 @@
   </Lorems>
   
   <Teams>
-    <Team Location="Buffalo" Name="Bills" Conference="AFC" Division="East"></Team>
-    <Team Location="Miami" Name="Dolphins" Conference="AFC" Division="East"></Team>
-    <Team Location="New England" Name="Patriots" Conference="AFC" Division="East"></Team>
-    <Team Location="New York" Name="Jets" Conference="AFC" Division="East"></Team>
-    <Team Location="Baltimore" Name="Ravens" Conference="AFC" Division="North"></Team>
-    <Team Location="Cincinnati" Name="Bengals" Conference="AFC" Division="North"></Team>
-    <Team Location="Cleveland" Name="Browns" Conference="AFC" Division="North"></Team>
-    <Team Location="Pittsburgh" Name="Steelers" Conference="AFC" Division="North"></Team>
-    <Team Location="Houston" Name="Texans" Conference="AFC" Division="South"></Team>
-    <Team Location="Indianapolis" Name="Colts" Conference="AFC" Division="South"></Team>
-    <Team Location="Jacksonville" Name="Jaguars" Conference="AFC" Division="South"></Team>
-    <Team Location="Tennessee" Name="Titans" Conference="AFC" Division="South"></Team>
-    <Team Location="Denver" Name="Broncos" Conference="AFC" Division="West"></Team>
-    <Team Location="Kansas City" Name="Chiefs" Conference="AFC" Division="West"></Team>
-    <Team Location="Oakland" Name="Raiders" Conference="AFC" Division="West"></Team>
-    <Team Location="Los Angeles" Name="Chargers" Conference="AFC" Division="West"></Team>
-    <Team Location="Dallas" Name="Cowboys" Conference="NFC" Division="East"></Team>
-    <Team Location="New York" Name="Giants" Conference="NFC" Division="East"></Team>
-    <Team Location="Philadelphia" Name="Eagles" Conference="NFC" Division="East"></Team>
-    <Team Location="Washington" Name="Redskins" Conference="NFC" Division="East"></Team>
-    <Team Location="Chicago" Name="Bears" Conference="NFC" Division="North"></Team>
-    <Team Location="Detroit" Name="Lions" Conference="NFC" Division="North"></Team>
-    <Team Location="Green Bay" Name="Packers" Conference="NFC" Division="North"></Team>
-    <Team Location="Minnesota" Name="Vikings" Conference="NFC" Division="North"></Team>
-    <Team Location="Atlanta" Name="Falcons" Conference="NFC" Division="South"></Team>
-    <Team Location="Carolina" Name="Panthers" Conference="NFC" Division="South"></Team>
-    <Team Location="New Orleans" Name="Saints" Conference="NFC" Division="South"></Team>
-    <Team Location="Tampa Bay" Name="Buccaneers" Conference="NFC" Division="South"></Team>
-    <Team Location="Arizona" Name="Cardinals" Conference="NFC" Division="West"></Team>
-    <Team Location="Los Angeles" Name="Rams" Conference="NFC" Division="West"></Team>
-    <Team Location="San Francisco" Name="49ers" Conference="NFC" Division="West"></Team>
-    <Team Location="Seattle" Name="Seahawks" Conference="NFC" Division="West"></Team>
+    <Team Location="Buffalo"        Name="Bills"      Conference="AFC"  Division="East">   </Team>
+    <Team Location="Miami"          Name="Dolphins"   Conference="AFC"  Division="East">   </Team>
+    <Team Location="New England"    Name="Patriots"   Conference="AFC"  Division="East">   </Team>
+    <Team Location="New York"       Name="Jets"       Conference="AFC"  Division="East">   </Team>
+    <Team Location="Baltimore"      Name="Ravens"     Conference="AFC"  Division="North">  </Team>
+    <Team Location="Cincinnati"     Name="Bengals"    Conference="AFC"  Division="North">  </Team>
+    <Team Location="Cleveland"      Name="Browns"     Conference="AFC"  Division="North">  </Team>
+    <Team Location="Pittsburgh"     Name="Steelers"   Conference="AFC"  Division="North">  </Team>
+    <Team Location="Houston"        Name="Texans"     Conference="AFC"  Division="South">  </Team>
+    <Team Location="Indianapolis"   Name="Colts"      Conference="AFC"  Division="South">  </Team>
+    <Team Location="Jacksonville"   Name="Jaguars"    Conference="AFC"  Division="South">  </Team>
+    <Team Location="Tennessee"      Name="Titans"     Conference="AFC"  Division="South">  </Team>
+    <Team Location="Denver"         Name="Broncos"    Conference="AFC"  Division="West">   </Team>
+    <Team Location="Kansas City"    Name="Chiefs"     Conference="AFC"  Division="West">   </Team>
+    <Team Location="Oakland"        Name="Raiders"    Conference="AFC"  Division="West">   </Team>
+    <Team Location="Los Angeles"    Name="Chargers"   Conference="AFC"  Division="West">   </Team>
+    <Team Location="Dallas"         Name="Cowboys"    Conference="NFC"  Division="East">   </Team>
+    <Team Location="New York"       Name="Giants"     Conference="NFC"  Division="East">   </Team>
+    <Team Location="Philadelphia"   Name="Eagles"     Conference="NFC"  Division="East">   </Team>
+    <Team Location="Washington"     Name="Redskins"   Conference="NFC"  Division="East">   </Team>
+    <Team Location="Chicago"        Name="Bears"      Conference="NFC"  Division="North">  </Team>
+    <Team Location="Detroit"        Name="Lions"      Conference="NFC"  Division="North">  </Team>
+    <Team Location="Green Bay"      Name="Packers"    Conference="NFC"  Division="North">  </Team>
+    <Team Location="Minnesota"      Name="Vikings"    Conference="NFC"  Division="North">  </Team>
+    <Team Location="Atlanta"        Name="Falcons"    Conference="NFC"  Division="South">  </Team>
+    <Team Location="Carolina"       Name="Panthers"   Conference="NFC"  Division="South">  </Team>
+    <Team Location="New Orleans"    Name="Saints"     Conference="NFC"  Division="South">  </Team>
+    <Team Location="Tampa Bay"      Name="Buccaneers" Conference="NFC"  Division="South">  </Team>
+    <Team Location="Arizona"        Name="Cardinals"  Conference="NFC"  Division="West">   </Team>
+    <Team Location="Los Angeles"    Name="Rams"       Conference="NFC"  Division="West">   </Team>
+    <Team Location="San Francisco"  Name="49ers"      Conference="NFC"  Division="West">   </Team>
+    <Team Location="Seattle"        Name="Seahawks"   Conference="NFC"  Division="West">   </Team>
   </Teams>
 
 </Root>
