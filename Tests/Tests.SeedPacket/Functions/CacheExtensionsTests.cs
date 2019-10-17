@@ -21,7 +21,7 @@ namespace Tests.SeedPacket
             var generator = new MultiGenerator()
             {
                 Rules =  {
-                    new Rule(typeof(List<Invoice>), "", g => Funcs.GetCacheItemsRandom<Invoice>(g, "Invoices", 3, 3), "GetRandomInvoices")
+                    new Rule(typeof(List<Invoice>), "", g => Funcs.GetListFromCacheRandom<Invoice>(g, "Invoices", 3, 3), "GetRandomInvoices")
                 }
             };
             generator.Cache.Invoices = new List<Invoice>().Seed(1, 300, generator);
@@ -39,8 +39,8 @@ namespace Tests.SeedPacket
             var generator = new MultiGenerator()
             {
                 Rules =  {
-                    new Rule(typeof(List<InvoiceItem>), "",     g => Funcs.GetCacheItemsNext<InvoiceItem>(g, "InvoiceItems", 3, 3), "GetRandomInvoices"),
-                    new Rule(typeof(List<Invoice>), "",         g => Funcs.GetCacheItemsRandom<Invoice>(g, "Invoices", 2, 2), "GetRandomInvoiceItems")
+                    new Rule(typeof(List<InvoiceItem>), "",     g => Funcs.GetListFromCacheNext<InvoiceItem>(g, "InvoiceItems", 3, 3), "GetRandomInvoices"),
+                    new Rule(typeof(List<Invoice>), "",         g => Funcs.GetListFromCacheRandom<Invoice>(g, "Invoices", 2, 2), "GetRandomInvoiceItems")
                 }
             };
 

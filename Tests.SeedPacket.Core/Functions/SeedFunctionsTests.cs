@@ -100,6 +100,18 @@ namespace Tests.SeedPacket.Core
         }
 
         [Test]
+        public void SeedFunctions_GetObjectNext_FromJson_Throws_Exception()
+        {
+            void ExceptionIfInvalidObjectName()
+            {
+                var gen = new MultiGenerator(sourceFilepath: pathToTestJsonFile);
+                var item = Funcs.GetObjectNext<Item>(gen, "InvalidName");
+            }
+
+            Assert.Throws<ArgumentNullException>(() => ExceptionIfInvalidObjectName());
+        }
+
+        [Test]
         public void SeedFunctions_GetObjectNext_FromJson()
         {
             var gen = new MultiGenerator(sourceFilepath: pathToTestJsonFile);

@@ -63,7 +63,7 @@ namespace SeedPacket.DataSources
             try
             {
                 // Gets embedded xml file Update 'Build Action' property to 'embedded Resource'
-                System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
+                Assembly a = Assembly.GetExecutingAssembly();
                 using (var xmlStream = a.GetManifestResourceStream(defaultXml))
                 {
                     sourceData = XDocument.Load(xmlStream);

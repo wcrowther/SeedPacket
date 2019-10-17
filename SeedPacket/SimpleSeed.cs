@@ -1,4 +1,4 @@
-﻿using SeedPacket.DataSources;
+using SeedPacket.DataSources;
 using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace SeedPacket
 {
     public class SimpleSeed
     {
-        private IDataSource dataSource;
+        private readonly IDataSource dataSource;
 
         // Default Constructor
         public SimpleSeed(string sourcefilepath = null, string sourcestring = null, DataInputType datainputtype = DataInputType.Auto)

@@ -1,4 +1,4 @@
-﻿using SeedPacket.Interfaces;
+using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -13,41 +13,22 @@ namespace SeedPacket.Generators
 
         public Generator (IRules rules =  null, Random baseRandom = null)
         {
-            RowNumber = seedBegin;
+            RowNumber = SeedBegin;
             this.rules = rules ?? new Rules();
             this.baseRandom = baseRandom ?? new Random(defaultSeed);
             GetNextRowRandom();
         }
 
-        #region Private Fields
-
         private int defaultSeed = 123456789;
-        private int seedBegin = 1;
-        private int seedEnd = 10;
         private Random baseRandom;
-        private Random rowRandom;
-        private int rowRandomNumber;
         private DateTime? baseDateTime;
-        private Dictionary<string, object> currentRowValues = new Dictionary<string, object>();
-        private DateTime defaultDateTime = DateTime.Parse("1/1/2020");
-        private bool debugging = true; // shows in console
+        private readonly DateTime defaultDateTime = DateTime.Parse("1/1/2020");
         private ExpandoObject cache = new ExpandoObject();
-        private string currentPropertyName = null;
         protected IDataSource dataSource;
 
-        #endregion
+        public int SeedBegin { get; set; } = 1;
 
-        public int SeedBegin
-        {
-            get { return seedBegin; }
-            set { seedBegin = value; }
-        }
-
-        public int SeedEnd
-        {
-            get { return seedEnd; }
-            set { seedEnd = value; }
-        }
+        public int SeedEnd { get; set; } = 10;
 
         public IDataSource Datasource
         {
@@ -78,11 +59,7 @@ namespace SeedPacket.Generators
             set { baseDateTime = value ; }
         }
 
-        public bool Debugging
-        {
-            get { return debugging; }
-            set { debugging = value; }
-        }
+        public bool Debugging { get; set; } = true;
 
         public int RowCount
         {
@@ -91,33 +68,22 @@ namespace SeedPacket.Generators
 
         public int RowNumber { get; set; }
 
-        public Random RowRandom
-        {
-            get { return rowRandom; }
-        }
+        public Random RowRandom { get; private set; }
 
-        public int RowRandomNumber
-        {
-            get { return rowRandomNumber; }
-        }
+        public int RowRandomNumber { get; private set; }
 
-        // Temp dictionary of values in current seed
-        public Dictionary<string, object> CurrentRowValues
-        {
-            get { return currentRowValues; }
-        }
+        /// <summary>Temp dictionary of values generated for current row. Only contains previously generated values <br/>
+        /// for that row. Values are cleared at beginning of new row.</summary>
+        public Dictionary<string, object> CurrentRowValues { get; } = new Dictionary<string, object>();
 
         public MetaProperty CurrentProperty { get; set; }
 
-        public string CustomName {
-            get { return currentPropertyName; }
-            set { currentPropertyName = value; }
-        }
+        public string CustomName { get; set; } = null;
 
         public void GetNextRowRandom()
         {
-            rowRandomNumber = BaseRandom.Next();
-            rowRandom = new Random(rowRandomNumber);
+            RowRandomNumber = BaseRandom.Next();
+            RowRandom = new Random(RowRandomNumber);
         }
     }
 } 

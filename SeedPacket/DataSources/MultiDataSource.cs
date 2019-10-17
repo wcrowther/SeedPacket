@@ -10,11 +10,11 @@ namespace SeedPacket.DataSources
     {
         private IDataSource sourceData;
         private JsonDataSource jsonDataSource;
-        private XmlDataSource xmlDataSource;
-        private DataInputType dataInputType;
+        private readonly XmlDataSource xmlDataSource;
+        private readonly DataInputType dataInputType;
 
-        private string sourceFilePath;
-        private string sourceString;
+        private readonly string sourceFilePath;
+        private readonly string sourceString;
 
         public MultiDataSource(string sourcefilepath = null, string sourcestring = null, DataInputType datainputtype = DataInputType.Auto)
         {

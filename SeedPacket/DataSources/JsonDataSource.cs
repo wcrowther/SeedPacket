@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using WildHare.Extensions;
 
 namespace SeedPacket.DataSources
@@ -57,7 +58,7 @@ namespace SeedPacket.DataSources
             try
             {
                 // Gets embedded json file Update 'Build Action' property to 'embedded Resource'
-                System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
+                Assembly a = Assembly.GetExecutingAssembly();
 
                 using (var stream = a.GetManifestResourceStream(defaultJson))
                 using (var reader = new StreamReader(stream))

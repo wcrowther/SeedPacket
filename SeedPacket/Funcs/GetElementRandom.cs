@@ -1,4 +1,4 @@
-﻿using SeedPacket.Interfaces;
+using SeedPacket.Interfaces;
 using System;
 using System.Linq;
 
@@ -9,7 +9,7 @@ namespace SeedPacket.Functions
         public static string GetElementRandom (IGenerator generator, string identifier = null, bool nullIfEmpty = false)
         {
             // Get propertyName from generator to use if identfier not set
-            var propertyName = identifier ?? generator.CustomName ?? generator?.CurrentProperty?.Name ?? "";
+            string propertyName = identifier ?? generator.CustomName ?? generator?.CurrentProperty?.Name ?? "";
             string defaultValue = nullIfEmpty ? null : propertyName + generator.RowNumber.ToString();
 
             var elementList = generator.Datasource.GetElementList(propertyName);
