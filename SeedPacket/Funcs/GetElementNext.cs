@@ -1,29 +1,34 @@
 using SeedPacket.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using WildHare.Extensions;
 
 namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
-        public static string GetElementNext (this IGenerator generator, string identifier = null, int offset = 0)
+
+        /// <summary>Gets the next element named for the [identifier] from the datasource contained in the <br/>
+        /// generator passed in from [generator] parameter. By default goes to first record in the 0-based list, <br/>
+        /// offset by the [offset] parameter. If the number is greater than what exists in the list, then it wraps<br/>
+        /// back around to the first element in the list. If no elements exist in the list, null is returned.
+        /// </summary>
+        public static string GetElementNext (this IGenerator generator, string identifier = null, int offset = 0, bool wrap = true)
         {
             var propertyName = identifier ?? generator.CustomName ?? generator?.CurrentProperty?.Name ?? "";
-
-            // Will loop back to beginning if rownumber is greater than number of elements in list
-            List<string> strings = generator.Datasource.GetElementList(propertyName);
+            var strings = generator.Datasource.GetElementList(propertyName);
             int count = strings.Count;
+
             if (count == 0)
                 return null;
 
-            // By default goes to first record in 0-based list. Offset allows to start offset from the row.
-            //  Will always add 1 for each row so it remains sequential. Will loop back if past the end.
             int rowNumberWithOffset = (generator.RowNumber - 1) + offset;
             int mod = (rowNumberWithOffset) % count;
             int position = mod;
 
-            return strings?.ElementAtOrDefault(position);
+            if (wrap)
+                return strings?.ElementInOrDefault(position); 
+            else
+                return strings?.ElementAtOrDefault(position);
         }
     }
 }

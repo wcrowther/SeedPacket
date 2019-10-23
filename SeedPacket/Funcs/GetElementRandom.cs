@@ -1,12 +1,13 @@
 using SeedPacket.Interfaces;
 using System;
 using System.Linq;
+using WildHare.Extensions;
 
 namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
-        public static string GetElementRandom (this IGenerator generator, string identifier = null, bool nullIfEmpty = false)
+        public static string GetElementRandom (this IGenerator generator, string identifier = null, bool nullIfEmpty = false, bool wrap = true)
         {
             // Get propertyName from generator to use if identfier not set
             string propertyName = identifier ?? generator.CustomName ?? generator?.CurrentProperty?.Name ?? "";
@@ -14,17 +15,18 @@ namespace SeedPacket.Functions
 
             var elementList = generator.Datasource.GetElementList(propertyName);
             int index = generator.RowRandom.Next(elementList.Count);
-            string element = elementList?.ElementAtOrDefault(index) ?? defaultValue;
 
-            return element;
+            if (wrap)
+                return elementList?.ElementInOrDefault(index) ?? defaultValue; 
+            else
+                return elementList?.ElementAtOrDefault(index) ?? defaultValue;
         }
 
-        public static dynamic GetElementRandom (this IGenerator generator, string identifier, TypeCode typeCode)
+        public static dynamic GetElementRandom (this IGenerator generator, string identifier, TypeCode typeCode, bool wrap = true)
         {
-            var elementList = generator.Datasource.GetElementList(identifier);
-            int index = generator.RowRandom.Next(elementList.Count);
+            string element = generator.GetElementRandom(identifier, true, wrap);
 
-            return Convert.ChangeType(elementList?.ElementAtOrDefault(index), typeCode);
+            return Convert.ChangeType(element, typeCode);
         }
     }
 }

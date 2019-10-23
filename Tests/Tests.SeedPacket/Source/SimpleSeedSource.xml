@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <SimpleSeed>
 
   <FirstName>Bob</FirstName>
@@ -32,6 +32,15 @@
   <ProductName>thingamabob</ProductName>
   <ProductName>whatnot</ProductName>
 
+  <Numbers>0</Numbers>
+  <Numbers>1</Numbers>
+  <Numbers>10</Numbers>
+  <Numbers>100</Numbers>
+  <Numbers>1000</Numbers>
+  <Numbers>10000</Numbers>
+  <Numbers>1000000</Numbers>
+  <Numbers>10000000</Numbers>
+
   <Items>
     <Item ItemId="1" ItemName="TestName1" Number="100" Created=""></Item>
     <Item ItemId="2" ItemName="TestName2" Number="200" Created="2018-02-02 18:25:43.511"></Item>
@@ -39,6 +48,10 @@
       <Number>300</Number>
     </Item>
   </Items>
+
+
+
+
 
 </SimpleSeed>
 

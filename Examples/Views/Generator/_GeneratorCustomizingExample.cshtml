@@ -11,10 +11,10 @@
     {
         Rules = {
             new Rule(typeof(int), "SelectedProduct",  g => g.RowRandom.Next(0, 11), "Random product id"),
-            new Rule(typeof(string), "ItemName",      g => Funcs.GetElementNext(g, "ProductName"), "ItemName"),
-            new Rule(typeof(string), "Ceo",           g => Funcs.GetElementNext(g, "FirstName") + " " + Funcs.GetElementNext(g, "LastName"), "Random CEO Name"),
-            new Rule(typeof(string),"Description%",   g => Funcs.GetElementNext(g, "Description"), "Description", "Gets Description from custom XML file" ),
-            new Rule(typeof(List<Item>), "Products",  g => Funcs.GetCacheItemsNext<Item>(g, g.Cache.Items, 10, 10, false), "ItemList")
+            new Rule(typeof(string), "ItemName",      g => g.GetElementNext("ProductName"), "ItemName"),
+            new Rule(typeof(string), "Ceo",           g => g.GetElementNext("FirstName") + " " + Funcs.GetElementNext(g, "LastName"), "Random CEO Name"),
+            new Rule(typeof(string),"Description%",   g => g.GetElementNext("Description"), "Description", "Gets Description from custom XML file" ),
+            new Rule(typeof(List<Item>), "Products",  g => Funcs.GetListFromCacheNext<Item>(g, g.Cache.Items, 10, 10, false), "ItemList")
         },
         BaseDateTime = DateTime.Today,
         BaseRandom = new Random(1234567)

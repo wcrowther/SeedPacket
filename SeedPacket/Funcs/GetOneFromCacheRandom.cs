@@ -27,7 +27,7 @@ namespace SeedPacket.Functions
         {
             List<T> itemList = cacheList;
 
-            return itemList.TakeFromListRandom<T>(generator.RowRandom, 1, remove).FirstOrDefault();
+            return itemList.TakeRandom<T>(1, generator.RowRandom, remove).FirstOrDefault();
         }
     }
 }

@@ -162,5 +162,17 @@ namespace Tests.SeedPacket
         {
             return @"<Root></Root>";
         }
+
+        [Test]
+        public void SeedFunctions_GetElementRandom_Dynamic()
+        {
+            // Always returns the same value because by default the generator
+            // uses the same seed value and gets 10,000 from the xmlFile.
+
+            var gen = new MultiGenerator(sourceFilepath: pathToTestXmlFile);
+            var number = gen.GetElementRandom("Numbers", TypeCode.Int64);
+
+            Assert.AreEqual(10,000 , number);
+        }
     }
 }
