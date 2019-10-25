@@ -3,25 +3,31 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;net471</TargetFrameworks>
     <Authors>Will Crowther</Authors>
-    <Version>3.0.3</Version>
+    <Version>3.0.5.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageIconUrl>http://www.seedpacket.net/Content/Images/favicon.png</PackageIconUrl>
-    <FileVersion>3.0.3.0</FileVersion>
-    <AssemblyVersion>3.0.3.0</AssemblyVersion>
-    <PackageReleaseNotes>BETA 3.0.3
+    <FileVersion>3.0.5.2</FileVersion>
+    <AssemblyVersion>3.0.5.2</AssemblyVersion>
+    <PackageReleaseNotes>BETA 3.0.5.2
 
 - Known issues. Paths to json and xml source files currently must be absolute for Core implementations</PackageReleaseNotes>
-    <Description>BETA 3.0.3</Description>
+    <Description>BETA 3.0.5.2</Description>
     <Copyright>Will Crowther</Copyright>
-    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>http://www.seedpacket.net/</PackageProjectUrl>
     <PackageTags>c# linq data generator seed data generation extension method IEnumerable List rules engine seeding prototyping rad</PackageTags>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="favicon.ico" />
     <None Remove="Source\JsonGeneratorSource.json" />
     <None Remove="Source\XmlGeneratorSource.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="favicon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,9 +36,22 @@
   </ItemGroup>
 
   <ItemGroup>
+     <!--
+    <PackageReference Include="docfx.console" Version="2.46.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    -->
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="WildHare" Version="0.9.9" />
   </ItemGroup>
 
+  <!--
+    <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="docfx">
+      <Version>2.46.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  -->
 </Project>

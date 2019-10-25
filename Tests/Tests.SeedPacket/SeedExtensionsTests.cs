@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using SeedPacket.Extensions;
 using SeedPacket.Generators;
 using System;
@@ -16,8 +16,8 @@ namespace Tests.SeedPacket
     {
         private string pathToTestXmlFile;
         private string pathToTestJsonFile;
-        private string xmlFile = @"SimpleSeedSource.xml";
-        private string jsonFile = @"JsonSeedSource.json";
+        private readonly string xmlFile = @"SimpleSeedSource.xml";
+        private readonly string jsonFile = @"JsonSeedSource.json";
 
         private string testValidXml;
         private string testEmptyXml;
