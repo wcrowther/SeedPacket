@@ -16,7 +16,7 @@ namespace SeedPacket.Functions
         public static List<T> GetListFromCacheNext<T> (this IGenerator generator, string cacheListName, int min, int max, bool remove = true)
         {
             ExpandoObject cache = generator.Cache;
-            var cacheList = cache.GetByItemName<List<T>>(cacheListName);
+            var cacheList = cache.Get<List<T>>(cacheListName);
 
             if (cacheList == null)
                 return null;

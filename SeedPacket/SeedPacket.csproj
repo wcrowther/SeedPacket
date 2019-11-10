@@ -3,21 +3,27 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;net471</TargetFrameworks>
     <Authors>Will Crowther</Authors>
-    <Version>3.0.5.2</Version>
+    <Version>3.0.5.3</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageIconUrl>http://www.seedpacket.net/Content/Images/favicon.png</PackageIconUrl>
-    <FileVersion>3.0.5.2</FileVersion>
-    <AssemblyVersion>3.0.5.2</AssemblyVersion>
-    <PackageReleaseNotes>BETA 3.0.5.2
+    <FileVersion>3.0.5.3</FileVersion>
+    <AssemblyVersion>3.0.5.3</AssemblyVersion>
+    <PackageReleaseNotes>3.0.5.3 Has been updated to accommodate changes to the WildHare dependency.</PackageReleaseNotes>
+    <Description>SeedPacket 3.0 (BETA) adds a .seed() method onto IEnumerable for the quick seeding of data. Designed to be a part of your LINQ workflow, it quick generates and populates many IEnumerable list types with realistic data. Ex: var mylist = new List&lt;Item&gt;().Seed().
 
-- Known issues. Paths to json and xml source files currently must be absolute for Core implementations</PackageReleaseNotes>
-    <Description>BETA 3.0.5.2</Description>
+SeedPacket is easy to use, with a customizable, and powerful rules engine that keys off the datatype or interface, and name of an item's properties so that the data is appropriate to the type. That is to say, "out-of-the-box" - email properties will be filled with valid emails, phone numbers filled with phone numbers, and names are names etc. If you need to modify the default generated data the rules are simple to create and modify, and come with a many examples, including a data generator that pulls from an xml or json file or string. The randomly generated data can be set to always be repeatable or  to be random on each request.
+
+Go to http://www.seedpacket.net/  for more details.</Description>
     <Copyright>Will Crowther</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>http://www.seedpacket.net/</PackageProjectUrl>
     <PackageTags>c# linq data generator seed data generation extension method IEnumerable List rules engine seeding prototyping rad</PackageTags>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DocumentationFile>C:\Code\Trunk\SeedPacket\SeedPacket\SeedPacket.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -44,7 +50,7 @@
     -->
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="WildHare" Version="0.9.9" />
+    <PackageReference Include="WildHare" Version="0.9.9.1" />
   </ItemGroup>
 
   <!--

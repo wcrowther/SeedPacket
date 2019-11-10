@@ -188,6 +188,19 @@ namespace Tests.SeedPacket
             Assert.IsInstanceOf<Item>(list[1]);
         }
 
+
+        [Test]
+        public void SeedExtensions_SeedList_Seed_Dictionary_With_String_Key()
+        {
+            var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
+            var list = new Dictionary<string, Item>().Seed(gen);
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(1, list["1"].ItemId);
+            Assert.AreEqual("machine", list["1"].ItemName);
+            Assert.IsInstanceOf<Item>(list["1"]);
+        }
+
         /* =====================================================================================
         *  PRIVATE METHODS
         *  =================================================================================== */

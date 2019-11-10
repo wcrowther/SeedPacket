@@ -15,6 +15,7 @@ namespace SeedPacket
                 new Rule(typeof(string),    "",                                 g => g.GetElementRandom(),                  "String",               "Random string from data or default" ),
                 new Rule(typeof(string),    "%firstname%,%givenname%",          g => g.GetElementRandom("FirstName"),       "FirstName",            "Random firstName" ),
                 new Rule(typeof(string),    "%lastname%,%surname%",             g => g.GetElementRandom("LastName"),        "LastName",             "Random lastname" ),
+                new Rule(typeof(string),    "%fullname%",                       g => g.RandomFullName(),                    "FullName",             "Random fullName" ),
                 new Rule(typeof(string),    "%user%",                           g => g.RandomUserName(),                    "User",                 "Random username" ),
                 new Rule(typeof(string),    "%address%",                        g => g.RandomAddress(),                     "Address",              "Random address" ),
                 new Rule(typeof(string),    "%city%",                           g => g.GetElementRandom("City"),            "City",                 "Random city" ),

@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using SeedPacket;
 using SeedPacket.Extensions;
 using SeedPacket.Functions;
@@ -69,10 +69,10 @@ namespace Tests.SeedPacket.Core
             };
             ExpandoObject cache = generator.Cache;
 
-            Assert.AreEqual(1, cache.GetByItemName<Invoice>("Invoice").InvoiceId);
-            Assert.AreEqual(7890, cache.GetByItemName<Invoice>("Invoice").AccountId);
-            Assert.AreEqual(99.99M, cache.GetByItemName<Invoice>("Invoice").InvoiceItems[0].Fee);
-            Assert.AreEqual(5678, cache.GetByItemName<Invoice>("Invoice").InvoiceItems[1].InvoiceItemId);
+            Assert.AreEqual(1, cache.Get<Invoice>("Invoice").InvoiceId);
+            Assert.AreEqual(7890, cache.Get<Invoice>("Invoice").AccountId);
+            Assert.AreEqual(99.99M, cache.Get<Invoice>("Invoice").InvoiceItems[0].Fee);
+            Assert.AreEqual(5678, cache.Get<Invoice>("Invoice").InvoiceItems[1].InvoiceItemId);
         }
 
         [Test]
@@ -85,9 +85,9 @@ namespace Tests.SeedPacket.Core
                 InvoiceId = 1
             };
             ExpandoObject cache = generator.Cache;
-            cache.RemoveItemByName(name);
+            cache.Remove(name);
 
-            Assert.AreEqual(null, cache.GetByItemName<Invoice>(name));
+            Assert.AreEqual(null, cache.Get<Invoice>(name));
         }
 
         [Test]
@@ -101,9 +101,9 @@ namespace Tests.SeedPacket.Core
             };
 
             ExpandoObject cache = generator.Cache;
-            cache.AddItemByName(name, invoice);
+            cache.Add(name, invoice);
 
-            Assert.AreEqual(1, cache.GetByItemName<Invoice>(name).InvoiceId);
+            Assert.AreEqual(1, cache.Get<Invoice>(name).InvoiceId);
         }
     }
 }

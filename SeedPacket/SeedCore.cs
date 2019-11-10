@@ -1,4 +1,4 @@
-﻿using SeedPacket.Generators;
+using SeedPacket.Generators;
 using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace SeedPacket
 
             if (generator.CustomName != null)
             {
-                iEnumerable = CreateValueTypeList<T>(); // for named custom types
+                iEnumerable = CreateValueTypeList<T>(); // for simple value type like string[] or int[] where CustomName is used for Rule selector.
             }
             else if (typeof(T).GetConstructor(Type.EmptyTypes) != null) // for complex types w/ no CustomName
             {
@@ -35,7 +35,7 @@ namespace SeedPacket
                 iEnumerable = CreateValueTypeList<T>();  // for simpleTypes
             }
 
-            DebugLineWrite();
+            DebugWrite("-", 25);
 
             return iEnumerable;
         }
@@ -46,7 +46,7 @@ namespace SeedPacket
 
             dictionary = CreateDictionaryList<TKey, TValue>();
 
-            DebugLineWrite();
+            DebugWrite("-", 25);
 
             return dictionary;
         }
@@ -180,13 +180,13 @@ namespace SeedPacket
             {
                 rule = generator.Rules.GetRuleByTypeAndName(property.PropertyType, property.Name);
 
-                cache.AddItemByName("CachedRules." + propInt, rule);
+                cache.Add("CachedRules." + propInt, rule);
 
                 DebugWrite($"Property: {property.Name }({property.PropertyType}) using rule: {rule?.RuleName ?? "No matching Rule"}.");
             }
             else
             {
-                rule = cache.GetByItemName<Rule>("CachedRules." + propInt); 
+                rule = cache.Get<Rule>("CachedRules." + propInt); 
             }
             return rule;
         }
@@ -205,21 +205,20 @@ namespace SeedPacket
 
         private void DebugSeedType(string name)
         {
-            DebugLineWrite();
+            DebugWrite("-", 25);
             DebugWrite("Begin Seed Creation for Type: " + name);
-            DebugLineWrite();
+            DebugWrite("-", 25);
         }
 
-        private void DebugLineWrite()
-        {
-            DebugWrite("-----------------------------------------------------");
-        }
 
-        private void DebugWrite(string str)
+        private void DebugWrite(string str, int repeat = 1)
         {
+            if (repeat < 1)
+                throw new Exception("DebugWrite repeat parameter must be a positive int.");
+
             if (generator.Debugging)
             {
-                Debug.WriteLine(str);
+                Debug.WriteLine(repeat > 1 ? str.Repeat(repeat) : str);
             }
         }
 

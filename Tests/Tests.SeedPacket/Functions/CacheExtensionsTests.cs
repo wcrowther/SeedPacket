@@ -45,7 +45,7 @@ namespace Tests.SeedPacket
             };
 
             generator.Cache.InvoiceItems = new List<InvoiceItem>().Seed(1, (rowCount * 10), generator); //
-            generator.Cache.Invoices = new List<Invoice>().Seed(1, (rowCount * 3), generator); // 
+            generator.Cache.Invoices     = new List<Invoice>().Seed(1, (rowCount * 3), generator); // 
 
             var accountList =  new List<Account>().Seed(1, rowCount, generator).ToList();
 
@@ -70,10 +70,10 @@ namespace Tests.SeedPacket
             };
             ExpandoObject cache = generator.Cache;
 
-            Assert.AreEqual(1, cache.GetByItemName<Invoice>("Invoice").InvoiceId);
-            Assert.AreEqual(7890, cache.GetByItemName<Invoice>("Invoice").AccountId);
-            Assert.AreEqual(99.99M, cache.GetByItemName<Invoice>("Invoice").InvoiceItems[0].Fee);
-            Assert.AreEqual(5678, cache.GetByItemName<Invoice>("Invoice").InvoiceItems[1].InvoiceItemId);
+            Assert.AreEqual(1, cache.Get<Invoice>("Invoice").InvoiceId);
+            Assert.AreEqual(7890, cache.Get<Invoice>("Invoice").AccountId);
+            Assert.AreEqual(99.99M, cache.Get<Invoice>("Invoice").InvoiceItems[0].Fee);
+            Assert.AreEqual(5678, cache.Get<Invoice>("Invoice").InvoiceItems[1].InvoiceItemId);
         }
 
         [Test]
@@ -87,11 +87,11 @@ namespace Tests.SeedPacket
             };
             ExpandoObject cache = generator.Cache;
 
-            Assert.IsNotNull(cache.GetByItemName<Invoice>(name));
+            Assert.IsNotNull(cache.Get<Invoice>(name));
 
-            cache.RemoveItemByName(name);
+            cache.Remove(name);
 
-            Assert.IsNull(cache.GetByItemName<Invoice>(name));
+            Assert.IsNull(cache.Get<Invoice>(name));
         }
 
         [Test]
@@ -105,9 +105,9 @@ namespace Tests.SeedPacket
             };
 
             ExpandoObject cache = generator.Cache;
-            cache.AddItemByName(name, invoice);
+            cache.Add(name, invoice);
 
-            Assert.AreEqual(1, cache.GetByItemName<Invoice>(name).InvoiceId);
+            Assert.AreEqual(1, cache.Get<Invoice>(name).InvoiceId);
         }
     }
 }

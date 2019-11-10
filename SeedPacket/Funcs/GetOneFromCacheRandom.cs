@@ -15,7 +15,7 @@ namespace SeedPacket.Functions
         public static T GetOneFromCacheRandom<T>(this IGenerator generator, string cacheListName, bool remove = true)
         {
             ExpandoObject cache = generator.Cache;
-            var cacheList = cache.GetByItemName<List<T>>(cacheListName);
+            var cacheList = cache.Get<List<T>>(cacheListName);
 
             return GetOneFromCacheRandom<T>(generator, cacheList, remove);
         }

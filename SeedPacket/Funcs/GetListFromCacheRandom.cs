@@ -16,7 +16,7 @@ namespace SeedPacket.Functions
         public static List<T> GetListFromCacheRandom<T> (this IGenerator generator, string cacheListName, int min, int max, bool remove = true)
         {
             ExpandoObject cache = generator.Cache;
-            var cacheList = cache.GetByItemName<List<T>>(cacheListName);
+            var cacheList = cache.Get<List<T>>(cacheListName);
             int count = generator.RowRandom.Next(min, max + 1);
 
                         if (cacheList == null)
