@@ -10,6 +10,8 @@ namespace SeedPacket
         XmlFile,
         JsonString,
         JsonFile,
+        CsvString,
+        CsvFile,
         Default
     };
 }

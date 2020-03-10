@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;net471</TargetFrameworks>
@@ -24,10 +24,12 @@ Go to http://www.seedpacket.net/  for more details.</Description>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <DocumentationFile>C:\Code\Trunk\SeedPacket\SeedPacket\SeedPacket.xml</DocumentationFile>
+    <NoWarn>1701,1702,1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="favicon.ico" />
+    <None Remove="Source\CsvGeneratorSource.csv" />
     <None Remove="Source\JsonGeneratorSource.json" />
     <None Remove="Source\XmlGeneratorSource.xml" />
   </ItemGroup>
@@ -37,6 +39,7 @@ Go to http://www.seedpacket.net/  for more details.</Description>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Source\CsvGeneratorSource.csv" />
     <EmbeddedResource Include="Source\JsonGeneratorSource.json" />
     <EmbeddedResource Include="Source\XmlGeneratorSource.xml" />
   </ItemGroup>
@@ -50,7 +53,7 @@ Go to http://www.seedpacket.net/  for more details.</Description>
     -->
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="WildHare" Version="0.9.9.1" />
+    <PackageReference Include="WildHare" Version="0.9.9.3" />
   </ItemGroup>
 
   <!--

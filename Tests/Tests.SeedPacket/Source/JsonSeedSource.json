@@ -1,4 +1,4 @@
-﻿{
+{
   "Root": {
     "FirstNames": {
       "FirstName": [
@@ -239,12 +239,6 @@
         "Eastdale",
         "Winterspring",
         "Westmoor"
-      ],
-      "#text": [
-        ",",
-        ",",
-        ",",
-        ""
       ]
     },
     "Counties": {
@@ -389,7 +383,7 @@
           "ItemId": 1,
           "ItemName": "TestName1",
           "Number": 100,
-          "Created": "" //"2018-01-01T18:25:43.511Z"
+          "Created": "" 
         },
         {
           "ItemId": 2,
@@ -404,6 +398,5 @@
           "Created": "2018-03-03T18:25:43.511Z"
         }]
     }
-    
   }
 }

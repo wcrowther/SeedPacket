@@ -17,14 +17,17 @@ namespace Tests.SeedPacket
 
         private string pathToTestXmlFile;
         private string pathToTestJsonFile;
+        private string pathToTestCsvFile;
         private string xmlFile = @"SimpleSeedSource.xml";
         private string jsonFile = @"JsonSeedSource.json";
+        private string csvFile = @"CsvSeedSource.csv";
 
         [SetUp]
         public void Setup()
         {
 			pathToTestXmlFile = Path.Combine(GetApplicationRoot() + "\\Source\\", xmlFile);
             pathToTestJsonFile = Path.Combine(GetApplicationRoot() + "\\Source\\", jsonFile);
+            pathToTestCsvFile = Path.Combine(GetApplicationRoot() + "\\Source\\", csvFile);
         }
 
         [Test]
@@ -119,6 +122,46 @@ namespace Tests.SeedPacket
         {
             var gen = new MultiGenerator(sourceFilepath: pathToTestXmlFile);
             var item = Funcs.GetObjectNext<Item>(gen, "Item");
+
+            Assert.IsNotNull(item);
+            Assert.AreEqual(1, item.ItemId);
+            Assert.AreEqual("TestName1", item.ItemName);
+            Assert.AreEqual(100, item.Number);
+            Assert.IsNull(item.Created);
+
+            var item2 = Funcs.GetObjectNext<Item>(gen, "Item", 1);
+
+            Assert.IsNotNull(item2);
+            Assert.AreEqual(2, item2.ItemId);
+            Assert.AreEqual("TestName2", item2.ItemName);
+            Assert.AreEqual(200, item2.Number);
+            Assert.AreEqual(DateTime.Parse("2018-02-02 18:25:43.511"), item2.Created);
+
+            var item3 = Funcs.GetObjectNext<Item>(gen, "Item", 2);
+
+            Assert.IsNotNull(item3);
+            Assert.AreEqual(3, item3.ItemId);
+            Assert.AreEqual("TestName3", item3.ItemName);
+            Assert.AreEqual(300, item3.Number);
+            Assert.IsNull(item3.Created);
+        }
+
+        [Test]
+        public void SeedFunctions_GetElementNext_FromCSV()
+        {
+            var gen = new MultiGenerator(sourceFilepath: pathToTestCsvFile);
+            var element = Funcs.GetElementNext(gen, "LastName");
+
+            Assert.IsNotNull(element);
+
+        }
+
+        [Test]
+        public void SeedFunctions_GetObjectNext_FromCSV()
+        {
+            var gen = new MultiGenerator(sourceFilepath: pathToTestCsvFile);
+            var item = Funcs.GetObjectNext<Item>(gen, "Item");
+
 
             Assert.IsNotNull(item);
             Assert.AreEqual(1, item.ItemId);

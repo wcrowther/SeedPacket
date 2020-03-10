@@ -11,31 +11,18 @@ namespace Examples.FootballExtensions
     {
         static readonly string footballSourcePath = HostingEnvironment.MapPath("/SourceFiles/FootballSource.xml");
 
-        public static List<T> Seed<T>(this IEnumerable<T> iEnumerable, int? seedEnd = null, int? seedBegin = null, int? randomSeed = null, string customPropertyName = null)
+        public static List<T> SeedSeason<T>(this IEnumerable<T> iEnumerable, DateTime seasonStartDate, int? randomSeed = null)
         {
 
-            var gen = new FootballGenerator(footballSourcePath)
+            var gen = new FootballGenerator(seasonStartDate, footballSourcePath)
             {
-                CustomName = customPropertyName,
-                SeedBegin = seedBegin ?? 1,
-                SeedEnd = seedEnd ?? 32,
+                CustomName = "Game",
+                SeedBegin = 1,
+                SeedEnd = 96,
                 BaseRandom = randomSeed.HasValue ? new Random(randomSeed.Value) : new Random()
             };
 
             return new SeedCore(gen).SeedList(iEnumerable).ToList();
-        }
-
-        public static IDictionary<TKey, TValue> Seed<TKey, TValue>(this IDictionary<TKey, TValue> iDictionary, int? seedEnd = null, int? seedBegin = null, int? randomSeed = null, string customPropertyName = null)
-        {
-            var gen = new FootballGenerator(footballSourcePath)
-            {
-                CustomName = customPropertyName,
-                SeedBegin = seedBegin ?? 1,
-                SeedEnd = seedEnd ?? 32,
-                BaseRandom = randomSeed.HasValue ? new Random(randomSeed.Value) : new Random()
-            };
-
-            return new SeedCore(gen).SeedList(iDictionary);
         }
     }
 }

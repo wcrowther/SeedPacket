@@ -1,6 +1,5 @@
 using SeedPacket.Interfaces;
-using System;
-using System.Linq;
+using WildHare.Extensions;
 
 namespace SeedPacket.Functions
 {
@@ -8,7 +7,7 @@ namespace SeedPacket.Functions
     {
         public static string RandomCompany (this IGenerator generator)
         {
-            return Funcs.GetElementRandom(generator, "CompanyName") + " " + Funcs.GetElementRandom(generator, "CompanySuffix") ?? "Inc";
+            return GetElementRandom(generator, "CompanyName") + GetElementRandom(generator, "CompanySuffix").AddStart(" ");
         }
     }
 }

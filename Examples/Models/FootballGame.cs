@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Examples.Generators;
+using System;
 
 namespace Examples.Models
 {
     public class FootballGame
     {
+        public int GameId { get; set; }
+
+        public GameType GameType { get; set; } // ie conference home, conference away, bye, etc.
+
+        public int SeasonStartYear { get; set; } // ie 2020
+
+        public int SeasonWeek { get; set; } = 1; // Week 1-17 (16 games, 1 bye)
+
+        public DateTime GameDate { get; set; }
+
         public FootballTeam HomeTeam { get; set; }
 
         public FootballTeam AwayTeam { get; set; }

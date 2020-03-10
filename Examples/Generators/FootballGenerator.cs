@@ -4,15 +4,23 @@ using SeedPacket.Extensions;
 using SeedPacket.Functions;
 using SeedPacket.Generators;
 using SeedPacket.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using WildHare.Extensions;
 
 namespace Examples.Generators
 {
     public class FootballGenerator : MultiGenerator
     {
-        public FootballGenerator( string sourceFilepath =  null) 
+        DateTime _seasonStartDate;
+
+        public FootballGenerator( DateTime seasonStartDate, string sourceFilepath = null) 
             : base(sourceFilepath, dataInputType: DataInputType.XmlFile)
-        {   }
+        {
+            _seasonStartDate = seasonStartDate;
+        }
 
         protected override void GetRules(RulesSet ruleSet)
         {
@@ -21,21 +29,96 @@ namespace Examples.Generators
             FootballRules();
         }
 
+
         public void FootballRules()
         {
             var footballRules = new List<Rule>()
             {
-                new Rule(typeof(FootballTeam), "",   g => GetTeam(g), "Get Football Team"),
-                new Rule(typeof(FootballGame), "",   g => GetGame(g), "Get Football Game w/ 2 FootballTeams")
+                new Rule(typeof(FootballGame), "",   g => GetCachedGame(g), "Get Football Game w/ 2 FootballTeams"),
+                new Rule(typeof(FootballTeam), "",   g => GetTeam(g), "Get Football Team")
             };
             Rules.AddRange(footballRules, true);
 
-            var teams = new List<FootballTeam>().Seed(1, 32, this, "Team");
-
-            Cache.FootballTeams = teams;
+            Cache.FootballTeams = new List<FootballTeam>().Seed(1, 32, this, "Team");
+            Cache.SeasonGames = GetAllGames(this, _seasonStartDate);
         }
 
-        private dynamic GetGame(IGenerator g)
+        private List<FootballGame> GetAllGames(IGenerator g, DateTime startDate)
+        {
+            ExpandoObject cache = g.Cache;
+            var teams = cache.Get<List<FootballTeam>>("FootballTeams").ToList();
+            var divisions = teams.GroupBy(x => new { x.ConfId, x.DivId })
+                                 .ToDictionary(x => x.Key, x => x.ToList());
+
+            var games = new List<FootballGame>();
+            games.AddRange(GetDivisionGames(g, teams));
+            games.AddRange(GetInConferenceGames(g, teams, startDate));
+            games.AddRange(GetExtraInConferenceGames(g, teams, startDate));
+            games.AddRange(GetOutOfConferenceGames(g, teams, startDate));
+            games.AddRange(GetByeWeekGames(g, teams, startDate));
+
+            return games;
+        }
+
+        private List<FootballGame> GetDivisionGames(IGenerator g, List<FootballTeam> teams)
+        {
+            var divisionGames =
+                    from home in teams
+                    from away in teams
+
+                    where home.Name != away.Name
+                        && home.DivId == away.DivId
+                        && home.ConfId == away.ConfId
+                    select new FootballGame
+                    {
+                        HomeTeam = home,
+                        AwayTeam = away,
+                        GameType = GameType.Division,                      
+                    };
+
+            return divisionGames.ToList();
+        }
+
+        private List<FootballGame> GetInConferenceGames(IGenerator g, List<FootballTeam> teams, DateTime seasonStart)
+        {
+            var inConferenceGames =
+                    from home in teams
+                    from away in teams
+                    where home.Name != away.Name
+                        && home.DivId == away.DivId
+                        && home.ConfId == away.ConfId
+                    select new FootballGame
+                    {
+                        HomeTeam = home,
+                        AwayTeam = away,
+                        GameType = GameType.Division
+                    };
+
+            // return inConferenceGames.ToList();
+            return new List<FootballGame>();
+        }
+
+        private List<FootballGame> GetExtraInConferenceGames(IGenerator g, List<FootballTeam> teams, DateTime seasonStart)
+        {
+            return new List<FootballGame>();
+        }
+
+        private List<FootballGame> GetOutOfConferenceGames(IGenerator g, List<FootballTeam> teams, DateTime seasonStart)
+        {
+            return new List<FootballGame>();
+        }
+
+        private List<FootballGame> GetByeWeekGames(IGenerator g, List<FootballTeam> teams, DateTime seasonStart)
+        {
+            return new List<FootballGame>();
+        }
+
+        private FootballGame GetCachedGame(IGenerator g)
+        {
+            return Funcs.GetOneFromCacheRandom<FootballGame>(g, Cache.SeasonGames, true) ?? new FootballGame();
+        }
+
+        private FootballGame CreateGame(IGenerator g)
         {
             var game = new FootballGame
             {
@@ -49,6 +132,15 @@ namespace Examples.Generators
         {
             return gen.GetObjectNext<FootballTeam>("Team");
         }
+    }
+
+    public enum GameType
+    {
+        Division,
+        InConference,
+        ExtraConference,
+        OutOfConference,
+        Bye
     }
 }
 

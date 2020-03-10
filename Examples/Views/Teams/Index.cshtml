@@ -1,8 +1,16 @@
-﻿
+@using Examples.Models
+
+@model Dictionary<int, List<FootballGame>>
+
+
 @{ Html.RenderPartial("_Header"); }
 
-<div class="row">
-    <div class="col-md-12">
-        @{ Html.RenderPartial("_Games"); }
+@foreach (var footballWeek in Model)
+{
+    <div>Week @footballWeek.Key</div>
+    <div class="row">
+        <div class="col-md-12">
+            @{ Html.RenderPartial("_Games", footballWeek.Value); }
+        </div>
     </div>
-</div>
+}

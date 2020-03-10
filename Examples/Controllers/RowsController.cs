@@ -16,7 +16,7 @@ namespace Website.Controllers
 {
     public class RowsController : Controller
     {
-        private readonly string xmlSeedSourcePlus = HostingEnvironment.MapPath("/SourceFiles/XmlGeneratorSource.xml");
+        private readonly string xmlSeedSourcePlus = HostingEnvironment.MapPath("/SourceFiles/xmlSeedSourcePlus.xml");
 
         public ActionResult Index()
         {
@@ -38,7 +38,8 @@ namespace Website.Controllers
             int baseAccountId = 3464;
             var generator = new MultiGenerator(xmlSeedSourcePlus)
             {
-                Rules =  {
+                Rules =
+                {
                     new Rule(typeof(int), "AccountId",      g => baseAccountId + g.RowNumber, "AccountId"  ),
                     new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth"  ),
                     new Rule(typeof(string),"Description%", g => Funcs.GetElementRandom(g, "Description"), "Description", "Gets Description from custom XML file" ),

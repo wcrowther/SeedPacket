@@ -4,6 +4,7 @@ using SeedPacket.Functions;
 using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -98,11 +99,12 @@ namespace SeedPacket.DataSources
         }
     }
 
+    // TODO  - MOVE TO WILDHARE EXTENSIONS
     public static class XmlDataSourceExtensions
     {
         public static T ToObject<T>(this XElement element) where T : class, new()
         {
-            T instance = new T();
+            var instance = new T();
             foreach (var property in typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 var xattribute = element.Attribute(property.Name);
@@ -112,7 +114,9 @@ namespace SeedPacket.DataSources
                 if (xattribute == null && xelement == null)
                 {
                     string message = $"Unable to parse XML value. Object '{element.Name}' does not contain either an attribute or an element called '{property.Name}'.";
-                    throw new Exception(message);
+                    Debug.WriteLine(message);
+
+                    continue;
                 }
 
                 var value = xattribute?.Value ?? xelement.Value;
@@ -126,9 +130,10 @@ namespace SeedPacket.DataSources
                         }
                     }
                 }
-                catch // (Exception ex) // If Error let the value remain default for that property type
+                catch (Exception ex) // If Error let the value remain default for that property type
                 {
-                    Console.WriteLine("Not able to parse XML value " + value + " for type '" + property.PropertyType + "' for property " + property.Name);
+                    Debug.WriteLine( $"Not able to parse XML value {value} for type '{property.PropertyType}' " +
+                                     $"for property {property.Name}. Ex: {ex.Message}" );
                 }
             }
 

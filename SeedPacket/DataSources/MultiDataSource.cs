@@ -3,14 +3,15 @@ using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using WildHare.Extensions;
 
 namespace SeedPacket.DataSources
 {
     public class MultiDataSource : IDataSource
     {
-        private IDataSource sourceData;
-        private JsonDataSource jsonDataSource;
-        private readonly XmlDataSource xmlDataSource;
+        private IDataSource dataSource;
         private readonly DataInputType dataInputType;
 
         private readonly string sourceFilePath;
@@ -21,8 +22,6 @@ namespace SeedPacket.DataSources
             sourceFilePath = sourcefilepath;
             sourceString = sourcestring;
             dataInputType = datainputtype;
-            jsonDataSource = new JsonDataSource();
-            xmlDataSource = new XmlDataSource();
             LoadSource();
         }
 
@@ -30,28 +29,38 @@ namespace SeedPacket.DataSources
         {
             if (dataInputType == DataInputType.JsonString)
             {
-                jsonDataSource.Parse(sourceString);
-                sourceData = jsonDataSource;
+                dataSource = GetDataSource("json");
+                dataSource.Parse(sourceString);
             }
             else if (dataInputType == DataInputType.JsonFile)
             {
-                jsonDataSource.Load(sourceFilePath);
-                sourceData = jsonDataSource;
+                dataSource = GetDataSource("json");
+                dataSource.Load(sourceFilePath);
             }
             else if (dataInputType == DataInputType.XmlString)
             {
-                xmlDataSource.Parse(sourceString);
-                sourceData = xmlDataSource;
+                dataSource = GetDataSource("xml");
+                dataSource.Parse(sourceString);
             }
             else if (dataInputType == DataInputType.XmlFile)
             {
-                xmlDataSource.Load(sourceFilePath);
-                sourceData = xmlDataSource;
+                dataSource = GetDataSource("xml");
+                dataSource.Load(sourceFilePath);
+            }
+            else if (dataInputType == DataInputType.CsvString)
+            {
+                dataSource = GetDataSource("csv");
+                dataSource.Parse(sourceString);
+            }
+            else if (dataInputType == DataInputType.CsvFile)
+            {
+                dataSource = GetDataSource("csv");
+                dataSource.Load(sourceFilePath);
             }
             else if (dataInputType == DataInputType.Default)
             {
-                xmlDataSource.LoadDefaultData();
-                sourceData = xmlDataSource;
+                dataSource = GetDataSource("xml");
+                dataSource.LoadDefaultData();
             }
             else  // if DataInputType.Auto determine best option
             {
@@ -59,73 +68,115 @@ namespace SeedPacket.DataSources
             }
         }
 
+        public void Parse(string str, string source = null)
+        {
+            throw new NotImplementedException("MultiDataSource does not implement 'Parse'. Pass in a dataSource string using the 'sourcestring' parameter in the constructor.");
+        }
+
+        public void Load(string sourceFilePath)
+        {
+            throw new NotImplementedException("MultiDataSource does not implement 'Load'. Pass in a dataSource filename using the 'sourcefilepath' parameter in the constructor.");
+        }
+
+        public void LoadDefaultData()
+        {
+            dataSource = new XmlDataSource();
+            dataSource.LoadDefaultData();
+        }
+
+        public List<string> GetElementList(string identifier)
+        {
+            return dataSource.GetElementList(identifier);
+        }
+
+        public List<T> GetObjectList<T>(string identifier) where T : class, new()
+        {
+            return dataSource.GetObjectList<T>(identifier);
+        }
+
+        // PRIVATE METHODS ======================================
+
         private void AutoSource()
         {
             if (sourceFilePath != null && sourceString != null)
             {
                 throw new MultipleSourceException();
             }
-            else if (!string.IsNullOrWhiteSpace(sourceFilePath))
+            else if (!sourceFilePath.IsNullOrSpace())
             {
                 if (sourceFilePath.StartsWith("~"))
                 {
                     throw new InvalidTildePathException(sourceFilePath);
                 };
 
-                try
+                string fileExtension = Path.GetExtension(sourceFilePath);
+                dataSource = GetDataSource(fileExtension);
+
+                if (dataSource != null)
                 {
-                    jsonDataSource.Load(sourceFilePath);
-                    sourceData = jsonDataSource;
+                    dataSource.Load(sourceFilePath);
                 }
-                catch (InvalidSourceException)
+                else
                 {
-                    // If no valid JSON file try XML
-                    try
-                    {
-                        xmlDataSource.Load(sourceFilePath);
-                        sourceData = xmlDataSource;
-                    }
-                    catch
-                    {
-                        throw new InvalidSourceException("", sourceFilePath);
-                    }
+                    throw new AutoSourceException(fileExtension);
                 }
+
             }
             else if (sourceString != null)
             {
                 try
                 {
-                    jsonDataSource.Parse(sourceString);
-                    sourceData = jsonDataSource;
+                    dataSource = GetDataSource("json");
+                    dataSource.Parse(sourceString);
                 }
                 catch (InvalidSourceException)
                 {
                     try
                     {
-                        xmlDataSource.Parse(sourceString);
-                        sourceData = xmlDataSource;
+                        dataSource = GetDataSource("xml");
+                        dataSource.Parse(sourceString);
                     }
                     catch
                     {
-                        throw new InvalidSourceException();
+                        try
+                        {
+                            dataSource = GetDataSource("csv");
+                            dataSource.Parse(sourceString);
+                        }
+                        catch
+                        {
+                            throw new InvalidSourceException();
+                        }
                     }
                 }
             }
             else
             {
-                xmlDataSource.LoadDefaultData();
-                sourceData = xmlDataSource;
+               LoadDefaultData();
             }
         }
 
-        public List<string> GetElementList(string identifier)
+        private IDataSource GetDataSource(string dataSourceType)
         {
-            return sourceData.GetElementList(identifier);
+            string sourceType = dataSourceType.RemoveStart(".").ToLower();
+
+            if (sourceType == "json")
+            {
+                return new JsonDataSource();
+            }
+            else if (sourceType == "xml")
+            {
+                return new XmlDataSource();
+            }
+            else if (sourceType == "csv")
+            {
+                return new CsvDataSource();
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public List<T> GetObjectList<T>(string identifier) where T : class, new()
-        {
-            return sourceData.GetObjectList<T>(identifier);
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using SeedPacket;
 using SeedPacket.DataSources;
 using SeedPacket.Generators;

@@ -1,10 +1,3 @@
-﻿using Examples.Models;
-using SeedPacket.Extensions;
-using SeedPacket.Generators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Website.Controllers
@@ -15,6 +8,11 @@ namespace Website.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        protected override void HandleUnknownAction(string actionName)
+        {
+            View(actionName).ExecuteResult(this.ControllerContext);
         }
     }
 }

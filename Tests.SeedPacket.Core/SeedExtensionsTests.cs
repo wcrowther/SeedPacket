@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using SeedPacket.Extensions;
 using SeedPacket.Generators;
 using System;
@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Tests.SeedPacket.Core.Model;
+using Tests.SeetPacket.Core.Models;
 using static Tests.SeedPacket.Core.Common;
 
 namespace Tests.SeedPacket
@@ -185,6 +186,16 @@ namespace Tests.SeedPacket
             Assert.AreEqual(1, list[1].ItemId);
             Assert.AreEqual("thingamabob", list[1].ItemName);
             Assert.IsInstanceOf<Item>(list[1]);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_Seed_AccountName_Example()
+        {
+            var list = new List<Account>().Seed().ToList();
+
+            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(1, list[0].AccountId);
+            Assert.AreEqual("Nakatomi Inc", list[0].AccountName);
         }
 
         /* =====================================================================================
