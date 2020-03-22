@@ -23,5 +23,6 @@ namespace Examples.Models
         {
             return $"{HomeTeam} vs {AwayTeam}";
         }
+
     }
 }

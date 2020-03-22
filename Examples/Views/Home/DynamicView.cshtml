@@ -1,0 +1,38 @@
+@using WildHare.Extensions
+@using Examples.Models
+@using SeedPacket
+@using SeedPacket.Extensions
+@using SeedPacket.Generators
+
+@{
+    ViewBag.Title = "Dynamic View";
+}
+
+<h2>DynamicView</h2>
+
+<table class="table table-striped topSpace">
+    <thead>
+        <tr>
+            @foreach (var column in typeof(Account).GetMetaProperties() )
+            {
+                <th>@column.Name</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in new List<Account>().Seed())
+        {
+        <tr>
+            @foreach (var property in row.GetMetaProperties())
+            {
+                object val = property.GetInstanceValue();
+            <td>
+                @Html.ValueFor(a => val)
+                @(property.Implements("IList") ? "*" : "")
+            </td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+

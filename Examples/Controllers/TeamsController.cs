@@ -27,8 +27,13 @@ namespace Website.Controllers
 
         private Dictionary<int,List<FootballGame>> GetGamesGroupedByWeek() //randomSeed: 34234, 
         {
+            // FootballExtensions.SeedSeason generates all the games for a football season.
             var games = new List<FootballGame>().SeedSeason(DateTime.Now).ToList();
 
+            if (games.Count() == 0)
+                throw new Exception("Games not generated correctly.");
+
+            // Group by SeasonWeek (if exists)
             var weeks = games.OrderBy(o => o.HomeTeam.ConfId)
                              .ThenBy(t => t.HomeTeam.DivId)
                              .GroupBy(g => g.SeasonWeek)

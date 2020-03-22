@@ -4,6 +4,7 @@ using SeedPacket.DataSources;
 using SeedPacket.Generators;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Tests.SeedPacket.Core.Model;
@@ -313,6 +314,28 @@ namespace Tests.SeedPacket
             // rule is randomly picked from the json datasource and the 4th default 
             // "County" is a duplicate -> which is not allowed for an index...
             // Use a 
+        }
+
+
+        [Test]
+        public void SeedCore_NameTuple_Test()
+        {
+            var dict = new Dictionary<(int ConfId, int DivId, int TeamId), string>
+            {
+                { (ConfId: 1, DivId: 1, TeamId: 1), "Atlanta Falcons" },
+                { (1,1,2), "New Orleans Saints" },
+                { (1,1,3), "Tampa Bay Buccaneers"},
+                { (2,2,1), "Chicago Bears" },
+                { (2,3,1), "New England Patriots"}
+            };
+
+            var keys = dict.Keys.ToList();
+
+            Assert.AreEqual(5, dict.Count());
+            Assert.AreEqual(5, keys.Count());
+            Assert.AreEqual(3, dict.Keys.Where(w => w.ConfId == 1).Count());
+            Assert.AreEqual(3, dict.Keys.Where(w => w.Item1 == 1).Count());
+            Assert.AreEqual("Atlanta Falcons", dict.Where(w => w.Key.ConfId == 1).ElementAt(0).Value);
         }
 
         //[Test]
