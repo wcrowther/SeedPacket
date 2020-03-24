@@ -2,8 +2,9 @@
 
 @model Dictionary<int, List<FootballGame>>
 
-
 @{ Html.RenderPartial("_Header"); }
+
+<div style="float:right;">Generator Elapsed Time is @ViewBag.ElapsedTime seconds</div>
 
 @foreach (var footballWeek in Model)
 {

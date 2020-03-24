@@ -1,4 +1,4 @@
-﻿using SeedPacket.DataSources;
+using SeedPacket.DataSources;
 using SeedPacket.Interfaces;
 using System;
 
@@ -11,8 +11,9 @@ namespace SeedPacket.Generators
                                 string sourceString = null, 
                                 DataInputType dataInputType = DataInputType.Auto,
                                 RulesSet rulesSet = RulesSet.Common,
-                                Random baseRandom = null
-                             ) : base(baseRandom: baseRandom)
+                                Random baseRandom = null,
+                                DateTime? baseDateTime =  null
+                             ) : base(baseRandom: baseRandom, baseDateTime: baseDateTime)
         {
             dataSource = new MultiDataSource(sourceFilepath, sourceString, dataInputType);
             GetRules(rulesSet);

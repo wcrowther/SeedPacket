@@ -105,7 +105,9 @@ namespace SeedPacket.DataSources
         public static T ToObject<T>(this XElement element) where T : class, new()
         {
             var instance = new T();
-            foreach (var property in typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            var typeProperties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance); //.GetMetaProperties();
+
+            foreach (var property in typeProperties)
             {
                 var xattribute = element.Attribute(property.Name);
                 var xelement = element.Element(property.Name);
@@ -113,9 +115,11 @@ namespace SeedPacket.DataSources
 
                 if (xattribute == null && xelement == null)
                 {
-                    string message = $"Unable to parse XML value. Object '{element.Name}' does not contain either an attribute or an element called '{property.Name}'.";
-                    Debug.WriteLine(message);
-
+                    if (property.CustomAttributes.Where(a => a.AttributeType.Name == "XmlIgnoreAttribute").Count() == 0)
+                    {
+                        string message = $"Unable to parse XML value. Object '{element.Name}' does not contain either an attribute or an element called '{property.Name}'.";
+                        Debug.WriteLine(message);
+                    }
                     continue;
                 }
 

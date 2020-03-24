@@ -21,7 +21,7 @@ namespace Examples.Models
 
         public override string ToString()
         {
-            return $"{HomeTeam} vs {AwayTeam}";
+            return $"{GameId} {HomeTeam} vs {AwayTeam}";
         }
 
     }

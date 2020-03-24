@@ -9,6 +9,9 @@ namespace Examples.FootballExtensions
 {
     public static class FootballSeedExtensions
     {
+        // CURRENTLY NOT BEING USED // ARE CURRENTLY USING JUST A NEW FOOTBALLGENERATOR
+        // THIS IS FOR WRAPPING ALL THIS LOGIC IF DESIRED.
+
         static readonly string footballSourcePath = HostingEnvironment.MapPath("/SourceFiles/FootballSource.xml");
 
         public static List<T> SeedSeason<T>(this IEnumerable<T> iEnumerable, DateTime seasonStartDate, int? randomSeed = null)
@@ -18,8 +21,9 @@ namespace Examples.FootballExtensions
             {
                 CustomName = "Game",
                 SeedBegin = 1,
-                SeedEnd = 96,
-                BaseRandom = randomSeed.HasValue ? new Random(randomSeed.Value) : new Random()
+                SeedEnd = 64,
+                BaseRandom = randomSeed.HasValue ? new Random(randomSeed.Value) : new Random(),
+                BaseDateTime = seasonStartDate
             };
 
             return new SeedCore(gen).SeedList(iEnumerable).ToList();

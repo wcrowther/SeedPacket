@@ -1,7 +1,9 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Xml.Serialization;
 
 namespace Examples.Models
 {
@@ -9,6 +11,7 @@ namespace Examples.Models
     {
         private int rank = 0;
 
+        [XmlIgnore]
         public string Id
         {
             get { return $"{ConfId}.{DivId}.{TeamId}"; }
@@ -28,14 +31,15 @@ namespace Examples.Models
 
         public int TeamId { get; set; }
 
+        [XmlIgnore]
         public int Rank
         {
             get { return rank == 0 ? TeamId : rank; }
             set { rank = value; }
         }
 
-
-        public List<FootballScheduleSlot> Schedule { get; set; } = new List<FootballScheduleSlot>();
+        [XmlIgnore]
+        public List<ScheduleSlot> Schedule { get; set; } = new List<ScheduleSlot>();
 
         public override string ToString()
         {

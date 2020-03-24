@@ -11,11 +11,12 @@ namespace SeedPacket.Generators
     {
         IRules rules;
 
-        public Generator (IRules rules =  null, Random baseRandom = null)
+        public Generator (IRules rules =  null, Random baseRandom = null, DateTime? baseDateTime = null)
         {
             RowNumber = SeedBegin;
             this.rules = rules ?? new Rules();
             this.baseRandom = baseRandom ?? new Random(defaultSeed);
+            this.baseDateTime = baseDateTime;
             GetNextRowRandom();
         }
 

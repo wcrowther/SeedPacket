@@ -17,7 +17,8 @@ namespace SeedPacket.DataSources
         private readonly string sourceFilePath;
         private readonly string sourceString;
 
-        public MultiDataSource(string sourcefilepath = null, string sourcestring = null, DataInputType datainputtype = DataInputType.Auto)
+        public MultiDataSource( string sourcefilepath = null, string sourcestring = null,
+                                DataInputType datainputtype = DataInputType.Auto)
         {
             sourceFilePath = sourcefilepath;
             sourceString = sourcestring;
