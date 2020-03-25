@@ -320,6 +320,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\Example.cs" />
+    <Compile Include="Models\FootballInfo.cs" />
     <Compile Include="Models\FootballGame.cs" />
     <Compile Include="Models\ScheduleSlot.cs" />
     <Compile Include="Models\Invoice.cs" />

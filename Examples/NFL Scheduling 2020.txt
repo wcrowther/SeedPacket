@@ -49,13 +49,17 @@ D) Each team plays the following games a year (ex: 2019 Falcons 2.3 in NFC South
 
 E) Division IN Conference Logic
 
-    1) Team plays against every team in 1 specific of the 3 other Divisions in Conference for a particular Year
+    1) Team plays against every team in 1 specific of the 3 other Divisions in same Conference for a particular Year
     2) So every 4th year the Division repeats playing the other Division
 
 F) Division OUT of Conference Logic
 
-    1) Team plays against every team in 1 specific of the 3 other Divisions in Conference for a particular Year
+    1) Team plays against every team in 1 specific of the 4 other Divisions in other Conference for a particular Year
     2) So every 5th year the Division repeats playing the other Division
+
+
+
+
 
 G) Division EXTRA Games from Other Divisions in Conference Logic
 

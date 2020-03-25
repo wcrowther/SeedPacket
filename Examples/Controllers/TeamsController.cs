@@ -21,18 +21,15 @@ namespace Website.Controllers
         {
             var stopwatch = Stopwatch.StartNew();
 
-            var footballGames = GetGamesGroupedByWeek();
+            var info = GetGamesInfo();
 
             stopwatch.Stop();
 
             ViewBag.ElapsedTime = stopwatch.Elapsed.TotalSeconds.ToString("#.0000");
 
-            var falconGames = footballGames.SelectMany(w => w.Value.Where(x => x.HomeTeam.Name == "Falcons" || x.AwayTeam.Name == "Falcons"));
-
-            return View(footballGames);
+            return View(info);
         }
-
-        private Dictionary<int,List<FootballGame>> GetGamesGroupedByWeek() //randomSeed: 34234, 
+        private FootballInfo GetGamesInfo() //randomSeed: 34234, 
         {
             string footballSource = HostingEnvironment.MapPath("/SourceFiles/FootballSource.xml"); 
             var gen = new FootballGenerator(DateTime.Now.Next(DayOfWeek.Sunday), footballSource);
@@ -48,7 +45,19 @@ namespace Website.Controllers
                              .GroupBy(g => g.SeasonWeek)
                              .ToDictionary(g => g.Key, g => g.ToList());
 
-            return weeks;
+            var teamGames = new Dictionary<string, List<FootballGame>>();
+
+            foreach (FootballTeam team in gen.Cache.FootballTeams)
+            {
+                teamGames.Add($"{team.Location} {team.Name}", 
+                              games.Where(w => w.HomeTeam.Id == team.Id || w.AwayTeam.Id == team.Id).ToList() );
+            }
+
+            return new FootballInfo()
+            {
+                TeamGames = teamGames,
+                FootballWeeks = weeks
+            };
         }
 
     }

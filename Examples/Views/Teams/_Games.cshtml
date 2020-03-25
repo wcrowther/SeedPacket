@@ -2,7 +2,6 @@
 
 @model  List<FootballGame>
 
-
 <div class="row">
     <div class="col-md-12">
         <table class="table accountTable table-striped topSpace table-collapse">
@@ -19,10 +18,10 @@
                     var game = Model[i];
                     <tr>
                         <td>
-                            <div style="float:left;">@(i + 1)</div>
+                            <div style="float:left; font-weight: bold; color: #346194;">@(i + 1)</div>
                             <div style="text-align:right;">@game.HomeTeam</div>
                         </td>
-                        <td style="text-align:center;">vs</td>
+                        <td style="text-align:center;">@game.GameDate.ToString("MM/dd/yyyy h:mm tt")</td>
                         <td>@game.AwayTeam</td>
                     </tr>
                 }

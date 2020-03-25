@@ -88,21 +88,19 @@ namespace Examples.Generators
 
             var games = new List<FootballGame>();
 
-            int offset = 0;// firstSunday.Year; 
-            var divs = new List<int> { 1, 2, 3, 4 };
+            int offset = firstSunday.Year; 
+            var divIds = new List<int> { 1, 2, 3, 4 };
+            var offsetIds = divIds.TakeNext(4, offset).ToArray();
 
-            int firstDiv    = divs.TakeNextOne();
-            int secondDiv   = divs.TakeNextOne(offset: offset);
-            int thirdDiv    = divs.TakeNextOne();
-            int fourthDiv   = divs.TakeNextOne();
+            Debug.WriteLine($"{(confId == 1 ? "AFC":"NFC")}({confId}) Year({firstSunday.Year}) {offsetIds[0]} {offsetIds[1]} {offsetIds[2]} {offsetIds[3]}");
 
-            Debug.WriteLine($"{(confId == 1 ? "AFC":"NFC")}({confId}) Year({firstSunday.Year}) {firstDiv} {secondDiv} {thirdDiv} {fourthDiv}");
+            // =====================================================================
 
             var firstSecondGames = teams
-                    .Where(w => w.ConfId == confId && w.DivId == firstDiv)
+                    .Where(w => w.ConfId == confId && w.DivId == offsetIds[0])
                     .OrderByDescending(o => o.TeamId)
                     .SelectMany(t1 => teams
-                    .Where(w => w.ConfId == confId && w.DivId == secondDiv)
+                    .Where(w => w.ConfId == confId && w.DivId == offsetIds[1])
                     .Select((t2, index) =>
                 new FootballGame
                 {
@@ -118,9 +116,9 @@ namespace Examples.Generators
             // =====================================================================
 
             var thirdFourthGames = teams
-                    .Where(w => w.ConfId == confId && w.DivId == thirdDiv)
+                    .Where(w => w.ConfId == confId && w.DivId == offsetIds[2])
                     .SelectMany(t1 => teams
-                    .Where(w => w.ConfId == confId && w.DivId == fourthDiv)
+                    .Where(w => w.ConfId == confId && w.DivId == offsetIds[3])
                     .Select((t2, index) =>
                new FootballGame
                {
@@ -136,33 +134,33 @@ namespace Examples.Generators
 
             // =====================================================================
 
-            var extraInGames = GenerateExtraInConferenceGames(teams, confId, firstDiv, secondDiv, thirdDiv, fourthDiv);
+            var extraInGames = GenerateExtraInConferenceGames(teams, confId, offsetIds);
 
             games.AddRange(extraInGames);
 
             return games;
         }
 
-        private  List<FootballGame> GenerateExtraInConferenceGames(List<FootballTeam> teams, int confId, int firstDiv, int secondDiv, int thirdDiv, int fourthDiv)
+        private  List<FootballGame> GenerateExtraInConferenceGames(List<FootballTeam> teams, int confId, int[] offsetIds)
         {
             var games = new List<FootballGame>();
 
             //----------------------------------------------------------------------------------------
             // firstDiv teams play one game each against thirdDiv, fourthDiv with same ranking 1,2,3,4
 
-            var firstThirdGames = GetExtraInConferenceGames(teams, confId, firstDiv, thirdDiv);
+            var firstThirdGames = GetExtraInConferenceGames(teams, confId, offsetIds[0], offsetIds[2]);
             games.AddRange(firstThirdGames);
 
-            var firstFourthGames = GetExtraInConferenceGames(teams, confId, fourthDiv, firstDiv);
+            var firstFourthGames = GetExtraInConferenceGames(teams, confId, offsetIds[3], offsetIds[0]);
             games.AddRange(firstFourthGames);
 
             //----------------------------------------------------------------------------------------
             // secondDiv teams play one game each against thirdDiv, fourthDiv with same ranking 1,2,3,4
 
-            var secondThirdGames = GetExtraInConferenceGames(teams, confId, thirdDiv, secondDiv);
+            var secondThirdGames = GetExtraInConferenceGames(teams, confId, offsetIds[2], offsetIds[1]);
             games.AddRange(secondThirdGames);
 
-            var secondFourthGames = GetExtraInConferenceGames(teams, confId, secondDiv, fourthDiv);
+            var secondFourthGames = GetExtraInConferenceGames(teams, confId, offsetIds[1], offsetIds[3]);
             games.AddRange(secondFourthGames);
 
             //----------------------------------------------------------------------------------------
