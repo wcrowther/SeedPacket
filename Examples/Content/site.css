@@ -355,3 +355,8 @@ table thead {
     font-weight: bold;
     text-align: right;
 }
+.sectionHeader {
+    font-size: 20px;
+    font-weight: bold;
+    color: #346194;
+}
