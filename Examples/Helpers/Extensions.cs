@@ -8,16 +8,16 @@ namespace Examples.Helpers
 {
     public static class Extensions 
     {
-        public static IList<FootballGame> EqualizeHomeAndAway(this IList<FootballGame> games)
+        public static IList<FootballGame> EqualizeHomeAndAway(this IList<FootballGame> games, string conference = "In")
         {
-            EqualizeGames(games, 1);
-            EqualizeGames(games, 2);
-            EqualizeGames(games, 3);
+            EqualizeGames(games, 1, conference);
+            EqualizeGames(games, 2, conference);
+            EqualizeGames(games, 3, conference);
 
             return games.Select(s => s).ToList();
         }
 
-        private static void EqualizeGames(IList<FootballGame> games, int num)
+        private static void EqualizeGames(IList<FootballGame> games, int num, string conference)
         {
             foreach (var game in games)
             {
@@ -27,7 +27,8 @@ namespace Examples.Helpers
 
                 if (homeTeam_HomeGames != 2)
                 {
-                    Debug.WriteLine($"{num} - Switching Home({homeTeam_HomeGames}) {game.HomeTeam} to Away({homeTeam_HomeGames}) {game.AwayTeam}");
+                    Debug.WriteLine($"{conference} {num} - Switching Home({homeTeam_HomeGames})" +
+                                    $" {game.HomeTeam} to Away({homeTeam_HomeGames}) {game.AwayTeam}");
 
                     var home = game.HomeTeam;
                     var away = game.AwayTeam;

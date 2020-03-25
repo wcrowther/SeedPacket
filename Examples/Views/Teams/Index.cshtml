@@ -6,7 +6,7 @@
 
 <div style="float:right;">Generator Elapsed Time is @ViewBag.ElapsedTime seconds</div>
 
-@foreach (var footballWeek in Model.FootballWeeks)
+@*@foreach (var footballWeek in Model.FootballWeeks)
 {
     <div class="sectionHeader">Week @footballWeek.Key</div>
     <div class="row">
@@ -14,13 +14,13 @@
             @{ Html.RenderPartial("_Games", footballWeek.Value); }
         </div>
     </div>
-}
+}*@
 
 <div style="height: 30px;">&nbsp;</div>
 
 @foreach (var team in Model.TeamGames)
 {
-    <div class="sectionHeader">Team @team.Key</div>
+    <div class="sectionHeader">@team.Key</div>
     <div class="row">
         <div class="col-md-12">
             @{ Html.RenderPartial("_Games", team.Value); }

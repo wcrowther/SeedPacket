@@ -21,7 +21,9 @@ namespace Examples.Generators
         public FootballGenerator( DateTime baseDateTime, string sourceFilepath) 
                     : base(sourceFilepath, dataInputType: DataInputType.XmlFile, baseDateTime: baseDateTime)
         {
-            Debug.WriteLine("Creating FootballGenerator");
+            // FirstSunday of Football Season
+            if (BaseDateTime.DayOfWeek != DayOfWeek.Sunday)
+                throw new Exception("BaseDateTime must be set to the first Sunday of the season.");
         }
 
         protected override void GetRules(RulesSet ruleSet)
@@ -54,10 +56,10 @@ namespace Examples.Generators
                                  .ToDictionary(x => x.Key, x => x.ToList());
 
             var games = new List<FootballGame>();
-            games.AddRange(GenerateDivisionGames(g, teams)); 
-            games.AddRange(GenerateInConferenceGames(g, 1, teams)); // confId 1: AFC
-            games.AddRange(GenerateInConferenceGames(g, 2, teams)); // confId 2: NFC
-            //games.AddRange(GetOutOfConferenceGames(g, teams, startDate));
+            //games.AddRange(GenerateDivisionGames(g, teams)); 
+            //games.AddRange(GenerateInConferenceGames(g, 1, teams)); // confId 1: AFC
+            //games.AddRange(GenerateInConferenceGames(g, 2, teams)); // confId 2: NFC
+            games.AddRange(GenerateOutOfConferenceGames(g, teams));
 
             return games;
         }
@@ -74,7 +76,9 @@ namespace Examples.Generators
                     {
                         HomeTeam = home,
                         AwayTeam = away,
-                        GameType = GameType.Division,                      
+                        GameType = GameType.Division,
+                        SeasonStartYear = g.BaseDateTime.Year,
+                        GameDate = g.BaseDateTime
                     };
 
             return divisionGames.ToList();
@@ -82,17 +86,13 @@ namespace Examples.Generators
 
         private List<FootballGame> GenerateInConferenceGames(IGenerator g, int confId, List<FootballTeam> teams)
         {
-            var firstSunday = g.BaseDateTime;
-            if (firstSunday.DayOfWeek != DayOfWeek.Sunday)
-                throw new Exception("BaseDateTime must be set to the first Sunday of the season.");
-
             var games = new List<FootballGame>();
 
-            int offset = firstSunday.Year; 
+            int offset = g.BaseDateTime.Year; 
             var divIds = new List<int> { 1, 2, 3, 4 };
             var offsetIds = divIds.TakeNext(4, offset).ToArray();
 
-            Debug.WriteLine($"{(confId == 1 ? "AFC":"NFC")}({confId}) Year({firstSunday.Year}) {offsetIds[0]} {offsetIds[1]} {offsetIds[2]} {offsetIds[3]}");
+            Debug.WriteLine($"Gen InConf for {(confId == 1 ? "AFC":"NFC")}({confId}) Year({g.BaseDateTime.Year}) {offsetIds[0]} {offsetIds[1]} {offsetIds[2]} {offsetIds[3]}");
 
             // =====================================================================
 
@@ -107,10 +107,11 @@ namespace Examples.Generators
                     HomeTeam = (index % 2 == 0) ? t1 : t2,
                     AwayTeam = (index % 2 == 0) ? t2 : t1,
                     GameId = index,
-                    SeasonStartYear = firstSunday.Year,
+                    SeasonStartYear = g.BaseDateTime.Year,
                     GameType = GameType.InConference
                 }
             ));
+
             games.AddRange(firstSecondGames.ToList().EqualizeHomeAndAway());
 
             // =====================================================================
@@ -125,7 +126,7 @@ namespace Examples.Generators
                    HomeTeam = t1,
                    AwayTeam = t2,
                    GameId = index,
-                   SeasonStartYear = firstSunday.Year,
+                   SeasonStartYear = g.BaseDateTime.Year,
                    GameType = GameType.InConference
                }
             ));
@@ -134,33 +135,33 @@ namespace Examples.Generators
 
             // =====================================================================
 
-            var extraInGames = GenerateExtraInConferenceGames(teams, confId, offsetIds);
+            var extraInGames = GenerateExtraInConferenceGames(g, teams, confId, offsetIds);
 
             games.AddRange(extraInGames);
 
             return games;
         }
 
-        private  List<FootballGame> GenerateExtraInConferenceGames(List<FootballTeam> teams, int confId, int[] offsetIds)
+        private  List<FootballGame> GenerateExtraInConferenceGames(IGenerator g, List<FootballTeam> teams, int confId, int[] offsetIds)
         {
             var games = new List<FootballGame>();
 
             //----------------------------------------------------------------------------------------
             // firstDiv teams play one game each against thirdDiv, fourthDiv with same ranking 1,2,3,4
 
-            var firstThirdGames = GetExtraInConferenceGames(teams, confId, offsetIds[0], offsetIds[2]);
+            var firstThirdGames = GetExtraInConferenceGames(g, teams, confId, offsetIds[0], offsetIds[2]);
             games.AddRange(firstThirdGames);
 
-            var firstFourthGames = GetExtraInConferenceGames(teams, confId, offsetIds[3], offsetIds[0]);
+            var firstFourthGames = GetExtraInConferenceGames(g, teams, confId, offsetIds[3], offsetIds[0]);
             games.AddRange(firstFourthGames);
 
             //----------------------------------------------------------------------------------------
             // secondDiv teams play one game each against thirdDiv, fourthDiv with same ranking 1,2,3,4
 
-            var secondThirdGames = GetExtraInConferenceGames(teams, confId, offsetIds[2], offsetIds[1]);
+            var secondThirdGames = GetExtraInConferenceGames(g, teams, confId, offsetIds[2], offsetIds[1]);
             games.AddRange(secondThirdGames);
 
-            var secondFourthGames = GetExtraInConferenceGames(teams, confId, offsetIds[1], offsetIds[3]);
+            var secondFourthGames = GetExtraInConferenceGames(g, teams, confId, offsetIds[1], offsetIds[3]);
             games.AddRange(secondFourthGames);
 
             //----------------------------------------------------------------------------------------
@@ -168,7 +169,7 @@ namespace Examples.Generators
             return games;
         }
 
-        private  IEnumerable<FootballGame> GetExtraInConferenceGames(List<FootballTeam> teams, int confId, int homeDivId, int awayDivId)
+        private  IEnumerable<FootballGame> GetExtraInConferenceGames(IGenerator g, List<FootballTeam> teams, int confId, int homeDivId, int awayDivId)
         {
             return from home in teams.Where(w => w.ConfId == confId && w.DivId == homeDivId)
                    from away in teams.Where(w => w.ConfId == confId && w.DivId == awayDivId)
@@ -177,13 +178,100 @@ namespace Examples.Generators
                    {
                        HomeTeam = home,
                        AwayTeam = away,
-                       GameType = GameType.ExtraConference
+                       GameType = GameType.ExtraConference,
+                       SeasonStartYear = g.BaseDateTime.Year
                    };
         }
 
-        private List<FootballGame> GenerateOutOfConferenceGames(IGenerator g, List<FootballTeam> teams, DateTime seasonStart)
+        private List<FootballGame> GenerateOutOfConferenceGames(IGenerator g, List<FootballTeam> teams)
         {
-            return new List<FootballGame>();
+            var games = new List<FootballGame>();
+
+            int offset = g.BaseDateTime.Year + 4;
+            var confOneDivIds = new List<int> { 1, 2, 3, 4 };
+            var confTwoDivIds = new List<int> { 1, 2, 3, 4 };
+            var confTwoOffsetDivIds = confTwoDivIds.TakeNext(4, offset).ToArray();
+
+            Debug.WriteLine($"Conf 2 Offset({offset}): {confTwoOffsetDivIds[0]} {confTwoOffsetDivIds[1]} {confTwoOffsetDivIds[2]} {confTwoOffsetDivIds[3]}");
+
+            // =====================================================================
+
+            var firstfirstGames = teams
+                    .Where(w => w.ConfId == 1 && w.DivId == 1)
+                    .SelectMany(t1 => teams
+                    .Where(w => w.ConfId == 2 && w.DivId == confTwoOffsetDivIds[0])
+                    .Select((t2, index) =>
+                new FootballGame
+                {
+                    HomeTeam = (index % 2 == 0) ? t1 : t2,
+                    AwayTeam = (index % 2 == 0) ? t2 : t1,
+                    GameId = index,
+                    SeasonStartYear = g.BaseDateTime.Year,
+                    GameType = GameType.OutOfConference
+                }
+            ));
+            games.AddRange(firstfirstGames.ToList());
+
+            // =====================================================================
+
+            var secondSecondGames = teams
+                    .Where(w => w.ConfId == 1 && w.DivId == 2)
+                    .SelectMany(t1 => teams
+                    .Where(w => w.ConfId == 2 && w.DivId == confTwoOffsetDivIds[1])
+                    .Select((t2, index) =>
+               new FootballGame
+               {
+                   HomeTeam = (index % 2 == 0) ? t1 : t2,
+                   AwayTeam = (index % 2 == 0) ? t2 : t1,
+                   GameId = index,
+                   SeasonStartYear = g.BaseDateTime.Year,
+                   GameType = GameType.OutOfConference
+               }
+            ));
+
+            games.AddRange(secondSecondGames.ToList());
+
+            // =====================================================================
+
+            var thirdThirdGames = teams
+                    .Where(w => w.ConfId == 1 && w.DivId == 3)
+                    .SelectMany(t1 => teams
+                    .Where(w => w.ConfId == 2 && w.DivId == confTwoOffsetDivIds[2])
+                    .Select((t2, index) =>
+               new FootballGame
+               {
+                   HomeTeam = (index % 2 == 0) ? t1 : t2,
+                   AwayTeam = (index % 2 == 0) ? t2 : t1,
+                   GameId = index,
+                   SeasonStartYear = g.BaseDateTime.Year,
+                   GameType = GameType.OutOfConference
+               }
+            ));
+
+            games.AddRange(thirdThirdGames.ToList());
+
+            // =====================================================================
+
+            var fourthFourthGames = teams
+                    .Where(w => w.ConfId == 1 && w.DivId == 4)
+                    .SelectMany(t1 => teams
+                    .Where(w => w.ConfId == 2 && w.DivId == confTwoOffsetDivIds[3])
+                    .Select((t2, index) =>
+               new FootballGame
+               {
+                   HomeTeam = (index % 2 == 0) ? t1 : t2,
+                   AwayTeam = (index % 2 == 0) ? t2 : t1,
+                   GameId = index,
+                   SeasonStartYear = g.BaseDateTime.Year,
+                   GameType = GameType.OutOfConference
+               }
+            ));
+
+            games.AddRange(fourthFourthGames.ToList());
+
+            // =====================================================================
+
+            return games;
         }
 
         private FootballGame GetCachedGame(IGenerator g)
