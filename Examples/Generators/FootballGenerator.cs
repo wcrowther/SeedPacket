@@ -196,34 +196,34 @@ namespace Examples.Generators
 
             // =====================================================================
 
-            var firstfirstGames = teams
-                    .Where(w => w.ConfId == 1 && w.DivId == 1)
-                    .SelectMany(t1 => teams
-                    .Where(w => w.ConfId == 2 && w.DivId == confTwoOffsetDivIds[0])
-                    .Select((t2, index) =>
-                new FootballGame
-                {
-                    HomeTeam = (index % 2 == 0) ? t1 : t2,
-                    AwayTeam = (index % 2 == 0) ? t2 : t1,
-                    GameId = index,
-                    SeasonStartYear = g.BaseDateTime.Year,
-                    GameType = GameType.OutOfConference
-                }
-            ));
-            games.AddRange(firstfirstGames.ToList());
+            //var firstfirstGames = teams
+            //        .Where(w => w.ConfId == 1 && w.DivId == 1)
+            //        .SelectMany(t1 => teams
+            //        .Where(w => w.ConfId == 2 && w.DivId == confTwoOffsetDivIds[0])
+            //        .Select((t2, index) =>
+            //    new FootballGame
+            //    {
+            //        HomeTeam = (index % 2 == 0) ? t1 : t2,
+            //        AwayTeam = (index % 2 == 0) ? t2 : t1,
+            //        GameId = index,
+            //        SeasonStartYear = g.BaseDateTime.Year,
+            //        GameType = GameType.OutOfConference
+            //    }
+            //));
+            //games.AddRange(firstfirstGames.ToList());
 
             // =====================================================================
 
             var secondSecondGames = teams
                     .Where(w => w.ConfId == 1 && w.DivId == 2)
-                    .SelectMany(t1 => teams
+                    .SelectMany((t1, index1) => teams
                     .Where(w => w.ConfId == 2 && w.DivId == confTwoOffsetDivIds[1])
-                    .Select((t2, index) =>
+                    .Select((t2, index2) =>
                new FootballGame
                {
-                   HomeTeam = (index % 2 == 0) ? t1 : t2,
-                   AwayTeam = (index % 2 == 0) ? t2 : t1,
-                   GameId = index,
+                   HomeTeam = EqualizeVenue(index1, index2, t1, t2, "home"),
+                   AwayTeam = EqualizeVenue(index1, index2, t2, t1, "away"),
+                   GameId = index1,
                    SeasonStartYear = g.BaseDateTime.Year,
                    GameType = GameType.OutOfConference
                }
@@ -233,45 +233,56 @@ namespace Examples.Generators
 
             // =====================================================================
 
-            var thirdThirdGames = teams
-                    .Where(w => w.ConfId == 1 && w.DivId == 3)
-                    .SelectMany(t1 => teams
-                    .Where(w => w.ConfId == 2 && w.DivId == confTwoOffsetDivIds[2])
-                    .Select((t2, index) =>
-               new FootballGame
-               {
-                   HomeTeam = (index % 2 == 0) ? t1 : t2,
-                   AwayTeam = (index % 2 == 0) ? t2 : t1,
-                   GameId = index,
-                   SeasonStartYear = g.BaseDateTime.Year,
-                   GameType = GameType.OutOfConference
-               }
-            ));
+            //var thirdThirdGames = teams
+            //        .Where(w => w.ConfId == 1 && w.DivId == 3)
+            //        .SelectMany(t1 => teams
+            //        .Where(w => w.ConfId == 2 && w.DivId == confTwoOffsetDivIds[2])
+            //        .Select((t2, index) =>
+            //   new FootballGame
+            //   {
+            //       HomeTeam = (index % 2 == 0) ? t1 : t2,
+            //       AwayTeam = (index % 2 == 0) ? t2 : t1,
+            //       GameId = index,
+            //       SeasonStartYear = g.BaseDateTime.Year,
+            //       GameType = GameType.OutOfConference
+            //   }
+            //));
 
-            games.AddRange(thirdThirdGames.ToList());
+            //games.AddRange(thirdThirdGames.ToList());
 
             // =====================================================================
 
-            var fourthFourthGames = teams
-                    .Where(w => w.ConfId == 1 && w.DivId == 4)
-                    .SelectMany(t1 => teams
-                    .Where(w => w.ConfId == 2 && w.DivId == confTwoOffsetDivIds[3])
-                    .Select((t2, index) =>
-               new FootballGame
-               {
-                   HomeTeam = (index % 2 == 0) ? t1 : t2,
-                   AwayTeam = (index % 2 == 0) ? t2 : t1,
-                   GameId = index,
-                   SeasonStartYear = g.BaseDateTime.Year,
-                   GameType = GameType.OutOfConference
-               }
-            ));
+            //var fourthFourthGames = teams
+            //        .Where(w => w.ConfId == 1 && w.DivId == 4)
+            //        .SelectMany(t1 => teams
+            //        .Where(w => w.ConfId == 2 && w.DivId == confTwoOffsetDivIds[3])
+            //        .Select((t2, index) =>
+            //   new FootballGame
+            //   {
+            //       HomeTeam = (index % 2 == 0) ? t1 : t2,
+            //       AwayTeam = (index % 2 == 0) ? t2 : t1,
+            //       GameId = index,
+            //       SeasonStartYear = g.BaseDateTime.Year,
+            //       GameType = GameType.OutOfConference
+            //   }
+            //));
 
-            games.AddRange(fourthFourthGames.ToList());
+            //games.AddRange(fourthFourthGames.ToList());
 
             // =====================================================================
 
             return games;
+        }
+
+
+        private static FootballTeam EqualizeVenue(int index1, int index2, FootballTeam t1, FootballTeam t2, string note)
+        {
+            if (note == "home")
+                Debug.WriteLine("-".Repeat(0));
+
+            Debug.WriteLine($"{note} {index1} | {index2}: {index1 % 2 == 1} {(index2 % 2 == 0 ? t1 : t2)} {(index2 % 2 == 0 ? t2 : t1)}");
+
+            return (index1 % 2 == 1) ? (index2 % 2 == 0 ? t1 : t2) : (index2 % 2 == 0 ? t2 : t1);
         }
 
         private FootballGame GetCachedGame(IGenerator g)
