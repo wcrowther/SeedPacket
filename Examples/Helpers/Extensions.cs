@@ -8,6 +8,7 @@ namespace Examples.Helpers
 {
     public static class Extensions 
     {
+        // NO LONGER USED - USING EqualizeVenue() INSTEAD
         public static IList<FootballGame> EqualizeHomeAndAway(this IList<FootballGame> games, int repeat = 3, string conference = "In")
         {
             for (int i = 1; i <= repeat; i++)

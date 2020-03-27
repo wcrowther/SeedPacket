@@ -48,6 +48,16 @@ namespace Examples.Generators
             SeedEnd = Cache.SeasonGames.Count; // set this to however many games in the season.
         }
 
+        public FootballTeam GetTeam(IGenerator gen)
+        {
+            return gen.GetObjectNext<FootballTeam>("Team");
+        }
+
+        private FootballGame GetCachedGame(IGenerator g)
+        {
+            return Funcs.GetOneFromCacheRandom<FootballGame>(g, Cache.SeasonGames, true);
+        }
+
         private List<FootballGame> GetAllGames(IGenerator g)
         {
             ExpandoObject cache = g.Cache;
@@ -65,6 +75,11 @@ namespace Examples.Generators
 
         private List<FootballGame> GenerateDivisionGames(List<FootballTeam> teams)
         {
+            // ===========================================================================================
+            // In Conference within Division each team plays the others at home & away
+            // 6 games per team for 96 total games for the league.
+            // ===========================================================================================
+
             var divisionGames =
                     from home in teams
                     from away in teams
@@ -87,56 +102,48 @@ namespace Examples.Generators
         {
             var games = new List<FootballGame>();
 
-            int offset = BaseDateTime.Year; 
+            int offset = BaseDateTime.Year;
             var divIds = new List<int> { 1, 2, 3, 4 };
             var offsetIds = divIds.TakeNext(4, offset).ToArray();
 
-            // =====================================================================
+            // ===========================================================================================
+            // In Conference division 1 plays 2, 3 plays 4 with a yearly offset
+            // 4 games per team for 64 total games for the league.
+            // ===========================================================================================
 
-            var firstSecondGames = teams
-                    .Where(w => w.ConfId == confId && w.DivId == offsetIds[0])
+            games.AddRange(GetInConferenceGames(confId, teams, offsetIds[0], offsetIds[1]) );
+
+            games.AddRange(GetInConferenceGames(confId, teams, offsetIds[2], offsetIds[3]) );
+
+            // ===========================================================================================
+            // In Conference Division Extra  - example:
+            // If division 1 plays 2 then the extra games are division 1 playing 3 and 4.
+            // Teams play the equally ranked teams from the year before.
+            // 2 games per team for 32 total games for the league.
+            // ===========================================================================================
+
+            games.AddRange(GenerateExtraInConferenceGames(teams, confId, offsetIds));
+
+            return games;
+        }
+
+        private IEnumerable<FootballGame> GetInConferenceGames(int confId, List<FootballTeam> teams, int firstDiv, int secondDiv)
+        {
+            return teams
+                    .Where(w => w.ConfId == confId && w.DivId == firstDiv)
                     .OrderByDescending(o => o.TeamId)
-                    .SelectMany(t1 => teams
-                    .Where(w => w.ConfId == confId && w.DivId == offsetIds[1])
-                    .Select((t2, index) =>
+                    .SelectMany((t1, index1) => teams
+                    .Where(w => w.ConfId == confId && w.DivId == secondDiv)
+                    .Select((t2, index2) =>
                 new FootballGame
                 {
-                    HomeTeam = (index % 2 == 0) ? t1 : t2,
-                    AwayTeam = (index % 2 == 0) ? t2 : t1,
-                    GameId = index,
+                    HomeTeam = EqualizeVenue(index1, index2, t1, t2),
+                    AwayTeam = EqualizeVenue(index1, index2, t2, t1),
+                    GameId = index1,
                     SeasonStartYear = BaseDateTime.Year,
                     GameType = GameType.InConference
                 }
             ));
-
-            games.AddRange(firstSecondGames.ToList().EqualizeHomeAndAway());
-
-            // =====================================================================
-
-            var thirdFourthGames = teams
-                    .Where(w => w.ConfId == confId && w.DivId == offsetIds[2])
-                    .SelectMany(t1 => teams
-                    .Where(w => w.ConfId == confId && w.DivId == offsetIds[3])
-                    .Select((t2, index) =>
-               new FootballGame
-               {
-                   HomeTeam = t1,
-                   AwayTeam = t2,
-                   GameId = index,
-                   SeasonStartYear = BaseDateTime.Year,
-                   GameType = GameType.InConference
-               }
-            ));
-
-            games.AddRange(thirdFourthGames.ToList().EqualizeHomeAndAway());
-
-            // =====================================================================
-
-            var extraInGames = GenerateExtraInConferenceGames(teams, confId, offsetIds);
-
-            games.AddRange(extraInGames);
-
-            return games;
         }
 
         private  List<FootballGame> GenerateExtraInConferenceGames(List<FootballTeam> teams, int confId, int[] offsetIds)
@@ -189,6 +196,11 @@ namespace Examples.Generators
             var divIds = new List<int> { 1, 2, 3, 4 };                      // For Conference 1
             var offsetIds = divIds.TakeNext(4, offset, false).ToArray();    // For Conference 2
 
+            // ===========================================================================================
+            // Out of Conference - a division plays division from other conference with a yearly offset
+            // 4 games per team for 64 total games for the league.
+            // ===========================================================================================
+
             foreach (int id in divIds)
             {
                 games.AddRange(GetOutOfConferenceGames(teams, divIds[id - 1], offsetIds[id - 1]));
@@ -215,16 +227,8 @@ namespace Examples.Generators
             )).ToList();
         }
 
-        private static FootballTeam EqualizeVenue(int index1, int index2, FootballTeam t1, FootballTeam t2, string note = "home")
-        {
-            return (index1 % 2 == 1) ? (index2 % 2 == 0 ? t1 : t2) : (index2 % 2 == 0 ? t2 : t1);
-        }
 
-        private FootballGame GetCachedGame(IGenerator g)
-        {
-            return Funcs.GetOneFromCacheRandom<FootballGame>(g, Cache.SeasonGames, true);
-        }
-
+        // Not currently used
         private FootballGame CreateGame()
         {
             var game = new FootballGame
@@ -235,9 +239,9 @@ namespace Examples.Generators
             return game;
         }
 
-        public FootballTeam GetTeam(IGenerator gen)
+        private static FootballTeam EqualizeVenue(int index1, int index2, FootballTeam t1, FootballTeam t2, string note = "home")
         {
-            return gen.GetObjectNext<FootballTeam>("Team");
+            return (index1 % 2 == 1) ? (index2 % 2 == 0 ? t1 : t2) : (index2 % 2 == 0 ? t2 : t1);
         }
     }
 
