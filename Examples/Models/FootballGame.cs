@@ -11,7 +11,7 @@ namespace Examples.Models
 
         public int SeasonStartYear { get; set; } // ie 2020
 
-        public int SeasonWeek { get; set; } = 1; // Week 1-17 (16 games, 1 bye)
+        public int SeasonWeek { get; set; } = -1; // Week 1-17 (16 games, 1 bye)
 
         public DateTime GameDate { get; set; }
 
@@ -21,7 +21,7 @@ namespace Examples.Models
 
         public override string ToString()
         {
-            return $"{GameId} {HomeTeam} vs {AwayTeam}";
+            return $"Week {SeasonWeek}: {HomeTeam} vs {AwayTeam}";
         }
 
     }

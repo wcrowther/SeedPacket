@@ -51,14 +51,5 @@ namespace Examples.Extensions
         {
             return new List<T>().Seed(seedEnd: 1, randomSeed: randomSeed).Single();
         }
-
-        // MOVE TO WILDHARE
-        public static DateTime Next(this DateTime date, DayOfWeek dayOfWeek, bool includeCurrentDate = false)
-        {
-            if (includeCurrentDate && date.DayOfWeek == dayOfWeek)
-                return date;
-
-            return date.AddDays(7 - (int)date.DayOfWeek);
-        }
     }
 }

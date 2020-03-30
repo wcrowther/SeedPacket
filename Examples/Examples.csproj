@@ -126,6 +126,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="NFL Scheduling 2020.txt" />
     <Content Include="packages.config" />
+    <Content Include="ScriptApp\Teams.js" />
     <Content Include="ScriptApp\Examples.js" />
     <Content Include="libman.json" />
     <Content Include="Scripts\bootstrap.js" />
@@ -280,6 +281,7 @@
     <Content Include="Views\Teams\_Games.cshtml" />
     <Content Include="Views\Teams\Index.cshtml" />
     <Content Include="Views\Home\DynamicView.cshtml" />
+    <Content Include="Views\Teams\_GamesRow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -303,7 +305,7 @@
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Extensions\DistinctBy.cs" />
+    <Compile Include="Helpers\DistinctBy.cs" />
     <Compile Include="Extensions\FootballSeedExtensions.cs" />
     <Compile Include="Extensions\CustomSeedExtensions.cs" />
     <Compile Include="Generators\FootballGenerator.cs" />
@@ -312,11 +314,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Interfaces\ITeamsManager.cs" />
+    <Compile Include="Managers\TeamsManager.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\Example.cs" />
     <Compile Include="Models\FootballInfo.cs" />
     <Compile Include="Models\FootballGame.cs" />
+    <Compile Include="Models\GameType.cs" />
     <Compile Include="Models\ScheduleSlot.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\InvoiceItem.cs" />

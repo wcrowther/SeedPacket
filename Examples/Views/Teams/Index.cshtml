@@ -4,26 +4,26 @@
 
 @{ Html.RenderPartial("_Header"); }
 
-<div style="float:right;">Generator Elapsed Time is @ViewBag.ElapsedTime seconds</div>
 
-@foreach (var footballWeek in Model.FootballWeeks)
-{
-    <div class="sectionHeader">Week @footballWeek.Key</div>
-    <div class="row">
-        <div class="col-md-12">
-            @{ Html.RenderPartial("_Games", footballWeek.Value); }
+<div class="row">
+    <div class="col-md-6">
+        <div class="teamsSeed">
+            <div class="">
+                Seed<input id="randomSeed" type="number" value="1234" maxlength="4" style="width: 100px;" />
+            </div>
+            @*<div class="rowCounter">
+                    First Sunday<input id="firstSunday" type="text" value="20" maxlength="4" style="text-align: center;" />
+                </div>*@
         </div>
     </div>
-}
+</div>
 
-<div style="height: 30px;">&nbsp;</div>
+@{ Html.RenderPartial("_Games", Model); }
 
-@foreach (var team in Model.TeamGames)
-{
-    <div class="sectionHeader">@team.Key</div>
-    <div class="row">
-        <div class="col-md-12">
-            @{ Html.RenderPartial("_Games", team.Value); }
-        </div>
-    </div>
-}
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        Teams.init();
+    });
+</script>
+
+

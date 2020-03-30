@@ -1,4 +1,4 @@
-﻿using System.Web;
+using System.Web;
 using System.Web.Optimization;
 
 namespace Website
@@ -21,7 +21,8 @@ namespace Website
                           "~/Scripts/respond.js"
                       ));
             bundles.Add(new ScriptBundle("~/bundles/ScriptApp").Include(
-                          "~/ScriptApp/Examples.js"
+                          "~/ScriptApp/Examples.js",
+                          "~/ScriptApp/Teams.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

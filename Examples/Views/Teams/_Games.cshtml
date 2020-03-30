@@ -1,31 +1,32 @@
 @using Examples.Models
 
-@model  List<FootballGame>
+@model FootballInfo
 
-<div class="row">
-    <div class="col-md-12">
-        <table class="table accountTable table-striped topSpace table-collapse">
-            <thead>
-                <tr>
-                    <th style="text-align: right;">Home Team</th>
-                    <th style="text-align: center">Date</th>
-                    <th>Visiting Team</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model.Count; i++)
-                {
-                    var game = Model[i];
-                    <tr>
-                        <td>
-                            <div style="float:left; font-weight: bold; color: #346194;">@(i + 1)</div>
-                            <div style="text-align:right;">@game.HomeTeam</div>
-                        </td>
-                        <td style="text-align:center;">Week @game.SeasonWeek - @game.GameDate.ToString("MM/dd/yyyy h:mm tt")</td>
-                        <td>@game.AwayTeam</td>
-                    </tr>
-                }
-            </tbody>
-         </table>
-     </div>
+
+<div id="games">
+
+    <div style="float:right;">Generator Elapsed Time is @Model.ElapsedTime seconds</div>
+
+    @foreach (var footballWeek in Model.FootballWeeks)
+    {
+        <div class="sectionHeader">Week @footballWeek.Key</div>
+        <div class="row">
+            <div class="col-md-12">
+                @{ Html.RenderPartial("_GamesRow", footballWeek.Value); }
+            </div>
+        </div>
+    }
+
+    @*<div style="height: 30px;">&nbsp;</div>
+
+    @foreach (var team in Model.TeamGames)
+    {
+        <div class="sectionHeader">@team.Key</div>
+        <div class="row">
+            <div class="col-md-12">
+                @{ Html.RenderPartial("_Games", team.Value); }
+            </div>
+        </div>
+    }*@
+
 </div>

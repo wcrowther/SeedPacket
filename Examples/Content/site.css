@@ -157,9 +157,9 @@ code i {
 }
 .rowCounter,
 .randomSeed {
-    float:right;
-    width: 80px;
-    height: 80px;
+    float:right; 
+    width: 80px; 
+    height: 80px; 
     padding: 10px;
     margin-left: 10px;
     margin-bottom: 20px;
@@ -173,6 +173,17 @@ code i {
 .topSpace {
     margin-top: 15px;
 }
+
+.teamsSeed {
+    background-color: #ccc;
+    padding: 10px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+    .teamsSeed input {
+        margin-left: 10px;
+    }
 
 /*  =========================================================================== 
     Bootstrap Overrides / Additions 

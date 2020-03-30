@@ -1,4 +1,6 @@
-﻿using System.Web;
+using Examples.Models;
+using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Examples.Helpers

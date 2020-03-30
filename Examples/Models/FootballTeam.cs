@@ -1,3 +1,5 @@
+using Examples.Generators;
+using Examples.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -39,7 +41,7 @@ namespace Examples.Models
         }
 
         [XmlIgnore]
-        public List<ScheduleSlot> Schedule { get; set; } = new List<ScheduleSlot>();
+        public List<ScheduleSlot> Schedule { get; set; } = new List<ScheduleSlot>().GetBaseSlots();
 
         public override string ToString()
         {

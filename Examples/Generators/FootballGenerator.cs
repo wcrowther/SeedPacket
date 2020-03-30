@@ -1,3 +1,5 @@
+using Examples.Extensions;
+using Examples.Helpers;
 using Examples.Models;
 using SeedPacket;
 using SeedPacket.Extensions;
@@ -9,17 +11,13 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using WildHare.Extensions;
-using Examples.Extensions;
-using Examples.Helpers;
-using System.Diagnostics;
 
 namespace Examples.Generators
 {
     public class FootballGenerator : MultiGenerator
     {
-
-        public FootballGenerator( DateTime baseDateTime, string sourceFilepath) 
-                    : base(sourceFilepath, dataInputType: DataInputType.XmlFile, baseDateTime: baseDateTime)
+        public FootballGenerator( DateTime baseDateTime, string sourceFilepath, Random baseRandom = null) 
+                    : base(sourceFilepath, dataInputType: DataInputType.XmlFile, baseDateTime: baseDateTime, baseRandom: baseRandom)
         {
             // FirstSunday of Football Season
             if (BaseDateTime.DayOfWeek != DayOfWeek.Sunday)
@@ -37,8 +35,8 @@ namespace Examples.Generators
         {
             var footballRules = new List<Rule>()
             {
-                new Rule(typeof(FootballGame), "",   g => GetCachedGame(g), "Get Football Game w/ 2 FootballTeams"),
-                new Rule(typeof(FootballTeam), "",   g => GetTeam(g), "Get Football Team")
+                new Rule(typeof(FootballGame), "", g => GetCachedGame(g), "Get Football Game w/ 2 FootballTeams"),
+                new Rule(typeof(FootballTeam), "", g => GetTeam(g), "Get Football Team")
             };
             Rules.AddRange(footballRules, true);
 
@@ -65,15 +63,15 @@ namespace Examples.Generators
             var teams = cache.Get<List<FootballTeam>>("FootballTeams").ToList();
             var games = new List<FootballGame>();
 
+            //games.AddRange(GenerateOutOfConferenceGames(teams));
+            //games.AddRange(GenerateInConferenceGames(1, teams)); // confId 1: AFC
+            //games.AddRange(GenerateInConferenceGames(2, teams)); // confId 2: NFC
             games.AddRange(GenerateDivisionGames(teams));
-            games.AddRange(GenerateInConferenceGames(1, teams)); // confId 1: AFC
-            games.AddRange(GenerateInConferenceGames(2, teams)); // confId 2: NFC
-            games.AddRange(GenerateOutOfConferenceGames(teams));
 
             return games;
         }
 
-        private List<FootballGame> GenerateDivisionGames(List<FootballTeam> teams)
+        protected IEnumerable<FootballGame> GenerateDivisionGames(List<FootballTeam> teams)
         {
             // ===========================================================================================
             // In Conference within Division each team plays the others at home & away
@@ -86,19 +84,20 @@ namespace Examples.Generators
                     where home.Name != away.Name
                           && home.DivId == away.DivId
                           && home.ConfId == away.ConfId
+                         //&& home.ConfId == 2
+                         // && home.DivId == 1
                     select new FootballGame
                     {
                         HomeTeam = home,
                         AwayTeam = away,
                         GameType = GameType.Division,
-                        SeasonStartYear = BaseDateTime.Year,
-                        GameDate = BaseDateTime
+                        SeasonStartYear = BaseDateTime.Year
                     };
 
-            return divisionGames.ToList();
+            return divisionGames.ToList().AssignGameDates(GameType.Division, this);
         }
 
-        private List<FootballGame> GenerateInConferenceGames(int confId, List<FootballTeam> teams)
+        protected IEnumerable<FootballGame> GenerateInConferenceGames(int confId, List<FootballTeam> teams)
         {
             var games = new List<FootballGame>();
 
@@ -127,26 +126,8 @@ namespace Examples.Generators
             return games;
         }
 
-        private IEnumerable<FootballGame> GetInConferenceGames(int confId, List<FootballTeam> teams, int firstDiv, int secondDiv)
-        {
-            return teams
-                    .Where(w => w.ConfId == confId && w.DivId == firstDiv)
-                    .OrderByDescending(o => o.TeamId)
-                    .SelectMany((t1, index1) => teams
-                    .Where(w => w.ConfId == confId && w.DivId == secondDiv)
-                    .Select((t2, index2) =>
-                new FootballGame
-                {
-                    HomeTeam = EqualizeVenue(index1, index2, t1, t2),
-                    AwayTeam = EqualizeVenue(index1, index2, t2, t1),
-                    GameId = index1,
-                    SeasonStartYear = BaseDateTime.Year,
-                    GameType = GameType.InConference
-                }
-            ));
-        }
 
-        private  List<FootballGame> GenerateExtraInConferenceGames(List<FootballTeam> teams, int confId, int[] offsetIds)
+        protected IEnumerable<FootballGame> GenerateExtraInConferenceGames(List<FootballTeam> teams, int confId, int[] offsetIds)
         {
             var games = new List<FootballGame>();
 
@@ -170,24 +151,11 @@ namespace Examples.Generators
 
             //----------------------------------------------------------------------------------------
 
-            return games;
+            return games.AssignGameDates(GameType.ExtraConference, this);
         }
 
-        private  IEnumerable<FootballGame> GetExtraInConferenceGames(List<FootballTeam> teams, int confId, int homeDivId, int awayDivId)
-        {
-            return from home in teams.Where(w => w.ConfId == confId && w.DivId == homeDivId)
-                   from away in teams.Where(w => w.ConfId == confId && w.DivId == awayDivId)
-                   where home.Rank == away.Rank
-                   select new FootballGame
-                   {
-                       HomeTeam = home,
-                       AwayTeam = away,
-                       GameType = GameType.ExtraConference,
-                       SeasonStartYear = BaseDateTime.Year
-                   };
-        }
 
-        private List<FootballGame> GenerateOutOfConferenceGames(List<FootballTeam> teams)
+        protected IEnumerable<FootballGame> GenerateOutOfConferenceGames(List<FootballTeam> teams)
         {
             var games = new List<FootballGame>();
 
@@ -206,10 +174,48 @@ namespace Examples.Generators
                 games.AddRange(GetOutOfConferenceGames(teams, divIds[id - 1], offsetIds[id - 1]));
             }
 
-            return games;
+            return games.AssignGameDates(GameType.OutOfConference, this);
         }
 
-        private List<FootballGame> GetOutOfConferenceGames(List<FootballTeam> teams, int conf1DivId, int conf2DivId)
+        // ===========================================================================================
+        // PRIVATE METHODS
+        // ===========================================================================================
+
+        private IEnumerable<FootballGame> GetInConferenceGames(int confId, List<FootballTeam> teams, int firstDiv, int secondDiv)
+        {
+            var games = teams
+                    .Where(w => w.ConfId == confId && w.DivId == firstDiv)
+                    .OrderByDescending(o => o.TeamId)
+                    .SelectMany((t1, index1) => teams
+                    .Where(w => w.ConfId == confId && w.DivId == secondDiv)
+                    .Select((t2, index2) =>
+                new FootballGame
+                {
+                    HomeTeam = EqualizeVenue(index1, index2, t1, t2),
+                    AwayTeam = EqualizeVenue(index1, index2, t2, t1),
+                    GameId = index1,
+                    GameType = GameType.InConference,
+                }
+            ));
+
+            return games.ToList().AssignGameDates(GameType.InConference, this);
+        }
+
+        private IEnumerable<FootballGame> GetExtraInConferenceGames(List<FootballTeam> teams, int confId, int homeDivId, int awayDivId)
+        {
+            return from home in teams.Where(w => w.ConfId == confId && w.DivId == homeDivId)
+                   from away in teams.Where(w => w.ConfId == confId && w.DivId == awayDivId)
+                   where home.Rank == away.Rank
+                   select new FootballGame
+                   {
+                       HomeTeam = home,
+                       AwayTeam = away,
+                       GameType = GameType.ExtraConference,
+                       SeasonStartYear = BaseDateTime.Year
+                   };
+        }
+
+        private IEnumerable<FootballGame> GetOutOfConferenceGames(List<FootballTeam> teams, int conf1DivId, int conf2DivId)
         {
             return teams
                     .Where(w => w.ConfId == 1 && w.DivId == conf1DivId)
@@ -221,13 +227,17 @@ namespace Examples.Generators
                     HomeTeam = EqualizeVenue(index1, index2, t1, t2),
                     AwayTeam = EqualizeVenue(index1, index2, t2, t1),
                     GameId = index1,
-                    SeasonStartYear = BaseDateTime.Year,
                     GameType = GameType.OutOfConference
                 }
-            )).ToList();
+            ));
         }
 
+        private static FootballTeam EqualizeVenue(int index1, int index2, FootballTeam t1, FootballTeam t2, string note = "home")
+        {
+            return (index1 % 2 == 1) ? (index2 % 2 == 0 ? t1 : t2) : (index2 % 2 == 0 ? t2 : t1);
+        }
 
+        // =========================================================================================
         // Not currently used
         private FootballGame CreateGame()
         {
@@ -239,20 +249,8 @@ namespace Examples.Generators
             return game;
         }
 
-        private static FootballTeam EqualizeVenue(int index1, int index2, FootballTeam t1, FootballTeam t2, string note = "home")
-        {
-            return (index1 % 2 == 1) ? (index2 % 2 == 0 ? t1 : t2) : (index2 % 2 == 0 ? t2 : t1);
-        }
     }
 
-    public enum GameType
-    {
-        Division,
-        InConference,
-        ExtraConference,
-        OutOfConference,
-        Bye
-    }
 }
 
 //var divisions = teams.GroupBy(x => new { x.ConfId, x.DivId })

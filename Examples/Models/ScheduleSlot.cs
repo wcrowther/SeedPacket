@@ -1,12 +1,15 @@
-using System.ComponentModel.DataAnnotations;
 
 namespace Examples.Models
 {
     public class ScheduleSlot
     {
-        public bool IsHomeGame { get; set; } 
+        public int SeasonWeek { get; set; }
 
-        [StringLength(10)]
-        public string GameType { get; set; } // In, Out, Division, Extra, Bye
-	}
+        public GameType GameType { get; set; } // In, Out, Division, Extra
+
+        public override string ToString()
+        {
+            return $"Week {SeasonWeek} {GameType}";
+        }
+    }
 }

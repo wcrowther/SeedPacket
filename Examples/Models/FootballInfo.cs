@@ -10,5 +10,6 @@ namespace Examples.Models
 
         public Dictionary<string, List<FootballGame>> TeamGames { get; set; }
 
+        public string ElapsedTime { get; set; }
     }
 }
