@@ -63,15 +63,15 @@ namespace Examples.Generators
             var teams = cache.Get<List<FootballTeam>>("FootballTeams").ToList();
             var games = new List<FootballGame>();
 
-            //games.AddRange(GenerateOutOfConferenceGames(teams));
-            //games.AddRange(GenerateInConferenceGames(1, teams)); // confId 1: AFC
-            //games.AddRange(GenerateInConferenceGames(2, teams)); // confId 2: NFC
             games.AddRange(GenerateDivisionGames(teams));
+            games.AddRange(GenerateInConferenceGames(teams));
+            games.AddRange(GenerateOutOfConferenceGames(teams));
+            games.AddByeWeek(this);
 
             return games;
         }
 
-        protected IEnumerable<FootballGame> GenerateDivisionGames(List<FootballTeam> teams)
+        public IEnumerable<FootballGame> GenerateDivisionGames(List<FootballTeam> teams)
         {
             // ===========================================================================================
             // In Conference within Division each team plays the others at home & away
@@ -84,8 +84,6 @@ namespace Examples.Generators
                     where home.Name != away.Name
                           && home.DivId == away.DivId
                           && home.ConfId == away.ConfId
-                         //&& home.ConfId == 2
-                         // && home.DivId == 1
                     select new FootballGame
                     {
                         HomeTeam = home,
@@ -97,65 +95,19 @@ namespace Examples.Generators
             return divisionGames.ToList().AssignGameDates(GameType.Division, this);
         }
 
-        protected IEnumerable<FootballGame> GenerateInConferenceGames(int confId, List<FootballTeam> teams)
+
+        public IEnumerable<FootballGame> GenerateInConferenceGames(List<FootballTeam> teams)
         {
             var games = new List<FootballGame>();
 
-            int offset = BaseDateTime.Year;
-            var divIds = new List<int> { 1, 2, 3, 4 };
-            var offsetIds = divIds.TakeNext(4, offset).ToArray();
-
-            // ===========================================================================================
-            // In Conference division 1 plays 2, 3 plays 4 with a yearly offset
-            // 4 games per team for 64 total games for the league.
-            // ===========================================================================================
-
-            games.AddRange(GetInConferenceGames(confId, teams, offsetIds[0], offsetIds[1]) );
-
-            games.AddRange(GetInConferenceGames(confId, teams, offsetIds[2], offsetIds[3]) );
-
-            // ===========================================================================================
-            // In Conference Division Extra  - example:
-            // If division 1 plays 2 then the extra games are division 1 playing 3 and 4.
-            // Teams play the equally ranked teams from the year before.
-            // 2 games per team for 32 total games for the league.
-            // ===========================================================================================
-
-            games.AddRange(GenerateExtraInConferenceGames(teams, confId, offsetIds));
+            games.AddRange(GetInConferenceGames_ForEachConference(1, teams)); // confId 1: AFC
+            games.AddRange(GetInConferenceGames_ForEachConference(2, teams)); // confId 2: NFC
 
             return games;
         }
 
 
-        protected IEnumerable<FootballGame> GenerateExtraInConferenceGames(List<FootballTeam> teams, int confId, int[] offsetIds)
-        {
-            var games = new List<FootballGame>();
-
-            //----------------------------------------------------------------------------------------
-            // firstDiv teams play one game each against thirdDiv, fourthDiv with same ranking 1,2,3,4
-
-            var firstThirdGames = GetExtraInConferenceGames(teams, confId, offsetIds[0], offsetIds[2]);
-            games.AddRange(firstThirdGames);
-
-            var firstFourthGames = GetExtraInConferenceGames(teams, confId, offsetIds[3], offsetIds[0]);
-            games.AddRange(firstFourthGames);
-
-            //----------------------------------------------------------------------------------------
-            // secondDiv teams play one game each against thirdDiv, fourthDiv with same ranking 1,2,3,4
-
-            var secondThirdGames = GetExtraInConferenceGames(teams, confId, offsetIds[2], offsetIds[1]);
-            games.AddRange(secondThirdGames);
-
-            var secondFourthGames = GetExtraInConferenceGames(teams, confId, offsetIds[1], offsetIds[3]);
-            games.AddRange(secondFourthGames);
-
-            //----------------------------------------------------------------------------------------
-
-            return games.AssignGameDates(GameType.ExtraConference, this);
-        }
-
-
-        protected IEnumerable<FootballGame> GenerateOutOfConferenceGames(List<FootballTeam> teams)
+        public IEnumerable<FootballGame> GenerateOutOfConferenceGames(List<FootballTeam> teams)
         {
             var games = new List<FootballGame>();
 
@@ -171,17 +123,75 @@ namespace Examples.Generators
 
             foreach (int id in divIds)
             {
-                games.AddRange(GetOutOfConferenceGames(teams, divIds[id - 1], offsetIds[id - 1]));
+                games.AddRange(GetOutOfConferenceGames_DivisionVsDivision(teams, divIds[id - 1], offsetIds[id - 1]));
             }
 
             return games.AssignGameDates(GameType.OutOfConference, this);
         }
 
+
         // ===========================================================================================
         // PRIVATE METHODS
         // ===========================================================================================
 
-        private IEnumerable<FootballGame> GetInConferenceGames(int confId, List<FootballTeam> teams, int firstDiv, int secondDiv)
+
+        private IEnumerable<FootballGame> GetInConferenceGames_ForEachConference(int confId, List<FootballTeam> teams)
+        {
+            var games = new List<FootballGame>();
+
+            int offset = BaseDateTime.Year;
+            var divIds = new List<int> { 1, 2, 3, 4 };
+            var offsetIds = divIds.TakeNext(4, offset).ToArray();
+
+            // ===========================================================================================
+            // In Conference division 1 plays 2, 3 plays 4 with a yearly offset
+            // 4 games per team for 64 total games for the league.
+            // ===========================================================================================
+
+            games.AddRange(GetInConferenceGames_DivisionVsDivision(confId, teams, offsetIds[0], offsetIds[1]));
+
+            games.AddRange(GetInConferenceGames_DivisionVsDivision(confId, teams, offsetIds[2], offsetIds[3]));
+
+            // ===========================================================================================
+            // In Conference Division Extra  - example:
+            // If division 1 plays 2 then the extra games are division 1 playing 3 and 4.
+            // Teams play the equally ranked teams from the year before.
+            // 2 games per team for 32 total games for the league.
+            // ===========================================================================================
+
+            games.AddRange(GetExtraInConferenceGames(teams, confId, offsetIds));
+
+            return games;
+        }
+
+        protected IEnumerable<FootballGame> GetExtraInConferenceGames(List<FootballTeam> teams, int confId, int[] offsetIds)
+        {
+            var games = new List<FootballGame>();
+
+            //----------------------------------------------------------------------------------------
+            // firstDiv teams play one game each against thirdDiv, fourthDiv with same ranking 1,2,3,4
+
+            var firstThirdGames = GetExtraInConferenceGames_DivisionVsDivision(teams, confId, offsetIds[0], offsetIds[2]);
+            games.AddRange(firstThirdGames);
+
+            var firstFourthGames = GetExtraInConferenceGames_DivisionVsDivision(teams, confId, offsetIds[3], offsetIds[0]);
+            games.AddRange(firstFourthGames);
+
+            //----------------------------------------------------------------------------------------
+            // secondDiv teams play one game each against thirdDiv, fourthDiv with same ranking 1,2,3,4
+
+            var secondThirdGames = GetExtraInConferenceGames_DivisionVsDivision(teams, confId, offsetIds[2], offsetIds[1]);
+            games.AddRange(secondThirdGames);
+
+            var secondFourthGames = GetExtraInConferenceGames_DivisionVsDivision(teams, confId, offsetIds[1], offsetIds[3]);
+            games.AddRange(secondFourthGames);
+
+            //----------------------------------------------------------------------------------------
+
+            return games.AssignGameDates(GameType.ExtraConference, this);
+        }
+
+        private IEnumerable<FootballGame> GetInConferenceGames_DivisionVsDivision(int confId, List<FootballTeam> teams, int firstDiv, int secondDiv)
         {
             var games = teams
                     .Where(w => w.ConfId == confId && w.DivId == firstDiv)
@@ -201,7 +211,7 @@ namespace Examples.Generators
             return games.ToList().AssignGameDates(GameType.InConference, this);
         }
 
-        private IEnumerable<FootballGame> GetExtraInConferenceGames(List<FootballTeam> teams, int confId, int homeDivId, int awayDivId)
+        private IEnumerable<FootballGame> GetExtraInConferenceGames_DivisionVsDivision(List<FootballTeam> teams, int confId, int homeDivId, int awayDivId)
         {
             return from home in teams.Where(w => w.ConfId == confId && w.DivId == homeDivId)
                    from away in teams.Where(w => w.ConfId == confId && w.DivId == awayDivId)
@@ -215,7 +225,7 @@ namespace Examples.Generators
                    };
         }
 
-        private IEnumerable<FootballGame> GetOutOfConferenceGames(List<FootballTeam> teams, int conf1DivId, int conf2DivId)
+        private IEnumerable<FootballGame> GetOutOfConferenceGames_DivisionVsDivision(List<FootballTeam> teams, int conf1DivId, int conf2DivId)
         {
             return teams
                     .Where(w => w.ConfId == 1 && w.DivId == conf1DivId)
