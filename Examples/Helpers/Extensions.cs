@@ -84,20 +84,18 @@ namespace Examples.Helpers
             return games;
         }
 
-        //public static List<ScheduleSlot> AddByeWeek(this List<FootballGame> games, IGenerator g)
-        //{
-        //    for (int i = 1; i <= 16; i++)
-        //    {
-        //        var gamesInWeek = games.Where(w => w.SeasonWeek == i);
+        public static List<FootballGame> AddByeWeek(this List<FootballGame> games, IGenerator g)
+        {
+            for (int i = 2; i <= 16; i++)
+            {
+                var gamesInWeek = games.Where(w => w.SeasonWeek == i).ToList();
+                var gameFromWeek = gamesInWeek.TakeRandomOne(g.RowRandom);
 
-        //        game.GameDate = g.BaseDateTime.AddDays((gameWeek - 1) * 7);
-
-
-
-
-        //    }
-        //    return games;
-        //}
+                gameFromWeek.SeasonWeek = 17;
+                gameFromWeek.GameDate = g.BaseDateTime.AddDays((17 - 1) * 7);
+            }
+            return games;
+        }
 
 
         public static List<ScheduleSlot> GetBaseSlots(this List<ScheduleSlot> list)
@@ -137,6 +135,8 @@ namespace Examples.Helpers
             return date.AddDays(7 - (int)date.DayOfWeek);
         }
 
+
+        // NOT SURE THIS IS WORKING...
         public static Random Skip(this Random random, int number )
         {
             if (number < 0) number = 0;
