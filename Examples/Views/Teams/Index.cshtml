@@ -5,25 +5,43 @@
 @{ Html.RenderPartial("_Header"); }
 
 
+<script src="~/Scripts/vue.min.js"></script>
+
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-offset-6 col-md-6">
         <div class="teamsSeed">
-            <div class="">
-                Seed<input id="randomSeed" type="number" value="1234" maxlength="4" style="width: 100px;" />
-            </div>
-            @*<div class="rowCounter">
-                    First Sunday<input id="firstSunday" type="text" value="20" maxlength="4" style="text-align: center;" />
-                </div>*@
+            <div>Seed<input id="randomSeed" type="number" value="1234" maxlength="4" style="width: 100px;" /></div>
+            @*<div class="rowCounter">First Sunday<input id="firstSunday" type="text" value="20" maxlength="4" style="text-align: center;" /></div>*@
         </div>
     </div>
 </div>
 
-@{ Html.RenderPartial("_Games", Model); }
+<div id="vueContent">
+
+    <ul class="nav nav-tabs">
+        <li><a @@click="ActiveTab=1" :class="{'activeTab' : ActiveTab === 1}" style="color: black;">Games By Week</a></li>
+        <li><a @@click="ActiveTab=2" :class="{'activeTab' : ActiveTab === 2}" style="color: black;">Games By Team</a></li>
+    </ul>
+
+    @{ Html.RenderPartial("_Games", Model); }
+
+</div>
 
 <script language="javascript" type="text/javascript">
+
     $(document).ready(function () {
         Teams.init();
     });
+
+    // =============================================
+    // NEW VUE APP
+    // =============================================
+
+    const vueApp = new Vue({
+        el: '#vueContent',
+        data: {
+            ActiveTab: 1
+        }
+    })
+
 </script>
-
-

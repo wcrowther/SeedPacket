@@ -177,13 +177,39 @@ code i {
 .teamsSeed {
     background-color: #ccc;
     padding: 10px;
-    margin-bottom: 30px;
     font-weight: bold;
 }
-
     .teamsSeed input {
         margin-left: 10px;
     }
+
+/*  =========================================================================== 
+    Team Page
+=========================================================================== */
+.navTabs {}
+
+nav.navTabs li a {
+    color: black;
+}
+.contentBox {
+    margin-top: 30px;
+}
+.gameBox { }
+.activeTab {
+    background-color: #83a8d1;
+}
+.elapsedTime {
+    float: right;
+    font-style: italic;
+    color: #83A8D1;
+}
+
+@media only screen and (max-width: 992px) {
+    .teamsSeed {
+        margin-bottom: 20px
+    }
+}
+
 
 /*  =========================================================================== 
     Bootstrap Overrides / Additions 

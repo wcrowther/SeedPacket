@@ -2,31 +2,32 @@
 
 @model FootballInfo
 
+    <div class="contentBox">
 
-<div id="games">
+        <div class="elapsedTime">Generator Elapsed Time is @Model.ElapsedTime seconds</div>
 
-    <div style="float:right;">Generator Elapsed Time is @Model.ElapsedTime seconds</div>
-
-    @foreach (var footballWeek in Model.FootballWeeks)
-    {
-        <div class="sectionHeader">Week @footballWeek.Key</div>
-        <div class="row">
-            <div class="col-md-12">
-                @{ Html.RenderPartial("_GamesRow", footballWeek.Value); }
-            </div>
+        <div v-if="ActiveTab === 1" id="GamesByWeek" class="gameBox">
+            @foreach (var footballWeek in Model.FootballWeeks)
+            {
+                <div class="sectionHeader">Week @footballWeek.Key</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @{ Html.RenderPartial("_GamesRow", footballWeek.Value); }
+                    </div>
+                </div>
+            }
         </div>
-    }
 
-    <div style="height: 30px;">&nbsp;</div>
-
-    @foreach (var team in Model.TeamGames)
-    {
-        <div class="sectionHeader">@team.Key</div>
-        <div class="row">
-            <div class="col-md-12">
-                @{ Html.RenderPartial("_GamesRow", team.Value); }
-            </div>
+        <div v-if="ActiveTab === 2" id="GamesByTeam" class="gameBox">
+            @foreach (var team in Model.TeamGames)
+            {
+                <div class="sectionHeader">@team.Key</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @{ Html.RenderPartial("_GamesRow", team.Value); }
+                    </div>
+                </div>
+            }
         </div>
-    }
 
-</div>
+    </div>
