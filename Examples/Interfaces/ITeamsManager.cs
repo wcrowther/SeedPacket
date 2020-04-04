@@ -5,6 +5,6 @@ namespace Examples.Interfaces
 {
     public interface ITeamsManager
     {
-        FootballInfo GetGamesInfo(DateTime seasonStart, Random random = null);
+        FootballInfo GetGamesInfo( Random random = null, DateTime? openingSunday = null);
     }
 }

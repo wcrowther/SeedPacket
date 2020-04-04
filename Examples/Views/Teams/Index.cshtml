@@ -4,14 +4,19 @@
 
 @{ Html.RenderPartial("_Header"); }
 
-
 <script src="~/Scripts/vue.min.js"></script>
 
 <div class="row">
     <div class="col-md-offset-6 col-md-6">
         <div class="teamsSeed">
-            <div>Seed<input id="randomSeed" type="number" value="1234" maxlength="4" style="width: 100px;" /></div>
-            @*<div class="rowCounter">First Sunday<input id="firstSunday" type="text" value="20" maxlength="4" style="text-align: center;" /></div>*@
+            <div style="display:inline-block">
+                <span>Seed:</span>
+                <input id="randomSeed" type="number" value="1234" maxlength="4" style="width: 100px;" />
+            </div>
+            <div style="display:inline-block; margin-left: 20px;">
+                 <span>Opening Sunday: </span>
+                 @Html.DropDownListFor(m => m.OpeningSunday, Model.OpeningSundayList, new { id = "openingSunday", @class = "form-control" })
+            </div>
         </div>
     </div>
 </div>
@@ -41,6 +46,9 @@
         el: '#vueContent',
         data: {
             ActiveTab: 1
+        },
+        mounted: function () {
+            alert('mounted');
         }
     })
 

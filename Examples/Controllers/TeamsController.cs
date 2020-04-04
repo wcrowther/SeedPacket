@@ -1,4 +1,5 @@
 //using Examples.FootballExtensions;
+using Examples.Helpers;
 using Examples.Interfaces;
 using Examples.Managers;
 using System;
@@ -18,17 +19,17 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
-            var info = _teamsManager.GetGamesInfo(DateTime.Now, new Random(123));
+            var info = _teamsManager.GetGamesInfo(new Random(123) );
 
             return View(info);
         }
 
-        [Route("Teams/GetRefreshedGames/{seed:int}/{firstSunday:DateTime?}")]
-        public ActionResult GetRefreshedGames(int seed, DateTime? firstSunday = null)
+        [HttpPost]
+        [Route("Teams/GetRefreshedGames")]
+        public ActionResult GetRefreshedGames(int seed, DateTime openingSunday)
         {
-            DateTime _firstSunday = firstSunday ?? DateTime.Now;
-
-            var info = _teamsManager.GetGamesInfo(_firstSunday, new Random(seed));
+            //var _openingDate = DateTime.Parse(openingDate);
+            var info = _teamsManager.GetGamesInfo(new Random(seed), openingSunday);
 
             return PartialView("_Games", info);
         }

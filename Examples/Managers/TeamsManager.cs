@@ -14,10 +14,12 @@ namespace Examples.Managers
 {
     public class TeamsManager : ITeamsManager
     {
-        public FootballInfo GetGamesInfo(DateTime seasonStart, Random random = null)
+        public FootballInfo GetGamesInfo(Random random = null, DateTime? openingDate = null)
         {
+            var footballInfo = new FootballInfo(openingDate);
+
             string footballSource = HostingEnvironment.MapPath("/SourceFiles/FootballSource.xml");
-            var gen = new FootballGenerator(seasonStart.Next(DayOfWeek.Sunday), footballSource, random);
+            var gen = new FootballGenerator(footballInfo.OpeningSunday, footballSource, random);
 
             var stopwatch = Stopwatch.StartNew();
 
@@ -25,12 +27,11 @@ namespace Examples.Managers
 
             stopwatch.Stop();
 
-            return new FootballInfo()
-            {
-                TeamGames = GroupGamesByTeam(gen, games),
-                FootballWeeks = GroupGamesByWeek(games),
-                ElapsedTime = stopwatch.Elapsed.TotalSeconds.ToString("#.0000")
-            };
+            footballInfo.TeamGames      = GroupGamesByTeam(gen, games);
+            footballInfo.FootballWeeks  = GroupGamesByWeek(games);
+            footballInfo.ElapsedTime    = stopwatch.Elapsed.TotalSeconds.ToString("#.0000");
+
+            return footballInfo;
         }
 
         // ========================================================================
@@ -60,6 +61,11 @@ namespace Examples.Managers
             return games.OrderBy(o => o.SeasonWeek)
                         .GroupBy(g => g.SeasonWeek)
                         .ToDictionary(g => g.Key, g => g.ToList());
+        }
+
+        private List<DateTime> GetFirstSundayList()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -8,6 +8,7 @@ using SeedPacket.Generators;
 using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
 using WildHare.Extensions;
@@ -137,6 +138,8 @@ namespace Examples.Generators
 
         private IEnumerable<FootballGame> GetInConferenceGames_ForEachConference(int confId, List<FootballTeam> teams)
         {
+            Debug.WriteLine($"GetInConferenceGames_ForEachConference for {confId}.");
+
             var games = new List<FootballGame>();
 
             int offset = BaseDateTime.Year;

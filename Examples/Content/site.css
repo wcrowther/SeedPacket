@@ -174,14 +174,7 @@ code i {
     margin-top: 15px;
 }
 
-.teamsSeed {
-    background-color: #ccc;
-    padding: 10px;
-    font-weight: bold;
-}
-    .teamsSeed input {
-        margin-left: 10px;
-    }
+
 
 /*  =========================================================================== 
     Team Page
@@ -190,19 +183,37 @@ code i {
 
 nav.navTabs li a {
     color: black;
+    border: solid 2px transparent;
 }
 .contentBox {
     margin-top: 30px;
 }
 .gameBox { }
-.activeTab {
-    background-color: #83a8d1;
+li a.activeTab {
+    border: solid 2px #83a8d1;
+    border-bottom: none;
+    background-color: whitesmoke;
 }
 .elapsedTime {
     float: right;
     font-style: italic;
     color: #83A8D1;
 }
+#openingSunday {
+    margin-left: 10px;
+    display: inline-block;
+    width: 100px;
+    height: 32px;
+    border: solid 1px #9a9a9a;
+}
+.teamsSeed {
+    background-color: #ccc;
+    padding: 10px;
+    font-weight: bold;
+}
+    .teamsSeed input {
+        margin-left: 10px;
+    }
 
 @media only screen and (max-width: 992px) {
     .teamsSeed {

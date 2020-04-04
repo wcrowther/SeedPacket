@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Web.Mvc;
 using WildHare.Extensions;
 
 namespace Examples.Helpers
@@ -34,7 +35,6 @@ namespace Examples.Helpers
             }
             return games;
         }
-
 
         public static List<FootballGame> GetGameDates(this List<FootballGame> games, GameType gameType, IGenerator g, int tries)
         {
@@ -97,7 +97,6 @@ namespace Examples.Helpers
             return games;
         }
 
-
         public static List<ScheduleSlot> GetBaseSlots(this List<ScheduleSlot> list)
         {
             if (list.Count != 0)
@@ -126,15 +125,38 @@ namespace Examples.Helpers
             return list;
         }
 
+        public static List<SelectListItem> GetOpeningSundayList(this List<SelectListItem> list)
+        {
+            // Years starting 10 years ago to 10 years from now
+            var startDate = DateTime.Now.AddYears(-10);
+
+            // List of Second Sundays in September + or - 10 years
+            return Enumerable.Range(0, 20)
+                             .Select(s => startDate.AddYears(s).SecondSundayInSeptember())
+                             .Select(i => new SelectListItem()
+                             {
+                                 Text = i.Year.ToString(),
+                                 Value = i.ToString()
+
+                             }).ToList();
+        }
+
+        public static DateTime SecondSundayInSeptember(this DateTime date)
+        {
+            if (date == null)
+                throw new Exception("SecondSundayInSeptember - Date cannot be null");
+
+            return new DateTime(date.Year, 9, 1).NextDayOfWeek(DayOfWeek.Sunday, true).AddDays(7);
+        }
+
         // TODO - MOVE TO WILDHARE
-        public static DateTime Next(this DateTime date, DayOfWeek dayOfWeek, bool includeCurrentDate = false)
+        public static DateTime NextDayOfWeek(this DateTime date, DayOfWeek dayOfWeek, bool includeCurrentDate = false)
         {
             if (includeCurrentDate && date.DayOfWeek == dayOfWeek)
                 return date;
 
             return date.AddDays(7 - (int)date.DayOfWeek);
         }
-
 
         // NOT SURE THIS IS WORKING...
         public static Random Skip(this Random random, int number )
