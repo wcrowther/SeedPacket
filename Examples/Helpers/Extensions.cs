@@ -125,7 +125,7 @@ namespace Examples.Helpers
             return list;
         }
 
-        public static List<SelectListItem> GetOpeningSundayList(this List<SelectListItem> list)
+        public static List<DateTime> GetOpeningSundayList(this List<DateTime> list)
         {
             // Years starting 10 years ago to 10 years from now
             var startDate = DateTime.Now.AddYears(-10);
@@ -133,12 +133,18 @@ namespace Examples.Helpers
             // List of Second Sundays in September + or - 10 years
             return Enumerable.Range(0, 20)
                              .Select(s => startDate.AddYears(s).SecondSundayInSeptember())
-                             .Select(i => new SelectListItem()
-                             {
-                                 Text = i.Year.ToString(),
-                                 Value = i.ToString()
+                             .ToList();
+        }
 
-                             }).ToList();
+        public static List<FootballGame> NumberedGames(this List<FootballGame> games)
+        {
+            var orderedGames = games.OrderBy(o => o.GameDate).ToList();
+
+            for (int i = 0; i < orderedGames.Count(); i++)
+            {
+                orderedGames[i].GameId = i + 1;
+            }
+            return orderedGames;
         }
 
         public static DateTime SecondSundayInSeptember(this DateTime date)

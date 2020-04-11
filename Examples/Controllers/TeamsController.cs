@@ -2,7 +2,10 @@
 using Examples.Helpers;
 using Examples.Interfaces;
 using Examples.Managers;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace Website.Controllers
@@ -19,19 +22,20 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
-            var info = _teamsManager.GetGamesInfo(new Random(123) );
+            var sundayList = new List<DateTime>().GetOpeningSundayList();
 
-            return View(info);
+            return View(sundayList);
         }
 
         [HttpPost]
-        [Route("Teams/GetRefreshedGames")]
-        public ActionResult GetRefreshedGames(int seed, DateTime openingSunday)
+        [Route("Teams/GetGamesList")]
+        public ActionResult GetGamesList(int seed, int year, DateTime? customSunday = null)
         {
-            //var _openingDate = DateTime.Parse(openingDate);
-            var info = _teamsManager.GetGamesInfo(new Random(seed), openingSunday);
+            var openingSunday = new DateTime(year, 1, 1).SecondSundayInSeptember(); // Usual start of season
 
-            return PartialView("_Games", info);
+            var info = _teamsManager.GetGamesInfo(new Random(seed), customSunday ?? openingSunday);
+
+            return Json(info);
         }
     }
 }

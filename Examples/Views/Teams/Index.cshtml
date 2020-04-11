@@ -1,42 +1,160 @@
 @using Examples.Models
 
-@model FootballInfo
+@model List<DateTime>
 
-@{ Html.RenderPartial("_Header"); }
+@*<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>*@
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="~/Scripts/global.js"></script>
 <script src="~/Scripts/vue.min.js"></script>
 
+
 <div class="row">
-    <div class="col-md-offset-6 col-md-6">
-        <div class="teamsSeed">
-            <div style="display:inline-block">
-                <span>Seed:</span>
-                <input id="randomSeed" type="number" value="1234" maxlength="4" style="width: 100px;" />
-            </div>
-            <div style="display:inline-block; margin-left: 20px;">
-                 <span>Opening Sunday: </span>
-                 @Html.DropDownListFor(m => m.OpeningSunday, Model.OpeningSundayList, new { id = "openingSunday", @class = "form-control" })
-            </div>
-        </div>
+    <div class="col-md-8">
+        @*<img class="pull-right" style="margin: 20px 0; width:178px; height:215px;" src="~/Content/Images/SeedPacketImage.png" alt="SeedPacket Illustration" />*@
+        <h2>Football Season</h2>
+        <h3 class="byline">Generate The Entire Season!</h3>
+        <p>Created by Will Crowther</p>
     </div>
 </div>
 
 <div id="vueContent">
 
+    <div class="row">
+        <div class="col-md-offset-6 col-md-6">
+            <div class="teamsSeed" v-cloak>
+                <div style="display:inline-block">
+                    <span>Seed:</span>
+                    <input id="randomSeed" v-model="Seed" type="number" @@change="getGameData()" style="width: 100px;" />
+                </div>
+                <div style="display:inline-block; margin-left: 20px;">
+                    <select id="openingSundayId" class="form-control" v-model="Year" @@change="getGameData()">
+                        <option disabled value="">- Please select one -</option>
+                        <option v-for="year in yearList" :value="year.value">{{year.text}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <ul class="nav nav-tabs">
+        <li><a @@click="ActiveTab=0" :class="{'activeTab' : ActiveTab === 0}" style="color: black;">Games By Date</a></li>
         <li><a @@click="ActiveTab=1" :class="{'activeTab' : ActiveTab === 1}" style="color: black;">Games By Week</a></li>
         <li><a @@click="ActiveTab=2" :class="{'activeTab' : ActiveTab === 2}" style="color: black;">Games By Team</a></li>
     </ul>
 
-    @{ Html.RenderPartial("_Games", Model); }
+    <div id="games" class="contentBox">
 
+        <div class="elapsedTime">Generator Elapsed Time is {{ ElapsedTime }} seconds</div>
+
+
+        <div v-if="ActiveTab === 0" id="GamesByWeek" class="gameBox">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table accountTable table-striped topSpace table-collapse">
+                        <thead>
+                            <tr>
+                                <th style="text-align: right;">Home Team</th>
+                                <th style="text-align: center">Date / Time</th>
+                                <th>Visiting Team</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(game,index) in Games" :key="index" v-cloak>
+                                <td>
+                                    <div style="float:left; font-weight: bold; color: #346194;">{{index+1}}</div>
+                                    <div style="text-align:right;">{{ game.HomeTeam.Name }}</div>
+                                </td>
+                                <td style="text-align:center;">{{ jsonDate(game.GameDate,'MMM Do YYYY, h:mm:ss a') }}</td>
+                                <td>{{ game.AwayTeam.Name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div v-if="ActiveTab === 1" id="GamesByWeek" class="gameBox">
+            @*@foreach (var footballWeek in Model.FootballWeeks) {*@
+            <template v-for="(footballWeek, name) in FootballWeeks" :key="i">
+                <!-- note in object... -->
+                <div class="sectionHeader">Week {{ name }}</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table accountTable table-striped topSpace table-collapse">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: right;">Home Team</th>
+                                    <th style="text-align: center">Date</th>
+                                    <th>Visiting Team</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                xxxx
+                                @*@for (int i = 0; i < Model.Count; i++)
+                                            {
+                                        var game = Model[i];
+                                        <tr>
+                                            <td>
+                                                <div style="float:left; font-weight: bold; color: #346194;">@(i + 1)</div>
+                                                <div style="text-align:right;">@game.HomeTeam</div>
+                                            </td>
+                                            <td style="text-align:center;">Week @game.SeasonWeek  ( @game.GameDate.ToString("MM/dd/yyyy h:mm tt") )</td>
+                                            <td>@game.AwayTeam</td>
+                                        </tr>
+                                    }*@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </template>
+            @*}*@
+        </div>
+
+        @*<div v-if="ActiveTab === 2" id="GamesByTeam" class="gameBox">
+                @foreach (var team in Model.TeamGames)
+                {
+                    <div class="sectionHeader">@team.Key</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table accountTable table-striped topSpace table-collapse">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: right;">Home Team</th>
+                                        <th style="text-align: center">Date</th>
+                                        <th>Visiting Team</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.Count; i++)
+                                    {
+                                        var game = Model[i];
+                                        <tr>
+                                            <td>
+                                                <div style="float:left; font-weight: bold; color: #346194;">@(i + 1)</div>
+                                                <div style="text-align:right;">@game.HomeTeam</div>
+                                            </td>
+                                            <td style="text-align:center;">Week @game.SeasonWeek  ( @game.GameDate.ToString("MM/dd/yyyy h:mm tt") )</td>
+                                            <td>@game.AwayTeam</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                }
+            </div>*@
+
+    </div>
 </div>
 
 <script language="javascript" type="text/javascript">
 
-    $(document).ready(function () {
-        Teams.init();
-    });
+    //$(document).ready(function () {
+    //    Teams.init();
+    //});
 
     // =============================================
     // NEW VUE APP
@@ -45,11 +163,61 @@
     const vueApp = new Vue({
         el: '#vueContent',
         data: {
-            ActiveTab: 1
+            ActiveTab: 0,
+            Seed: 1234,
+            FootballWeeks: [],
+            Teams: [],
+            Games: [],
+            ElapsedTime: '',
+            CustomSunday: null,
+            Year: 2020,
+            YearList: []
         },
-        mounted: function () {
-            alert('mounted');
+        mounted: function ()
+        {
+            this.getGameData();
+        },
+        computed:
+        {
+            yearList: function ()
+            {
+                var options = [];
+                var currentYear = new Date().getFullYear()
+                max = currentYear + 10
+
+                for (var year = currentYear - 10; year <= max; year++)
+                {    
+                    var option = { value: year, text: year };
+                    options.push(option);
+                }
+                return options;
+            }
+        },
+        methods:
+        {
+            getGameData: function ()
+            {
+                console.log('getGameData for: ' + this.Year);
+                let self = this;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Teams/GetGamesList',
+                    data: JSON.stringify({ Seed: this.Seed, Year: this.Year }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'JSON', //'html',
+                    success: function (result)
+                    {
+                        //self.Teams = result.Team;
+                        self.Games = result.Games;
+                        self.OpeningSunday = result.OpeningSunday;
+                        self.ElapsedTime = result.ElapsedTime;
+                    }
+                });
+            }
         }
     })
+
+
 
 </script>

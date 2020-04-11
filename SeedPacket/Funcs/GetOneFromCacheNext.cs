@@ -23,7 +23,9 @@ namespace SeedPacket.Functions
         /// </summary>
         public static T GetOneFromCacheNext<T>(this IGenerator generator, dynamic cacheList, bool remove = true)
         {
-            return GetListFromCacheNext<T>(generator, cacheList, 1, 1, remove).SingleOrDefault();
+            List<T> List = cacheList;
+
+            return GetListFromCacheNext<T>(generator, List, 1, 1, remove).SingleOrDefault();
         }
     }
 }

@@ -9,15 +9,19 @@ using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Dynamic;
 using System.Linq;
 using WildHare.Extensions;
 
 namespace Examples.Generators
 {
-    public class FootballGenerator : MultiGenerator
+    // Alternative approach (very slightly faster) that removes some of the work from the dynamic cache as
+    // we know what the structure is in this more specific implementation. Also, uses the generator
+    // code to just create the data as the public properties 'Teams' and 'Games' on the generator instead
+    // of using the exension method approach
+
+    public class FootballGenerator_Alt : MultiGenerator
     {
-        public FootballGenerator( DateTime baseDateTime, string sourceFilepath, Random baseRandom = null) 
+        public FootballGenerator_Alt(DateTime baseDateTime, string sourceFilepath, Random baseRandom = null)
                     : base(sourceFilepath, dataInputType: DataInputType.XmlFile, baseDateTime: baseDateTime, baseRandom: baseRandom)
         {
             // FirstSunday of Football Season
@@ -25,30 +29,26 @@ namespace Examples.Generators
                 throw new Exception("BaseDateTime must be set to the first Sunday of the season.");
         }
 
-        protected override void GetRules(RulesSet ruleSet)
-        {
-            // Rules.AddBasicRules();
-            // Rules.AddCommonRules();
-            AddFootballRules();
-        }
-
         public List<FootballTeam> Teams { get; set; }
 
-        public List<FootballGame> SeasonGames { get; set; }
+        public List<FootballGame> Games { get; set; }
+
+        protected override void GetRules(RulesSet ruleSet)
+        {
+            AddFootballRules();
+        }
 
         public void AddFootballRules()
         {
             var footballRules = new List<Rule>()
             {
-                new Rule(typeof(FootballGame), "", g => GetRandomGame(g), "Get Football Game w/ 2 FootballTeams"),
+                new Rule(typeof(FootballGame), "", g => GetGame(g), "Get Football Game w/ 2 FootballTeams"),
                 new Rule(typeof(FootballTeam), "", g => GetTeam(g), "Get Football Team")
             };
             Rules.AddRange(footballRules, true);
 
             Teams = new List<FootballTeam>().Seed(1, 32, this, "Team").ToList();
-            SeasonGames = GetAllGames(this);
-
-            //SeedEnd = Cache.SeasonGames.Count; // set this to however many games in the season.
+            Games = GetAllGames();
         }
 
         public FootballTeam GetTeam(IGenerator gen)
@@ -56,12 +56,12 @@ namespace Examples.Generators
             return gen.GetObjectNext<FootballTeam>("Team");
         }
 
-        private FootballGame GetRandomGame(IGenerator g)
+        private FootballGame GetGame(IGenerator gen)
         {
-            return SeasonGames.TakeRandomOne(g.RowRandom); 
+            return Games.TakeNextOne();
         }
 
-        private List<FootballGame> GetAllGames(IGenerator g)
+        private List<FootballGame> GetAllGames()
         {
             var games = new List<FootballGame>();
 
@@ -69,7 +69,7 @@ namespace Examples.Generators
             games.AddRange(GenerateInConferenceGames(Teams));
             games.AddRange(GenerateOutOfConferenceGames(Teams));
             games.AddByeWeek(this);
-            // games.NumberGames();
+            games = games.NumberedGames();
 
             return games;
         }
@@ -98,7 +98,6 @@ namespace Examples.Generators
             return divisionGames.ToList().AssignGameDates(GameType.Division, this);
         }
 
-
         public IEnumerable<FootballGame> GenerateInConferenceGames(List<FootballTeam> teams)
         {
             var games = new List<FootballGame>();
@@ -108,7 +107,6 @@ namespace Examples.Generators
 
             return games;
         }
-
 
         public IEnumerable<FootballGame> GenerateOutOfConferenceGames(List<FootballTeam> teams)
         {
@@ -136,7 +134,6 @@ namespace Examples.Generators
         // ===========================================================================================
         // PRIVATE METHODS
         // ===========================================================================================
-
 
         private IEnumerable<FootballGame> GetInConferenceGames_ForEachConference(int confId, List<FootballTeam> teams)
         {

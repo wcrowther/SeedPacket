@@ -134,6 +134,7 @@
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\global.js" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
@@ -279,10 +280,8 @@
     <Content Include="Views\Extending\_ExtendingSeedOneExample.cshtml" />
     <Content Include="Views\Extending\_ExtendingGeneratorExample.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
-    <Content Include="Views\Teams\_Games.cshtml" />
     <Content Include="Views\Teams\Index.cshtml" />
     <Content Include="Views\Home\DynamicView.cshtml" />
-    <Content Include="Views\Teams\_GamesRow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -305,6 +304,7 @@
     <Compile Include="Controllers\RowsController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Generators\FootballGenerator_Alt.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\DistinctBy.cs" />
     <Compile Include="Extensions\FootballSeedExtensions.cs" />
