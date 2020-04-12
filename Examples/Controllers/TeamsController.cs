@@ -28,8 +28,8 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        [Route("Teams/GetGamesList")]
-        public ActionResult GetGamesList(int seed, int year, DateTime? customSunday = null)
+        [Route("Teams/GetFootballInfo")]
+        public ActionResult GetFootballInfo(int seed, int year, DateTime? customSunday = null)
         {
             var openingSunday = new DateTime(year, 1, 1).SecondSundayInSeptember(); // Usual start of season
 
