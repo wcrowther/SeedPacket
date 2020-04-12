@@ -4104,6 +4104,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   line-height: 1.42857143;
   border-radius: 4px 4px 0 0;
   top: 1px;
+  border: 2px solid transparent;
+  border-bottom: 0;
 }
 .nav-tabs > li > a:hover {
   border: #83a8d1 2px solid;
@@ -6833,4 +6835,4 @@ button.close {
     display: none !important;
   }
 }
-/*# sourceMappingURL=bootstrap.css.map */
+/*# sourceMappingURL=bootstrap.css.map */css.map */

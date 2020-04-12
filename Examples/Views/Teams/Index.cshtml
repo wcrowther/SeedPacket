@@ -46,8 +46,10 @@
 
         <div class="elapsedTime">Generator Elapsed Time is {{ ElapsedTime }} seconds</div>
 
-
         <div v-if="ActiveTab === 0" id="GamesByWeek" class="gameBox">
+
+            <div class="sectionHeader">Games</div>
+
             <div class="row">
                 <div class="col-md-12">
                     <table class="table accountTable table-striped topSpace table-collapse">
@@ -76,7 +78,9 @@
         <div v-if="ActiveTab === 1" id="GamesByWeek" class="gameBox">
 
             <template v-for="week in gamesByWeek" :key="week.key">
+
                 <div class="sectionHeader">Week {{ week.key }}</div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <table class="table accountTable table-striped topSpace table-collapse">
@@ -109,6 +113,7 @@
             <template v-for="team in Teams" :key="team.Id">
 
                 <div class="sectionHeader">{{team.Location}} {{team.Name}}</div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <table class="table accountTable table-striped topSpace table-collapse">
@@ -123,10 +128,10 @@
                                 <tr v-for="game in team.games">
                                     <td>
                                         <div style="float:left; font-weight: bold; color: #346194;"></div>
-                                        <div style="text-align:right;">{{game.HomeTeam.Location}} {{game.HomeTeam.Name}}</div>
+                                        <div style="text-align:right;"  :class="{bold: game.HomeTeam.Id === team.Id}">{{game.HomeTeam.Location}} {{game.HomeTeam.Name}}</div>
                                     </td>
                                     <td style="text-align:center;">Week {{game.SeasonWeek}}  ({{ jsonDate(game.GameDate,'MMM Do YYYY, h:mm:ss a') }})</td>
-                                    <td>{{game.AwayTeam.Location}} {{game.AwayTeam.Name}}</td>
+                                    <td  :class="{bold: game.AwayTeam.Id === team.Id}">{{game.AwayTeam.Location}} {{game.AwayTeam.Name}}</td>
                                 </tr>
                             </tbody>
                         </table>

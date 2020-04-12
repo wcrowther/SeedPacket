@@ -17,7 +17,7 @@ namespace Examples.FootballExtensions
         public static List<T> SeedSeason<T>(this IEnumerable<T> iEnumerable, DateTime seasonStartDate, int? randomSeed = null)
         {
 
-            var gen = new FootballGenerator(seasonStartDate, footballSourcePath)
+            var gen = new FootballGenerator_Old(seasonStartDate, footballSourcePath)
             {
                 CustomName = "Game",
                 SeedBegin = 1,

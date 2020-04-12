@@ -15,9 +15,9 @@ using WildHare.Extensions;
 
 namespace Examples.Generators
 {
-    public class FootballGenerator : MultiGenerator
+    public class FootballGenerator_Old : MultiGenerator
     {
-        public FootballGenerator( DateTime baseDateTime, string sourceFilepath, Random baseRandom = null) 
+        public FootballGenerator_Old( DateTime baseDateTime, string sourceFilepath, Random baseRandom = null) 
                     : base(sourceFilepath, dataInputType: DataInputType.XmlFile, baseDateTime: baseDateTime, baseRandom: baseRandom)
         {
             // FirstSunday of Football Season

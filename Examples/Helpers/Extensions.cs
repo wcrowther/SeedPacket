@@ -86,13 +86,22 @@ namespace Examples.Helpers
 
         public static List<FootballGame> AddByeWeek(this List<FootballGame> games, IGenerator g)
         {
+            var byeWeekGames = games.ToList();
+
             for (int i = 2; i <= 16; i++)
             {
-                var gamesInWeek = games.Where(w => w.SeasonWeek == i).ToList();
+                var gamesInWeek = byeWeekGames.Where(w => w.SeasonWeek == i).ToList();
                 var gameFromWeek = gamesInWeek.TakeRandomOne(g.RowRandom);
 
-                gameFromWeek.SeasonWeek = 17;
-                gameFromWeek.GameDate = g.BaseDateTime.AddDays((17 - 1) * 7);
+                if (gameFromWeek != null)
+                {
+                    gameFromWeek.SeasonWeek = 17;
+                    gameFromWeek.GameDate = g.BaseDateTime.AddDays((17 - 1) * 7);
+
+                    // Remove these teams as you can only have one bye week in a season.
+                    byeWeekGames.RemoveAll(r => r.HomeTeam.Id == gameFromWeek.HomeTeam.Id || r.AwayTeam.Id == gameFromWeek.HomeTeam.Id);
+                    byeWeekGames.RemoveAll(r => r.HomeTeam.Id == gameFromWeek.AwayTeam.Id || r.AwayTeam.Id == gameFromWeek.AwayTeam.Id);
+                }
             }
             return games;
         }

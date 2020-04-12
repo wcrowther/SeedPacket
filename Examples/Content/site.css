@@ -215,11 +215,17 @@ li a.activeTab {
         margin-left: 10px;
     }
 
+.bold {
+    font-weight: bold;
+    color: #346193;
+}
+
 @media only screen and (max-width: 992px) {
     .teamsSeed {
         margin-bottom: 20px
     }
 }
+
 
 
 /*  =========================================================================== 
