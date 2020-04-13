@@ -14,14 +14,9 @@ using WildHare.Extensions;
 
 namespace Examples.Generators
 {
-    // Alternative approach (very slightly faster) that removes some of the work from the dynamic cache as
-    // we know what the structure is in this more specific implementation. Also, uses the generator
-    // code to just create the data as the public properties 'Teams' and 'Games' on the generator instead
-    // of using the exension method approach
-
-    public class FootballGenerator_Alt : MultiGenerator
+    public class FootballGenerator : MultiGenerator
     {
-        public FootballGenerator_Alt(DateTime baseDateTime, string sourceFilepath, Random baseRandom = null)
+        public FootballGenerator(DateTime baseDateTime, string sourceFilepath, Random baseRandom = null)
                     : base(sourceFilepath, dataInputType: DataInputType.XmlFile, baseDateTime: baseDateTime, baseRandom: baseRandom)
         {
             // FirstSunday of Football Season
@@ -68,7 +63,7 @@ namespace Examples.Generators
             games.AddRange(GenerateDivisionGames(Teams));
             games.AddRange(GenerateInConferenceGames(Teams));
             games.AddRange(GenerateOutOfConferenceGames(Teams));
-            games.AddByeWeek(this);
+            games.AddByeWeeks(this);
             games = games.NumberedGames();
 
             return games;
@@ -205,7 +200,6 @@ namespace Examples.Generators
                 {
                     HomeTeam = EqualizeVenue(index1, index2, t1, t2),
                     AwayTeam = EqualizeVenue(index1, index2, t2, t1),
-                    GameId = index1,
                     GameType = GameType.InConference,
                 }
             ));
@@ -238,7 +232,6 @@ namespace Examples.Generators
                 {
                     HomeTeam = EqualizeVenue(index1, index2, t1, t2),
                     AwayTeam = EqualizeVenue(index1, index2, t2, t1),
-                    GameId = index1,
                     GameType = GameType.OutOfConference
                 }
             ));

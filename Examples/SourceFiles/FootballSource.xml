@@ -510,38 +510,38 @@
   </Lorems>
   
   <Teams>
-    <Team Location="Buffalo"        Name="Bills"      ConfId="1" Conference="AFC" DivId="1"  Division="East" TeamId="1" />
-    <Team Location="Miami"          Name="Dolphins"   ConfId="1" Conference="AFC" DivId="1"  Division="East" TeamId="2" />
-    <Team Location="New England"    Name="Patriots"   ConfId="1" Conference="AFC" DivId="1"  Division="East" TeamId="3" />
-    <Team Location="New York"       Name="Jets"       ConfId="1" Conference="AFC" DivId="1"  Division="East" TeamId="4" />
-    <Team Location="Baltimore"      Name="Ravens"     ConfId="1" Conference="AFC" DivId="2"  Division="North" TeamId="1" />
-    <Team Location="Cincinnati"     Name="Bengals"    ConfId="1" Conference="AFC" DivId="2"  Division="North" TeamId="2" />
-    <Team Location="Cleveland"      Name="Browns"     ConfId="1" Conference="AFC" DivId="2"  Division="North" TeamId="3" />
-    <Team Location="Pittsburgh"     Name="Steelers"   ConfId="1" Conference="AFC" DivId="2"  Division="North" TeamId="4" />
-    <Team Location="Houston"        Name="Texans"     ConfId="1" Conference="AFC" DivId="3"  Division="South" TeamId="1" />
-    <Team Location="Indianapolis"   Name="Colts"      ConfId="1" Conference="AFC" DivId="3"  Division="South" TeamId="2" />
-    <Team Location="Jacksonville"   Name="Jaguars"    ConfId="1" Conference="AFC" DivId="3"  Division="South" TeamId="3" />
-    <Team Location="Tennessee"      Name="Titans"     ConfId="1" Conference="AFC" DivId="3"  Division="South" TeamId="4" />
-    <Team Location="Denver"         Name="Broncos"    ConfId="1" Conference="AFC" DivId="4"  Division="West" TeamId="1" />
-    <Team Location="Kansas City"    Name="Chiefs"     ConfId="1" Conference="AFC" DivId="4"  Division="West" TeamId="2" />
-    <Team Location="Oakland"        Name="Raiders"    ConfId="1" Conference="AFC" DivId="4"  Division="West" TeamId="3" />
-    <Team Location="Los Angeles"    Name="Chargers"   ConfId="1" Conference="AFC" DivId="4"  Division="West" TeamId="4" />
-    <Team Location="Dallas"         Name="Cowboys"    ConfId="2" Conference="NFC" DivId="1"  Division="East" TeamId="1" />
-    <Team Location="New York"       Name="Giants"     ConfId="2" Conference="NFC" DivId="1"  Division="East" TeamId="2" />
-    <Team Location="Philadelphia"   Name="Eagles"     ConfId="2" Conference="NFC" DivId="1"  Division="East" TeamId="3" />
-    <Team Location="Washington"     Name="Redskins"   ConfId="2" Conference="NFC" DivId="1"  Division="East" TeamId="4" />
-    <Team Location="Chicago"        Name="Bears"      ConfId="2" Conference="NFC" DivId="2"  Division="North" TeamId="1" />
-    <Team Location="Detroit"        Name="Lions"      ConfId="2" Conference="NFC" DivId="2"  Division="North" TeamId="2" />
-    <Team Location="Green Bay"      Name="Packers"    ConfId="2" Conference="NFC" DivId="2"  Division="North" TeamId="3" />
-    <Team Location="Minnesota"      Name="Vikings"    ConfId="2" Conference="NFC" DivId="2"  Division="North" TeamId="4" />
-    <Team Location="Atlanta"        Name="Falcons"    ConfId="2" Conference="NFC" DivId="3"  Division="South" TeamId="1" />
-    <Team Location="Carolina"       Name="Panthers"   ConfId="2" Conference="NFC" DivId="3"  Division="South" TeamId="2" />
-    <Team Location="New Orleans"    Name="Saints"     ConfId="2" Conference="NFC" DivId="3"  Division="South" TeamId="3" />
-    <Team Location="Tampa Bay"      Name="Buccaneers" ConfId="2" Conference="NFC" DivId="3"  Division="South" TeamId="4" />
-    <Team Location="Arizona"        Name="Cardinals"  ConfId="2" Conference="NFC" DivId="4"  Division="West" TeamId="1" />
-    <Team Location="Los Angeles"    Name="Rams"       ConfId="2" Conference="NFC" DivId="4"  Division="West" TeamId="2" />
-    <Team Location="San Francisco"  Name="49ers"      ConfId="2" Conference="NFC" DivId="4"  Division="West" TeamId="3" />
-    <Team Location="Seattle"        Name="Seahawks"   ConfId="2" Conference="NFC" DivId="4"  Division="West" TeamId="4" />
+    <Team Location="Buffalo"        Name="Bills"      ConfId="1" Conference="AFC" DivId="1"  Division="East"  TeamId="1" HomeTimeZone="EDT" />
+    <Team Location="Miami"          Name="Dolphins"   ConfId="1" Conference="AFC" DivId="1"  Division="East"  TeamId="2" HomeTimeZone="EDT" />
+    <Team Location="New England"    Name="Patriots"   ConfId="1" Conference="AFC" DivId="1"  Division="East"  TeamId="3" HomeTimeZone="EDT" />
+    <Team Location="New York"       Name="Jets"       ConfId="1" Conference="AFC" DivId="1"  Division="East"  TeamId="4" HomeTimeZone="EDT" />
+    <Team Location="Baltimore"      Name="Ravens"     ConfId="1" Conference="AFC" DivId="2"  Division="North" TeamId="1" HomeTimeZone="EDT" />
+    <Team Location="Cincinnati"     Name="Bengals"    ConfId="1" Conference="AFC" DivId="2"  Division="North" TeamId="2" HomeTimeZone="EDT" />
+    <Team Location="Cleveland"      Name="Browns"     ConfId="1" Conference="AFC" DivId="2"  Division="North" TeamId="3" HomeTimeZone="EDT" />
+    <Team Location="Pittsburgh"     Name="Steelers"   ConfId="1" Conference="AFC" DivId="2"  Division="North" TeamId="4" HomeTimeZone="EDT" />
+    <Team Location="Houston"        Name="Texans"     ConfId="1" Conference="AFC" DivId="3"  Division="South" TeamId="1" HomeTimeZone="CDT" />
+    <Team Location="Indianapolis"   Name="Colts"      ConfId="1" Conference="AFC" DivId="3"  Division="South" TeamId="2" HomeTimeZone="EDT" />
+    <Team Location="Jacksonville"   Name="Jaguars"    ConfId="1" Conference="AFC" DivId="3"  Division="South" TeamId="3" HomeTimeZone="EDT" />
+    <Team Location="Tennessee"      Name="Titans"     ConfId="1" Conference="AFC" DivId="3"  Division="South" TeamId="4" HomeTimeZone="CDT" />
+    <Team Location="Denver"         Name="Broncos"    ConfId="1" Conference="AFC" DivId="4"  Division="West"  TeamId="1" HomeTimeZone="MDT" />
+    <Team Location="Kansas City"    Name="Chiefs"     ConfId="1" Conference="AFC" DivId="4"  Division="West"  TeamId="2" HomeTimeZone="CDT" />
+    <Team Location="Oakland"        Name="Raiders"    ConfId="1" Conference="AFC" DivId="4"  Division="West"  TeamId="3" HomeTimeZone="PDT" />
+    <Team Location="Los Angeles"    Name="Chargers"   ConfId="1" Conference="AFC" DivId="4"  Division="West"  TeamId="4" HomeTimeZone="PDT" />
+    <Team Location="Dallas"         Name="Cowboys"    ConfId="2" Conference="NFC" DivId="1"  Division="East"  TeamId="1" HomeTimeZone="CDT" />
+    <Team Location="New York"       Name="Giants"     ConfId="2" Conference="NFC" DivId="1"  Division="East"  TeamId="2" HomeTimeZone="EST" />
+    <Team Location="Philadelphia"   Name="Eagles"     ConfId="2" Conference="NFC" DivId="1"  Division="East"  TeamId="3" HomeTimeZone="EDT" />
+    <Team Location="Washington"     Name="Redskins"   ConfId="2" Conference="NFC" DivId="1"  Division="East"  TeamId="4" HomeTimeZone="EDT" />
+    <Team Location="Chicago"        Name="Bears"      ConfId="2" Conference="NFC" DivId="2"  Division="North" TeamId="1" HomeTimeZone="CDT" />
+    <Team Location="Detroit"        Name="Lions"      ConfId="2" Conference="NFC" DivId="2"  Division="North" TeamId="2" HomeTimeZone="EDT" />
+    <Team Location="Green Bay"      Name="Packers"    ConfId="2" Conference="NFC" DivId="2"  Division="North" TeamId="3" HomeTimeZone="CDT" />
+    <Team Location="Minnesota"      Name="Vikings"    ConfId="2" Conference="NFC" DivId="2"  Division="North" TeamId="4" HomeTimeZone="CDT" />
+    <Team Location="Atlanta"        Name="Falcons"    ConfId="2" Conference="NFC" DivId="3"  Division="South" TeamId="1" HomeTimeZone="EDT" />
+    <Team Location="Carolina"       Name="Panthers"   ConfId="2" Conference="NFC" DivId="3"  Division="South" TeamId="2" HomeTimeZone="EDT" />
+    <Team Location="New Orleans"    Name="Saints"     ConfId="2" Conference="NFC" DivId="3"  Division="South" TeamId="3" HomeTimeZone="CDT" />
+    <Team Location="Tampa Bay"      Name="Buccaneers" ConfId="2" Conference="NFC" DivId="3"  Division="South" TeamId="4" HomeTimeZone="EDT" />
+    <Team Location="Arizona"        Name="Cardinals"  ConfId="2" Conference="NFC" DivId="4"  Division="West"  TeamId="1" HomeTimeZone="MST" />
+    <Team Location="Los Angeles"    Name="Rams"       ConfId="2" Conference="NFC" DivId="4"  Division="West"  TeamId="2" HomeTimeZone="PDT" />
+    <Team Location="San Francisco"  Name="49ers"      ConfId="2" Conference="NFC" DivId="4"  Division="West"  TeamId="3" HomeTimeZone="PDT" />
+    <Team Location="Seattle"        Name="Seahawks"   ConfId="2" Conference="NFC" DivId="4"  Division="West"  TeamId="4" HomeTimeZone="PDT" />
   </Teams>
 
 </Root>

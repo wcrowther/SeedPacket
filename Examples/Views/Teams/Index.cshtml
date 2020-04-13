@@ -55,19 +55,26 @@
                     <table class="table accountTable table-striped topSpace table-collapse">
                         <thead>
                             <tr>
-                                <th style="text-align: right;">Home Team</th>
+                                <th style="text-align: right;"></th>
+                                <th>Home Team</th>
                                 <th style="text-align: center">Date / Time</th>
-                                <th>Visiting Team</th>
+                                <th style="text-align: right">Visiting Team</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(game,index) in Games" :key="index" v-cloak>
-                                <td>
-                                    <div style="float:left; font-weight: bold; color: #346194;">{{index+1}}</div>
-                                    <div style="text-align:right;">{{ game.HomeTeam.Name }}</div>
+                                <td style="text-align:right;font-weight: bold; color: #346194;">
+                                    <span style="float: left;">{{index+1}}</span>
+                                    <football-logo :conf-id="game.HomeTeam.ConfId" :div-id="game.HomeTeam.DivId" :team-id="game.HomeTeam.TeamId"></football-logo>
                                 </td>
-                                <td style="text-align:center;">{{ jsonDate(game.GameDate,'MMM Do YYYY, h:mm:ss a') }}</td>
-                                <td>{{ game.AwayTeam.Name }}</td>
+                                <td>{{ game.HomeTeam.Name }}</td>
+                                <td v-if="game.GameType == 4" style="text-align:center;">BYE WEEK</td>
+                                <td v-else style="text-align:center;">{{ jsonDate(game.GameDate,'MMM Do YYYY') }}</td>
+                                <td style="text-align: right;">{{ game.AwayTeam.Name }}</td>
+                                <td>
+                                    <football-logo :conf-id="game.AwayTeam.ConfId" :div-id="game.AwayTeam.DivId" :team-id="game.AwayTeam.TeamId"></football-logo>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -92,12 +99,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="game in week.group" >
+                                <tr v-for="game in week.group">
                                     <td>
                                         <div style="float:left; font-weight: bold; color: #346194;"></div>
                                         <div style="text-align:right;">{{game.HomeTeam.Location}} {{game.HomeTeam.Name}}</div>
                                     </td>
-                                    <td style="text-align:center;">Week {{game.SeasonWeek}}  ({{ jsonDate(game.GameDate,'MMM Do YYYY, h:mm:ss a') }})</td>
+                                    <td v-if="game.GameType == 4" style="text-align:center;">BYE WEEK</td>
+                                    <td v-else style="text-align:center;">{{ jsonDate(game.GameDate,'MMM Do YYYY') }}</td>@*'MMM Do YYYY, h:mm:ss a'*@
                                     <td>{{game.AwayTeam.Location}} {{game.AwayTeam.Name}}</td>
                                 </tr>
                             </tbody>
@@ -126,12 +134,19 @@
                             </thead>
                             <tbody>
                                 <tr v-for="game in team.games">
-                                    <td>
-                                        <div style="float:left; font-weight: bold; color: #346194;"></div>
-                                        <div style="text-align:right;"  :class="{bold: game.HomeTeam.Id === team.Id}">{{game.HomeTeam.Location}} {{game.HomeTeam.Name}}</div>
-                                    </td>
-                                    <td style="text-align:center;">Week {{game.SeasonWeek}}  ({{ jsonDate(game.GameDate,'MMM Do YYYY, h:mm:ss a') }})</td>
-                                    <td  :class="{bold: game.AwayTeam.Id === team.Id}">{{game.AwayTeam.Location}} {{game.AwayTeam.Name}}</td>
+                                    <template v-if="game.GameType === 4">
+                                        <td></td>
+                                        <td style="text-align:center;">BYE WEEK</td>
+                                        <td></td>
+                                    </template>
+                                    <template v-else>
+                                        <td>
+                                            <div style="float:left; font-weight: bold; color: #346194;"></div>
+                                            <div style="text-align:right;" :class="{bold: game.HomeTeam.Id === team.Id}">{{game.HomeTeam.Location}} {{game.HomeTeam.Name}}</div>
+                                        </td>
+                                        <td style="text-align:center;">{{ jsonDate(game.GameDate,'MMM Do YYYY') }}</td>
+                                        <td :class="{bold: game.AwayTeam.Id === team.Id}">{{game.AwayTeam.Location}} {{game.AwayTeam.Name}}</td>
+                                    </template>
                                 </tr>
                             </tbody>
                         </table>
@@ -146,13 +161,14 @@
 
 <script language="javascript" type="text/javascript">
 
-    //$(document).ready(function () {
-    //    Teams.init();
-    //});
-
-    // =============================================
-    // NEW VUE APP
-    // =============================================
+Vue.component('test-component', {
+  data: function () {
+    return {
+      count: 555
+    }
+  },
+  template: '<div>{count}</div>'
+})
 
 const vueApp = new Vue({
     el: '#vueContent',
@@ -167,10 +183,32 @@ const vueApp = new Vue({
         Year: 2020,
         YearList: []
     },
-    mounted: function ()
-    {
+    mounted: function () {
         this.getFootballInfo();
-        //this.gamesByTeam();
+    },
+    components:
+    {
+        footballLogo:
+        {
+            template: `<span class="football-Logo"  :style="styleObject"></span>`,
+            props:
+            {
+                confId: { type: Number, required: true },
+                divId:  { type: Number, required: true },
+                teamId: { type: Number, required: true }
+            },
+            computed:
+            {
+                styleObject: function ()
+                {
+                    var x = (this.divId-1) * 30;
+                    var y = (this.teamId - 1) * 25;
+                    x = (this.confId === 2) ? x + 120 : x;
+
+                    return { backgroundPosition: `-${x}px -${y}px` };
+                }
+            }
+        }
     },
     computed:
     {
@@ -221,7 +259,7 @@ const vueApp = new Vue({
 
                    for (var i = 0; i < self.Teams.length; i++)
                    {
-                        let team = self.Teams[i];
+                        var team = self.Teams[i];
 
                        self.Teams[i].games = self.Games.filter(g => g.HomeTeam.Id === team.Id ||
                            g.AwayTeam.Id === team.Id);
@@ -233,12 +271,11 @@ const vueApp = new Vue({
         {
             for (var i = 0; i < this.Teams.length; i++)
             {
-                let team = Teams[i];
+                var team = Teams[i];
 
                 this.Teams[i].games = this.Games.filter(g => g.HomeTeam.Id === team.Id || 
                                                              g.AwayTeam.Id === team.Id)
             }
-            console.log(this.Teams);
         }
     }
 })

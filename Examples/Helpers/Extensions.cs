@@ -84,24 +84,23 @@ namespace Examples.Helpers
             return games;
         }
 
-        public static List<FootballGame> AddByeWeek(this List<FootballGame> games, IGenerator g)
+        public static List<FootballGame> AddByeWeeks(this List<FootballGame> games, IGenerator g)
         {
+            // Currently makes bye weeks from the 2nd week to the 16th week then takes the remainng
+            // 6 teams and adds them randomly. This could easily change based on anothe pattern. 
+            // Teams are taken out of the list so they can only have one bye week a season
+
             var byeWeekGames = games.ToList();
 
             for (int i = 2; i <= 16; i++)
             {
-                var gamesInWeek = byeWeekGames.Where(w => w.SeasonWeek == i).ToList();
-                var gameFromWeek = gamesInWeek.TakeRandomOne(g.RowRandom);
+                AddByeWeek(games, g, byeWeekGames, i);
+            }
 
-                if (gameFromWeek != null)
-                {
-                    gameFromWeek.SeasonWeek = 17;
-                    gameFromWeek.GameDate = g.BaseDateTime.AddDays((17 - 1) * 7);
-
-                    // Remove these teams as you can only have one bye week in a season.
-                    byeWeekGames.RemoveAll(r => r.HomeTeam.Id == gameFromWeek.HomeTeam.Id || r.AwayTeam.Id == gameFromWeek.HomeTeam.Id);
-                    byeWeekGames.RemoveAll(r => r.HomeTeam.Id == gameFromWeek.AwayTeam.Id || r.AwayTeam.Id == gameFromWeek.AwayTeam.Id);
-                }
+            while (byeWeekGames.Count > 0) // Add bye weeks games from remaining teams
+            {
+                var seasonWeek = byeWeekGames.First().SeasonWeek;
+                AddByeWeek(games, g, byeWeekGames, seasonWeek);
             }
             return games;
         }
@@ -161,10 +160,42 @@ namespace Examples.Helpers
             if (date == null)
                 throw new Exception("SecondSundayInSeptember - Date cannot be null");
 
-            return new DateTime(date.Year, 9, 1).NextDayOfWeek(DayOfWeek.Sunday, true).AddDays(7);
+            return new DateTime(date.Year, 9, 1, 13, 0, 0).NextDayOfWeek(DayOfWeek.Sunday, true).AddDays(7);
         }
 
+        // =================================================================================
+
+        private static void AddByeWeek(List<FootballGame> games, IGenerator g, List<FootballGame> byeWeekGames, int i)
+        {
+            var gamesInWeek = byeWeekGames.Where(w => w.SeasonWeek == i).ToList();
+            var gameFromWeek = gamesInWeek.TakeRandomOne(g.RowRandom);
+
+            if (gameFromWeek != null)
+            {
+                // Add new Week 17 ga
+                games.Add(new FootballGame
+                {
+                    SeasonWeek = 17,
+                    GameDate = g.BaseDateTime.AddDays((17 - 1) * 7),
+                    HomeTeam = gameFromWeek.HomeTeam,
+                    AwayTeam = gameFromWeek.AwayTeam,
+                    GameType = gameFromWeek.GameType,
+                    SeasonStartYear = gameFromWeek.SeasonStartYear
+                });
+
+                // Make game from week a Bye for both teams
+                gameFromWeek.GameType = GameType.Bye;
+
+                // Remove these teams as you can only have one bye week in a season.
+                byeWeekGames.RemoveAll(r => r.HomeTeam.Id == gameFromWeek.HomeTeam.Id || r.AwayTeam.Id == gameFromWeek.HomeTeam.Id);
+                byeWeekGames.RemoveAll(r => r.HomeTeam.Id == gameFromWeek.AwayTeam.Id || r.AwayTeam.Id == gameFromWeek.AwayTeam.Id);
+            }
+        }
+
+        // =================================================================================
         // TODO - MOVE TO WILDHARE
+        // =================================================================================
+
         public static DateTime NextDayOfWeek(this DateTime date, DayOfWeek dayOfWeek, bool includeCurrentDate = false)
         {
             if (includeCurrentDate && date.DayOfWeek == dayOfWeek)
@@ -173,7 +204,10 @@ namespace Examples.Helpers
             return date.AddDays(7 - (int)date.DayOfWeek);
         }
 
+        // =================================================================================
         // NOT SURE THIS IS WORKING...
+        // =================================================================================
+
         public static Random Skip(this Random random, int number )
         {
             if (number < 0) number = 0;

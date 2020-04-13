@@ -19,7 +19,7 @@ namespace Examples.Managers
             
             var stopwatch = Stopwatch.StartNew();
 
-            var gen = new FootballGenerator_Alt (footballInfo.OpeningSunday, footballSource, random);
+            var gen = new FootballGenerator (footballInfo.OpeningSunday, footballSource, random);
             // var games = new List<FootballGame>().Seed(gen); 
 
             stopwatch.Stop();

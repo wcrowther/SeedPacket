@@ -118,6 +118,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\grid.css" />
     <Content Include="Content\Images\favicon.png" />
+    <Content Include="Content\Images\NFL-Logos-50-percent.png" />
+    <Content Include="Content\Images\NFL-Logos.png" />
     <Content Include="Content\Images\SeedPacket shadows.png" />
     <Content Include="Content\Images\SeedPacketImage.png" />
     <Content Include="Content\Images\seedpacket_Icon.png" />
@@ -304,12 +306,12 @@
     <Compile Include="Controllers\RowsController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Generators\FootballGenerator_Alt.cs" />
+    <Compile Include="Generators\FootballGenerator.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\DistinctBy.cs" />
     <Compile Include="Extensions\FootballSeedExtensions.cs" />
     <Compile Include="Extensions\CustomSeedExtensions.cs" />
-    <Compile Include="Generators\FootballGenerator.cs" />
+    <Compile Include="Generators\FootballGenerator_Old.cs" />
     <Compile Include="Generators\CustomGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

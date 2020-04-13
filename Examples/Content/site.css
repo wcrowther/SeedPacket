@@ -220,6 +220,14 @@ li a.activeTab {
     color: #346193;
 }
 
+.football-Logo {
+    display: inline-block;
+    width: 30px;
+    height: 25px;
+    background-image: url('../Content/images/NFL-Logos-50-percent.png');
+    background-repeat: no-repeat;
+}
+
 @media only screen and (max-width: 992px) {
     .teamsSeed {
         margin-bottom: 20px

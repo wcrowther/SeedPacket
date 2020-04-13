@@ -68,7 +68,7 @@ namespace Examples.Generators
             games.AddRange(GenerateDivisionGames(Teams));
             games.AddRange(GenerateInConferenceGames(Teams));
             games.AddRange(GenerateOutOfConferenceGames(Teams));
-            games.AddByeWeek(this);
+            games.AddByeWeeks(this);
             // games.NumberGames();
 
             return games;
