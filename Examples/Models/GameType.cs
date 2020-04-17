@@ -5,7 +5,7 @@ namespace Examples.Models
     {
         Division,
         InConference,
-        ExtraConference,
+        ExtraInConference,
         OutOfConference,
         Bye
     }

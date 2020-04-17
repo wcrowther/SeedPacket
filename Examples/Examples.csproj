@@ -118,6 +118,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\grid.css" />
     <Content Include="Content\Images\favicon.png" />
+    <Content Include="Content\Images\NFL-Logos-25-percent.png" />
     <Content Include="Content\Images\NFL-Logos-50-percent.png" />
     <Content Include="Content\Images\NFL-Logos.png" />
     <Content Include="Content\Images\SeedPacket shadows.png" />
@@ -306,6 +307,9 @@
     <Compile Include="Controllers\RowsController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Exceptions\InvalidShortGameType.cs" />
+    <Compile Include="Exceptions\InvalidWeekSequenceLength.cs" />
+    <Compile Include="Exceptions\InvalidWeekSequence.cs" />
     <Compile Include="Generators\FootballGenerator.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\DistinctBy.cs" />

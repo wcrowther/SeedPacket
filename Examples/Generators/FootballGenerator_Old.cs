@@ -193,7 +193,7 @@ namespace Examples.Generators
 
             //----------------------------------------------------------------------------------------
 
-            return games.AssignGameDates(GameType.ExtraConference, this);
+            return games.AssignGameDates(GameType.ExtraInConference, this);
         }
 
         private IEnumerable<FootballGame> GetInConferenceGames_DivisionVsDivision(int confId, List<FootballTeam> teams, int firstDiv, int secondDiv)
@@ -225,7 +225,7 @@ namespace Examples.Generators
                    {
                        HomeTeam = home,
                        AwayTeam = away,
-                       GameType = GameType.ExtraConference,
+                       GameType = GameType.ExtraInConference,
                        SeasonStartYear = BaseDateTime.Year
                    };
         }

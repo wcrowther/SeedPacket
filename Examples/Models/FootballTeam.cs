@@ -41,7 +41,7 @@ namespace Examples.Models
         }
 
         [XmlIgnore]
-        public List<ScheduleSlot> Schedule { get; set; } = new List<ScheduleSlot>().GetBaseSlots();
+        public List<ScheduleSlot> Schedule { get; set; } = new List<ScheduleSlot>();
 
         public override string ToString()
         {

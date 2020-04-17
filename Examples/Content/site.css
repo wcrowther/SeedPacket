@@ -173,6 +173,9 @@ code i {
 .topSpace {
     margin-top: 15px;
 }
+.bottomSpace {
+    margin-bottom: 30px;
+}
 
 
 
@@ -220,12 +223,26 @@ li a.activeTab {
     color: #346193;
 }
 
-.football-Logo {
+.football-logo-small,
+.football-logo-medium,
+.football-logo-large {
     display: inline-block;
     width: 30px;
     height: 25px;
-    background-image: url('../Content/images/NFL-Logos-50-percent.png');
+    background-image: url('../Content/images/NFL-Logos-25-percent.png');
     background-repeat: no-repeat;
+    vertical-align: middle;
+}
+.football-logo-medium  {
+    width: 60px;
+    height: 50px;
+    background-image: url('../Content/images/NFL-Logos-50-percent.png');
+
+}
+.football-logo-large {
+    width: 120px;
+    height: 100px;
+    background-image: url('../Content/images/NFL-Logos.png');
 }
 
 @media only screen and (max-width: 992px) {
@@ -264,7 +281,7 @@ table thead {
 }
 @media only screen and (max-width: 800px) {
     .table-collapse {
-        display: block;
+        /* display: block; */
         overflow-y: hidden;
         overflow-x: scroll;
         width: 100%;

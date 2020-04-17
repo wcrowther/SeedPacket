@@ -23,7 +23,7 @@ namespace Examples.Helpers
 
                     break;
                 }
-                    catch (Exception ex)
+                catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
                 }
@@ -105,33 +105,6 @@ namespace Examples.Helpers
             return games;
         }
 
-        public static List<ScheduleSlot> GetBaseSlots(this List<ScheduleSlot> list)
-        {
-            if (list.Count != 0)
-                return list;
-
-            list.AddRange(new List<ScheduleSlot>
-                    {
-                        new ScheduleSlot{ GameType = GameType.OutOfConference, SeasonWeek = 1 },
-                        new ScheduleSlot{ GameType = GameType.InConference, SeasonWeek = 2 },
-                        new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 3 },
-                        new ScheduleSlot{ GameType = GameType.InConference, SeasonWeek = 4 },
-                        new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 5 },
-                        new ScheduleSlot{ GameType = GameType.OutOfConference, SeasonWeek = 6 },
-                        new ScheduleSlot{ GameType = GameType.ExtraConference, SeasonWeek = 7 },
-                        new ScheduleSlot{ GameType = GameType.InConference, SeasonWeek = 8 },
-                        new ScheduleSlot{ GameType = GameType.OutOfConference, SeasonWeek = 9 },
-                        new ScheduleSlot{ GameType = GameType.ExtraConference, SeasonWeek = 10 },
-                        new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 11 },
-                        new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 12 },
-                        new ScheduleSlot{ GameType = GameType.InConference, SeasonWeek = 13 },
-                        new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 14 },
-                        new ScheduleSlot{ GameType = GameType.OutOfConference, SeasonWeek = 15 },
-                        new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 16 },
-                    });
-
-            return list;
-        }
 
         public static List<DateTime> GetOpeningSundayList(this List<DateTime> list)
         {
@@ -202,6 +175,14 @@ namespace Examples.Helpers
                 return date;
 
             return date.AddDays(7 - (int)date.DayOfWeek);
+        }
+
+        public static int[] ToIntArray(this string str, bool strict = false)
+        {
+            string intStr = strict ?  str : str.NumbersOnly(",-");
+            int[] intArray = intStr.Split(',').Select(s => s.Trim().ToInt()).ToArray();
+
+            return intArray;
         }
 
         // =================================================================================
