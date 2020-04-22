@@ -199,13 +199,13 @@ code i {
     text-align: center;
     font-size: 12px;
     font-family: 'Merriweather', serif;
+    letter-spacing: 1px;
     font-weight: bold;
     margin: auto;
     position: relative;
     top: 12px;
     border: solid 1px #ccc;
     border-radius: 20px;
-    font-weight: bold;
 }
 .team-box {
     height: 50px;
