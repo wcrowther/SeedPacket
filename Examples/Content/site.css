@@ -16,10 +16,10 @@ html, body {
     font-family: 'Merriweather', serif;
 }
  h2, .h2 {
-    margin-top: 30px;
+    margin-top: 50px;
     margin-bottom: 4px;
-    font-size: 40px;
-    font-weight: 500;
+    font-size: 40px; 
+    font-weight: 500;   
 }
  p, ul, li {
     font-weight: 100;
@@ -186,22 +186,25 @@ code i {
     user-select: none;
     z-index: 3000;
 }
-.league-box {
-    margin-bottom: 0;
-}
-.league-box {
-    margin-bottom: 10px;
-}
 .conference-box {
     margin-bottom: 30px;
+    /* background-color: #ccc; */
+    border: 1px #ccc solid;
+    padding: 20px 0 15px 0;
 }
 .conference-box-title {
-    background-color: #83a8d1;
+    background-color: #ffffff;
+    width: 50px;
     padding: 4px;
     text-align: center;
-    margin: 10px 0; 
-    font-size: 21px;
+    font-size: 12px;
     font-family: 'Merriweather', serif;
+    font-weight: bold;
+    margin: auto;
+    position: relative;
+    top: 12px;
+    border: solid 1px #ccc;
+    border-radius: 20px;
     font-weight: bold;
 }
 .team-box {
@@ -220,10 +223,9 @@ nav.navTabs li a {
     color: black;
     border: solid 2px transparent;
 }
-.contentBox {
-    margin-top: 20px;
+.gameBox {
+    margin-top: 10px;
 }
-.gameBox { }
 li a.activeTab {
     border: solid 2px #83a8d1;
     border-bottom: none;
