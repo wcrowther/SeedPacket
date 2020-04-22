@@ -46,7 +46,7 @@
 
     <div class="row gameBox" v-if="ActiveTab == 0" id="GamesByWeek">
         <div class="col-xs-12 sectionHeader">Games</div>
-        <div class="col-md-12">
+        <div class="sectionContent">
             <table class="table table-striped topSpace table-collapse">
                 <thead>
                     <tr>
@@ -77,8 +77,8 @@
 
     <div class="row gameBox" v-if="ActiveTab == 1" id="GamesByWeek">
         <template v-for="week in gamesByWeek">
-            <div class="col-xs-12 sectionHeader" :key="week.key">Week {{ week.key }}</div>
-            <div class="col-md-12">
+            <div class="sectionHeader" :key="week.key">Week {{ week.key }}</div>
+            <div class="sectionContent">
                 <table class="table table-striped topSpace table-collapse">
                     <thead>
                         <tr>
@@ -110,29 +110,30 @@
 
     <div v-if="ActiveTab == 2" id="GamesByTeam" class="row gameBox">
 
-        <div class="col-sm-6">
-            <div class="conference-box-title">AFC</div>
-            <div class="conference-box clearfix">
-                <div v-for="team in teamsByConference(1)" class="col-xs-3 team-box">
-                    <football-icon size="medium" :team="team" @@show-team="setActiveTeam"></football-icon>
+        <div style="clear: both;">
+            <div class="col-sm-6">
+                <div class="conference-box-title">AFC</div>
+                <div class="conference-box clearfix">
+                    <div v-for="team in teamsByConference(1)" class="col-xs-3 team-box">
+                        <football-icon size="medium" :team="team" @@show-team="setActiveTeam"></football-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="conference-box-title">NFC</div>
+                <div class="conference-box clearfix">
+                    <div v-for="team in teamsByConference(2)" class="col-xs-3 team-box" v-bind:key="team.Id">
+                        <football-icon size="medium" :team="team" @@show-team="setActiveTeam"></football-icon>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="conference-box-title">NFC</div>
-            <div class="conference-box clearfix">
-                <div v-for="team in teamsByConference(2)" class="col-xs-3 team-box" v-bind:key="team.Id">
-                    <football-icon size="medium" :team="team" @@show-team="setActiveTeam"></football-icon>
-                </div>
-            </div>
-        </div>
-
         <template v-for="team in Teams">
             <div class="col-xs-12 sectionHeader" :key="team.Id">
                 <football-icon size="medium" :team="team"></football-icon>
                 {{team.Location}} {{team.Name}}
             </div>
-            <div class="col-md-12">
+            <div>
                 <table class="table table-striped topSpace bottomSpace table-collapse">
                     <thead>
                         <tr>
