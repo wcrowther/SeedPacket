@@ -9,19 +9,28 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-<div class="mainContent">
+    <div class="mainContent">
 
-    @{ Html.RenderPartial("_NavBar"); }
-    <div class="container body-content">
-        @RenderBody()
-        <hr style="clear: both;" />
-        <footer>
-            <p>&copy; @DateTime.Now.Year Will Crowther - SeedPacket</p>
-        </footer>
+        @{ Html.RenderPartial("_NavBar"); }
+        <div class="container body-content">
+            @RenderBody()
+            <hr style="clear: both;" />
+            <footer>
+                <p>&copy; @DateTime.Now.Year Will Crowther - SeedPacket</p>
+            </footer>
+        </div>
+        @if (Request.IsLocal || Request["ShowScreenSize"] == "bootstrap")
+        { // DEV only: show viewport size indicator in bootstrap units
+            <div class="badge badge-warning-light widget">
+                <div class="visible-xs">xs</div>
+                <div class="visible-sm">sm</div>
+                <div class="visible-md">md</div>
+                <div class="visible-lg">lg</div>
+            </div>
+        }
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/ScriptApp")
+        @RenderSection("scripts", required: false)
     </div>
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/ScriptApp")
-    @RenderSection("scripts", required: false)
-</div>
 </body>
 </html>

@@ -16,10 +16,10 @@ html, body {
     font-family: 'Merriweather', serif;
 }
  h2, .h2 {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 4px;
-    font-size: 40px; 
-    font-weight: 500;   
+    font-size: 40px;
+    font-weight: 500;
 }
  p, ul, li {
     font-weight: 100;
@@ -176,7 +176,39 @@ code i {
 .bottomSpace {
     margin-bottom: 30px;
 }
-
+.widget {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    color: darkred;
+    background-color: #f3d36a;
+    margin: 10px 5px;
+    user-select: none;
+    z-index: 3000;
+}
+.league-box {
+    margin-bottom: 0;
+}
+.league-box {
+    margin-bottom: 10px;
+}
+.conference-box {
+    margin-bottom: 30px;
+}
+.conference-box-title {
+    background-color: #83a8d1;
+    padding: 4px;
+    text-align: center;
+    margin: 10px 0; 
+    font-size: 21px;
+    font-family: 'Merriweather', serif;
+    font-weight: bold;
+}
+.team-box {
+    height: 50px;
+    text-align:center;
+    vertical-align: middle;
+}
 
 
 /*  =========================================================================== 
@@ -189,7 +221,7 @@ nav.navTabs li a {
     border: solid 2px transparent;
 }
 .contentBox {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 .gameBox { }
 li a.activeTab {
@@ -213,6 +245,7 @@ li a.activeTab {
     background-color: #ccc;
     padding: 10px;
     font-weight: bold;
+    margin-bottom: 20px;
 }
     .teamsSeed input {
         margin-left: 10px;
@@ -223,9 +256,9 @@ li a.activeTab {
     color: #346193;
 }
 
-.football-logo-small,
-.football-logo-medium,
-.football-logo-large {
+.football-icon-small,
+.football-icon-medium,
+.football-icon-large {
     display: inline-block;
     width: 30px;
     height: 25px;
@@ -233,13 +266,12 @@ li a.activeTab {
     background-repeat: no-repeat;
     vertical-align: middle;
 }
-.football-logo-medium  {
+.football-icon-medium {
     width: 60px;
     height: 50px;
     background-image: url('../Content/images/NFL-Logos-50-percent.png');
-
 }
-.football-logo-large {
+.football-icon-large {
     width: 120px;
     height: 100px;
     background-image: url('../Content/images/NFL-Logos.png');
@@ -250,7 +282,6 @@ li a.activeTab {
         margin-bottom: 20px
     }
 }
-
 
 
 /*  =========================================================================== 
