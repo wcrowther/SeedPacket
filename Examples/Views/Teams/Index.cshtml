@@ -15,6 +15,11 @@
             @*<img class="pull-right" style="margin: 20px 0; width:178px; height:215px;" src="~/Content/Images/SeedPacketImage.png" alt="SeedPacket Illustration" />*@
             <h2>NFL Season Generator</h2>
             <h3 class="byline">for the entire {{ Year }} season!</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="elapsedTime pull-right"><span class="hidden-xs">Generator Elapsed Time is </span>{{ ElapsedTime }} secs</div>
             <p>Created by Will Crowther</p>
         </div>
     </div>
@@ -26,9 +31,10 @@
                     <span>Seed:</span>
                     <input id="randomSeed" v-model="Seed" type="number" @@change="getFootballInfo()" style="width: 100px;" />
                 </div>
+                <div style="display:inline-block; margin-left: 20px;">Year:</div>
                 <div style="display:inline-block; margin-left: 20px;">
                     <select id="openingSundayId" class="form-control" v-model="Year" @@change="getFootballInfo()">
-                        <option disabled value="">- Please select one -</option>
+                        <option disabled value="">- Select one -</option>
                         <option v-for="year in yearList" :value="year.value">{{year.text}}</option>
                     </select>
                 </div>
@@ -36,7 +42,7 @@
         </div>
     </div>
 
-    <div class="elapsedTime pull-right"><span class="hidden-xs">Generator Elapsed Time is </span>{{ ElapsedTime }} secs</div>
+    <button id="team-show-all" v-show="ActiveTab == 2" class="bubble" @@click="setActiveTeam()" :disable="true">Show All</button>
 
     <ul class="nav nav-tabs">
         <li><a @@click="activeTab=0" :class="{'activeTab' : ActiveTab == 0}" style="color: black;">By Date</a></li>
@@ -44,9 +50,9 @@
         <li><a @@click="activeTab=2" :class="{'activeTab' : ActiveTab == 2}" style="color: black;">By Team</a></li>
     </ul>
 
-    <div class="row gameBox" v-if="ActiveTab == 0" id="GamesByWeek">
+    <div class="row gameBox" v-if="ActiveTab == 0" id="GamesByDate" v-cloak>
         <div class="col-xs-12 sectionHeader">Games</div>
-        <div class="sectionContent">
+        <div class="col-xs-12 sectionContent">
             <table class="table table-striped topSpace table-collapse">
                 <thead>
                     <tr>
@@ -75,10 +81,10 @@
         </div>
     </div>
 
-    <div class="row gameBox" v-if="ActiveTab == 1" id="GamesByWeek">
+    <div class="row gameBox" v-if="ActiveTab == 1" id="GamesByWeek" v-cloak>
         <template v-for="week in gamesByWeek">
-            <div class="sectionHeader" :key="week.key">Week {{ week.key }}</div>
-            <div class="sectionContent">
+            <div class="col-xs-12 sectionHeader" :key="week.key">Week {{ week.key }}</div>
+            <div class="col-xs-12 sectionContent">
                 <table class="table table-striped topSpace table-collapse">
                     <thead>
                         <tr>
@@ -108,32 +114,31 @@
         </template>
     </div>
 
-    <div v-if="ActiveTab == 2" id="GamesByTeam" class="row gameBox">
+    <div v-if="ActiveTab == 2" id="GamesByTeam" class="row gameBox" v-cloak>
 
-        <div style="clear: both;">
-            <div class="col-sm-6">
-                <div class="conference-box-title">AFC</div>
-                <div class="conference-box clearfix">
-                    <div v-for="team in teamsByConference(1)" class="col-xs-3 team-box">
-                        <football-icon size="medium" :team="team" @@show-team="setActiveTeam"></football-icon>
+        <div class="col-xs-12 topSpace bottomSpace">
+            <div class="col-xs-6 conference-box row-no-gutters" style="border-left: 0;">
+                <div v-for="divId in 4" class="col-xs-3">
+                    <div v-for="team in teamsByConference(1, divId)" class="col-sm-3 col-md-6 col-sm-3 col-lg-3 team-box">
+                        <football-icon size="small" :team="team" @@show-team="setActiveTeam"></football-icon>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="conference-box-title">NFC</div>
-                <div class="conference-box clearfix">
-                    <div v-for="team in teamsByConference(2)" class="col-xs-3 team-box" v-bind:key="team.Id">
-                        <football-icon size="medium" :team="team" @@show-team="setActiveTeam"></football-icon>
+            <div class="col-xs-6 conference-box row-no-gutters" style="border-right: 0;">
+                <div v-for="divId in 4" class="col-xs-3">
+                    <div v-for="team in teamsByConference(2, divId)" class="col-sm-3 col-md-6 col-sm-3 col-lg-3 team-box">
+                        <football-icon size="small" :team="team" @@show-team="setActiveTeam"></football-icon>
                     </div>
                 </div>
             </div>
         </div>
-        <template v-for="team in Teams">
-            <div class="col-xs-12 sectionHeader" :key="team.Id">
-                <football-icon size="medium" :team="team"></football-icon>
-                {{team.Location}} {{team.Name}}
+
+        <template v-for="team in Teams" v-if="ActiveTeam ? team.Id == ActiveTeam.Id : true">
+            <div class="col-xs-6 sectionHeader" :key="team.Id">
+                <football-icon size="medium" :team="team"></football-icon> &nbsp; {{team.Location}} {{team.Name}}
             </div>
-            <div>
+            <div class="col-xs-6 sectionHeader team-conf-div">{{team.Conference}} {{team.Division}}</div>
+            <div class="col-xs-12">
                 <table class="table table-striped topSpace bottomSpace table-collapse">
                     <thead>
                         <tr>
@@ -171,31 +176,31 @@
 const vueApp = new Vue({
     el: '#vueContent',
     data: {
-        Cookie: getCookie('activeTab', 0),
+        CookieDuration: 7,
         ActiveTab: 0,
         Seed: 1234,
         FootballWeeks: [],
         Teams: [],
+        ActiveTeam: {},
         Games: [],
         ElapsedTime: '',
         CustomSunday: null,
         Year: 2020,
-        YearList: [],
-        CookieDuration: 7
+        YearList: []
     },
     mounted: function ()
     {
         this.getFootballInfo();
-        this.ActiveTab = this.Cookie;
+        this.ActiveTab = getCookie('activeTab', 0);
     },
     components:
     {
         footballIcon :
         {
-            template: `<span :class="classObject" :style="styleObject" @@click="$emit('show-team', team)" :title="teamName"></span>`,
+            template: `<span :class="classObject" :style="styleObject" @@click="showTeam(team)" :title="teamName"></span>`,
             props:
             {
-                team:  { type: Object, required: true },
+                team:   { type: Object, required: true, default: null },
                 size:   { type: String,
                           default: 'small',
                           validator: (prop) => [
@@ -205,6 +210,13 @@ const vueApp = new Vue({
                           ].includes(prop)
                         }
             },
+            methods:
+            {
+                showTeam: function (team)
+                {
+                    this.$emit('show-team', team);
+                }
+            },
             computed:
             {
                 classObject: function ()
@@ -213,7 +225,7 @@ const vueApp = new Vue({
                 },
                 teamName: function ()
                 {
-                    return `${this.team.Location} ${this.team.Name} ${this.team.Id}`
+                    return `${this.team.Location} ${this.team.Name} - ${this.team.Conference} ${this.team.Division}`
                 },
                 styleObject: function ()
                 {
@@ -234,7 +246,7 @@ const vueApp = new Vue({
                         return { width: 30, height: 25 };
                 }
             }
-        }
+        } 
     },
     computed:
     {
@@ -299,7 +311,10 @@ const vueApp = new Vue({
         },
         setActiveTeam: function (team)
         {
-            console.log(`${team.Location} ${team.Name} are active`);
+            if (typeof team === 'undefined' || team === null)
+                this.ActiveTeam = null;
+            else
+                this.ActiveTeam = team;
         },
         getFootballInfo: function ()
         {
@@ -318,6 +333,9 @@ const vueApp = new Vue({
                     self.Games = result.Games;
                     self.OpeningSunday = result.OpeningSunday;
                     self.ElapsedTime = result.ElapsedTime;
+                    
+                    if (self.Teams)
+                        self.ActiveTeam = self.Teams[0];
 
                    for (var i = 0; i < self.Teams.length; i++)
                    {
@@ -339,9 +357,9 @@ const vueApp = new Vue({
                                                              g.AwayTeam.Id === team.Id)
             }
         },
-        teamsByConference: function (confId)
+        teamsByConference: function (confId, divId)
         {
-            return this.Teams.filter( g => g.ConfId === confId);
+            return this.Teams.filter( g => g.ConfId === confId && g.DivId === divId);
         }
     }
 })

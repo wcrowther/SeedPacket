@@ -31,10 +31,18 @@ html, body {
     font-weight: bold;
 }
 
-/* Set padding to keep content from hitting the edges */
+.removeMargin {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+/*  Set padding to keep content from hitting the edges
+    ALSO SETS MIN-WIDTH TO 450px
+*/
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    min-width: 430px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -186,38 +194,13 @@ code i {
     user-select: none;
     z-index: 3000;
 }
-.conference-box {
-    margin-bottom: 30px;
-    /* background-color: #ccc; */
-    border: 1px #ccc solid;
-    padding: 20px 0 15px 0;
-}
-.conference-box-title {
-    background-color: #ffffff;
-    width: 50px;
-    padding: 4px;
-    text-align: center;
-    font-size: 12px;
-    font-family: 'Merriweather', serif;
-    letter-spacing: 1px;
-    font-weight: bold;
-    margin: auto;
-    position: relative;
-    top: 12px;
-    border: solid 1px #ccc;
-    border-radius: 20px;
-}
-.team-box {
-    height: 50px;
-    text-align:center;
-    vertical-align: middle;
-}
 
 
 /*  =========================================================================== 
     Team Page
 =========================================================================== */
-.navTabs {}
+.navTabs {
+}
 
 nav.navTabs li a {
     color: black;
@@ -278,6 +261,57 @@ li a.activeTab {
     height: 100px;
     background-image: url('../Content/images/NFL-Logos.png');
 }
+
+.conference-box {
+    /* background-color: white; */
+}
+.conference-box-title {
+    background-color: #ffffff;
+    width: 50px;
+    padding: 4px;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'Merriweather', serif;
+    letter-spacing: 1px;
+    font-weight: bold;
+    margin: auto;
+    position: relative;
+    top: 12px;
+    border: solid 1px #ccc;
+    border-radius: 20px;
+}
+.team-box {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0px;
+    min-width: 30px;
+    /*background-color: #e4e4e4;*/
+}
+.bubble {
+    padding: 4px 15px 3px 15px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin: auto;
+    border: solid 2px #83a8d1;
+    border-radius: 20px;
+    outline: 0;
+    line-height: 16px;
+}
+    .bubble:hover {
+        background-color: #b0cdec;
+
+    }
+.team-conf-div {
+    text-align: right;
+    line-height: 46px;
+}
+#team-show-all {
+    margin-top: 2px;
+    float: right;
+}
+
+
 
 @media only screen and (max-width: 992px) {
     .teamsSeed {
