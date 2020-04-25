@@ -75,13 +75,31 @@ namespace Examples.Helpers
                         //  $"({game.AwayTeam.Name}: {string.Join(" ", game.AwayTeam.Schedule.Where(w => w.GameType == gameType).Select(s => s.SeasonWeek)) }) ");
 
                         game.SeasonWeek = gameWeek;
-                        game.GameDate = g.BaseDateTime.AddDays((gameWeek - 1) * 7);
+                        game.GameDate =  GetDateByWeekAndLocation(g, game.HomeTeam, gameWeek); //g.BaseDateTime.AddDays((gameWeek - 1) * 7); 
                         game.HomeTeam.Schedule.RemoveAll(r => r.SeasonWeek == gameWeek);
                         game.AwayTeam.Schedule.RemoveAll(r => r.SeasonWeek == gameWeek);
                     }
                 }
             }
             return games;
+        }
+
+        private static DateTime GetDateByWeekAndLocation(IGenerator g, FootballTeam homeTeam, int gameWeek)
+        {
+            var date = g.BaseDateTime.AddDays((gameWeek - 1) * 7);
+
+            int offsetTime;
+            switch (homeTeam.TimeZone)
+            {
+                case "EDT": offsetTime = 0; break;
+                case "CDT": offsetTime = 1; break;
+                case "MDT": offsetTime = 2; break;
+                case "MST": offsetTime = 2; break;
+                case "PDT": offsetTime = 3; break;
+                default: throw new InvalidTimeZoneException($"{homeTeam.Location} {homeTeam.Name}");
+            }
+
+            return date.AddHours(offsetTime);
         }
 
         public static List<FootballGame> AddByeWeeks(this List<FootballGame> games, IGenerator g)

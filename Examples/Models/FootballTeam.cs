@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Examples.Models
 {
@@ -32,6 +33,9 @@ namespace Examples.Models
         public string Division { get; set; }
 
         public int TeamId { get; set; }
+
+        [StringLength(3)]
+        public string TimeZone { get; set; }
 
         [XmlIgnore]
         public int Rank
