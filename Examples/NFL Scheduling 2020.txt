@@ -3,7 +3,7 @@
 NFL Scheduling 2020
 
 A) Each team plays 16 games over 17 weeks
-B) There are 32 team x 16 games for a total of 256 regular games a year
+B) There are 32 team x 16 games for a total of 256 regular games a year (272 games if you include bye week)
 C) Conferences and Divisions
 
     1.1) AFC East
