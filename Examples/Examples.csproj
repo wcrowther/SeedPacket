@@ -311,6 +311,7 @@
     <Compile Include="Controllers\RowsController.cs" />
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Exceptions\InvalidTimeZoneException.cs" />
     <Compile Include="Exceptions\InvalidShortGameType.cs" />
     <Compile Include="Exceptions\InvalidWeekSequenceLength.cs" />
     <Compile Include="Exceptions\InvalidWeekSequence.cs" />
@@ -319,7 +320,6 @@
     <Compile Include="Helpers\DistinctBy.cs" />
     <Compile Include="Extensions\FootballSeedExtensions.cs" />
     <Compile Include="Extensions\CustomSeedExtensions.cs" />
-    <Compile Include="Generators\FootballGenerator_Old.cs" />
     <Compile Include="Generators\CustomGenerator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
