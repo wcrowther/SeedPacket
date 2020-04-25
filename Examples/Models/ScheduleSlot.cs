@@ -5,7 +5,7 @@ namespace Examples.Models
     {
         public int SeasonWeek { get; set; }
 
-        public GameType GameType { get; set; } // Intra, Out, Division, Extra
+        public GameType GameType { get; set; } // In, Out, Division, Extra
 
         public override string ToString()
         {

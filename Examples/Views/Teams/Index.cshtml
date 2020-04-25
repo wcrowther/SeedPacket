@@ -148,15 +148,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="game in team.games">
+                        <tr v-for="(game,index) in team.games">
                             <template v-if="game.GameType === 4">
-                                <td></td>
+                                <td>{{index + 1}}</td>
                                 <td style="text-align:center;">BYE WEEK</td>
                                 <td></td>
                             </template>
                             <template v-else>
                                 <td>
-                                    <div style="float:left; font-weight: bold; color: #346194;"></div>
+                                    <div style="float:left; font-weight: bold; color: #346194;">{{index + 1}}</div>
                                     <div style="text-align:right;" :class="{bold: game.HomeTeam.Id === team.Id}">{{game.HomeTeam.Location}} {{game.HomeTeam.Name}}</div>
                                 </td>
                                 <td style="text-align:center;">{{ jDate(game.GameDate) }} {{game.GameType==0 ? '*':''}}</td>

@@ -1,4 +1,3 @@
-using Examples.Exceptions;
 using Examples.Extensions;
 using Examples.Helpers;
 using Examples.Models;
@@ -10,14 +9,15 @@ using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Linq;
 using WildHare.Extensions;
 
 namespace Examples.Generators
 {
-    public class FootballGenerator : MultiGenerator
+    public class FootballGenerator_Old : MultiGenerator
     {
-        public FootballGenerator(DateTime baseDateTime, string sourceFilepath, Random baseRandom = null)
+        public FootballGenerator_Old( DateTime baseDateTime, string sourceFilepath, Random baseRandom = null) 
                     : base(sourceFilepath, dataInputType: DataInputType.XmlFile, baseDateTime: baseDateTime, baseRandom: baseRandom)
         {
             // FirstSunday of Football Season
@@ -25,44 +25,43 @@ namespace Examples.Generators
                 throw new Exception("BaseDateTime must be set to the first Sunday of the season.");
         }
 
-        private List<ScheduleSlot> ScheduleSlots = GetScheduleSlots();
-
-        public List<FootballTeam> Teams { get; set; }
-
-        public List<FootballGame> Games { get; set; }
-
         protected override void GetRules(RulesSet ruleSet)
         {
+            // Rules.AddBasicRules();
+            // Rules.AddCommonRules();
             AddFootballRules();
         }
 
-        private void AddFootballRules()
+        public List<FootballTeam> Teams { get; set; }
+
+        public List<FootballGame> SeasonGames { get; set; }
+
+        public void AddFootballRules()
         {
             var footballRules = new List<Rule>()
             {
-                new Rule(typeof(FootballGame), "", g => GetGame(g), "Get Football Game w/ 2 FootballTeams"),
+                new Rule(typeof(FootballGame), "", g => GetRandomGame(g), "Get Football Game w/ 2 FootballTeams"),
                 new Rule(typeof(FootballTeam), "", g => GetTeam(g), "Get Football Team")
             };
             Rules.AddRange(footballRules, true);
 
             Teams = new List<FootballTeam>().Seed(1, 32, this, "Team").ToList();
-            Games = GetAllGames();
+            SeasonGames = GetAllGames(this);
+
+            //SeedEnd = Cache.SeasonGames.Count; // set this to however many games in the season.
         }
 
-        private FootballTeam GetTeam(IGenerator gen)
+        public FootballTeam GetTeam(IGenerator gen)
         {
-            var team = gen.GetObjectNext<FootballTeam>("Team");
-            team.Schedule = ScheduleSlots.ToList(); // ToList makes it a copy...
-
-            return team;
+            return gen.GetObjectNext<FootballTeam>("Team");
         }
 
-        private FootballGame GetGame(IGenerator gen)
+        private FootballGame GetRandomGame(IGenerator g)
         {
-            return Games.TakeNextOne();
+            return SeasonGames.TakeRandomOne(g.RowRandom); 
         }
 
-        private List<FootballGame> GetAllGames()
+        private List<FootballGame> GetAllGames(IGenerator g)
         {
             var games = new List<FootballGame>();
 
@@ -70,7 +69,7 @@ namespace Examples.Generators
             games.AddRange(GenerateInConferenceGames(Teams));
             games.AddRange(GenerateOutOfConferenceGames(Teams));
             games.AddByeWeeks(this);
-            games = games.NumberedGames();
+            // games.NumberGames();
 
             return games;
         }
@@ -93,11 +92,12 @@ namespace Examples.Generators
                         HomeTeam = home,
                         AwayTeam = away,
                         GameType = GameType.Division,
-                        SeasonStartYear = BaseDateTime.Year,
+                        SeasonStartYear = BaseDateTime.Year
                     };
 
             return divisionGames.ToList().AssignGameDates(GameType.Division, this);
         }
+
 
         public IEnumerable<FootballGame> GenerateInConferenceGames(List<FootballTeam> teams)
         {
@@ -108,6 +108,7 @@ namespace Examples.Generators
 
             return games;
         }
+
 
         public IEnumerable<FootballGame> GenerateOutOfConferenceGames(List<FootballTeam> teams)
         {
@@ -136,41 +137,6 @@ namespace Examples.Generators
         // PRIVATE METHODS
         // ===========================================================================================
 
-        private static List<ScheduleSlot> GetScheduleSlots(string weekSequence = null)
-        {
-            var list = new List<ScheduleSlot>();
-
-            string defaultSequence = "i,d,i,d,o,e,d,o,e,i,d,i,d,o,d,o";  //"o,i,d,i,d,o,e,i,o,e,d,d,i,d,o,d";
-            string sequence = weekSequence.IsNullOrEmpty() ? defaultSequence : weekSequence;
-            var shortTypes = sequence.Split(',').Select(s => s.Trim()).ToArray();
-
-            if (shortTypes.Length != 16)
-            {
-                throw new InvalidWeekSequenceLength();
-            }
-
-            if (shortTypes.Where(w => w == "d").Count() != 6 || shortTypes.Where(w => w == "i").Count() != 4 ||
-                shortTypes.Where(w => w == "e").Count() != 2 || shortTypes.Where(w => w == "o").Count() != 4)
-            {
-                throw new InvalidWeekSequence();
-            }
-
-            for (int i = 1; i <= 16; i++)
-            {
-                GameType gameType;
-                switch (shortTypes[i-1].ToLower())
-                {
-                    case "d": gameType = GameType.Division; break;
-                    case "i": gameType = GameType.InConference; break;
-                    case "e": gameType = GameType.ExtraInConference; break;
-                    case "o": gameType = GameType.OutOfConference; break;
-                    default:  throw new InvalidShortGameType();
-                }
-
-                list.Add(new ScheduleSlot { GameType = gameType, SeasonWeek = i });
-            }
-            return list;
-        }
 
         private IEnumerable<FootballGame> GetInConferenceGames_ForEachConference(int confId, List<FootballTeam> teams)
         {
@@ -242,6 +208,7 @@ namespace Examples.Generators
                 {
                     HomeTeam = EqualizeVenue(index1, index2, t1, t2),
                     AwayTeam = EqualizeVenue(index1, index2, t2, t1),
+                    GameId = index1,
                     GameType = GameType.InConference,
                 }
             ));
@@ -274,6 +241,7 @@ namespace Examples.Generators
                 {
                     HomeTeam = EqualizeVenue(index1, index2, t1, t2),
                     AwayTeam = EqualizeVenue(index1, index2, t2, t1),
+                    GameId = index1,
                     GameType = GameType.OutOfConference
                 }
             ));
@@ -297,63 +265,12 @@ namespace Examples.Generators
             };
             return game;
         }
+
     }
+
 }
-
-// ====================================================
-// CODE NO LONGER USED (BUT POTENTIALLY USEFUL)
-// ====================================================
-
 
 //var divisions = teams.GroupBy(x => new { x.ConfId, x.DivId })
 //                     .ToDictionary(x => x.Key, x => x.ToList());
-
-
-//private int[] weekSequence = { 1, 2 };
-//
-//public int[] WeekSequence
-//{
-//    get { return weekSequence; }
-//    set { ValidateWeekSequence(value); }
-//}
-//
-//private void ValidateWeekSequence(int[] value)
-//{
-//    int[] val = value.OrderBy(o => o).ToArray();
-//    int[] test = Enumerable.Range(1, 16).ToArray();
-//    bool invalid = !test.SequenceEqual(val);
-//
-//    if (invalid)
-//        throw new Exception("Not able to set WeekSequence as it is invalid. It must contain " +
-//            "ints 1-16 in any order. Game 17 is currently determined by the Bye week.");
-//
-//    weekSequence = value;
-//}
-
-
-//public static List<ScheduleSlot> GetScheduleSlots()
-//{
-//    var list = new List<ScheduleSlot>
-//            {
-//                new ScheduleSlot{ GameType = GameType.OutOfConference, SeasonWeek = 1 },
-//                new ScheduleSlot{ GameType = GameType.InConference, SeasonWeek = 2 },
-//                new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 3 },
-//                new ScheduleSlot{ GameType = GameType.InConference, SeasonWeek = 4 },
-//                new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 5 },
-//                new ScheduleSlot{ GameType = GameType.OutOfConference, SeasonWeek = 6 },
-//                new ScheduleSlot{ GameType = GameType.ExtraInConference, SeasonWeek = 7 },
-//                new ScheduleSlot{ GameType = GameType.InConference, SeasonWeek = 8 },
-//                new ScheduleSlot{ GameType = GameType.OutOfConference, SeasonWeek = 9 },
-//                new ScheduleSlot{ GameType = GameType.ExtraInConference, SeasonWeek = 10 },
-//                new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 11 },
-//                new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 12 },
-//                new ScheduleSlot{ GameType = GameType.InConference, SeasonWeek = 13 },
-//                new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 14 },
-//                new ScheduleSlot{ GameType = GameType.OutOfConference, SeasonWeek = 15 },
-//                new ScheduleSlot{ GameType = GameType.Division, SeasonWeek = 16 },
-//            };
-
-//    return list;
-//}
 
 

@@ -102,21 +102,23 @@ namespace Examples.Helpers
             return date.AddHours(offsetTime);
         }
 
-        public static List<FootballGame> AddByeWeeks(this List<FootballGame> games, IGenerator g, int scheduleByeWeek)
+        public static List<FootballGame> AddByeWeeks(this List<FootballGame> games, IGenerator g)
         {
-            // Randomly take games and adds them to the scheduleBye(b) week so that the games are spread over the whole season.
+            // Currently makes bye weeks from the 2nd week to the 16th week then takes the remainng
+            // 6 teams and adds them randomly. This could easily change based on anothe pattern. 
+            // Teams are taken out of the list so they can only have one bye week a season
 
-            var byeWeekGames = games.Where(w => w.GameType != GameType.Bye).ToList();
+            var byeWeekGames = games.ToList();
 
             for (int i = 2; i <= 16; i++)
             {
-                AddByeWeek(games, g, scheduleByeWeek, byeWeekGames, i);
+                AddByeWeek(games, g, byeWeekGames, i);
             }
 
             while (byeWeekGames.Count > 0) // Add bye weeks games from remaining teams
             {
                 var seasonWeek = byeWeekGames.First().SeasonWeek;
-                AddByeWeek(games, g, scheduleByeWeek, byeWeekGames, seasonWeek);
+                AddByeWeek(games, g, byeWeekGames, seasonWeek);
             }
             return games;
         }
@@ -154,11 +156,8 @@ namespace Examples.Helpers
 
         // =================================================================================
 
-        private static void AddByeWeek(List<FootballGame> games, IGenerator g, int scheduleByeWeek, List<FootballGame> byeWeekGames, int i)
+        private static void AddByeWeek(List<FootballGame> games, IGenerator g, List<FootballGame> byeWeekGames, int i)
         {
-            if (scheduleByeWeek == i)
-                return;
-
             var gamesInWeek = byeWeekGames.Where(w => w.SeasonWeek == i).ToList();
             var gameFromWeek = gamesInWeek.TakeRandomOne(g.RowRandom);
 
@@ -167,7 +166,7 @@ namespace Examples.Helpers
                 // Add new Week 17 ga
                 games.Add(new FootballGame
                 {
-                    SeasonWeek = scheduleByeWeek,
+                    SeasonWeek = 17,
                     GameDate = g.BaseDateTime.AddDays((17 - 1) * 7),
                     HomeTeam = gameFromWeek.HomeTeam,
                     AwayTeam = gameFromWeek.AwayTeam,

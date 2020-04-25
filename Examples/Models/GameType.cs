@@ -4,7 +4,7 @@ namespace Examples.Models
     public enum GameType
     {
         Division,
-        IntraConference,
+        InConference,
         ExtraInConference,
         OutOfConference,
         Bye
