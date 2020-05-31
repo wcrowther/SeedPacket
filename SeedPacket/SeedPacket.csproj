@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;net471</TargetFrameworks>
     <Authors>Will Crowther</Authors>
-    <Version>3.0.5.3</Version>
+    <Version>3.0.6.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageIconUrl>http://www.seedpacket.net/Content/Images/favicon.png</PackageIconUrl>
-    <FileVersion>3.0.5.3</FileVersion>
-    <AssemblyVersion>3.0.5.3</AssemblyVersion>
+    <FileVersion>3.0.6.0</FileVersion>
+    <AssemblyVersion>3.0.6.0</AssemblyVersion>
     <PackageReleaseNotes>3.0.5.3 Has been updated to accommodate changes to the WildHare dependency.</PackageReleaseNotes>
     <Description>SeedPacket 3.0 (BETA) adds a .seed() method onto IEnumerable for the quick seeding of data. Designed to be a part of your LINQ workflow, it quick generates and populates many IEnumerable list types with realistic data. Ex: var mylist = new List&lt;Item&gt;().Seed().
 

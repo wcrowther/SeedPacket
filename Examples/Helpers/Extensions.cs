@@ -1,4 +1,3 @@
-
 using Examples.Models;
 using SeedPacket.Interfaces;
 using System;
@@ -12,7 +11,6 @@ namespace Examples.Helpers
 {
     public static class Extensions 
     {
-
         public static List<FootballGame> AssignGameDates(this List<FootballGame> games, GameType gameType, IGenerator g, int maxTries = 20)
         {
             for (int i = 1; i <= maxTries; i++)

@@ -1,8 +1,6 @@
-using Examples.Generators;
 using System;
 using System.Collections.Generic;
 using Examples.Helpers;
-using System.Web.Mvc;
 
 namespace Examples.Models
 {

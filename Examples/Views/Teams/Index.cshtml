@@ -17,6 +17,7 @@
             <h3 class="byline">for the entire {{ Year }} season!</h3>
         </div>
     </div>
+
     <div class="row">
         <div class="col-xs-12">
             <div class="elapsedTime pull-right"><span class="hidden-xs">Generator Elapsed Time is </span>{{ ElapsedTime }} secs</div>
@@ -43,6 +44,8 @@
     </div>
 
     <button id="team-show-all" v-show="ActiveTab == 2" class="bubble" @@click="setActiveTeam()" :disable="true">Show All</button>
+
+    <button id="testButton" @@click="showTestButtonId()" >TestButton</button>
 
     <ul class="nav nav-tabs">
         <li><a @@click="activeTab=0" :class="{'activeTab' : ActiveTab == 0}" style="color: black;">By Date</a></li>
@@ -301,7 +304,11 @@ const vueApp = new Vue({
     },
     methods:
     {
-        jDate: function(date, format)
+        showTestButtonId: function ()
+        {
+            alert(event.currentTarget.id);
+        },
+        jDate: function (date, format)
         {
             format = typeof format === 'undefined' ? 'h:mm a MMM Do YYYY' : format;
 

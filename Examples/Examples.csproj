@@ -155,6 +155,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\axios.min.map" />
     <Content Include="Scripts\axios.map" />
+    <None Include="Properties\PublishProfiles\Publish to Smarter.Asp.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -252,9 +253,9 @@
     <Content Include="SourceFiles\seedsource.xml" />
     <Content Include="SourceFiles\sourceData2.xml" />
     <EmbeddedResource Include="SourceFiles\XmlGeneratorSource.xml" />
-    <EmbeddedResource Include="SourceFiles\FootballSource.xml">
+    <Content Include="SourceFiles\FootballSource.xml">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
+    </Content>
     <Content Include="SourceFiles\xmlSeedSourcePlus.xml" />
     <Content Include="Views\Generator\_GeneratorCustomizingExample.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -312,6 +313,7 @@
     <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Exceptions\InvalidShortGameType.cs" />
+    <Compile Include="Exceptions\InvalidTimeZoneException.cs" />
     <Compile Include="Exceptions\InvalidWeekSequenceLength.cs" />
     <Compile Include="Exceptions\InvalidWeekSequence.cs" />
     <Compile Include="Generators\FootballGenerator.cs" />
