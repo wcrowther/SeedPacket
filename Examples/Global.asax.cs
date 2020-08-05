@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,12 @@ namespace Examples
             JsonConvert.DefaultSettings = (() =>
             {
                 var settings = new JsonSerializerSettings();
-                settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                settings.Converters.Add(
+                    new StringEnumConverter
+                    {
+                        NamingStrategy = new CamelCaseNamingStrategy()
+                    }
+                );
                 return settings;
             });
         }

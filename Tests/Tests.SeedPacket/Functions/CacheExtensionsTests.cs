@@ -6,7 +6,6 @@ using SeedPacket.Generators;
 using System.Collections.Generic;
 using System.Linq;
 using System.Dynamic;
-using Microsoft.CSharp;
 using Examples.Models;
 using WildHare.Extensions;
 
