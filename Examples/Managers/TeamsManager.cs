@@ -5,6 +5,7 @@ using SeedPacket.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Web.Hosting;
 
@@ -12,6 +13,8 @@ namespace Examples.Managers
 {
     public class TeamsManager : ITeamsManager
     {
+
+        // MAKE CORE COMPATIBLE
         public FootballInfo GetGamesInfo(Random random = null, DateTime? openingDate = null)
         {
             var footballInfo = new FootballInfo(openingDate);
@@ -20,12 +23,11 @@ namespace Examples.Managers
             var stopwatch = Stopwatch.StartNew();
 
             var gen = new FootballGenerator (footballInfo.OpeningSunday, footballSource, random);
-            // var games = new List<FootballGame>().Seed(gen); 
 
             stopwatch.Stop();
 
-            footballInfo.Teams = gen.Teams; //gen.Cache.FootballTeams; 
-            footballInfo.Games = gen.Games;  //games.ToList();        
+            footballInfo.Teams = gen.Teams; 
+            footballInfo.Games = gen.Games;       
 
             footballInfo.ElapsedTime    = stopwatch.Elapsed.TotalSeconds.ToString("#.0000");
             Debug.WriteLine($"ElapsedTime: { footballInfo.ElapsedTime }");
@@ -34,7 +36,6 @@ namespace Examples.Managers
         }
     }
 }
-
 
 // ========================================================================
 // NO LONGER USED BUT AN INTERESTING SAMPLE

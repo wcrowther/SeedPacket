@@ -11,14 +11,14 @@ namespace Tests.SeedPacket.Core
     public class SimpleSeedTests
     {
         private string pathToTestXmlFile;
-        private string xmlFile = @"SimpleSeedSource.xml";
-        private string testEmptyXml = @"<SimpleSeedTests></SimpleSeedTests>";
-        private string testValidXml = @"<SimpleSeedTests>
-                                            <FirstName>Bob</FirstName>
-                                            <FirstName>Will</FirstName>
-                                            <FirstName>John</FirstName>
-                                            <FirstName>Joe</FirstName>
-                                        </SimpleSeedTests>";
+        private readonly string xmlFile = @"SimpleSeedSource.xml";
+        private readonly string testEmptyXml = @"<SimpleSeedTests></SimpleSeedTests>";
+        private readonly string testValidXml = @"<SimpleSeedTests>
+                                                    <FirstName>Bob</FirstName>
+                                                    <FirstName>Will</FirstName>
+                                                    <FirstName>John</FirstName>
+                                                    <FirstName>Joe</FirstName>
+                                                </SimpleSeedTests>";
         [SetUp]
         public void Setup()
         {

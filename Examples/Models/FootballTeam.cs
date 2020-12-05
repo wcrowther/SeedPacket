@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
 
 namespace Examples.Models
 {
@@ -49,7 +50,12 @@ namespace Examples.Models
 
         public override string ToString()
         {
-            return $"{Location} {Name} {Id}";
+            return base.ToString();
         }
+
+        //public override string ToString()
+        //{
+        //    return $"{Location} {Name} {Id}";
+        //}
     }
 }

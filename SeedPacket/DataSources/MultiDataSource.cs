@@ -63,7 +63,7 @@ namespace SeedPacket.DataSources
                 dataSource = GetDataSource("xml");
                 dataSource.LoadDefaultData();
             }
-            else  // if DataInputType.Auto determine best option
+            else  // if DataInputType.Auto determine best option between JSON and XML
             {
                 AutoSource();
             }
@@ -97,6 +97,7 @@ namespace SeedPacket.DataSources
 
         // PRIVATE METHODS ======================================
 
+        // AutoSource only works with Json & Xml. CSV must be directly selected.
         private void AutoSource()
         {
             if (sourceFilePath != null && sourceString != null)
@@ -139,17 +140,10 @@ namespace SeedPacket.DataSources
                     }
                     catch
                     {
-                        try
-                        {
-                            dataSource = GetDataSource("csv");
-                            dataSource.Parse(sourceString);
-                        }
-                        catch
-                        {
-                            throw new InvalidSourceException();
-                        }
+                       throw new InvalidSourceException();
                     }
                 }
+
             }
             else
             {

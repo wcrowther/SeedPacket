@@ -1,11 +1,15 @@
 using SeedPacket.DataSources;
 using SeedPacket.Interfaces;
 using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.Threading;
 
 namespace SeedPacket.Generators
 {
     public class MultiGenerator : Generator, IGenerator 
     {
+        readonly CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
 
         public MultiGenerator(  string sourceFilepath = null,
                                 string sourceString = null, 
@@ -29,6 +33,8 @@ namespace SeedPacket.Generators
 
         protected virtual void GetRules (RulesSet ruleSet)
         {
+            Debug.WriteLine($"CurrentCulture: {currentCulture.Name}");
+
             switch (ruleSet)
             {
                 case RulesSet.None:
@@ -39,10 +45,24 @@ namespace SeedPacket.Generators
                     break;
                 case RulesSet.Common:
                     Rules.AddBasicRules();
-                    Rules.AddCommonRules();
+                    AddCommonRulesByCulture(Rules);
                     break;
                 default:
                     throw new NotImplementedException("For use in a derived custom Generator");
+            }
+        }
+
+        private void AddCommonRulesByCulture(IRules rules)
+        {
+
+            switch (currentCulture.Name)
+            {
+                case "en-US": Rules.AddCommonRules(); break;
+
+                // case "en-GB": Rules.AddCommonRules(); break;
+                // Potentially other languages
+
+                default: Rules.AddCommonRules(); break;
             }
         }
     }

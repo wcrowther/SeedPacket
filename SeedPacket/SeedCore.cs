@@ -24,15 +24,21 @@ namespace SeedPacket
 
             if (generator.CustomName != null)
             {
-                iEnumerable = CreateValueTypeList<T>(); // for simple value type like string[] or int[] where CustomName is used for Rule selector.
+                // for simple value type like string[] or int[] where CustomName is used for Rule selector.
+
+                iEnumerable = CreateValueTypeList<T>(); 
             }
-            else if (typeof(T).GetConstructor(Type.EmptyTypes) != null) // for complex types w/ no CustomName
+            else if (typeof(T).GetConstructor(Type.EmptyTypes) != null) 
             {
+                // for complex types w/ no CustomName
+
                 iEnumerable = CreateComplexTypeList<T>();
             }
             else
             {
-                iEnumerable = CreateValueTypeList<T>();  // for simpleTypes
+                // for simpleTypes
+
+                iEnumerable = CreateValueTypeList<T>();  
             }
 
             DebugWrite("-", 25);
@@ -209,7 +215,6 @@ namespace SeedPacket
             DebugWrite("Begin Seed Creation for Type: " + name);
             DebugWrite("-", 25);
         }
-
 
         private void DebugWrite(string str, int repeat = 1)
         {

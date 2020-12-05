@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using WildHare;
 using WildHare.Extensions;
@@ -9,15 +9,17 @@ namespace SeedPacket.Interfaces
     {
         IRules Rules { get; }
 
-        // Seed Range
         int SeedBegin { get; set; }
 
         int SeedEnd { get; set; }
 
-        // Base 
         Random BaseRandom { get; set; }
 
         DateTime BaseDateTime { get; set; }
+
+        int BaseListCount { get; set; }
+
+        int BaseListDepth { get; set; }
 
         bool Debugging { get; set; }
 

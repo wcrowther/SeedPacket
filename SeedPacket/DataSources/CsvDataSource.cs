@@ -1,18 +1,14 @@
 
 using SeedPacket.Exceptions;
-using SeedPacket.Functions;
 using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Web;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Serialization;
+using System.Threading;
 using WildHare.Extensions;
 
 namespace SeedPacket.DataSources
@@ -20,7 +16,9 @@ namespace SeedPacket.DataSources
     public class CsvDataSource : IDataSource
     {
         private MultiDimensionalList<string,string> sourceData;
-        private const string defaultCsv = "SeedPacket.Source.CsvGeneratorSource.csv";
+        private readonly CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+
+        private const string itemSeparator = ".";
 
         public CsvDataSource()
         {
@@ -65,7 +63,7 @@ namespace SeedPacket.DataSources
             try
             {
                 var a = Assembly.GetExecutingAssembly();
-                using (var stream = a.GetManifestResourceStream(defaultCsv))
+                using (var stream = a.GetManifestResourceStream(GetDefaultCsvResource()))
                 using (var reader = new StreamReader(stream))
                 {
                     string result = reader.ReadToEnd();
@@ -89,54 +87,78 @@ namespace SeedPacket.DataSources
 
         public List<T> GetObjectList<T>(string identifier) where T : class, new()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
 
             //--------------------------------------------------------------------------------------
             // TODO - Currently this code only does one item and is not in a loop. Need to fix that.
             //--------------------------------------------------------------------------------------
             // ALSO - Consider using WildHare GetStart and GetEnd
-            // ALSO - Implement * for empty cell
+            // ALSO - Implement null for empty cell
             // ALSO - Tests around quoted and not quoted values particularily when they contain quotes
             // ALSO - Once they are working. Refactor MultiDimensionalList ??
 
-            //if (sourceData != null && !identifier.IsNullOrEmpty())
-            //{
-            //    var itemObjectList = sourceData.Where(w => w.Key.StartsWith($"{identifier}_"));
+            var list = new List<T>();
 
-            //    var instance = new T();
-            //    foreach (var property in typeof(T).GetMetaProperties())
-            //    {
-            //        var propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+            if (sourceData == null || identifier.IsNullOrEmpty())
+                return list;
 
-            //        var itemValuesList = itemObjectList.SingleOrDefault(w => w.Key.EndsWith($"_{property.Name}")).Value;
-            //        var value = itemValuesList?.ElementAtOrDefault(0);
-            //        try
-            //        {
-            //            if (value != null)
-            //            {
-            //                if (property.CanWrite)
-            //                {
-            //                    property.SetInstanceValue(instance, Convert.ChangeType(value, propertyType));
-            //                }
-            //            }
-            //        }
-            //        catch (Exception ex) // If Error let the value remains default for that property type
-            //        {
-            //            Debug.WriteLine($"Not able to parse CSV value {value} for type '{property.PropertyType}'" +
-            //                            $" for property {property.Name}. Ex: {ex.Message}");
-            //        }
-            //    }
-            //}
-            //return new List<T>();
+            var objectList = sourceData.Where(w => w.Key.StartsWith($"{identifier}{itemSeparator}"));
+            var maxRows = objectList.Max(m => m.Value.Count);
+
+            for (int i = 0; i <= maxRows-1; i++)
+            {
+                var row = new T();
+                foreach (var property in row.GetMetaProperties())
+                {
+                    var propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+                    var itemValuesList = objectList.SingleOrDefault(w => w.Key.EndsWith($"{itemSeparator}{property.Name}")).Value;
+                    var value = itemValuesList?.ElementAtOrDefault(i);
+                    try
+                    {
+                        if (value != null)
+                        {
+                            if (property.CanWrite)
+                            {
+                                property.SetInstanceValue(Convert.ChangeType(value, propertyType));
+                            }
+                        }
+                    }
+                    catch (Exception ex) // If Error let the value remains default for that property type
+                    {
+                        Debug.WriteLine($"Not able to parse CSV value {value} for type '{property.PropertyType}'" +
+                                        $" for property {property.Name}. Ex: {ex.Message}");
+                    }
+                }
+                list.Add(row);
+            }
+            return list;
         }
 
-        // source: https ://stackoverflow.com/questions/2081418/parsing-csv-files-in-c-with-header
-        // source: https: //stackoverflow.com/questions/1596530/multi-dimensional-arraylist-or-list-in-c
-        // ONLINE XML to CSV Converter: https: //json-csv.com/xml
-
-        private MultiDimensionalList<string,string> CSVHelper(string csv, char separator = ',')
+        private string GetDefaultCsvResource()
         {
-            string[] removeArray = {"\"", "\n", "\n\r", "\"\r" };
+            string sourceName;
+
+            switch (currentCulture.Name)
+            {
+                case "en-US": sourceName = "SeedPacket.Source.CsvGeneratorSource.csv"; break;
+
+                // Potentially other languages as
+                // case "en-GB":  sourceName = "SeedPacket.Source.JsonGeneratorSource.json"; break;
+
+                default: sourceName = "SeedPacket.Source.CsvGeneratorSource.csv"; break;
+            }
+            return sourceName;
+        }
+
+
+
+// source: https ://stackoverflow.com/questions/2081418/parsing-csv-files-in-c-with-header
+// source: https: //stackoverflow.com/questions/1596530/multi-dimensional-arraylist-or-list-in-c
+// ONLINE XML to CSV Converter: https: //json-csv.com/xml
+
+    private MultiDimensionalList<string,string> CSVHelper(string csv, char separator = ',')
+        {
+            string[] removeArray = {"\"", "\n\r", "\n", "\"\r" };
             var multi = new MultiDimensionalList<string,string>();
 
             string[] rows = csv.Split('\n').Where(w => !w.IsNullOrEmpty()).ToArray();
@@ -153,12 +175,16 @@ namespace SeedPacket.DataSources
 
                     if (!name.IsNullOrEmpty() && !data.IsNullOrEmpty())
                     {
+                        if (data.ToLower() == "null")
+                            data = "";
+
                         multi.Add(name, data);
                     }
                 }
             }
             return multi;
         }
+
     }
 
     public class MultiDimensionalList<K, T> : Dictionary<K, List<T>>

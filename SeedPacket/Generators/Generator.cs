@@ -60,6 +60,10 @@ namespace SeedPacket.Generators
             set { baseDateTime = value ; }
         }
 
+        public int BaseListCount { get; set; } = 3;
+
+        public int BaseListDepth { get; set; } = 3;
+
         public bool Debugging { get; set; } = true;
 
         public int RowCount

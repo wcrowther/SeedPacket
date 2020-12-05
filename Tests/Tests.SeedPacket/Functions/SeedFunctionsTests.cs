@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using SeedPacket.DataSources;
+using SeedPacket.Extensions;
 using SeedPacket.Functions;
 using SeedPacket.Generators;
 using System;
@@ -18,9 +18,9 @@ namespace Tests.SeedPacket
         private string pathToTestXmlFile;
         private string pathToTestJsonFile;
         private string pathToTestCsvFile;
-        private string xmlFile = @"SimpleSeedSource.xml";
-        private string jsonFile = @"JsonSeedSource.json";
-        private string csvFile = @"CsvSeedSource.csv";
+        private readonly string xmlFile = @"SimpleSeedSource.xml";
+        private readonly string jsonFile = @"JsonSeedSource.json";
+        private readonly string csvFile = @"CsvSeedSource.csv";
 
         [SetUp]
         public void Setup()
@@ -175,7 +175,7 @@ namespace Tests.SeedPacket
             Assert.AreEqual(2, item2.ItemId);
             Assert.AreEqual("TestName2", item2.ItemName);
             Assert.AreEqual(200, item2.Number);
-            Assert.AreEqual(DateTime.Parse("2018-02-02 18:25:43.511"), item2.Created);
+            Assert.AreEqual(DateTime.Parse("2018-02-02 13:25:43.511"), item2.Created);
 
             var item3 = Funcs.GetObjectNext<Item>(gen, "Item", 2);
 
@@ -183,7 +183,18 @@ namespace Tests.SeedPacket
             Assert.AreEqual(3, item3.ItemId);
             Assert.AreEqual("TestName3", item3.ItemName);
             Assert.AreEqual(300, item3.Number);
-            Assert.IsNull(item3.Created);
+            Assert.AreEqual(DateTime.Parse("2018-03-03 13:25:43.511"), item3.Created);
+        }
+
+        [Test]
+        public void Test_Convert_ChangeType()
+        {
+            var item = new Item();
+            var value = 1;
+            var itemId_property = item.GetMetaProperties()[0]; // ItemId is int
+            itemId_property.SetInstanceValue(value);
+
+            Assert.AreEqual(value, item.ItemId);
         }
 
         [Test]

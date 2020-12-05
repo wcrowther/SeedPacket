@@ -3,17 +3,18 @@ using SeedPacket.Exceptions;
 using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using WildHare.Extensions;
+using System.Threading;
 
 namespace SeedPacket.DataSources
 {
     public class JsonDataSource : IDataSource
     {
         private JObject jsonData;
-        private const string defaultJson = "SeedPacket.Source.JsonGeneratorSource.json";
+        private readonly CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
 
         public JsonDataSource()
         {
@@ -60,7 +61,7 @@ namespace SeedPacket.DataSources
                 // Gets embedded json file Update 'Build Action' property to 'embedded Resource'
                 Assembly a = Assembly.GetExecutingAssembly();
 
-                using (var stream = a.GetManifestResourceStream(defaultJson))
+                using (var stream = a.GetManifestResourceStream(GetDefaultJsonResource()))
                 using (var reader = new StreamReader(stream))
                 {
                     string result = reader.ReadToEnd();
@@ -102,6 +103,21 @@ namespace SeedPacket.DataSources
                 return list;
             }
             return new List<T>();
+        }
+
+        private string GetDefaultJsonResource()
+        {
+            string sourceName;
+            switch (currentCulture.Name)
+            {
+                case "en-US": sourceName = "SeedPacket.Source.JsonGeneratorSource.json"; break;
+
+                // Potentially other languages as
+                // case "en-GB":  sourceName = "SeedPacket.Source.JsonGeneratorSource.json"; break;
+
+                default: sourceName = "SeedPacket.Source.JsonGeneratorSource.json"; break;
+            }
+            return sourceName;
         }
     }
 }

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Dynamic;
 using Examples.Models;
 using WildHare.Extensions;
+using System;
+using SeedPacket.Interfaces;
 
 namespace Tests.SeedPacket
 {
@@ -19,13 +21,14 @@ namespace Tests.SeedPacket
         {
             var generator = new MultiGenerator()
             {
-                Rules =  {
+                Rules =
+                {
                     new Rule(typeof(List<Invoice>), "", g => Funcs.GetListFromCacheRandom<Invoice>(g, "Invoices", 3, 3), "GetRandomInvoices")
                 }
             };
             generator.Cache.Invoices = new List<Invoice>().Seed(1, 300, generator);
 
-            var accountList =  new List<Account>().Seed(1,  50, generator).ToList(); ;
+            var accountList =  new List<Account>().Seed(1,  50, generator).ToList();
 
             Assert.AreEqual(150, accountList.SelectMany(a => a.Invoices).Count() ); 
             Assert.AreEqual(150, generator.Cache.Invoices.Count); 
@@ -38,8 +41,8 @@ namespace Tests.SeedPacket
             var generator = new MultiGenerator()
             {
                 Rules =  {
-                    new Rule(typeof(List<InvoiceItem>), "",     g => Funcs.GetListFromCacheNext<InvoiceItem>(g, "InvoiceItems", 3, 3), "GetRandomInvoices"),
-                    new Rule(typeof(List<Invoice>), "",         g => Funcs.GetListFromCacheRandom<Invoice>(g, "Invoices", 2, 2), "GetRandomInvoiceItems")
+                    new Rule(typeof(List<InvoiceItem>), "",     g => Funcs.GetListFromCacheNext<InvoiceItem>(g, "InvoiceItems", 3, 3), "GetRandomInvoiceItems"),
+                    new Rule(typeof(List<Invoice>), "",         g => GetInvoices(g, 2, 2), "GetRandomInvoices")
                 }
             };
 
@@ -55,6 +58,19 @@ namespace Tests.SeedPacket
             Assert.AreEqual(10, generator.Cache.InvoiceItems.Count);                 // 100 InvoiceItems created - 90 taken in invoices = 10 left in cache
         }
 
+
+        // For greater realism Invoice AccountIds are made to match the account they are in
+        // NOTE that AccountId must already exist for this to work
+        private static List<Invoice> GetInvoices(IGenerator g, int min, int max)
+        {
+            int accountId = Convert.ToInt32(g?.CurrentRowValues["AccountId"]);
+            var invoices = Funcs.GetListFromCacheNext<Invoice>(g, "Invoices", min, max);
+            if (invoices != null)
+                invoices.ForEach(ii => ii.AccountId = accountId);
+
+            return invoices;
+        }
+
         [Test]
         public void TestGetByItemName()
         {
@@ -67,6 +83,9 @@ namespace Tests.SeedPacket
                     new InvoiceItem{ InvoiceItemId = 5678 , Fee = 2.22M }
                 }
             };
+
+            Assert.AreEqual(1, generator.Cache.Invoice.InvoiceId);
+
             ExpandoObject cache = generator.Cache;
 
             Assert.AreEqual(1, cache.Get<Invoice>("Invoice").InvoiceId);

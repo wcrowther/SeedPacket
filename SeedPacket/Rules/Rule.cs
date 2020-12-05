@@ -9,17 +9,6 @@ namespace SeedPacket
 {
     public class Rule 
     {
-
-    #region Private Fields
-
-        private Type typeMatch;
-        private string nameMatch;
-        private readonly Func<IGenerator, dynamic> func; 
-
-    #endregion
-
-    #region Constructor
-
         public Rule(Type typeMatch, string nameMatch, Func<IGenerator, dynamic> func, string ruleName, string description = "")
         {
             this.typeMatch = typeMatch;
@@ -32,9 +21,10 @@ namespace SeedPacket
             NameMatch = nameMatch;
         }
 
-    #endregion
+        private Type typeMatch;
+        private string nameMatch;
+        private readonly Func<IGenerator, dynamic> func;
 
-    #region Public
 
         [StringLength(30)]
         public string RuleName { get; }
@@ -78,9 +68,9 @@ namespace SeedPacket
             return $"{RuleName ?? "Not Named"} ({Description ?? "None"})";
         }
 
-        #endregion
-
-    #region Private Methods
+        // ===================================================================
+        // Private Methods
+        // ===================================================================
 
         private static bool NameMatches(string namematch, string propname)
         {
@@ -132,8 +122,6 @@ namespace SeedPacket
                 return false;
             }
         } 
-
-    #endregion
 
     }
 } 

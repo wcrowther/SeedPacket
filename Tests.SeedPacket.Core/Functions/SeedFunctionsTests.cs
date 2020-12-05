@@ -8,7 +8,8 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Tests.SeedPacket.Core.Model;
-using WildHare.Extensions;
+using SeedPacket.Extensions;
+
 
 namespace Tests.SeedPacket.Core
 {
@@ -121,7 +122,6 @@ namespace Tests.SeedPacket.Core
             Assert.AreEqual(1, item.ItemId);
             Assert.AreEqual("TestName1", item.ItemName);
             Assert.AreEqual(100, item.Number);
-            //Assert.IsNull(item.Created);
 
             gen.RowNumber++;
             var item2 = Funcs.GetObjectNext<Item>(gen, "Item");
@@ -130,7 +130,6 @@ namespace Tests.SeedPacket.Core
             Assert.AreEqual(2, item2.ItemId);
             Assert.AreEqual("TestName2", item2.ItemName);
             Assert.AreEqual(200, item2.Number);
-            //Assert.AreEqual(DateTime.Parse("2018-02-02 18:25:43.511"), item2.Created);
         }
 
         [Test]

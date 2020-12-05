@@ -1,4 +1,4 @@
-@using Examples.Models
+    @using Examples.Models
 
 @model List<DateTime>
 
@@ -45,7 +45,7 @@
 
     <button id="team-show-all" v-show="ActiveTab == 2" class="bubble" @@click="setActiveTeam()" :disable="true">Show All</button>
 
-    <button id="testButton" @@click="showTestButtonId()" >TestButton</button>
+    @*<button id="testButton" @@click="showTestButtonId()" >TestButton</button>*@
 
     <ul class="nav nav-tabs">
         <li><a @@click="activeTab=0" :class="{'activeTab' : ActiveTab == 0}" style="color: black;">By Date</a></li>
