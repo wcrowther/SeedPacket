@@ -203,6 +203,7 @@ namespace Tests.SeedPacket
         }
 
 
+        // CURRENTLY DOES NOT SUPPORT
         //[Test]
         //public void SeedExtensions_Seed_NonGeneric_IEnumerable()
         //{

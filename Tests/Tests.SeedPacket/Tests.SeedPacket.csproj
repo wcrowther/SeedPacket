@@ -62,8 +62,8 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WildHare, Version=0.9.9.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WildHare.0.9.9.5\lib\net471\WildHare.dll</HintPath>
+    <Reference Include="WildHare, Version=0.9.9.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WildHare.0.9.9.9\lib\net471\WildHare.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>
