@@ -2,10 +2,11 @@ using NUnit.Framework;
 using SeedPacket.Extensions;
 using SeedPacket.Generators;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Tests.SeedPacket.Model;
+using Tests.SeedPacket.Models;
 using static Tests.SeedPacket.Common;
 
 
@@ -200,6 +201,18 @@ namespace Tests.SeedPacket
             Assert.AreEqual("machine", list["1"].ItemName);
             Assert.IsInstanceOf<Item>(list["1"]);
         }
+
+
+        //[Test]
+        //public void SeedExtensions_Seed_NonGeneric_IEnumerable()
+        //{
+        //    var list = new List<Item>();
+
+        //    IEnumerable IEnumerableList = list;
+        //    IEnumerableList.Seed();
+
+        //    Assert.AreEqual(10, IEnumerableList.Cast<Item>().ToList().Count());
+        //}
 
         /* =====================================================================================
         *  PRIVATE METHODS

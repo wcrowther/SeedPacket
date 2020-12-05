@@ -1,6 +1,7 @@
-﻿using System;
 
-namespace Tests.SeedPacket.Model
+using System;
+
+namespace Tests.SeedPacket.Models
 {
     public class Unknown
     {

@@ -5,7 +5,7 @@ using SeedPacket.Generators;
 using System;
 using System.IO;
 using System.Xml.Linq;
-using Tests.SeedPacket.Model;
+using Tests.SeedPacket.Models;
 using WildHare.Extensions;
 using static Tests.SeedPacket.Common;
 

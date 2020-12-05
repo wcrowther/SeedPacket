@@ -9,6 +9,8 @@ using WildHare.Extensions;
 
 namespace SeedPacket
 {
+    // NOTE: SeedCore in this context is the core of the SeedPacket application NOT .NET CORE.
+
     public class SeedCore
     {
         private IGenerator generator; 

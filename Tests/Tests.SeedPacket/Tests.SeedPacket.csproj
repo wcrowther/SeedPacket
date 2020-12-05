@@ -77,9 +77,9 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Functions\CacheExtensionsTests.cs" />
-    <Compile Include="Model\ItemGroup.cs" />
-    <Compile Include="Model\Unknown.cs" />
-    <Compile Include="Model\Item.cs" />
+    <Compile Include="Models\ItemGroup.cs" />
+    <Compile Include="Models\Unknown.cs" />
+    <Compile Include="Models\Item.cs" />
     <Compile Include="Functions\SeedFunctionsTests.cs" />
     <Compile Include="SeedExtensionsTests.cs" />
     <Compile Include="SeedCoreTests.cs" />

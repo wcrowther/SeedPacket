@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using SeedPacket;
 using SeedPacket.DataSources;
 using SeedPacket.Generators;
@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Tests.SeedPacket.Model;
+using Tests.SeedPacket.Models;
 using static Tests.SeedPacket.Common;
 
 namespace Tests.SeedPacket.Core
 {
+    // NOTE: SeedCore in this context is the core of the SeedPacket application NOT .NET CORE.
+
     [TestFixture]
     public class SeedCoreTests
     {
@@ -313,20 +315,6 @@ namespace Tests.SeedPacket.Core
             // "County" is a duplicate -> which is not allowed for an index...
             // Use a 
         }
-
-        //[Test]
-        //public void SeedCore_SeedOne()
-        //{
-        //    var list = new Dictionary<int, Item>();
-        //    var item = new Item();
-        //    var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
-        //    var one = new SeedCore(gen).SeedList(item);
-
-        //    Assert.AreEqual(1, one.ItemId);
-        //    Assert.AreEqual("thingamabob", one.ItemName);
-        //    Assert.AreEqual(1, one.Number);
-        //    Assert.AreEqual(DateTime.Parse("2021-08-15 07:00:00.000"), one.Created);
-        //}
 
         // List<string>
         // List<int>

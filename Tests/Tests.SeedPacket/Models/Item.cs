@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 
-namespace Tests.SeedPacket.Model
+using System;
+
+namespace Tests.SeedPacket.Models
 {
     public class Item
     {

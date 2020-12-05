@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
 
-namespace Tests.SeedPacket.Model
+using System.Collections.Generic;
+
+namespace Tests.SeedPacket.Models
 {
     public class ItemGroup
     {
