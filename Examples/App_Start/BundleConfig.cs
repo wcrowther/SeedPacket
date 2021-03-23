@@ -22,8 +22,13 @@ namespace Website
                       ));
             bundles.Add(new ScriptBundle("~/bundles/ScriptApp").Include(
                           "~/ScriptApp/Examples.js",
-                          "~/ScriptApp/Teams.js"
+                          "~/ScriptApp/OLD-Teams.js"
                       ));
+
+            //bundles.Add(new ScriptBundle("~/bundles/Teams").Include(
+            //                  "~/ScriptApp/_footballIcon.js",
+            //                  "~/ScriptApp/teams.js"
+            //            ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                           "~/Content/bootstrap.css",
