@@ -15,7 +15,7 @@ namespace SeedPacket.DataSources
 {
     public class CsvDataSource : IDataSource
     {
-        private MultiDimensionalList<string,string> sourceData;
+        private ListOfList<string,string> sourceData;
         private readonly CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
 
         private const string itemSeparator = ".";
@@ -95,7 +95,7 @@ namespace SeedPacket.DataSources
             // ALSO - Consider using WildHare GetStart and GetEnd
             // ALSO - Implement null for empty cell
             // ALSO - Tests around quoted and not quoted values particularily when they contain quotes
-            // ALSO - Once they are working. Refactor MultiDimensionalList ??
+            // ALSO - Once they are working. Refactor ListOfList ??
 
             var list = new List<T>();
 
@@ -156,10 +156,10 @@ namespace SeedPacket.DataSources
 // source: https: //stackoverflow.com/questions/1596530/multi-dimensional-arraylist-or-list-in-c
 // ONLINE XML to CSV Converter: https: //json-csv.com/xml
 
-    private MultiDimensionalList<string,string> CSVHelper(string csv, char separator = ',')
+    private ListOfList<string,string> CSVHelper(string csv, char separator = ',')
         {
             string[] removeArray = {"\"", "\n\r", "\n", "\"\r" };
-            var multi = new MultiDimensionalList<string,string>();
+            var multi = new ListOfList<string,string>();
 
             string[] rows = csv.Split('\n').Where(w => !w.IsNullOrEmpty()).ToArray();
 
@@ -187,7 +187,7 @@ namespace SeedPacket.DataSources
 
     }
 
-    public class MultiDimensionalList<K, T> : Dictionary<K, List<T>>
+    public class ListOfList<K, T> : Dictionary<K, List<T>>
     {
         public void Add(K key, T addObject, bool makeDistinct = false)
         {

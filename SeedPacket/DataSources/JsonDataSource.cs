@@ -15,6 +15,7 @@ namespace SeedPacket.DataSources
     {
         private JObject jsonData;
         private readonly CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+        private readonly ListOfList<string, string> Data = new ListOfList<string, string>(); // For change
 
         public JsonDataSource()
         {

@@ -129,8 +129,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="NFL Scheduling 2020.txt" />
     <Content Include="packages.config" />
-    <Content Include="ScriptApp\Teams.js" />
+    <Content Include="ScriptApp\OLD-Teams.js" />
     <Content Include="ScriptApp\Examples.js" />
+    <Content Include="ScriptApp\teams.js" />
     <Content Include="Scripts\axios.js" />
     <Content Include="Scripts\axios.min.js" />
     <Content Include="Scripts\bootstrap.js" />
