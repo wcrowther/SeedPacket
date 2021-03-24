@@ -131,8 +131,8 @@
     <Content Include="packages.config" />
     <Content Include="ScriptApp\OLD-Teams.js" />
     <Content Include="ScriptApp\Examples.js" />
+    <Content Include="ScriptApp\_footballIcons.js" />
     <Content Include="ScriptApp\teams.js" />
-    <Content Include="ScriptApp\_footballIcon.js" />
     <Content Include="Scripts\axios.js" />
     <Content Include="Scripts\axios.min.js" />
     <Content Include="Scripts\bootstrap.js" />

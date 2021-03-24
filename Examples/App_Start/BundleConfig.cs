@@ -20,6 +20,7 @@ namespace Website
                           "~/Scripts/bootstrap.js",
                           "~/Scripts/respond.js"
                       ));
+
             bundles.Add(new ScriptBundle("~/bundles/ScriptApp").Include(
                           "~/ScriptApp/Examples.js",
                           "~/ScriptApp/OLD-Teams.js"
@@ -28,13 +29,14 @@ namespace Website
             //bundles.Add(new ScriptBundle("~/bundles/Teams").Include(
             //                  "~/ScriptApp/_footballIcon.js",
             //                  "~/ScriptApp/teams.js"
-            //            ));
+            //              ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                           "~/Content/bootstrap.css",
                           "~/Content/grid.css",
                           "~/Content/site.css"
                       ));
+
             BundleTable.EnableOptimizations = false;
         }
     }

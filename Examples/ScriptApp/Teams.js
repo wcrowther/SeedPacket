@@ -1,3 +1,4 @@
+// alert('teams.js loaded...');
 
 const vueApp = new Vue({
     el: '#vueContent',
@@ -31,7 +32,8 @@ const vueApp = new Vue({
         activeTab:
         {
             cache: false,
-            get: function () {
+            get: function ()
+            {
                 try {
                     var tab = getCookie('activeTab', 0);
                     return tab;
@@ -40,12 +42,14 @@ const vueApp = new Vue({
                     return 0;
                 };
             },
-            set: function (newValue) {
+            set: function (newValue)
+            {
                 this.ActiveTab = newValue;
                 setCookie('activeTab', newValue, this.Settings.CookieDuration);
             }
         },
-        yearList: function () {
+        yearList: function ()
+        {
             var options = [];
             var currentYear = new Date().getFullYear()
             max = currentYear + 10
@@ -56,13 +60,15 @@ const vueApp = new Vue({
             }
             return options;
         },
-        gamesByDate: function () {
+        gamesByDate: function ()
+        {
             let dateList = this.Games.groupBy(g => g.SeasonWeek);
             //console.log(JSON.stringify(dateList));
 
             return dateList;
         },
-        gamesByWeek: function () {
+        gamesByWeek: function ()
+        {
             return this.Games.groupBy(g => g.SeasonWeek);
         }
     },
@@ -72,24 +78,28 @@ const vueApp = new Vue({
         {
             alert(event.currentTarget.id);
         },
-        jDate: function (date, format) {
+        jDate: function (date, format)
+        {
             format = typeof format === 'undefined' ? 'h:mm a MMM Do YYYY' : format;
 
             return jsonDate(date, format);
         },
-        setActiveTab: function (tab) {
+        setActiveTab: function (tab)
+        {
             this.ActiveTab = tab;
-            // console.log('ActiveTab set to: ' + tab);
+            //console.log('ActiveTab set to: ' + tab);
 
             setCookie('activeTab', tab, this.Settings.CookieDuration);
         },
-        setActiveTeam: function (team) {
+        setActiveTeam: function (team)
+        {
             if (typeof team === 'undefined' || team === null)
                 this.ActiveTeam = null;
             else
                 this.ActiveTeam = team;
         },
-        getFootballInfo: function () {
+        getFootballInfo: function ()
+        {
             console.log('GetFootballInfo for: ' + this.Year);
             let self = this;
 
