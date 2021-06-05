@@ -316,6 +316,46 @@ namespace Tests.SeedPacket
             // Use a 
         }
 
+        [Test]
+        public void SeedCore_SeedList_Of_String_With_Defaults_Using_CustomName()
+        {
+            int count   = 8;
+            var list    = new List<string>();
+            var gen     = new MultiGenerator() { SeedBegin = 1, SeedEnd = count, CustomName = "FirstName" };
+            list        = new SeedCore(gen).SeedList(list).ToList();
+
+            Assert.AreEqual(count, list.Count());
+
+            Assert.AreEqual("Tiffany",      list[0]);
+            Assert.AreEqual("Robert",       list[1]);
+            Assert.AreEqual("Nicholas",     list[2]);
+            Assert.AreEqual("Jacqueline",   list[3]);
+            Assert.AreEqual("Mary",         list[4]);
+            Assert.AreEqual("Treymayne",    list[5]);
+            Assert.AreEqual("Omar",         list[6]);
+            Assert.AreEqual("Courtney",     list[7]);
+        }
+
+        [Test]
+        public void SeedCore_SeedList_Of_String_From_JSON_Using_CustomName()
+        {
+            int count = 8;
+            var list = new List<string>();
+            var gen = new MultiGenerator(pathToTestJsonFile) { SeedBegin = 1, SeedEnd = count, CustomName = "City" };
+            list = new SeedCore(gen).SeedList(list).ToList();
+
+            Assert.AreEqual(count, list.Count());
+
+            Assert.AreEqual("Brighton",     list[0]);
+            Assert.AreEqual("Lincolnton",   list[1]);
+            Assert.AreEqual("WestLake",     list[2]);
+            Assert.AreEqual("Gotham",       list[3]);
+            Assert.AreEqual("Jefferson",    list[4]);
+            Assert.AreEqual("Sierra",       list[5]);
+            Assert.AreEqual("Kingston",     list[6]);
+            Assert.AreEqual("Oakleaf",      list[7]);
+        }
+
 
         [Test]
         public void SeedCore_NameTuple_Test()

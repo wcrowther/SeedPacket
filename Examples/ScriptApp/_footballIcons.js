@@ -18,19 +18,23 @@ var footballIcon = Vue.component('football-icon',
     },
     methods:
     {
-        showTeam: function (team) {
+        showTeam: function (team)
+        {
             this.$emit('show-team', team);
         }
     },
     computed:
     {
-        classObject: function () {
+        classObject: function ()
+        {
             return `football-icon-${this.size} `;
         },
-        teamName: function () {
+        teamName: function ()
+        {
             return `${this.team.Location} ${this.team.Name} - ${this.team.Conference} ${this.team.Division} `
         },
-        styleObject: function () {
+        styleObject: function ()
+        {
             var width = (this.team.DivId - 1) * this.icon.width;
             var height = (this.team.TeamId - 1) * this.icon.height;
 
@@ -38,7 +42,8 @@ var footballIcon = Vue.component('football-icon',
 
             return { backgroundPosition: `-${width}px -${height}px` };
         },
-        icon: function () {
+        icon: function ()
+        {
             if (this.size === 'large')
                 return { width: 120, height: 100 };
             else if (this.size === 'medium')

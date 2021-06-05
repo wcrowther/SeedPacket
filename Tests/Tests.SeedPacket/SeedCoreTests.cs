@@ -76,7 +76,7 @@ namespace Tests.SeedPacket.Core
             var list = seedCore.SeedList(iEnumerable).ToList();
 
             Assert.AreEqual(10, list.Count());
-            Assert.AreEqual("10", list[9]); // not 10 because list is zero-based
+            Assert.AreEqual("10", list[9]); // zero-based
             Assert.IsInstanceOf<string>(list[0]);
         }
 
@@ -89,7 +89,7 @@ namespace Tests.SeedPacket.Core
             var list = seedCore.SeedList(iEnumerable).ToList();
 
             Assert.AreEqual(10, list.Count());
-            Assert.AreEqual(10, list[9]); // not 10 because list is zero-based
+            Assert.AreEqual(10, list[9]); // zero-based
             Assert.IsInstanceOf<int>(list[0]);
         }
 
@@ -102,7 +102,7 @@ namespace Tests.SeedPacket.Core
             var list = seedCore.SeedList(iEnumerable).ToList();
 
             Assert.AreEqual(10, list.Count());
-            Assert.AreEqual(DateTime.Parse("1/11/2020"), list[9]); // not 10 because list is zero-based
+            Assert.AreEqual(DateTime.Parse("1/11/2020"), list[9]); // zero-based
             Assert.IsInstanceOf<DateTime>(list[0]);
         }
 
