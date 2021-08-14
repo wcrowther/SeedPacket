@@ -1,7 +1,0 @@
-
-Check that CsvDataSource is working correctly.
-Globalization.
-Add Support for .Net Core.
-Add default list generation?
-Allow appending to default data instead of replacing.
-Make an EntityFramework SeededInMemory version...
