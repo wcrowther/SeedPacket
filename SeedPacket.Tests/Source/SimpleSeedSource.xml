@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SimpleSeed>
+
+  <FirstName>Bob</FirstName>
+  <FirstName>Patricia</FirstName>
+  <FirstName>Michael</FirstName>
+  <FirstName>Susan</FirstName>
+  <FirstName>William</FirstName>
+  <FirstName>Mary</FirstName>
+  <FirstName>Robert</FirstName>
+
+  <LastName>Smith</LastName>
+  <LastName>Johnson</LastName>
+  <LastName>Williams</LastName>
+  <LastName>Jones</LastName>
+  <LastName>Brown</LastName>
+  <LastName>Davis</LastName>
+  <LastName>Miller</LastName>
+  <LastName>Wilson</LastName>
+  <LastName>Moore</LastName>
+  <LastName>Taylor</LastName>
+  <LastName>Anderson</LastName>
+  
+  <ProductName>dooHickey</ProductName>
+  <ProductName>gadget</ProductName>
+  <ProductName>widget</ProductName>
+  <ProductName>thingamajig</ProductName>
+  <ProductName>gizmo</ProductName>
+  <ProductName>whatchamacallit</ProductName>
+  <ProductName>doodad</ProductName>
+  <ProductName>gimmick</ProductName>
+  <ProductName>thingamabob</ProductName>
+  <ProductName>whatnot</ProductName>
+
+  <Items>
+    <Item ItemId="1" ItemName="TestName1" Number="100" Created=""></Item>
+    <Item ItemId="2" ItemName="TestName2" Number="200" Created="2018-02-02 18:25:43.511"></Item>
+    <Item ItemId="3" ItemName="TestName3" Created="">
+      <Number>300</Number>
+    </Item>
+  </Items>
+
+</SimpleSeed>
+

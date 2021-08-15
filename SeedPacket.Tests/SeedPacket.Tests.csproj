@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Helpers\**" />
+    <EmbeddedResource Remove="Helpers\**" />
+    <None Remove="Helpers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="JsonTests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Source\JsonSeedSource.json" />
+    <None Remove="Source\SimpleSeedSource.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Source\JsonSeedSource.json" />
+    <Content Include="Source\SimpleSeedSource.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="WildHare" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SeedPacket\SeedPacket.csproj" />
+  </ItemGroup>
+
+</Project>

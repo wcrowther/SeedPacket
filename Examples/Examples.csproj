@@ -347,9 +347,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SeedPacket\SeedPacket.csproj">
+    <ProjectReference Include="..\SeedPacketOld\SeedPacketOld.csproj">
       <Project>{2d7b684a-b599-4e6f-b7f4-12cfbd029115}</Project>
-      <Name>SeedPacket</Name>
+      <Name>SeedPacketOld</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

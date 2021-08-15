@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SeedPacket</name>
+    </assembly>
+    <members>
+        <member name="T:SeedPacket.DataInputType">
+            <summary>The data source input type enum. Can be either a string or a file in eitherXML or JSON format.<br/>
+            Defaults to Auto which will try to use whatever is supplied. Default uses embedded XML default.</summary>
+        </member>
+        <member name="T:SeedPacket.Functions.Funcs">
+            <summary>Common static partial class used for all funcs meant to be used in a data generator rule</summary>
+        </member>
+        <member name="M:SeedPacket.Functions.Funcs.DiceRoll(SeedPacket.Interfaces.IGenerator,System.Int32,System.Int32)">
+            <summary>Simulates rolling a x-sided dice y number of times where x is diceSides and y is numberOfDice.<br/><br/> 
+            Use a higher numberOfDice to decrease chances in a linear progression.<br/>GetOneFromCacheNext
+            Increasing numberOfDice above 1 creates a bell-curve of probability.<br/><br/>
+            ie: rolling 3 6-sided dice (3d6) returns from 3 to 18 (with 7 the most likely possiblity)</summary>
+            <extensionmethod>true</extensionmethod>
+        </member>
+        <member name="M:SeedPacket.Functions.Funcs.GetElementNext(SeedPacket.Interfaces.IGenerator,System.String,System.Int32,System.Boolean)">
+            <summary>Gets the next element named for the [identifier] from the datasource contained in the <br/>
+            generator passed in from [generator] parameter. By default goes to first record in the 0-based list, <br/>
+            offset by the [offset] parameter. If the number is greater than what exists in the list, then it wraps<br/>
+            back around to the first element in the list. If no elements exist in the list, null is returned.
+            </summary>
+            <extensionmethod>true</extensionmethod>
+        </member>
+        <member name="M:SeedPacket.Functions.Funcs.GetListFromCacheNext``1(SeedPacket.Interfaces.IGenerator,System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>Gets a list of items from the generator.cache matching the string [cacheListname] like ('Invoices'). It will throw NOT an error <br/> 
+            if the named [cacheList] does not exist. If there are available elements in the [cacheList], it will get a random number of items <br/>
+            from [min] to [max] starting from the beginning of the list. If [remove] is true, it will delete the items from the source.
+            </summary>
+        </member>
+        <member name="M:SeedPacket.Functions.Funcs.GetListFromCacheNext``1(SeedPacket.Interfaces.IGenerator,System.Object,System.Int32,System.Int32,System.Boolean)">
+            <summary>Gets a list of items from the generator.cache matching the dynamic [cacheList] like (generator.cache.Invoices). It WILL throw <br/>
+            an error if the named [cacheList] does not exist. If there are available elements in the [cacheList], it will get a random number <br/>
+            of items from [min] to [max] starting from the beginning of the list. If [remove] is true, it will delete the items from the source.
+            </summary>
+        </member>
+        <member name="M:SeedPacket.Functions.Funcs.GetListFromCacheRandom``1(SeedPacket.Interfaces.IGenerator,System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>Gets a list of items from the generator.cache matching the string [cacheListname] like ('Invoices'). It will throw NOT an error <br/> 
+            if the named cacheList does not exist. If there are available elements in the cacheList, it will get a random number of items <br/>
+            from [min] to [max] starting from a RANDOM location in the list. If [remove] is true, it will delete the items from the source.
+            </summary>
+        </member>
+        <member name="M:SeedPacket.Functions.Funcs.GetOneFromCacheNext``1(SeedPacket.Interfaces.IGenerator,System.String,System.Boolean)">
+            <summary>Gets a single item from the generator.cache matching the string [cacheListname] like ('Invoices').
+            It will NOT throw  an error <br/>if the named [cacheList] does not exist. If [remove] is true,
+            it will delete the items from the source.
+            </summary>
+        </member>
+        <member name="M:SeedPacket.Functions.Funcs.GetOneFromCacheNext``1(SeedPacket.Interfaces.IGenerator,System.Object,System.Boolean)">
+            <summary>Gets a single item from the generator.cache matching the dynamic [cacheList] like (generator.cache.Invoices).
+            It WILL throw <br/>an error if the named [cacheList] does not exist. If [remove] is true, it will delete the item from the source.
+            </summary>
+        </member>
+        <member name="M:SeedPacket.Functions.Funcs.GetOneFromCacheRandom``1(SeedPacket.Interfaces.IGenerator,System.String,System.Boolean)">
+            <summary>Gets a single item from the generator.cache matching the string [cacheListname] like ('Invoices'). It will throw NOT an error <br/> 
+            if the named cacheList does not exist. If [remove] is true, it will delete the item from the source.
+            </summary>
+        </member>
+        <member name="M:SeedPacket.Functions.Funcs.GetOneFromCacheRandom``1(SeedPacket.Interfaces.IGenerator,System.Object,System.Boolean)">
+            <summary>Gets a single item from the generator.cache matching the dynamic [cacheList] like (generator.cache.Invoices). It WILL throw <br/>
+            an error if the named cacheList does not exist. If [remove] is true, it will delete the item from the source.
+            </summary>
+        </member>
+        <member name="M:SeedPacket.Functions.Funcs.OnceEvery(SeedPacket.Interfaces.IGenerator,System.Int32)">
+            <summary>Returns true every nth row where n is [count].<br/>
+            ie: var x = gen.OnceEvery(10) ? null : generator.GetElementNext("FirstName");
+            </summary>
+        </member>
+        <member name="P:SeedPacket.Generators.Generator.CurrentRowValues">
+            <summary>Temp dictionary of values generated for current row. Only contains previously generated values <br/>
+            for that row. Values are cleared at beginning of new row.</summary>
+        </member>
+        <member name="M:SeedPacket.SimpleSeed.Next(System.String,System.Int32,System.String)">
+            <summary>Gets the next named element looping back to the start if beyond last element</summary>
+        </member>
+        <member name="M:SeedPacket.SimpleSeed.Randomize(System.String,System.String)">
+            <summary>Gets a 'random' element based on seeded random so will always be same sequence. Pass in unseeded random for different elements each time.</summary>
+        </member>
+        <member name="T:SeedPacketCore.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SeedPacketCore.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SeedPacketCore.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

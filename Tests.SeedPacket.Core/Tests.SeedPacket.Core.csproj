@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SeedPacket\SeedPacket.csproj" />
+    <ProjectReference Include="..\SeedPacket\SeedPacketOld.csproj" />
   </ItemGroup>
 
 </Project>
