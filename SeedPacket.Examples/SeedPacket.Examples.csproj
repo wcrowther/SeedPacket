@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -6,7 +6,43 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Logic\SourceFiles\JsonGeneratorSource.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Logic\SourceFiles\FootballSource.xml" />
+    <None Remove="Logic\SourceFiles\seedsource.xml" />
+    <None Remove="Logic\SourceFiles\sourceData2.xml" />
+    <None Remove="Logic\SourceFiles\XmlGeneratorSource.xml" />
+    <None Remove="Logic\SourceFiles\xmlSeedSourcePlus.xml" />
+    <None Remove="Reference\NFL Scheduling 2020.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Logic\SourceFiles\FootballSource.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Logic\SourceFiles\seedsource.xml" />
+    <Content Include="Logic\SourceFiles\sourceData2.xml" />
+    <Content Include="Logic\SourceFiles\xmlSeedSourcePlus.xml" />
+    <Content Include="Reference\NFL Scheduling 2020.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Logic\SourceFiles\JsonGeneratorSource.json" />
+    <EmbeddedResource Include="Logic\SourceFiles\XmlGeneratorSource.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SeedPacket\SeedPacket.csproj" />
   </ItemGroup>
 
 </Project>
