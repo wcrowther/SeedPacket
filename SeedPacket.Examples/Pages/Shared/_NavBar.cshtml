@@ -1,0 +1,33 @@
+@using SeedPacket.Examples.Logic.Extensions
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+
+            <!-- Hamburger Menu -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navBarCollapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- NavBar -->
+            <div class="navbar-collapse collapse" id="navBarCollapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class='@Html.IsActive("/Home/Index")' asp-page="/Home/Index">
+                            <img class="small-logo" src="~/images/favicon.png" />Home</a>
+                    </li>
+                    <li><a class='@Html.IsActive("/Rules/Index")' asp-page="/Rules/Index">Rules</a></li>
+                    <li><a class='@Html.IsActive("/Extending/Index")' asp-page="/Extending/Index">Extending</a></li>
+                    <li><a class='@Html.IsActive("/Documentation/Index")' asp-page="/Docs/Index">Docs</a></li>
+                    <li><a class='@Html.IsActive("/Rows/Index")' asp-page="/Rows/Index">25K Rows</a></li>
+                    <li><a class='@Html.IsActive("/Football/Index")' asp-page="/Football/Index">Football</a></li>
+                    <li><a class='@Html.IsActive("/SimpleSeed/Index")' asp-page="/SimpleSeed/Index">SimpleSeed</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>

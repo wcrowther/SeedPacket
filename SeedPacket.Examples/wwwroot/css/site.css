@@ -1,71 +1,544 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
+@import url(https://fonts.googleapis.com/css?family=Merriweather:400,700,700italic,300);
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: whitesmoke;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+html {
+    overflow-y: scroll
+} 
+html, body {
+    height: 100%;
+}
+ p, h1, h2, h3, h4, h5, h6, 
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Merriweather', serif;
+}
+ h2, .h2 {
+    margin-top: 50px;
+    margin-bottom: 4px;
+    font-size: 40px; 
+    font-weight: 500;   
+}
+ p, ul, li {
+    font-weight: 100;
+}
+ hr {
+    border-top: 1px solid #83A8D1;
+}
+ a {
+    font-weight: bold;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+    padding: 4px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.row li {
+    margin-bottom: 10px;
+}
+
+.row ul {
+    margin-top: 10px;
+}
+
+.hotBox {
+    overflow: hidden;
+    position: relative;
+    border: solid 1px #ccc;
+    margin-bottom: 20px;
+    background-color: #F5DEDB;
+    min-height: 100px;
+    padding: 30px 20px 20px 20px;
+}
+
+.byline {
+    margin-top: -5px;
+    margin-bottom: 30px;
+}
+
+/* CodeExample */
+/* box-sizing: border-box is in effect from bootstrap */
+
+.codeExample {
+    overflow: hidden;
+    position: relative;
+    border: solid 1px #ccc;
+    -webkit-border-radius: 0 10px 10px 10px;
+    -moz-border-radius: 0 10px 10px 10px;
+    border-radius: 0 10px 10px 10px;
+    margin-bottom: 20px;
+    background-color: white;
+}
+.codeExample code {
+    display: block;
+    white-space: pre;
+    padding: 10px 20px 30px 30px;
+    font-weight: bold;
+    color: #5b5a5a;
+    background-color: white;
+}
+.codeExample div.codeTitle {
+    display: block;
+    padding:  10px 90px 10px 20px;
+    background-color: #eee;
+}
+.codeExample div.codeTitleBlue {
+    background-color: #ECEDF7;
+}
+.codeExample div.codeTitleGreen {
+    background-color: #F5DEDB;
+}
+.codeExample div.codeResults {
+    background-color:white;
+    border-top: solid 1px #ccc;
+    padding: 10px 10px 10px 20px;
+    position: relative;
+}
+.codeExample label {
+    background-color: #ccc;
+    text-align: center;
+    line-height: 30px;
+    padding: 5px 20px 3px 20px;
+    width: 80px;
+    height: 40px;
+    border-radius: 0 10px 0 10px;
+    position: absolute;
+    top:0;
+    right:0;
+}
+.codeExample div.codeResults label  {
+    border-radius: 0 0 0 10px;
+}
+label.codeLabelBlue {
+    background-color:#83A8D1;
+}
+label.codeLabelGreen {
+    background-color: #EC8181;
+}
+code i {
+  color: #F90E0A;
+}
+.codeBlue {
+    color: blue;
+}
+.codeAqua {
+    color: aqua;
+}
+.codeRed {
+    color: red;
+}
+
+.rowCounter,
+.randomSeed {
+    float:right;
+    width: 80px;
+    padding: 10px;
+    margin-left: 10px;
+    background-color: #CCC;
+    text-align: center;
+    font-weight: bold;
+}
+.randomSeed { 
+    margin-left:0;
+}
+.topSpace {
+    margin-top: 30px;
+}
+.navbar-custom {
+    background-color: #ccc;
+    border-color: transparent;
+}
+/*  =========================================================================== 
+    Bootstrap Overrides / Additions 
+=========================================================================== */
+table {
+    border: solid 1px #83A8D1;
+    background-color: white;
+}
+table thead {
+    background-color: #83A8D1;
+}
+.table thead > tr > th {
+    border-bottom: none;
+}
+.table thead > tr > th,
+.table tbody > tr > th,
+.table tfoot > tr > th,
+.table thead > tr > td,
+.table tbody > tr > td,
+.table tfoot > tr > td {
+    border-top: 1px solid #83A8D1;
+}
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #ECEDF7;
+}
+/*@media only screen and (max-width: 800px) {
+    .table-collapse {
+        display: block;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 550px) {
+    .table-collapse-sm {
+        display: block;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        width: 100%;
+    }
+}*/
+
+/* Green table */
+
+.table2 {
+    border: solid 1px #84d183;
+    background-color: white;
+}
+.table2 thead {
+    background-color: #84d183;
+}
+.table2 thead > tr > th {
+    border-bottom: none;
+}
+.table2 thead > tr > th,
+.table2 tbody > tr > th,
+.table2 tfoot > tr > th,
+.table2 thead > tr > td,
+.table2 tbody > tr > td,
+.table2 tfoot > tr > td {
+    border-top: 1px solid #84d183;
+}
+.table2-striped > tbody > tr:nth-child(odd) > td,
+.table2-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #dbf5db;
+}
+.nextpage {
+    font-weight: bold;
+    margin: 10px 0;
+}
+.nextpage span {
+    margin-left: 5px;
+}
+.SourceDesc{
+    font-weight: bold;
+    padding: 20px 0 0 0;
+}
+
+.linqSplash, .simpleSeedSplash {
+    position: absolute;
+    top: -10px;
+    right: 110px;
+    height: 78px;
+    width: 153px;
+}
+.linqSplash {
+    background: url(Images/linqSplash.png) no-repeat;
+}
+.simpleSeedSplash {
+    background: url(Images/simpleSeedSplash.png) no-repeat;
+}
+
+/*  
+=========================================================================== 
+    Documentation
+=========================================================================== */
+
+/* Namespace H3
+.documentation h3 {} */
+
+.documentation h4, .documentation h5, .documentation strong {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.documentation h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: -30px;
+}
+.documentation h5 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1f66b5;
+}
+.documentation strong {
+    font-size: 16px;    
+}
+.documentation li.class {
+    /*background-color: white;*/
+    padding: 5px 0 0 30px;
+    list-style-type: square;
+}
+
+
+/*  =========================================================================== 
+    Rows
+=========================================================================== */
+
+.invoiceTable {
+    width: 100%; 
+    margin-bottom: 20px;
+    border: none;
+}
+.invoiceTable tr {
+
+}
+.invoiceTable td {
+    border-color: #ccc !important;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.invoiceTable tr:last-child {
+    border-bottom: 1px solid #ccc;
+}
+.accountTable {
+    border: solid 1px #83A8D1;
+    border-collapse: initial;
+}
+.accountRow {
+}
+.accountRow td {
+    background-color: #c4d7ec !important;
+}
+.accountTable td {
+    width: 16%;
+    vertical-align: middle !important;
+}
+td.accountInvoices {
+    padding: 20px 20px 20px 20px !important;
+}
+.thirdWidth {
+    display: inline-block;
+    width: 30%;
+}
+.forthWidth {
+    display: inline-block;
+    width: 24.5%;
+}
+.invoice {
+    border: solid 2px #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-top-right-radius: 45px
+}
+.invoiceHeader {
+    background-color: #ccc;
+    margin: -10px -10px 20px -10px;
+    padding: 15px;
+    vertical-align: middle;
+    border-top-right-radius: 40px
+}
+.seedOne {
+    border: solid 1px #83A8D1;
+    padding: 10px;
+    background-color: white;
+}
+.seedOne div.name {
+    display: inline-block;
+    width: 150px;
+    margin-right: 20px;
+    font-weight: bold;
+}
+.seedOne div span {
+    display: inline-block;
+    width: 150px;
+    margin-right: 20px;
+    font-weight: bold;
+    text-align: right;
+}
+.topSpace {
+    margin-top: 15px;
+}
+
+.bottomSpace {
+    margin-bottom: 30px;
+}
+.widget {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    color: darkred;
+    background-color: #f3d36a;
+    margin: 10px 5px;
+    user-select: none;
+    z-index: 3000;
+}
+
+/*  =========================================================================== 
+    Football Page
+    =========================================================================== */
+
+.small-logo {
+    width: 20px;
+    height: 20px;
+    margin-right: 25px;
+}
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.nav-tabs {
+    border-bottom: 2px solid #83a8d1;
+}
+.navTabs {
+}
+.nav-tabs > li > a {
+    margin-right: 10px;
+    line-height: 1.42857143;
+    border-radius: 4px 4px 0 0;
+    top: 1px;
+    border: 2px solid transparent;
+    border-bottom: 0;
+}
+li a.activeTab {
+    border: solid 2px #83a8d1;
+    border-bottom: none;
+    background-color: whitesmoke;
+}
+nav.navTabs li a {
+    color: black;
+    border: solid 2px transparent;
+}
+.gameBox {
+    margin-top: 10px;
+}
+li a.activeTab {
+    border: solid 2px #83a8d1;
+    border-bottom: none;
+    background-color: whitesmoke;
+}
+.elapsedTime {
+    float: right;
+    font-style: italic;
+    color: #83A8D1;
+}
+#openingSunday {
+    margin-left: 10px;
+    display: inline-block;
+    width: 100px;
+    height: 32px;
+    border: solid 1px #9a9a9a;
+}
+.teamsSeed {
+    background-color: #ccc;
+    padding: 10px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+    .teamsSeed input {
+        margin-left: 10px;
+    }
+.bold {
+    font-weight: bold;
+    color: #346193;
+}
+.football-icon-small,
+.football-icon-medium,
+.football-icon-large {
+    display: inline-block;
+    width: 30px;
+    height: 25px;
+    background-image: url('../Content/images/NFL-Logos-25-percent.png');
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+.football-icon-medium {
+    width: 60px;
+    height: 50px;
+    background-image: url('../Content/images/NFL-Logos-50-percent.png');
+}
+.football-icon-large {
+    width: 120px;
+    height: 100px;
+    background-image: url('../Content/images/NFL-Logos.png');
+}
+.conference-box {
+    /* background-color: white; */
+}
+.conference-box-title {
+    background-color: #ffffff;
+    width: 50px;
+    padding: 4px;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'Merriweather', serif;
+    letter-spacing: 1px;
+    font-weight: bold;
+    margin: auto;
+    position: relative;
+    top: 12px;
+    border: solid 1px #ccc;
+    border-radius: 20px;
+}
+.team-box {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0px;
+    min-width: 30px;
+    /*background-color: #e4e4e4;*/
+}
+.bubble {
+    padding: 4px 15px 3px 15px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin: auto;
+    border: solid 2px #83a8d1;
+    border-radius: 20px;
+    outline: 0;
+    line-height: 16px;
+}
+    .bubble:hover {
+        background-color: #b0cdec;
+    }
+.team-conf-div {
+    text-align: right;
+    line-height: 46px;
+}
+#team-show-all {
+    margin-top: 2px;
+    float: right;
+}
+@media only screen and (max-width: 992px) {
+    .teamsSeed {
+        margin-bottom: 20px
+    }
 }

@@ -1,0 +1,32 @@
+@model List<User>
+
+<div id="rowResults">
+    <table class="table table-striped topSpace table-collapse-sm">
+        <thead>
+            <tr>
+                <th>UserId</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserId</td>
+                    <td>@(!string.IsNullOrEmpty(user.FirstName) ? user.FirstName : "---")</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Created.ToString("MM/dd/yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace SeedPacket.Examples.Pages
 {
-    public class PrivacyModel : PageModel
+    public class RulesModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
+        private readonly ILogger<RulesModel> _logger;
 
-        public PrivacyModel(ILogger<PrivacyModel> logger)
+        public RulesModel(ILogger<RulesModel> logger)
         {
             _logger = logger;
         }
