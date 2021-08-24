@@ -10,8 +10,9 @@ namespace SeedPacket.Functions
         {
             string firstName    = generator.CurrentRowValues.Get("FirstName")?.ToString() ?? GetElementRandom(generator, "FirstName") ?? "F";
             string lastName     = generator.CurrentRowValues.Get("LastName")?.ToString()  ?? GetElementRandom(generator, "LastName") ?? $"LastName{generator.RowNumber}";
+            string initial      = firstName.IsNullOrSpace() ? "" : firstName.FirstOrDefault().ToString();
 
-            return $"{firstName.FirstOrDefault()}{lastName}";
+            return $"{initial}{lastName}";
         }
     }
 }
