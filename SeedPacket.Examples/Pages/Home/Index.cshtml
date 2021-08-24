@@ -5,16 +5,15 @@
     ViewData["Title"] = "Home";
 }
 
-@*<h1>@ViewData["Title"]</h1>*@
-
-
 <div class="row">
     <div class="col-md-12">
-        <img class="pull-right" style="margin: 20px 0;" src="~/Content/Images/SeedPacketImage.png" alt="SeedPacket Illustration" />
-        <h2>SeedPacket 2.0</h2>
-        <h3 class="byline">the LINQ data generator</h3>
-        <p style="margin-top: -25px;">Created by Will Crowther</p>
-        <h3 style="color: red;">Coming Soon - SeedPacket 3.0 (with support for .net Core 3+)</h3>
+        <h2>SeedPacket 5.0</h2>
+        <h4 class="byline" style="color: red;">the LINQ data generator for .net 5.0</h4>
+        <p style="margin-top: -25px; font-weight: bold;">Created by Will Crowther</p>
+
+        <img class="pull-right" style="margin: 20px 0;" src="~/images/SeedPacketImage.png" alt="SeedPacket Illustration" />
+
+        @*<h3 style="color: red;">Now for .net 5.0</h3>*@
         <h3>Overview</h3>
         <p>
             SeedPacket is for quickly seeding data in .net for graphic mockups, Rapid Application Development (RAD), unit testing,
@@ -43,7 +42,7 @@
             <p>
                 Install SeedPacket using the <b>Nuget Package Manager</b> in Visual Studio.<br />
                 From the Package Manager Console type: <b>PM> Install-Package SeedPacket</b><br />
-                For more details: <b><a href="https://www.nuget.org/packages/SeedPacket">https://www.nuget.org/packages/SeedPacket</a></b>  
+                For more details: <b><a href="https://www.nuget.org/packages/SeedPacket">https://www.nuget.org/packages/SeedPacket</a></b>
             </p>
         </div>
     </div>
@@ -57,7 +56,7 @@
             on an existing an IEnumerable such as List, etc. The <b>table on the right</b> was generated the code in the second example below.
         </p>
 
-        @*<partial name="_Example_SimpleExample" />*@
+        <partial name="_Example_SimpleExample" />
 
         <div class="randomSeed">
             Seed<input id="randomSeed" type="text" value="1234" maxlength="4" style="width:60px; text-align: center;" />
@@ -93,8 +92,8 @@
     </div>
     <div class="col-md-6">
 
-        @*<partial name="_Result_SimpleExample" />
-        <partial name="_HotBox" />*@
+        <partial name="_Result_SimpleExample" model="Model.UserList" />
+        <partial name="_HotBox" />
 
     </div>
 </div>
@@ -102,7 +101,7 @@
 <div class="row">
     <div class="col-md-12">
 
-        @*<partial name="_Example_AdvancedExample" />*@
+        <partial name="_Example_AdvancedExample" />
 
         <h3>Advanced Example</h3>
         <p>
@@ -132,7 +131,7 @@
             will always be the same. We can always pass in a different number seed number if we do not like the data that we get...
         </p>
 
-        @*<partial name="_Result_AdvancedExample" />*@
+        <partial name="_Result_AdvancedExample" />
 
     </div>
 </div>
@@ -145,10 +144,14 @@
     </div>
 </div>
 
-<script language="javascript" type="text/javascript">
+@section scripts
+{
+    <script src="~/js/SeedExamples.js" type="text/javascript" asp-append-version="true"></script>
+    <script language="javascript" type="text/javascript">
 
-    $(document).ready(function () {
-        seedExamples.init();
-    });
-</script>
+        $(document).ready(function () {
+            seedExamples.init();
+        });
+    </script>
+}
 

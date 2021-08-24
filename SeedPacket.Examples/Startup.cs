@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +28,12 @@ namespace SeedPacket.Examples
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
+
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.ViewLocationFormats.Add("/Pages/Home/{0}.cshtml");
+            });
             services.AddRazorPages();
         }
 
@@ -53,6 +60,17 @@ namespace SeedPacket.Examples
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute
+                (
+                    name: "data",
+                    pattern: "Data/{action=Index}/{rows?}"
+                );
+
+                endpoints.MapControllerRoute
+                (
+                    name: "home",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
                 endpoints.MapRazorPages();
             });
         }
