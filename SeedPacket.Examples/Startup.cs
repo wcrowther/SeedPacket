@@ -62,12 +62,6 @@ namespace SeedPacket.Examples
             {
                 endpoints.MapControllerRoute
                 (
-                    name: "data",
-                    pattern: "Data/{action=Index}/{rows?}"
-                );
-
-                endpoints.MapControllerRoute
-                (
                     name: "home",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
