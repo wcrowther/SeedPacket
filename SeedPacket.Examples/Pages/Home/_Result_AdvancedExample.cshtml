@@ -49,15 +49,11 @@
                 <td>@ex.State</td>
                 <td>@ex.Ceo</td>
                 <td>@(string.Format("{0:C}", ex.NetWorth))M</td>
-                <td>
-                    @Html.DropDownListFor(a => ex.SelectedProduct, new SelectList(ex.Products, "ItemId", "ItemName", ex.SelectedProduct), "-None Selected-")
-                </td>
+                <td>@Html.DropDownListFor(a => ex.SelectedProduct, new SelectList(ex.Products, "ItemId", "ItemName", ex.SelectedProduct), "-None Selected-")</td>
                 <td>@ex.Description</td>
                 <td>@ex.ExampleGuid</td>
             </tr>
-            @*<tr>
-                  <td colspan="9">@ex.Notes</td>
-                </tr>*@
+            @*<tr><td colspan="9">@ex.Notes</td></tr>*@
         }
     </tbody>
 </table>

@@ -81,9 +81,8 @@ input[type="checkbox"].input-validation-error {
 .hotBox {
     overflow: hidden;
     position: relative;
-    border: solid 1px #ccc;
     margin-bottom: 20px;
-    background-color: #F5DEDB;
+    background-color: #ccc;
     min-height: 100px;
     padding: 30px 20px 20px 20px;
 }
