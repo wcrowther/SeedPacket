@@ -35,5 +35,18 @@ namespace SeedPacket.Examples.Logic.Extensions
 
             return new SeedCore(gen).SeedList(iDictionary);
         }
+
+        public static T SeedOne<T>(this T type, int? randomSeed = null, string customPropertyName = null) where T : new()
+        {
+            var gen = new CustomGenerator()
+            {
+                SeedBegin = 1,
+                SeedEnd = 1,
+                BaseRandom = new Random(randomSeed ?? defaultSeed),
+                CustomName = customPropertyName
+            };
+
+            return new SeedCore(gen).SeedList(new List<T>()).First();
+        }
     }
 }

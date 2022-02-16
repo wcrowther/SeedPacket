@@ -16,10 +16,8 @@
             <!-- NavBar -->
             <div class="navbar-collapse collapse" id="navBarCollapse">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a class='@Html.IsActive("/Home/Index")' asp-page="/Home/Index">
-                            <img class="small-logo" src="~/images/favicon.png" />Home</a>
-                    </li>
+                    <li><a asp-page="/Home/Index"><img class="small-logo" src="~/images/favicon.png" /></a></li>
+                    <li><a class='@Html.IsActive("/Home/Index")' asp-page="/Home/Index">Home</a></li>
                     <li><a class='@Html.IsActive("/Rules/Index")' asp-page="/Rules/Index">Rules</a></li>
                     <li><a class='@Html.IsActive("/Extending/Index")' asp-page="/Extending/Index">Extending</a></li>
                     <li><a class='@Html.IsActive("/Documentation/Index")' asp-page="/Docs/Index">Docs</a></li>

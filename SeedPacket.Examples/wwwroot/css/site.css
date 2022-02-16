@@ -1,9 +1,34 @@
 @import url(https://fonts.googleapis.com/css?family=Merriweather:400,700,700italic,300);
 
+
+/*
+new light blue: #bedcea
+new dark blue: #0290d2
+new dark blue 2: #63b3d8
+new alternating blue for table: #e5f4fb
+*/
+
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: whitesmoke;
+}
+.background-gradation {
+    position: absolute;
+    background: linear-gradient( 180deg, #bedcea 50%, whitesmoke);
+    height: 200px;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.background-gradation-right-corner {
+    position: fixed;
+    background: linear-gradient( 45deg, transparent 50%, #6e83dadb);
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 html {
     overflow-y: scroll
@@ -82,14 +107,14 @@ input[type="checkbox"].input-validation-error {
     overflow: hidden;
     position: relative;
     margin-bottom: 20px;
-    background-color: #ccc;
     min-height: 100px;
     padding: 30px 20px 20px 20px;
+    background: linear-gradient( 15deg, #bedcea 50%, whitesmoke);
 }
 
 .byline {
-    margin-top: -5px;
-    margin-bottom: 30px;
+    line-height: 1.3;
+    color: red;
 }
 
 /* CodeExample */
@@ -98,12 +123,13 @@ input[type="checkbox"].input-validation-error {
 .codeExample {
     overflow: hidden;
     position: relative;
-    border: solid 1px #ccc;
+    border: solid 1px #bedcea;
     -webkit-border-radius: 0 10px 10px 10px;
     -moz-border-radius: 0 10px 10px 10px;
-    border-radius: 0 10px 10px 10px;
+    border-radius: 0 15px 10px 10px;
     margin-bottom: 20px;
     background-color: white;
+    margin-right: 1px;
 }
 .codeExample code {
     display: block;
@@ -119,7 +145,7 @@ input[type="checkbox"].input-validation-error {
     background-color: #eee;
 }
 .codeExample div.codeTitleBlue {
-    background-color: #ECEDF7;
+    background-color: #bedcea;
 }
 .codeExample div.codeTitleGreen {
     background-color: #F5DEDB;
@@ -131,9 +157,8 @@ input[type="checkbox"].input-validation-error {
     position: relative;
 }
 .codeExample label {
-    background-color: #ccc;
     text-align: center;
-    line-height: 30px;
+    line-height: 32px;
     padding: 5px 20px 3px 20px;
     width: 80px;
     height: 40px;
@@ -141,12 +166,15 @@ input[type="checkbox"].input-validation-error {
     position: absolute;
     top:0;
     right:0;
+    font-size: 12px;
+    letter-spacing: .5px;
+    color: white;
 }
 .codeExample div.codeResults label  {
     border-radius: 0 0 0 10px;
 }
 label.codeLabelBlue {
-    background-color:#83A8D1;
+    background-color: #63b3d8;
 }
 label.codeLabelGreen {
     background-color: #EC8181;
@@ -166,13 +194,13 @@ code i {
 
 .rowCounter,
 .randomSeed {
-    float:right;
+    float: right;
     width: 80px;
     padding: 10px;
     margin-left: 10px;
-    background-color: #CCC;
     text-align: center;
     font-weight: bold;
+    background: linear-gradient( 360deg, #bedcea 50%, whitesmoke);
 }
 .randomSeed { 
     margin-left:0;
@@ -184,15 +212,22 @@ code i {
     background-color: #ccc;
     border-color: transparent;
 }
+.mainContent .navbar-inverse {
+    background: linear-gradient( 34deg, #000 60%, #521852 100%);
+    border: none;
+}
+
 /*  =========================================================================== 
     Bootstrap Overrides / Additions 
 =========================================================================== */
 table {
-    border: solid 1px #83A8D1;
+    border: solid 1px #bedcea;
     background-color: white;
 }
 table thead {
-    background-color: #83A8D1;
+    background-color: #63b3d8;
+    color: white;
+    letter-spacing: .5px;
 }
 .table thead > tr > th {
     border-bottom: none;
@@ -203,11 +238,11 @@ table thead {
 .table thead > tr > td,
 .table tbody > tr > td,
 .table tfoot > tr > td {
-    border-top: 1px solid #83A8D1;
+    border-top: 1px transparent;
 }
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
-    background-color: #ECEDF7;
+    background-color: #e5f4fb;
 }
 /*@media only screen and (max-width: 800px) {
     .table-collapse {
@@ -280,10 +315,8 @@ table thead {
 =========================================================================== 
     Documentation
 =========================================================================== */
-
 /* Namespace H3
 .documentation h3 {} */
-
 .documentation h4, .documentation h5, .documentation strong {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -541,3 +574,4 @@ li a.activeTab {
         margin-bottom: 20px
     }
 }
+

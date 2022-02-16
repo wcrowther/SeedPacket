@@ -3,6 +3,79 @@
 @{
     ViewData["Title"] = "Rules";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Rules</p>
+<div class="row">
+    <div class="col-md-12">
+        <h2>Rules</h2>
+        <h4 class="byline">the default rule sets without customization</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Overview</h3>
+        <p>
+            The Rules collection that governs data generation is highly customizable. You can easily add your own rules, remove rules,
+            replace a Rule with your own version, or even wipe out all the Rules and start over. Consult the
+            <a href="https://github.com/wcrowther/SeedPacket">source code</a> on GitHub for examples to base your own custom Rules on.
+        </p>
+        <p>
+            As the collection is public, it is alway possible to output a list of all the currently loaded rules. Each rule displays name,
+            description (if available), type it matches, and property name it matches (if specified). This list is the default for
+            the MultiDataSource. Keep in mind that order does matter as rules are always applied last to first.
+        </p>
+        <p>
+            <b>Debugging</b> is turned ON by default and writes useful information to the debug Output window in Visual Studio.
+            For each type that is run, the name of each public property, property type, and the name of the Rule that matched it is shown.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Basic Rules Set</h3>
+        <p>
+            This set of Rules is one of the choices for the default MultiGenerator, is deterministic, and covers basic default data types.
+            For instance, for a string type, the "String" rule just returns the name of the property that it is running for with the rownumber
+            appended onto the end. Nullable types act in a similar way, but with 1 in 6 null.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <partial name="_RulesBasic" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Common Rules Set</h3>
+        <p>
+            The Common Rules Set loads the Basic Rules Set and then these additional, more specific, rules are loaded after.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <partial name="_RulesCommon" />
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Creating Custom Rules</h3>
+        <p>
+            The ability to create new, customized versions of a Rule to create data that fits your requirements,  is one of the
+            main strengths of SeedPacket. For more information on the <b>Rule</b> class, consult the <a href="/Docs#Rule">Docs</a>.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="nextpage pull-right" href="/Extending">
+            Extending<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>

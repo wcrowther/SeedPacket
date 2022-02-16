@@ -233,9 +233,8 @@ namespace SeedPacket
 
     public class SingleProperty<T>
     {
-        // This class is a work around that GetMetaProperties() 
-        // may not return anything if there is a single property
-        // but we need a PropertyInfo to construct a MetaProperty
+        // This class is a work around that GetMetaProperties() may not return anything if there
+        // is a single property but we need a PropertyInfo to construct a MetaProperty
         public T Type { get; }
     }
 
