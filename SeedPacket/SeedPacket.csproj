@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;netstandard2.1;netcoreapp3.1;net48</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netcoreapp3.1;net472</TargetFrameworks>
     <Authors>Will Crowther</Authors>
     <Version>3.0.6.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
