@@ -35,18 +35,19 @@ html {
 } 
 html, body {
     height: 100%;
+    min-height: 100vh;
 }
- p, h1, h2, h3, h4, h5, h6, 
+p, h1, h2, h3, h4, h5, h6, 
 .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Merriweather', serif;
 }
- h2, .h2 {
+h2, .h2 {
     margin-top: 50px;
     margin-bottom: 4px;
     font-size: 40px; 
     font-weight: 500;   
 }
- p, ul, li {
+p, ul, li {
     font-weight: 100;
 }
  hr {
@@ -63,9 +64,7 @@ html, body {
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
+input, select, textarea {
     max-width: 280px;
     padding: 4px;
 }
@@ -78,31 +77,24 @@ textarea {
 .field-validation-valid {
     display: none;
 }
-
 input.input-validation-error {
     border: 1px solid #b94a48;
 }
-
 input[type="checkbox"].input-validation-error {
     border: 0 none;
 }
-
 .validation-summary-errors {
     color: #b94a48;
 }
-
 .validation-summary-valid {
     display: none;
 }
-
 .row li {
     margin-bottom: 10px;
 }
-
 .row ul {
     margin-top: 10px;
 }
-
 .hotBox {
     overflow: hidden;
     position: relative;
@@ -111,7 +103,6 @@ input[type="checkbox"].input-validation-error {
     padding: 30px 20px 20px 20px;
     background: linear-gradient( 15deg, #bedcea 50%, whitesmoke);
 }
-
 .byline {
     line-height: 1.3;
     color: red;
@@ -220,6 +211,9 @@ code i {
 /*  =========================================================================== 
     Bootstrap Overrides / Additions 
 =========================================================================== */
+.navbar-nav > li > a {
+    line-height: 31px;
+}
 table {
     border: solid 1px #bedcea;
     background-color: white;
@@ -438,9 +432,10 @@ td.accountInvoices {
     =========================================================================== */
 
 .small-logo {
-    width: 20px;
-    height: 20px;
-    margin-right: 25px;
+    margin-left: -14px;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
 }
 .nav {
     padding-left: 0;
