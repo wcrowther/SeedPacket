@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-                @*@foreach (var song in new List<Song>().Seed().ToList())
+                @foreach (var song in new List<Song>().Seed(15).ToList())
                 {
                     <tr>
                         <td>@song.Ranking</td>
@@ -23,7 +23,7 @@
                         <td>@song.Artist</td>
                         <td>@song.Released.ToShortDateString()</td>
                     </tr>
-                }*@
+                }
             </tbody>
         </table>
     </div>

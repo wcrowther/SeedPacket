@@ -1,0 +1,24 @@
+﻿
+<div class="row">
+    <div class="col-md-6">
+        <h3>Custom Generators</h3>
+        <p>
+            Another extensibility point is demonstrated in the code below by building a custom IGenerator. The <b>CustomGenerator</b>
+            inherits all functionality from the <b>MultiGenerator</b> and adds few new features. In this case, it adds a <b>RulesSet.Advanced</b>
+            option as the default and adds some additional rules, including a Rule that fills the <b>CEO</b> property. Of course these could
+            be more extensive, including a completely new default Rules implementation, etc.
+        </p>
+        <p>
+            The <b>GetRules()</b> method of the <b>MultiGenerator</b> is declared as virtual so that it can be overriden by a derived class.
+            This method is called by the constructor to load its Rules collection based on the RulesSet enum that it is passed. So be overriding it, you can
+            redefine which Rules are loaded for each enum. In fact, 3 values in the enum, Advanced, UnitTest, and Custom do not have an
+            implementation are there purely for customization in derived classes.
+        </p>
+
+        <partial name="_CustomGenerator_HotBox" />
+
+    </div>
+    <div class="col-md-6">
+        <partial name="_CustomGenerator_Example" />
+    </div>
+</div>

@@ -165,10 +165,10 @@ namespace SeedPacket.DataSources
 
             string[] cols = rows[0].Split(separator).Select(s => s.RemoveStartEnd(removeArray) ).ToArray(); // First Line Has Column Headers
 
-            for (int i = 1; i < rows.Count(); i++)
+            for (int i = 1; i < rows.Length; i++)
             {
                 string[] dataList = rows[i].Split(separator);
-                for (int x = 0; x < dataList.Count(); x++)
+                for (int x = 0; x < dataList.Length; x++)
                 {
                     string name = cols[x].RemoveStartEnd(removeArray);
                     string data = dataList[x].RemoveStartEnd(removeArray);

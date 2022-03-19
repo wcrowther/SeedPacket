@@ -1,5 +1,6 @@
 using SeedPacket.Functions;
 using SeedPacket.Generators;
+using SeedPacket.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -16,6 +17,7 @@ namespace SeedPacket.Examples.Logic.Generators
         {
         }
 
+        // Can create custom sets of Rules
         protected override void GetRules(RulesSet ruleSet)
         {
             switch (ruleSet)
@@ -36,7 +38,7 @@ namespace SeedPacket.Examples.Logic.Generators
                 case RulesSet.Advanced:  // <-- Used by default
                     Rules.AddBasicRules();
                     Rules.AddCommonRules();
-                    AdvancedRules();
+                    AddAdvancedRules(Rules);
                     break;
 
                 case RulesSet.UnitTest:
@@ -54,20 +56,25 @@ namespace SeedPacket.Examples.Logic.Generators
                     throw new NotImplementedException("That is not a valid RulesSet.");
             }
         }
-
-        public void AdvancedRules()
+        
+        // Example. Obviously this could be more extensive...
+        public static void AddAdvancedRules(IRules rules, bool overwrite = true)
         {
-            // Example. Obviously this could be more extensive...
-
             var advanceRules = new List<Rule>
             {
-                new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays(g.RowRandom.Next(-30, 1)),                  "DateTimeInLastMonth"),
-                new Rule(typeof(string),"Description%", g => g.GetElementRandom("Description"), "Description",                  "Gets Description from custom XML file"),
-                new Rule(typeof(string),"Ceo",          g => $"{g.GetElementNext("FirstName")} {g.GetElementNext("LastName")}", "Random CEO Name"),
+                new Rule(typeof(DateTime),  "Create%",      g => g.BaseDateTime.AddDays(g.RowRandom.Next(-30, 1)),                  "DateTimeInLastMonth"),
+                new Rule(typeof(string),    "Description%", g => g.GetElementRandom("Description"),                                 "Description", "Gets Description from custom XML file"),
+                new Rule(typeof(string),    "Ceo",          g => GetCeoName(g), "Random CEO Name"),
             };
 
+            rules.AddRange(advanceRules, overwrite);
         }
 
+        // Can break out rules into separate methods for easier debugging or if Rule is complex.
+        private static dynamic GetCeoName(IGenerator g)
+        {
+            return $"{g.GetElementNext("FirstName")} {g.GetElementNext("LastName")}";
+        }
     }
 }
 

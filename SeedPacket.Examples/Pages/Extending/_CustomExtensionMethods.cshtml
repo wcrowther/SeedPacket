@@ -1,0 +1,35 @@
+﻿
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="bottomSpace">
+            <h3>Custom Extension Methods</h3>
+            <p>
+                This example shows a simple yet extremely powerful way to customize data generation for a whole project. The extension method
+                overloads in the <b>SeedPacket.Extensions</b> for the main <b>.Seed()</b> methods have purposely been separated from the actual implementations
+                in the SeedCore class in the root SeedPacket namespace. This means you can easily create your own custom implementation of <b>.Seed()</b>
+                that just works everywhere in you project with your own Rules, defaults and data!
+            </p>
+            <p>
+                The actual code on this page is trivial as it a streamlined version of the <b>SeedPacket.Extensions</b> that you can find
+                in the SeedPacket source code and is a good starting point for your own custom extensions with but with defaults set to your own liking.
+                It simplifies and removes some of the overloads from the source code version, and sets the source data to come from our own XML file.
+                Once you have your ideal solution,  you will find it generic enough that you will be able to take it to other projects to use for prototyping.
+            </p>
+            <p>
+                One thing to note is that the namespace <b>Examples.Extensions</b> is imported into the page, but the <b>SeedPacket.Extensions</b>
+                namespace is <b>NOT</b>. This allows our custom version(s) of .Seed() to work without namespace collisions. Another is that we are
+                using a CustomGenerator that inherits from MultiGenerator. We will look at this a little later on the page.
+            </p>
+        </div>
+
+        <partial name="_CustomExtensionMethods_HotBox" />
+
+    </div>
+
+    <div class="col-md-6">
+        <partial name="_CustomExtensionMethods_Example1" />   
+    </div>
+
+</div>

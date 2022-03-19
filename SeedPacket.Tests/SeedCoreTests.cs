@@ -15,8 +15,8 @@ namespace SeedPacket.Tests
     {
         private string pathToTestXmlFile;
         private string pathToTestJsonFile;
-        private string xmlFile = @"SimpleSeedSource.xml";
-        private string jsonFile = @"JsonSeedSource.json";
+        private const string xmlFile = @"SimpleSeedSource.xml";
+        private const string jsonFile = @"JsonSeedSource.json";
 
         private string testValidXml;
         private string testEmptyXml;

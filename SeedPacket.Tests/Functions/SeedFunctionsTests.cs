@@ -30,8 +30,10 @@ namespace SeedPacket.Tests
 
 		public static string GetApplicationRoot()
 		{
-			var exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
-			var appPathMatcher = new Regex(@"(?<!fil)[A-Za-z]:\\+[\S\s]*?(?=\\+bin)");
+			// OLD VERSION: var exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+
+            string exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var appPathMatcher = new Regex(@"(?<!fil)[A-Za-z]:\\+[\S\s]*?(?=\\+bin)");
 			var appRoot = appPathMatcher.Match(exePath).Value;
 
 			return appRoot;

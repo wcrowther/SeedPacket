@@ -208,6 +208,10 @@ code i {
     border: none;
 }
 
+footer {
+    margin-bottom: 60px;
+}
+
 /*  =========================================================================== 
     Bootstrap Overrides / Additions 
 =========================================================================== */
@@ -485,14 +489,14 @@ li a.activeTab {
     border: solid 1px #9a9a9a;
 }
 .teamsSeed {
-    background-color: #ccc;
+    background: linear-gradient( 45deg, #bedcea 50%, #89a1df);
     padding: 10px;
     font-weight: bold;
     margin-bottom: 20px;
 }
-    .teamsSeed input {
-        margin-left: 10px;
-    }
+.teamsSeed input {
+    margin-left: 10px;
+}
 .bold {
     font-weight: bold;
     color: #346193;

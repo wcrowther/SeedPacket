@@ -13,15 +13,15 @@
                 </tr>
             </thead>
             <tbody>
-                @*@foreach (var user in new List<Example>().Seed(12))
+                @foreach (var example in new List<Example>().Seed(12))
                 {
                     <tr>
-                        <td>@user.Ceo</td>
-                        <td>@user.CompanyName</td>
-                        <td>@user.City</td>
-                        <td>@user.State</td>
+                        <td>@example.Ceo</td>
+                        <td>@example.CompanyName</td>
+                        <td>@example.City</td>
+                        <td>@example.State</td>
                     </tr>
-                }*@
+                }
             </tbody>
         </table>
     </div>
