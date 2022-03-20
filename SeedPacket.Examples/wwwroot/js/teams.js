@@ -93,6 +93,8 @@ const vueApp = new Vue({
         },
         setActiveTeam: function (team)
         {
+            // console.log('team: ' + team.Name);
+
             if (typeof team === 'undefined' || team === null)
                 this.ActiveTeam = null;
             else

@@ -43,9 +43,7 @@
         </div>
     </div>
 
-    <button id="team-show-all" v-show="ActiveTab == 2" class="bubble" @@click="setActiveTeam()" :disable="true">Show All</button>
-
-    @*<button id="testButton" @@click="showTestButtonId()" >TestButton</button>*@
+    @*<button id="testButton" style="z-index: 1000;" @@click="showTestButtonId()" >TestButton</button>*@
 
     <ul class="nav nav-tabs">
         <li><a @@click="activeTab=0" :class="{'activeTab' : ActiveTab == 0}" style="color: black;">By Date</a></li>
@@ -56,7 +54,7 @@
     <div class="row gameBox" v-if="ActiveTab == 0" id="GamesByDate" v-cloak>
         <div class="col-xs-12 sectionHeader">Games</div>
         <div class="col-xs-12 sectionContent">
-            <table class="table table-striped topSpace table-collapse">
+            <table class="table table-striped topSpace table-collapse football-table">
                 <thead>
                     <tr>
                         <th style="text-align: right;"></th>
@@ -88,7 +86,7 @@
         <template v-for="week in gamesByWeek">
             <div class="col-xs-12 sectionHeader" :key="week.key">Week {{ week.key }}</div>
             <div class="col-xs-12 sectionContent">
-                <table class="table table-striped topSpace table-collapse">
+                <table class="table table-striped topSpace table-collapse football-table">
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
@@ -137,12 +135,16 @@
         </div>
 
         <template v-for="team in Teams" v-if="ActiveTeam ? team.Id == ActiveTeam.Id : true">
-            <div class="col-xs-6 sectionHeader" :key="team.Id">
-                <football-icon size="medium" :team="team"></football-icon> &nbsp; {{team.Location}} {{team.Name}}
+            <div class="col-xs-9 sectionHeader" :key="team.Id">
+                <football-icon size="medium" :team="team"></football-icon> &nbsp; 
+                <span>{{team.Location}} {{team.Name}}</span>
+                <span> - {{team.Conference}} {{team.Division}}</span>
             </div>
-            <div class="col-xs-6 sectionHeader team-conf-div">{{team.Conference}} {{team.Division}}</div>
+            <div class="col-xs-3 sectionHeader team-conf-div">
+                <button id="team-show-all" v-show="ActiveTab == 2" class="bubble" @@click="setActiveTeam()">Show All</button>
+            </div>
             <div class="col-xs-12">
-                <table class="table table-striped topSpace bottomSpace table-collapse">
+                <table class="table table-striped topSpace bottomSpace table-collapse football-table">
                     <thead>
                         <tr>
                             <th style="text-align: right;">Home Team</th>

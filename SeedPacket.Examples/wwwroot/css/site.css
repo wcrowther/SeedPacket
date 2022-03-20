@@ -522,6 +522,7 @@ nav.navTabs li a {
     padding: 10px;
     font-weight: bold;
     margin-bottom: 20px;
+    min-width: 400px;
 }
 .teamsSeed input {
     margin-left: 10px;
@@ -586,16 +587,16 @@ nav.navTabs li a {
     outline: 0;
     line-height: 16px;
 }
-    .bubble:hover {
-        background-color: #b0cdec;
-    }
+.bubble:hover {
+    background-color: #b0cdec;
+}
 .team-conf-div {
     text-align: right;
     line-height: 46px;
 }
 #team-show-all {
-    margin-top: 2px;
-    float: right;
+    background: transparent;
+    white-space: nowrap;
 }
 .sectionHeader {
     color: #346193;
@@ -606,5 +607,9 @@ nav.navTabs li a {
     .teamsSeed {
         margin-bottom: 20px
     }
+}
+
+.football-table {
+    min-width: 400px;
 }
 
