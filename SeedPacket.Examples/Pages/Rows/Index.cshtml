@@ -2,13 +2,54 @@
 @model RowsModel
 
 @{
-    ViewData["Title"] = "24,000 Rows";
+    ViewData["Title"] = "Generate 25,000 Rows";
 }
 
 <div class="row">
     <div class="col-md-12">
         <h2>@ViewData["Title"]</h2>
-        <h4 class="byline">Sample of 4000 Invoices with 20,000 Line Items</h4>
-        <div style="min-height: 600px;"></div>
+        <h4 class="byline">this Sample Generates 1000 Accounts,<br />
+            with 4000 Invoices & 20,000 Line Items</h4>
+        <p>
+            This example shows how you can create 1000 Account records, that each have from 0 to 4 Invoices, which each have 
+            from 1 to 8 InvoiceItems. The intention here is to show that you can have some complex nested data structures with
+            large numbers of seeded items and the result will still be performant. 
+        </p>
+        <p>
+            If you look at the code in the controller, we are pre-generating a list containing 20,000 rows of InvoiceItems
+            and 4000 rows of invoices. These cached lists are then used by the "getRandomInvoiceItems" and "getRandomInvoices" rules
+            which utilize the <b>Funcs.GetCacheItemsRandom()</b> and <b>Funcs.GetCacheItemsNext()</b> methods to get either a number of random
+            items or a number of the next sequential items from a cached list. The <b>Funcs.GetCacheItemsRandom()</b> menthod usually 
+            takes 150% longer (or more) to process due to the overhead of randomizing the order of items returned.
+        </p>
+        <p>
+            The number of items taken is driven by the min and max parameters. To get a static number of items, just set
+            both parameters to the same number. The item is removed from the cached list by default after being retrieved. 
+            Setting the "remove" parmeter to false if will leave the item in the cached list, if that is desired. If there 
+            are no more items in the cached list, the method will fail silently, so it is best practice to manually estimate
+            how many rows are required ahead of time.
+        </p>
+        <p>
+            <b>Calculated on the fly, it took <i class="emphasis">@Model.ElapsedTime milliseconds</i> to generate these 24,000 rows of data.</b>
+        </p>
+        <p>
+            The source code also shows an example that breaks out the GetInvoices() rule into an external function. This example shows
+            how to apply extra logic to make the Invoice.AccountId match the actual AccountId in the Account it is nested under. Breaking 
+            the logic into an external function is also useful for debugging the logic...
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <partial name="_24kRowsExample" model="@Model.Accounts" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="nextpage pull-right" href="/Rules">
+            Rules<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+        </a>
     </div>
 </div>

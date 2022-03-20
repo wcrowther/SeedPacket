@@ -204,14 +204,25 @@ code i {
     border-color: transparent;
 }
 .mainContent .navbar-inverse {
-    background: linear-gradient( 34deg, #000 60%, #521852 100%);
+    background: linear-gradient( 20deg, #000 60%, #873f87 100%);
     border: none;
 }
-
 footer {
     margin-bottom: 60px;
 }
-
+.emphasis {
+    color: red;
+}
+.small-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+@media (min-width: 768px) {
+    .small-logo {
+        margin-left: -14px;
+    }
+}
 /*  =========================================================================== 
     Bootstrap Overrides / Additions 
 =========================================================================== */
@@ -345,27 +356,32 @@ table thead {
 .invoiceTable {
     width: 100%; 
     margin-bottom: 20px;
-    border: none;
+    border: 1px solid #ccc;
 }
 .invoiceTable tr {
 
 }
-.invoiceTable td {
+.invoiceTable tr td, 
+.invoiceTable tr th {
     border-color: #ccc !important;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding: 5px 10px;
+    border-bottom: 1px solid;
 }
 .invoiceTable tr:last-child {
     border-bottom: 1px solid #ccc;
 }
 .accountTable {
-    border: solid 1px #83A8D1;
-    border-collapse: initial;
+    border-right: #6e83dadb;
 }
-.accountRow {
+.accountTable tr.accountRow {
+    background: linear-gradient( 45deg, #bedcea 10%, #6e83dadb 60%);
+    color: black;
+    padding-left: 25px;
+    font-weight: bold;
+    font-style: italic;
 }
-.accountRow td {
-    background-color: #c4d7ec !important;
+.accountTable tr td h4{
+    padding-left: 25px;
 }
 .accountTable td {
     width: 16%;
@@ -386,14 +402,31 @@ td.accountInvoices {
     border: solid 2px #ccc;
     padding: 10px;
     margin-bottom: 20px;
-    border-top-right-radius: 45px
 }
 .invoiceHeader {
     background-color: #ccc;
-    margin: -10px -10px 20px -10px;
+    padding: 30px 15px;
+}
+.invoiceSubHeader, .invoiceFooter {
+    background-color: #e3e3e3;
     padding: 15px;
-    vertical-align: middle;
-    border-top-right-radius: 40px
+}
+.invoiceSubHeader {
+    color: #64647c;
+    font-style: italic;
+}
+.invoiceFooter {
+
+}
+div.no-invoices {
+    background-color: #e3e3e3;
+    text-align: center;
+    font-weight: bold;
+    color: #64647c;
+    font-style: italic;
+    border: solid 1px #ccc;
+    padding: 10px;
+    margin: 0px;
 }
 .seedOne {
     border: solid 1px #83A8D1;
@@ -435,12 +468,6 @@ td.accountInvoices {
     Football Page
     =========================================================================== */
 
-.small-logo {
-    margin-left: -14px;
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-}
 .nav {
     padding-left: 0;
     margin-bottom: 0;
@@ -457,12 +484,20 @@ td.accountInvoices {
     border-radius: 4px 4px 0 0;
     top: 1px;
     border: 2px solid transparent;
-    border-bottom: 0;
+}
+.nav-tabs > li > a:hover {
+    border: solid 2px #83a8d1;
+    background: linear-gradient( 0deg, #dfdfdf 10%, whitesmoke 69%);
 }
 li a.activeTab {
     border: solid 2px #83a8d1;
-    border-bottom: none;
+    border-bottom-color: whitesmoke;
     background-color: whitesmoke;
+}
+li a.activeTab:hover {
+    border: solid 2px #83a8d1;
+    background: linear-gradient( 180deg, #dfdfdf 10%, whitesmoke 69%);
+    border-bottom-color: whitesmoke;
 }
 nav.navTabs li a {
     color: black;
@@ -471,15 +506,9 @@ nav.navTabs li a {
 .gameBox {
     margin-top: 10px;
 }
-li a.activeTab {
-    border: solid 2px #83a8d1;
-    border-bottom: none;
-    background-color: whitesmoke;
-}
 .elapsedTime {
     float: right;
     font-style: italic;
-    color: #83A8D1;
 }
 #openingSunday {
     margin-left: 10px;
@@ -507,19 +536,19 @@ li a.activeTab {
     display: inline-block;
     width: 30px;
     height: 25px;
-    background-image: url('../Content/images/NFL-Logos-25-percent.png');
+    background-image: url('/images/NFL-Logos-25-percent.png');
     background-repeat: no-repeat;
     vertical-align: middle;
 }
 .football-icon-medium {
     width: 60px;
     height: 50px;
-    background-image: url('../Content/images/NFL-Logos-50-percent.png');
+    background-image: url('/images/NFL-Logos-50-percent.png');
 }
 .football-icon-large {
     width: 120px;
     height: 100px;
-    background-image: url('../Content/images/NFL-Logos.png');
+    background-image: url('/images/NFL-Logos.png');
 }
 .conference-box {
     /* background-color: white; */
@@ -567,6 +596,11 @@ li a.activeTab {
 #team-show-all {
     margin-top: 2px;
     float: right;
+}
+.sectionHeader {
+    color: #346193;
+    font-weight: bold;
+    margin-top: 5px;
 }
 @media only screen and (max-width: 992px) {
     .teamsSeed {

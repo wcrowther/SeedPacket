@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
+using SeedPacket.Examples.Logic.Interfaces;
+using SeedPacket.Examples.Logic.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,13 +31,21 @@ namespace SeedPacket.Examples
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            // Add Services here
+            services.AddScoped<ITeamsManager, TeamsManager>();
+
             services.AddControllersWithViews();
+            services.AddRazorPages()
+                    .AddNewtonsoftJson(opt => // Stops return json from automatically being pascal-cased
+                            opt.SerializerSettings.ContractResolver = new DefaultContractResolver()
+                     );
 
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.ViewLocationFormats.Add("/Pages/Home/{0}.cshtml");
             });
-            services.AddRazorPages();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

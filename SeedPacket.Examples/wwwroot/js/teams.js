@@ -100,16 +100,18 @@ const vueApp = new Vue({
         },
         getFootballInfo: function ()
         {
-            console.log('GetFootballInfo for: ' + this.Year);
+            // console.log('GetFootballInfo for Year: ' + this.Year + ' for Seed: ' + this.Seed);
             let self = this;
 
             $.ajax({
                 type: 'POST',
-                url: '/Teams/GetFootballInfo',
-                data: JSON.stringify({ Seed: this.Seed, Year: this.Year }),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'JSON', //'html',
-                success: function (result) {
+                url: '/Data/GetFootballInfo',
+                data: { 'seed': this.Seed, "year": this.Year },                 // Use this format with  CORE 5
+                // data: JSON.stringify({ Seed: this.Seed, Year: this.Year }),  // No longer works with  CORE 5
+                // contentType: 'application/json;',                            // No longer works with  CORE 5
+                dataType: 'json',                                               // Must be lowercase for CORE 5
+                success: function (result)
+                {
                     self.Teams = result.Teams;
                     self.Games = result.Games;
                     self.OpeningSunday = result.OpeningSunday;
@@ -127,15 +129,18 @@ const vueApp = new Vue({
                 }
             });
         },
-        gamesByTeam: function () {
-            for (var i = 0; i < this.Teams.length; i++) {
+        gamesByTeam: function ()
+        {
+            for (var i = 0; i < this.Teams.length; i++)
+            {
                 var team = Teams[i];
 
                 this.Teams[i].games = this.Games.filter(g => g.HomeTeam.Id === team.Id ||
                     g.AwayTeam.Id === team.Id)
             }
         },
-        teamsByConference: function (confId, divId) {
+        teamsByConference: function (confId, divId)
+        {
             return this.Teams.filter(g => g.ConfId === confId && g.DivId === divId);
         }
     }
