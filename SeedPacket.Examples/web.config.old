@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+
+	<location path="." inheritInChildApplications="false">
+		<system.webServer>
+			<handlers>
+				<add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModuleV2" resourceType="Unspecified" />
+			</handlers>
+			<!-- stdoutLogEnabled="true" logs to directory -->
+			<aspNetCore processPath=".\SeedPacket.Examples.exe" stdoutLogEnabled="true" stdoutLogFile=".\logs\stdout" hostingModel="OutOfProcess">
+				<environmentVariables>
+					<environmentVariable name="ASPNETCORE_ENVIRONMENT" value="Production" />
+				</environmentVariables>
+			</aspNetCore>
+		</system.webServer>
+	</location>
+
+	<!-- ENABLE ERRORS 
+	<system.web>
+		<customErrors mode="Off" />
+	</system.web>
+
+	<system.webServer>
+		<httpErrors errorMode="Detailed" />
+	</system.webServer>
+	-->
+</configuration>
+

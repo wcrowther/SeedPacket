@@ -2,12 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+	<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel> 
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
     <UserSecretsId>1ca52874-88d8-400f-a2dc-9e73c0f144a3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Remove="Logic\SourceFiles\JsonGeneratorSource.json" />
+    <Content Remove="web.config" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,16 +24,27 @@
   <ItemGroup>
     <Content Include="Logic\SourceFiles\FootballSource.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Logic\SourceFiles\seedsource.xml" />
-    <Content Include="Logic\SourceFiles\sourceData2.xml" />
-    <Content Include="Logic\SourceFiles\xmlSeedSourcePlus.xml" />
+    <Content Include="Logic\SourceFiles\seedsource.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Logic\SourceFiles\sourceData2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Logic\SourceFiles\xmlSeedSourcePlus.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Reference\NFL Scheduling 2020.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Logic\SourceFiles\JsonGeneratorSource.json" />
-    <EmbeddedResource Include="Logic\SourceFiles\XmlGeneratorSource.xml" />
+    <EmbeddedResource Include="Logic\SourceFiles\JsonGeneratorSource.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logic\SourceFiles\XmlGeneratorSource.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +54,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SeedPacket\SeedPacket.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Logic\SourceFiles\jsonseedsource.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Logic\SourceFiles\jsonseedsource2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
