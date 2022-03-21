@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using SeedPacket.Examples.Logic.Interfaces;
 using SeedPacket.Examples.Logic.Managers;
+using SeedPacket.Examples.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,12 +32,13 @@ namespace SeedPacket.Examples
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(Configuration.GetSection("App").Get<AppSettings>());
             
             // Add Services here
             services.AddScoped<ITeamsManager, TeamsManager>();
 
             services.AddControllersWithViews();
-            services.AddRazorPages()
+            services.AddRazorPages() //.AddRazorRuntimeCompilation()
                     .AddNewtonsoftJson(opt => // Stops return json from automatically being pascal-cased
                             opt.SerializerSettings.ContractResolver = new DefaultContractResolver()
                      );

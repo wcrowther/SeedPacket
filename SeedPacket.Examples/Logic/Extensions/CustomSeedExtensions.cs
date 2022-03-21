@@ -1,7 +1,10 @@
+using Microsoft.Extensions.Configuration;
 using SeedPacket.Examples.Helpers;
 using SeedPacket.Examples.Logic.Generators;
+using SeedPacket.Examples.Logic.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using static WildHare.Extensions.Xtra.XtraExtensions;
@@ -11,7 +14,8 @@ namespace SeedPacket.Examples.Logic.Extensions
     public static class CustomSeedExtensions
     {
         private static readonly int defaultSeed = 34567;
-        private static readonly string sourcePath = $@"{GetApplicationRoot()}\Logic\SourceFiles\xmlSeedSourcePlus.xml";
+        private static readonly string sourcePath = AppSettings.Current.CustomXmlSourceFile;
+            //$@"{GetApplicationRoot()}\Logic\SourceFiles\xmlSeedSourcePlus.xml";
 
         public static List<T> Seed<T>(  this IEnumerable<T> iEnumerable, 
                                         int? seedEnd = null, int? seedBegin = null, 
