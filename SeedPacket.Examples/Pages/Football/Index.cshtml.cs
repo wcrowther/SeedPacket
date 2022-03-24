@@ -25,6 +25,7 @@ namespace SeedPacket.Examples.Pages
 
         
         // TODO Revisit this later. I want to understand how to do AJAX (and Partial page) from web page.
+        // Currently I have a DataController that returns the Partial page.
         //
         // public JsonResult OnGetFootballInfo(int seed, int year, DateTime? customSunday = null)
         // {
