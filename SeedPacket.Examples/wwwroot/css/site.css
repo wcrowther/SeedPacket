@@ -124,8 +124,7 @@ input[type="checkbox"].input-validation-error {
     color: black;
 }
 .code-scrolls-div {
-    background: #bedcea;
-    text-align: center;
+    background: transparent;    /* #bedcea */
     padding: 5px;
 }
 .code-scrolls-span {
