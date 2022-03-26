@@ -123,7 +123,16 @@ input[type="checkbox"].input-validation-error {
     border: solid 1px black;
     color: black;
 }
-
+.code-scrolls-div {
+    background: #bedcea;
+    text-align: center;
+    padding: 5px;
+}
+.code-scrolls-span {
+    color: #5d9fd7;
+    font-style: italic;
+    letter-spacing: .04em;
+}
 
 /* CodeExample */
 /* box-sizing: border-box is in effect from bootstrap */
