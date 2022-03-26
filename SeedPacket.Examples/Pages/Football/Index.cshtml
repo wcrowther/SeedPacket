@@ -54,7 +54,7 @@
     <div class="row gameBox" v-if="ActiveTab == 0" id="GamesByDate" v-cloak>
         <div class="col-xs-12 sectionHeader">Games</div>
         <div class="col-xs-12 sectionContent">
-            <table class="table table-striped topSpace table-collapse football-table">
+            <table class="table table-striped top-margin table-collapse football-table">
                 <thead>
                     <tr>
                         <th style="text-align: right;"></th>
@@ -86,7 +86,7 @@
         <template v-for="week in gamesByWeek">
             <div class="col-xs-12 sectionHeader" :key="week.key">Week {{ week.key }}</div>
             <div class="col-xs-12 sectionContent">
-                <table class="table table-striped topSpace table-collapse football-table">
+                <table class="table table-striped top-margin table-collapse football-table">
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
@@ -117,7 +117,7 @@
 
     <div v-if="ActiveTab == 2" id="GamesByTeam" class="row gameBox" v-cloak>
 
-        <div class="col-xs-12 topSpace bottomSpace">
+        <div class="col-xs-12 top-margin bottom-margin">
             <div class="col-xs-6 conference-box row-no-gutters" style="border-left: 0;">
                 <div v-for="divId in 4" class="col-xs-3">
                     <div v-for="team in teamsByConference(1, divId)" class="col-sm-3 col-md-6 col-sm-3 col-lg-3 team-box">
@@ -144,7 +144,7 @@
                 <button id="team-show-all" v-show="ActiveTab == 2" class="bubble" @@click="setActiveTeam()">Show All</button>
             </div>
             <div class="col-xs-12">
-                <table class="table table-striped topSpace bottomSpace table-collapse football-table">
+                <table class="table table-striped top-margin bottom-margin table-collapse football-table">
                     <thead>
                         <tr>
                             <th style="text-align: right;">Home Team</th>

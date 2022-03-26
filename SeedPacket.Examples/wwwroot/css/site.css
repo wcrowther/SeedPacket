@@ -24,7 +24,7 @@ body {
 }
 .background-gradation-right-corner {
     position: fixed;
-    background: linear-gradient( 45deg, transparent 50%, #6e83dadb);
+    background: linear-gradient( 45deg, transparent 60%, #6e83dadb);
     height: 100%;
     top: 0;
     left: 0;
@@ -107,6 +107,23 @@ input[type="checkbox"].input-validation-error {
     line-height: 1.3;
     color: red;
 }
+.side-scroll {
+    overflow-x: auto;
+}
+.scroll-pill-div {
+    text-align: center;
+}
+.scroll-pill, .scroll-pill-blue {
+    border: solid 1px black;
+    border-radius: 15px;
+    padding: 7px 10px 6px 10px;
+    letter-spacing: .02em;
+}
+.scroll-pill-blue {
+    border: solid 1px black;
+    color: black;
+}
+
 
 /* CodeExample */
 /* box-sizing: border-box is in effect from bootstrap */
@@ -196,7 +213,10 @@ code i {
 .randomSeed { 
     margin-left:0;
 }
-.topSpace {
+.top-margin {
+    margin-top: 30px;
+}
+.top-margin-small {
     margin-top: 30px;
 }
 .navbar-custom {
@@ -218,11 +238,7 @@ footer {
     height: 24px;
     margin-right: 10px;
 }
-@media (min-width: 768px) {
-    .small-logo {
-        margin-left: -14px;
-    }
-}
+
 /*  =========================================================================== 
     Bootstrap Overrides / Additions 
 =========================================================================== */
@@ -253,22 +269,7 @@ table thead {
 .table-striped > tbody > tr:nth-child(odd) > th {
     background-color: #e5f4fb;
 }
-/*@media only screen and (max-width: 800px) {
-    .table-collapse {
-        display: block;
-        overflow-y: hidden;
-        overflow-x: scroll;
-        width: 100%;
-    }
-}
-@media only screen and (max-width: 550px) {
-    .table-collapse-sm {
-        display: block;
-        overflow-y: hidden;
-        overflow-x: scroll;
-        width: 100%;
-    }
-}*/
+
 
 /* Green table */
 
@@ -446,12 +447,11 @@ div.no-invoices {
     font-weight: bold;
     text-align: right;
 }
-.topSpace {
-    margin-top: 15px;
-}
-
-.bottomSpace {
+.bottom-margin {
     margin-bottom: 30px;
+}
+.bottom-margin-small {
+    margin-bottom: 15px;
 }
 .widget {
     position: fixed;
@@ -603,13 +603,68 @@ nav.navTabs li a {
     font-weight: bold;
     margin-top: 5px;
 }
+
+.football-table {
+    min-width: 390px;
+}
+
+/* ============================================================================================================ 
+    @Media - 
+ ============================================================================================================ 
+    https ://getbootstrap.com/docs/3.4/css/#responsive-utilities-classes
+
+    Bootstrap 3 values
+    xs  <   768  px
+    sm  >=  768  px
+    md  >=  992  px
+    lg  >=  1200 px
+
+    https: //getbootstrap.com/docs/4.1/layout/overview/
+
+    Bootstrap 4 values
+    xs  <   576  px
+    sm  >=  576  px
+    md  >=  768  px
+    lg  >=  992  px
+    xl  >=  1200 px
+*/
+
+/* display if less than 576px ------------------------------------------------------------------------------ */
+
+@media only screen and (max-width: 575.98px) {
+
+    .xss-inline {
+        display: none;
+    }
+    .background-gradation-right-corner {
+        background: linear-gradient( 45deg, transparent 75%, #6e83dadb);
+    }
+}
+
+@media only screen and (min-width: 575.98px) and (max-width: 768px) {
+
+    .background-gradation-right-corner {
+        background: linear-gradient( 45deg, transparent 68%, #6e83dadb);
+    }
+}
+
+/* md  >=  768px ------------------------------------------------------------------------------------------- */
+
+@media only screen and (min-width: 768px) {
+    .small-logo {
+        margin-left: -14px;
+    }
+    .hide-bigger-than-md {
+        display: none;
+    }
+
+}
+
+/* Max sizes      ------------------------------------------------------------------------------------------- */
+
 @media only screen and (max-width: 992px) {
     .teamsSeed {
         margin-bottom: 20px
     }
-}
 
-.football-table {
-    min-width: 400px;
 }
-
