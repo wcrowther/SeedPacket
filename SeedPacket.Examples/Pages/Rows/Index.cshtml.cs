@@ -55,9 +55,7 @@ namespace SeedPacket.Examples.Pages
         private List<Account> GetAccounts(int rowCount)
         {
             var baseRandom = new Random(2342789);
-            int baseAccountId = 3464;
-            int baseInvoiceId = 12799;
-            int baseItemId = 1098887;
+            int baseAccountId = 3464, baseInvoiceId = 12799, baseItemId = 1098887;
 
             var generator = new MultiGenerator(xmlSeedSourcePlusPath, baseRandom: baseRandom)
             {
@@ -67,7 +65,7 @@ namespace SeedPacket.Examples.Pages
                     new Rule(typeof(DateTime), "Create%",   g => g.BaseDateTime.AddDays (g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth"  ),
                     new Rule(typeof(string),"Description%", g => Funcs.GetElementRandom(g, "Description"), "Description", "Gets Description from custom XML file" ),
                     new Rule(typeof(List<InvoiceItem>), "", g => Funcs.GetListFromCacheNext<InvoiceItem>(g, "InvoiceItems", 1, 8), "getInvoiceItems"),
-                    new Rule(typeof(List<Invoice>), "",     g => GetInvoices(g), "getInvoices")
+                    new Rule(typeof(List<Invoice>), "",     g => Funcs.GetListFromCacheNext<Invoice>(g, "Invoices", 0, 5), "getInvoices")  // GetAccountInvoices(g)
                 }
             };
             generator.Cache.InvoiceItems = new List<InvoiceItem>().Seed(baseItemId, baseItemId + (rowCount * 20), generator);
@@ -76,7 +74,8 @@ namespace SeedPacket.Examples.Pages
             return new List<Account>().Seed(1, rowCount, generator).ToList();
         }
 
-        private static List<Invoice> GetInvoices(IGenerator g)
+        // See note below
+        private static List<Invoice> GetAccountInvoices(IGenerator g)
         {
             int accountId = Convert.ToInt32(g?.CurrentRowValues["AccountId"]);
             var invoices  = Funcs.GetListFromCacheNext<Invoice>(g, "Invoices", 0, 5);
@@ -91,7 +90,10 @@ namespace SeedPacket.Examples.Pages
     }
 }
 
-
+// ---------------------------------------------------------------------------------------------------------
 // The Private GetInvoices() method above is an example where rule is broken out into a separate function
-// 1) For adding extra logic like making the accountId in the invoice the actual accountId in parent
-// 2) Useful if debugging is needed as the code is much easier to isolate when in a separate function.
+// ---------------------------------------------------------------------------------------------------------
+// 1) Adding extra logic to make the accountId in the invoice match the actual accountId in parent
+// 2) Also useful if debugging is needed as the code is easier to isolate when in a separate function
+// 3) Without needing the accountId match it can be simplified to:
+//    Funcs.GetListFromCacheNext<Invoice>(g, "Invoices", 0, 5)

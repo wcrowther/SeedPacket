@@ -5,7 +5,7 @@ const vueApp = new Vue({
     data: {
     Settings:
         {
-    CookieDuration: 7
+            CookieDuration: 7
         },
         ActiveTab: 0,
         Seed: 1234,

@@ -7,6 +7,7 @@ namespace SeedPacket.Functions
 {
     public static partial class Funcs
     {
+        // Wrap parameter no longer used and will be removed.
         public static string GetElementRandom (this IGenerator generator, string identifier = null, bool nullIfEmpty = false, bool wrap = true)
         {
             // Get propertyName from generator to use if identfier not set
@@ -15,11 +16,8 @@ namespace SeedPacket.Functions
 
             var elementList = generator.Datasource.GetElementList(propertyName);
             int index = generator.RowRandom.Next(elementList.Count);
-
-            if (wrap)
-                return elementList?.ElementInOrDefault(index) ?? defaultValue; 
-            else
-                return elementList?.ElementAtOrDefault(index) ?? defaultValue;
+            
+            return elementList?.ElementInOrDefault(index) ?? defaultValue; 
         }
 
         public static dynamic GetElementRandom (this IGenerator generator, string identifier, TypeCode typeCode, bool wrap = true)

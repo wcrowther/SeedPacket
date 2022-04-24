@@ -1,0 +1,181 @@
+{
+     "SeedPacket" :
+     {
+          "DataInputType" :
+          {
+          },
+          "RulesExtensions" :
+          {
+               "AddBasicRules(IRules rules, Boolean overwrite)" : "",
+               "AddCommonRules(IRules rules, Boolean overwrite)" : ""
+          },
+          "Rule" :
+          {
+               "ApplyRule(IGenerator generator)" : "",
+               "IsMatch(Type propType, String propName)" : "",
+               "ToString()" : ""
+          },
+          "Rules" :
+          {
+               "Add(Rule rule, Boolean overwrite)" : "",
+               "AddRange(IEnumerable`1 rules, Boolean overwrite)" : "",
+               "GetRuleByTypeAndName(Type propertyType, String propertyName)" : "",
+               "RemoveRuleByName(String ruleName)" : ""
+          },
+          "RulesSet" :
+          {
+          },
+          "SeedCore" :
+          {
+               "SeedList``1(IEnumerable`1 iEnumerable)" : "",
+               "SeedList``2(IDictionary`2 dictionary)" : ""
+          },
+          "SingleProperty`1" :
+          {
+          },
+          "SimpleSeed" :
+          {
+               "Next(String identifier, Int32 number, String ifNull)" : "",
+               "Randomize(String identifier, String ifNull)" : ""
+          }
+     },
+     "SeedPacket.DataSources" :
+     {
+          "JsonDataSource" :
+          {
+               "GetElementList(String identifier)" : "",
+               "GetObjectList``1(String identifier)" : "",
+               "Load(String sourceFilePath)" : "",
+               "LoadDefaultData()" : "",
+               "Parse(String json, String source)" : ""
+          },
+          "MultiDataSource" :
+          {
+               "GetElementList(String identifier)" : "",
+               "GetObjectList``1(String identifier)" : ""
+          },
+          "XmlDataSource" :
+          {
+               "GetElementList(String identifier)" : "",
+               "GetObjectList``1(String identifier)" : "",
+               "Load(String sourceFilePath)" : "",
+               "LoadDefaultData()" : "",
+               "Parse(String xml, String source)" : ""
+          },
+          "XmlDataSourceExtensions" :
+          {
+               "ToObject``1(XElement element)" : ""
+          }
+     },
+     "SeedPacket.Exceptions" :
+     {
+          "InvalidDefaultDataException" :
+          {
+          },
+          "InvalidFilePathException" :
+          {
+          },
+          "InvalidSeedParametersException" :
+          {
+          },
+          "InvalidSourceException" :
+          {
+          },
+          "InvalidTildePathException" :
+          {
+          },
+          "MultipleSourceException" :
+          {
+          },
+          "NoSourceException" :
+          {
+          }
+     },
+     "SeedPacket.Extensions" :
+     {
+          "SeedExtensions" :
+          {
+               "Seed``1(IEnumerable`1 iEnumerable, Int32 count, Random random)" : "",
+               "Seed``1(IEnumerable`1 iEnumerable, IGenerator generator)" : "",
+               "Seed``1(IEnumerable`1 iEnumerable, Int32 seedBegin, Int32 seedEnd, String filePath, String customPropertyName, List`1 addRules)" : "",
+               "Seed``1(IEnumerable`1 iEnumerable, Nullable`1 seedBegin, Nullable`1 seedEnd, IGenerator generator, String customPropertyName, Random baseRandom)" : "",
+               "Seed``2(IDictionary`2 iDictionary, Int32 count, Random random)" : "",
+               "Seed``2(IDictionary`2 iDictionary, IGenerator generator)" : "",
+               "Seed``2(IDictionary`2 iDictionary, Int32 seedBegin, Int32 seedEnd, String filePath, String customPropertyName, List`1 addRules)" : "",
+               "Seed``2(IDictionary`2 iDictionary, Nullable`1 seedBegin, Nullable`1 seedEnd, IGenerator generator, String currentPropertyName, Random baseRandom)" : ""
+          }
+     },
+     "SeedPacket.Functions" :
+     {
+          "Funcs" :
+          {
+               "DiceRoll(IGenerator generator, Int32 diceSides, Int32 numberOfDice)" : "",
+               "GetElementNext(IGenerator generator, String identifier, Int32 offset, Boolean wrap)" : "",
+               "GetElementRandom(IGenerator generator, String identifier, Boolean nullIfEmpty, Boolean wrap)" : "",
+               "GetElementRandom(IGenerator generator, String identifier, TypeCode typeCode, Boolean wrap)" : "",
+               "GetListFromCacheNext``1(IGenerator generator, String cacheListName, Int32 min, Int32 max, Boolean remove)" : "",
+               "GetListFromCacheNext``1(IGenerator generator, Object cacheList, Int32 min, Int32 max, Boolean remove)" : "",
+               "GetListFromCacheRandom``1(IGenerator generator, String cacheListName, Int32 min, Int32 max, Boolean remove)" : "",
+               "GetObjectNext``1(IGenerator generator, String identifier, Int32 offset)" : "",
+               "GetObjectRandom``1(IGenerator generator, String identifier, Boolean nullIfEmpty)" : "",
+               "GetOneFromCacheNext``1(IGenerator generator, String cacheListName, Boolean remove)" : "",
+               "GetOneFromCacheNext``1(IGenerator generator, Object cacheList, Boolean remove)" : "",
+               "GetOneFromCacheRandom``1(IGenerator generator, String cacheListName, Boolean remove)" : "",
+               "GetOneFromCacheRandom``1(IGenerator generator, Object cacheList, Boolean remove)" : "",
+               "OnceEvery(IGenerator generator, Int32 count)" : "",
+               "RandomAddress(IGenerator generator)" : "",
+               "RandomBodyCopy(IGenerator generator, Int32 minParagraphs, Int32 maxParagraphs, Int32 offset)" : "",
+               "RandomCompany(IGenerator generator)" : "",
+               "RandomCost(IGenerator generator)" : "",
+               "RandomDateTime(IGenerator generator, Int32 hoursBefore, Int32 hoursAfter)" : "",
+               "RandomDateTimeNull(IGenerator generator, Int32 hoursBefore, Int32 hoursAfter, Int32 diceRange)" : "",
+               "RandomEmail(IGenerator generator)" : "",
+               "RandomFee(IGenerator generator)" : "",
+               "RandomFullName(IGenerator generator)" : "",
+               "RandomGuid(IGenerator generator)" : "",
+               "RandomLoremText(IGenerator generator, Int32 minWords, Int32 maxWords, Int32 minSentences, Int32 maxSentences, Int32 offset)" : "",
+               "RandomPhone(IGenerator generator)" : "",
+               "RandomUserName(IGenerator generator)" : "",
+               "RandomZip(IGenerator generator, Boolean plusfour)" : ""
+          }
+     },
+     "SeedPacket.Generators" :
+     {
+          "BasicGenerator" :
+          {
+          },
+          "Generator" :
+          {
+               "GetNextRowRandom()" : ""
+          },
+          "MultiGenerator" :
+          {
+          }
+     },
+     "SeedPacket.Interfaces" :
+     {
+          "IDataSource" :
+          {
+               "GetElementList(String identifier)" : "",
+               "GetObjectList``1(String identifier)" : ""
+          },
+          "IGenerator" :
+          {
+               "GetNextRowRandom()" : ""
+          },
+          "IRules" :
+          {
+               "Add(Rule rule)" : "",
+               "AddRange(IEnumerable`1 rules, Boolean overwrite)" : "",
+               "Clear()" : "",
+               "GetRuleByTypeAndName(Type ruleType, String propertyName)" : "",
+               "RemoveRuleByName(String ruleName)" : ""
+          }
+     },
+     "SeedPacketCore.Properties" :
+     {
+          "Resources" :
+          {
+          }
+     }
+}

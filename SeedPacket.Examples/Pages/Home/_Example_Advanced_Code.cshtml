@@ -11,7 +11,8 @@
 <code class="side-scroll">
 var generator = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml")
 {
-    Rules = {
+    Rules = 
+    {
         new Rule(typeof(string), "ItemName",      g =&gt; Funcs.GetNextElement(g, "ProductName"), "ItemName"),
         new Rule(typeof(int), "SelectedProduct",  g =&gt; g.RowRandom.Next(0, 11), "Random product id"),
         new Rule(typeof(string), "Ceo",           g =&gt; Funcs.GetNextElement(g, "FirstName") + " " + func.NextElement(g, "LastName"), "Random CEO Name"),

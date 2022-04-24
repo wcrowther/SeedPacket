@@ -1,0 +1,183 @@
+======================================================================================================================================================
+SeedPacket ASSEMBLY - 5 matches of 71 methods.
+======================================================================================================================================================
+Generated: 3/27/2022 1:45:08 PM
+======================================================================================================================================================
+SeedPacket
+
+     SeedPacket.DataInputType
+
+
+     SeedPacket.RulesExtensions
+
+          SeedPacket.RulesExtensions.AddBasicRules(SeedPacket.Interfaces.IRules,System.Boolean)
+          SeedPacket.RulesExtensions.AddCommonRules(SeedPacket.Interfaces.IRules,System.Boolean)
+
+     SeedPacket.Rule
+
+          SeedPacket.Rule.ApplyRule(SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Rule.IsMatch(System.Type,System.String)
+          SeedPacket.Rule.ToString()
+
+     SeedPacket.Rules
+
+          SeedPacket.Rules.Add(SeedPacket.Rule,System.Boolean)
+          SeedPacket.Rules.AddRange(System.Collections.Generic.IEnumerable`1[SeedPacket.Rule],System.Boolean)
+          SeedPacket.Rules.GetRuleByTypeAndName(System.Type,System.String)
+          SeedPacket.Rules.RemoveRuleByName(System.String)
+
+     SeedPacket.RulesSet
+
+
+     SeedPacket.SeedCore
+
+          SeedPacket.SeedCore.SeedList(System.Collections.Generic.IEnumerable`1[T])
+          SeedPacket.SeedCore.SeedList(System.Collections.Generic.IDictionary`2[TKey,TValue])
+
+     SeedPacket.SingleProperty`1
+
+
+     SeedPacket.SimpleSeed
+
+       >> SeedPacket.SimpleSeed.Next(System.String,System.Int32,System.String)
+       >> SeedPacket.SimpleSeed.Randomize(System.String,System.String)
+
+======================================================================================================================================================
+SeedPacket.DataSources
+
+     SeedPacket.DataSources.JsonDataSource
+
+          SeedPacket.DataSources.JsonDataSource.GetElementList(System.String)
+          SeedPacket.DataSources.JsonDataSource.GetObjectList(System.String)
+          SeedPacket.DataSources.JsonDataSource.Load(System.String)
+          SeedPacket.DataSources.JsonDataSource.LoadDefaultData()
+          SeedPacket.DataSources.JsonDataSource.Parse(System.String,System.String)
+
+     SeedPacket.DataSources.MultiDataSource
+
+          SeedPacket.DataSources.MultiDataSource.GetElementList(System.String)
+          SeedPacket.DataSources.MultiDataSource.GetObjectList(System.String)
+
+     SeedPacket.DataSources.XmlDataSource
+
+          SeedPacket.DataSources.XmlDataSource.GetElementList(System.String)
+          SeedPacket.DataSources.XmlDataSource.GetObjectList(System.String)
+          SeedPacket.DataSources.XmlDataSource.Load(System.String)
+          SeedPacket.DataSources.XmlDataSource.LoadDefaultData()
+          SeedPacket.DataSources.XmlDataSource.Parse(System.String,System.String)
+
+     SeedPacket.DataSources.XmlDataSourceExtensions
+
+          SeedPacket.DataSources.XmlDataSourceExtensions.ToObject(System.Xml.Linq.XElement)
+
+======================================================================================================================================================
+SeedPacket.Exceptions
+
+     SeedPacket.Exceptions.InvalidDefaultDataException
+
+
+     SeedPacket.Exceptions.InvalidFilePathException
+
+
+     SeedPacket.Exceptions.InvalidSeedParametersException
+
+
+     SeedPacket.Exceptions.InvalidSourceException
+
+
+     SeedPacket.Exceptions.InvalidTildePathException
+
+
+     SeedPacket.Exceptions.MultipleSourceException
+
+
+     SeedPacket.Exceptions.NoSourceException
+
+
+======================================================================================================================================================
+SeedPacket.Extensions
+
+     SeedPacket.Extensions.SeedExtensions
+
+          SeedPacket.Extensions.SeedExtensions.Seed(System.Collections.Generic.IEnumerable`1[T],System.Int32,System.Random)
+          SeedPacket.Extensions.SeedExtensions.Seed(System.Collections.Generic.IEnumerable`1[T],SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Extensions.SeedExtensions.Seed(System.Collections.Generic.IEnumerable`1[T],System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.List`1[SeedPacket.Rule])
+          SeedPacket.Extensions.SeedExtensions.Seed(System.Collections.Generic.IEnumerable`1[T],System.Nullable`1[System.Int32],System.Nullable`1[System.Int32],SeedPacket.Interfaces.IGenerator,System.String,System.Random)
+          SeedPacket.Extensions.SeedExtensions.Seed(System.Collections.Generic.IDictionary`2[TKey,TValue],System.Int32,System.Random)
+          SeedPacket.Extensions.SeedExtensions.Seed(System.Collections.Generic.IDictionary`2[TKey,TValue],SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Extensions.SeedExtensions.Seed(System.Collections.Generic.IDictionary`2[TKey,TValue],System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.List`1[SeedPacket.Rule])
+          SeedPacket.Extensions.SeedExtensions.Seed(System.Collections.Generic.IDictionary`2[TKey,TValue],System.Nullable`1[System.Int32],System.Nullable`1[System.Int32],SeedPacket.Interfaces.IGenerator,System.String,System.Random)
+
+======================================================================================================================================================
+SeedPacket.Functions
+
+     SeedPacket.Functions.Funcs
+
+       >> SeedPacket.Functions.Funcs.DiceRoll(SeedPacket.Interfaces.IGenerator,System.Int32,System.Int32)
+       >> SeedPacket.Functions.Funcs.GetElementNext(SeedPacket.Interfaces.IGenerator,System.String,System.Int32,System.Boolean)
+          SeedPacket.Functions.Funcs.GetElementRandom(SeedPacket.Interfaces.IGenerator,System.String,System.Boolean,System.Boolean)
+          SeedPacket.Functions.Funcs.GetElementRandom(SeedPacket.Interfaces.IGenerator,System.String,System.TypeCode,System.Boolean)
+          SeedPacket.Functions.Funcs.GetListFromCacheNext(SeedPacket.Interfaces.IGenerator,System.String,System.Int32,System.Int32,System.Boolean)
+          SeedPacket.Functions.Funcs.GetListFromCacheNext(SeedPacket.Interfaces.IGenerator,System.Object,System.Int32,System.Int32,System.Boolean)
+          SeedPacket.Functions.Funcs.GetListFromCacheRandom(SeedPacket.Interfaces.IGenerator,System.String,System.Int32,System.Int32,System.Boolean)
+          SeedPacket.Functions.Funcs.GetObjectNext(SeedPacket.Interfaces.IGenerator,System.String,System.Int32)
+          SeedPacket.Functions.Funcs.GetObjectRandom(SeedPacket.Interfaces.IGenerator,System.String,System.Boolean)
+          SeedPacket.Functions.Funcs.GetOneFromCacheNext(SeedPacket.Interfaces.IGenerator,System.String,System.Boolean)
+          SeedPacket.Functions.Funcs.GetOneFromCacheNext(SeedPacket.Interfaces.IGenerator,System.Object,System.Boolean)
+          SeedPacket.Functions.Funcs.GetOneFromCacheRandom(SeedPacket.Interfaces.IGenerator,System.String,System.Boolean)
+          SeedPacket.Functions.Funcs.GetOneFromCacheRandom(SeedPacket.Interfaces.IGenerator,System.Object,System.Boolean)
+       >> SeedPacket.Functions.Funcs.OnceEvery(SeedPacket.Interfaces.IGenerator,System.Int32)
+          SeedPacket.Functions.Funcs.RandomAddress(SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Functions.Funcs.RandomBodyCopy(SeedPacket.Interfaces.IGenerator,System.Int32,System.Int32,System.Int32)
+          SeedPacket.Functions.Funcs.RandomCompany(SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Functions.Funcs.RandomCost(SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Functions.Funcs.RandomDateTime(SeedPacket.Interfaces.IGenerator,System.Int32,System.Int32)
+          SeedPacket.Functions.Funcs.RandomDateTimeNull(SeedPacket.Interfaces.IGenerator,System.Int32,System.Int32,System.Int32)
+          SeedPacket.Functions.Funcs.RandomEmail(SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Functions.Funcs.RandomFee(SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Functions.Funcs.RandomFullName(SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Functions.Funcs.RandomGuid(SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Functions.Funcs.RandomLoremText(SeedPacket.Interfaces.IGenerator,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+          SeedPacket.Functions.Funcs.RandomPhone(SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Functions.Funcs.RandomUserName(SeedPacket.Interfaces.IGenerator)
+          SeedPacket.Functions.Funcs.RandomZip(SeedPacket.Interfaces.IGenerator,System.Boolean)
+
+======================================================================================================================================================
+SeedPacket.Generators
+
+     SeedPacket.Generators.BasicGenerator
+
+
+     SeedPacket.Generators.Generator
+
+          SeedPacket.Generators.Generator.GetNextRowRandom()
+
+     SeedPacket.Generators.MultiGenerator
+
+
+======================================================================================================================================================
+SeedPacket.Interfaces
+
+     SeedPacket.Interfaces.IDataSource
+
+          SeedPacket.Interfaces.IDataSource.GetElementList(System.String)
+          SeedPacket.Interfaces.IDataSource.GetObjectList(System.String)
+
+     SeedPacket.Interfaces.IGenerator
+
+          SeedPacket.Interfaces.IGenerator.GetNextRowRandom()
+
+     SeedPacket.Interfaces.IRules
+
+          SeedPacket.Interfaces.IRules.Add(SeedPacket.Rule)
+          SeedPacket.Interfaces.IRules.AddRange(System.Collections.Generic.IEnumerable`1[SeedPacket.Rule],System.Boolean)
+          SeedPacket.Interfaces.IRules.Clear()
+          SeedPacket.Interfaces.IRules.GetRuleByTypeAndName(System.Type,System.String)
+          SeedPacket.Interfaces.IRules.RemoveRuleByName(System.String)
+
+======================================================================================================================================================
+SeedPacketCore.Properties
+
+     SeedPacketCore.Properties.Resources
+
+
