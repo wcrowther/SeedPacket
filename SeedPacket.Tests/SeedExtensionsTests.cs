@@ -198,6 +198,16 @@ namespace SeedPacket.Tests
             Assert.AreEqual("Nakatomi Inc", list[0].AccountName);
         }
 
+        //[Test]
+        //public void SeedExtensions_SeedList_Integers()
+        //{
+        //    // var gen = new MultiGenerator();
+
+        //    var integers = new List<int>().Seed(10000,customPropertyName: "random").ToArray();
+
+        //    Assert.AreEqual(1234, integers[8888]);
+        //}
+
         /* =====================================================================================
         *  PRIVATE METHODS
         *  =================================================================================== */

@@ -34,7 +34,7 @@ namespace SeedPacket.Examples.Controllers
             var generator = new MultiGenerator() { BaseRandom = new Random(seed.Value) };
             var users = new List<User>().Seed(1, genRows, generator);
 
-            return PartialView("_Result_SimpleExample", users);
+            return PartialView("_Result_Simple", users);
         }
     }
 }
