@@ -20,7 +20,7 @@ namespace SeedPacket.Functions
             {
                 string paragraph = RandomLoremText(generator, offset: position);
                 paragraphBuilder.Add(paragraph);
-                position += paragraph.Split(null).Count();
+                position += paragraph.Split(null).Length;
             }
             return paragraphBuilder;
         }

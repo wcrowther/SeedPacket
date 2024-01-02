@@ -1,4 +1,5 @@
 using SeedPacket.Interfaces;
+using System.Diagnostics;
 
 namespace SeedPacket.Functions
 {
@@ -18,6 +19,9 @@ namespace SeedPacket.Functions
                 // Add +1 as Random takes values less than max ie: 1,7 returns 1-6
                 diceSum += generator.RowRandom.Next(1, diceSides + 1 );
             }
+
+            Debug.WriteLine("DiceSum: " + diceSum);
+
             return diceSum;
         }
     }

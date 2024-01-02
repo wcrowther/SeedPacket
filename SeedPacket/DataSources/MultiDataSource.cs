@@ -151,7 +151,7 @@ namespace SeedPacket.DataSources
             }
         }
 
-        private IDataSource GetDataSource(string dataSourceType)
+        private static IDataSource GetDataSource(string dataSourceType)
         {
             string sourceType = dataSourceType.RemoveStart(".").ToLower();
 

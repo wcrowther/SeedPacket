@@ -156,7 +156,7 @@ namespace SeedPacket.DataSources
 // source: https: //stackoverflow.com/questions/1596530/multi-dimensional-arraylist-or-list-in-c
 // ONLINE XML to CSV Converter: https: //json-csv.com/xml
 
-    private ListOfList<string,string> CSVHelper(string csv, char separator = ',')
+    private static ListOfList<string,string> CSVHelper(string csv, char separator = ',')
         {
             string[] removeArray = {"\"", "\n\r", "\n", "\"\r" };
             var multi = new ListOfList<string,string>();

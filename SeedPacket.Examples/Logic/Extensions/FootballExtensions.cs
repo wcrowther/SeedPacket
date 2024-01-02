@@ -37,7 +37,7 @@ namespace SeedPacket.Examples.Logic.Helpers
         {
             Debug.WriteLine($"Try {tries}. GetGameDates for {gameType}.");
 
-            for (int i = 0; i < games.Count(); i++)
+            for (int i = 0; i < games.Count; i++)
             {
                 var game = games[i];
 
@@ -135,7 +135,7 @@ namespace SeedPacket.Examples.Logic.Helpers
         {
             var orderedGames = games.OrderBy(o => o.GameDate).ToList();
 
-            for (int i = 0; i < orderedGames.Count(); i++)
+            for (int i = 0; i < orderedGames.Count; i++)
             {
                 orderedGames[i].GameId = i + 1;
             }

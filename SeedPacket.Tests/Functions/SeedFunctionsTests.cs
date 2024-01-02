@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using SeedPacket.Extensions;
 using SeedPacket.Tests.Model;
+using SeedPacket.Interfaces;
+using System.Diagnostics;
+using WildHare.Extensions;
 
 namespace SeedPacket.Tests
 {
@@ -42,11 +45,27 @@ namespace SeedPacket.Tests
 		[Test]
         public void SeedFunctions_DiceRoll_Basic_Roll()
         {
-            // Uses default seed for Random so value 4 is constant
+            // Uses default seed for Random so values
+            // are constants which results in 4
+
             var gen = new BasicGenerator();
             int diceRoll = Funcs.DiceRoll(gen);
-
             Assert.AreEqual(4, diceRoll);
+
+            // Iterate to the next RowRandom which results in 1
+            gen.GetNextRowRandom();
+            diceRoll = Funcs.DiceRoll(gen);
+            Assert.AreEqual(3, diceRoll);
+
+            // Iterate to the next RowRandom which results in 1
+            gen.GetNextRowRandom();
+            diceRoll = Funcs.DiceRoll(gen);
+            Assert.AreEqual(1, diceRoll);
+
+            // Iterate to the next RowRandom 3
+            gen.GetNextRowRandom();
+            diceRoll = Funcs.DiceRoll(gen);
+            Assert.AreEqual(5, diceRoll);
         }
 
         [Test]
@@ -176,9 +195,90 @@ namespace SeedPacket.Tests
             Assert.IsNull(item.Created);
         }
 
-        private string GetEmptyXml()
+        [Test]
+        public void Test_RunDiceRoll()
+        {
+            var gen = new BasicGenerator(baseRandom: new Random(3432));
+
+            // Uses custom seed for Random so diceroll is 6 so add bonus
+            int diceRoll = Funcs.DiceRoll(gen);
+
+            diceRoll =   AddDiceBonusesToRoll(gen, 0, diceRoll, 0);
+            Debug.WriteLine("Final DiceRoll: " + diceRoll);
+
+            Assert.AreEqual(9, diceRoll);
+        }
+
+        [TestCase(3432, 9, Description = "")]
+        [TestCase(3433, 3, Description = "")]
+        [TestCase(3434, 7, Description = "")]
+        [TestCase(3435, 2, Description = "")]
+        [TestCase(3436, 7, Description = "")]
+        [TestCase(3437, 1, Description = "")]
+        [TestCase(3438, 4, Description = "")]
+        [TestCase(3439, 7, Description = "")]
+        [TestCase(3440, 3, Description = "")]
+        [TestCase(3441, 6, Description = "")]
+        [TestCase(3442, 2, Description = "")]
+        [TestCase(3443, 29, Description = "")]
+        [TestCase(3444, 1, Description = "")]
+        [TestCase(3445, 4, Description = "")]
+        [TestCase(3446, 48, Description = "")]
+        [TestCase(3447, 3, Description = "")]
+        [TestCase(3448, 22, Description = "")]
+        [TestCase(3449, 2, Description = "")]
+        [TestCase(3450, 17, Description = "")]
+        [TestCase(3451, 1, Description = "")]
+        [TestCase(3452, 4, Description = "")]
+        [TestCase(3453, 55, Description = "")]
+        [TestCase(3454, 3, Description = "")]
+        [TestCase(3456, 2, Description = "")]
+
+        public void Test_Multiple_RunDiceRoll(int seed, int result)
+        {
+            var gen = new BasicGenerator(baseRandom: new Random(seed));
+
+            Debug.WriteLine("=".Repeat(30));
+
+            // Uses custom seed for Random so diceroll will be 6 and add bonus
+            int diceRoll =   AddDiceBonusesToRoll(gen, 0, 0, 0);
+
+            Debug.WriteLine($"Final DiceRoll: {diceRoll}");
+
+            Assert.AreEqual(result, diceRoll);
+        }
+
+
+
+        // ==============================================================================================
+
+        private int AddDiceBonusesToRoll(IGenerator gen, int total, int roll, int level)
+        {
+            if (total >= 100)
+                return total;
+
+            if(level == 0)
+                roll = Funcs.DiceRoll(gen);
+
+            total += roll;
+
+            if (roll >= 5-level && roll > 1)
+            {
+                gen.GetNextRowRandom();
+
+                int diceRoll = Funcs.DiceRoll(gen);
+
+                total = AddDiceBonusesToRoll(gen, total, diceRoll, level + 1);
+            }
+            return total;
+        }
+
+        private static string GetEmptyXml()
         {
             return @"<Root></Root>";
         }
+
+        // ==============================================================================================
+
     }
 }

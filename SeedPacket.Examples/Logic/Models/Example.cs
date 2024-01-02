@@ -37,6 +37,7 @@ namespace SeedPacket.Examples.Logic.Models
             set { products = value; }
         }
         public string Notes { get; set; }
+
         public List<string> BodyCopy { get; set; }
     }
 }

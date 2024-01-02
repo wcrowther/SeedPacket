@@ -156,16 +156,14 @@ namespace SeedPacket.Examples.Logic.Generators
 
             for (int i = 1; i <= 16; i++)
             {
-                GameType gameType;
-                switch (shortTypes[i-1].ToLower())
+                var gameType = shortTypes[i-1].ToLower() switch
                 {
-                    case "d": gameType = GameType.Division; break;
-                    case "i": gameType = GameType.InConference; break;
-                    case "e": gameType = GameType.ExtraInConference; break;
-                    case "o": gameType = GameType.OutOfConference; break;
-                    default:  throw new InvalidShortGameType();
-                }
-
+                    "d" => GameType.Division,
+                    "i" => GameType.InConference,
+                    "e" => GameType.ExtraInConference,
+                    "o" => GameType.OutOfConference,
+                    _   => throw new InvalidShortGameType(),
+                };
                 list.Add(new ScheduleSlot { GameType = gameType, SeasonWeek = i });
             }
             return list;
@@ -262,7 +260,7 @@ namespace SeedPacket.Examples.Logic.Generators
                    };
         }
 
-        private IEnumerable<FootballGame> GetOutOfConferenceGames_DivisionVsDivision(List<FootballTeam> teams, int conf1DivId, int conf2DivId)
+        private static IEnumerable<FootballGame> GetOutOfConferenceGames_DivisionVsDivision(List<FootballTeam> teams, int conf1DivId, int conf2DivId)
         {
             return teams
                     .Where(w => w.ConfId == 1 && w.DivId == conf1DivId)

@@ -199,7 +199,7 @@ namespace SeedPacket
             return rule;
         }
 
-        private void SetPropertyValue (dynamic newItem, MetaProperty property, Rule rule, IGenerator generator)
+        private static void SetPropertyValue (dynamic newItem, MetaProperty property, Rule rule, IGenerator generator)
         {
             if (property != null && rule != null)
             {

@@ -43,7 +43,7 @@ namespace SeedPacket.Tests
 
             var list = iEnumerable.ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(10, list[9].ItemId);
             Assert.AreEqual("ItemName10", list[9].ItemName);
             Assert.IsInstanceOf<Item>(list[0]);
@@ -58,7 +58,7 @@ namespace SeedPacket.Tests
             var list = iEnumerable.ToList();
 
             // 21 elements because 10 negative, 10 positive, 1 zero
-            Assert.AreEqual(21, list.Count());
+            Assert.AreEqual(21, list.Count);
             Assert.AreEqual(10, list[20].ItemId);
             Assert.AreEqual("ItemName10", list[20].ItemName);
             Assert.IsInstanceOf<Item>(list[0]);
@@ -69,7 +69,7 @@ namespace SeedPacket.Tests
         {
             var list = new List<string>().Seed(new BasicGenerator()).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual("10", list[9]); // not 10 because list is zero-based
             Assert.IsInstanceOf<string>(list[0]);
         }
@@ -79,7 +79,7 @@ namespace SeedPacket.Tests
         {
             var list = new List<int>().Seed(new BasicGenerator()).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(10, list[9]); // not 10 because list is zero-based
             Assert.IsInstanceOf<int>(list[0]);
         }
@@ -89,7 +89,7 @@ namespace SeedPacket.Tests
         {
             var list = new List<DateTime>().Seed(new BasicGenerator()).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(DateTime.Parse("1/11/2020"), list[9]); // not 10 because list is zero-based
             Assert.IsInstanceOf<DateTime>(list[0]);
         }
@@ -110,7 +110,7 @@ namespace SeedPacket.Tests
             var list = new List<DateTime>().Seed(new BasicGenerator() { SeedBegin = 2, SeedEnd = 1 }).ToList();
 
             // No elements
-            Assert.AreEqual(0, list.Count());
+            Assert.AreEqual(0, list.Count);
         }
 
         [Test]
@@ -119,7 +119,7 @@ namespace SeedPacket.Tests
             var list = new List<DateTime>().Seed(new BasicGenerator() { SeedBegin = 1, SeedEnd = 1 }).ToList();
 
             // Should produce 1 row
-            Assert.AreEqual(1, list.Count());
+            Assert.AreEqual(1, list.Count);
         }
 
         [Test]
@@ -143,7 +143,7 @@ namespace SeedPacket.Tests
             var list = new List<Item>().Seed().ToList();
 
             // Uses MultilGenerator by default
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(10, list[9].ItemId);
             Assert.AreEqual("gear", list[9].ItemName);
             Assert.IsInstanceOf<Item>(list[0]);
@@ -156,7 +156,7 @@ namespace SeedPacket.Tests
             var list = new List<Item>().Seed(gen).ToList();
 
             // Uses MultiGenerator by default
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(1, list[0].ItemId);
             Assert.AreEqual("thingamajig", list[0].ItemName);
             Assert.IsInstanceOf<Item>(list[0]);
@@ -169,7 +169,7 @@ namespace SeedPacket.Tests
             var list = new List<Unknown>().Seed(gen).ToList();
 
             // Uses MultiGenerator by default
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
 
             // 'Name' does not match any specific rules but the basic String rule
             // and  Name is not in the xml sourcedata so is propertyName + rownumber
@@ -182,7 +182,7 @@ namespace SeedPacket.Tests
             var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
             var list = new Dictionary<int, Item>().Seed(gen);
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(1, list[1].ItemId);
             Assert.AreEqual("thingamabob", list[1].ItemName);
             Assert.IsInstanceOf<Item>(list[1]);
@@ -193,7 +193,7 @@ namespace SeedPacket.Tests
         {
             var list = new List<Account>().Seed().ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(1, list[0].AccountId);
             Assert.AreEqual("Nakatomi Inc", list[0].AccountName);
         }
@@ -212,7 +212,7 @@ namespace SeedPacket.Tests
         *  PRIVATE METHODS
         *  =================================================================================== */
 
-        private string GetValidXml()
+        private static string GetValidXml()
         {
             return @"<Root>
                         <FirstNames>
@@ -230,12 +230,12 @@ namespace SeedPacket.Tests
                     </Root>";
         }
 
-        private string GetEmptyXml()
+        private static string GetEmptyXml()
         {
             return @"<Root></Root>";
         }
 
-        private string GetValidJson()
+        private static string GetValidJson()
         {
             return @"{ ""Root"": 
                          {
@@ -259,7 +259,7 @@ namespace SeedPacket.Tests
                     }";
         }
 
-        private string GetEmptyJson()
+        private static string GetEmptyJson()
         {
             return @"{""Root"": {}}";
         }

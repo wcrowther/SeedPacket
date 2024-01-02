@@ -44,7 +44,7 @@ namespace SeedPacket.Tests
             var seedCore = new SeedCore(basicGenerator);
             var list = seedCore.SeedList(iEnumerable).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(10, list[9].ItemId);
             Assert.AreEqual("ItemName10", list[9].ItemName);
             Assert.IsInstanceOf<Item>(list[0]);
@@ -59,7 +59,7 @@ namespace SeedPacket.Tests
             var list = seedCore.SeedList(iEnumerable).ToList();
 
             // 21 elements because 10 negative, 10 positive, 1 zero
-            Assert.AreEqual(21, list.Count());
+            Assert.AreEqual(21, list.Count);
             Assert.AreEqual(10, list[20].ItemId);
             Assert.AreEqual("ItemName10", list[20].ItemName);
             Assert.IsInstanceOf<Item>(list[0]);
@@ -73,7 +73,7 @@ namespace SeedPacket.Tests
             var seedCore = new SeedCore(basicGenerator);
             var list = seedCore.SeedList(iEnumerable).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual("10", list[9]); // not 10 because list is zero-based
             Assert.IsInstanceOf<string>(list[0]);
         }
@@ -86,7 +86,7 @@ namespace SeedPacket.Tests
             var seedCore = new SeedCore(basicGenerator);
             var list = seedCore.SeedList(iEnumerable).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(10, list[9]); // not 10 because list is zero-based
             Assert.IsInstanceOf<int>(list[0]);
         }
@@ -99,7 +99,7 @@ namespace SeedPacket.Tests
             var seedCore = new SeedCore(basicGenerator);
             var list = seedCore.SeedList(iEnumerable).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(DateTime.Parse("1/11/2020"), list[9]); // not 10 because list is zero-based
             Assert.IsInstanceOf<DateTime>(list[0]);
         }
@@ -113,7 +113,7 @@ namespace SeedPacket.Tests
             var list = seedCore.SeedList(iEnumerable).ToList();
 
             // No elements
-            Assert.AreEqual(0, list.Count());
+            Assert.AreEqual(0, list.Count);
         }
 
         [Test]
@@ -125,7 +125,7 @@ namespace SeedPacket.Tests
             var list = seedCore.SeedList(iEnumerable).ToList();
 
             // Should produce 1 row
-            Assert.AreEqual(1, list.Count());
+            Assert.AreEqual(1, list.Count);
         }
 
         [Test]
@@ -155,7 +155,7 @@ namespace SeedPacket.Tests
             var list = seedCore.SeedList(iEnumerable).ToList();
 
             // Uses MultilGenerator by default
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(10, list[9].ItemId);
             Assert.AreEqual("gear", list[9].ItemName);
             Assert.IsInstanceOf<Item>(list[0]);
@@ -170,7 +170,7 @@ namespace SeedPacket.Tests
             list = seedCore.SeedList(list).ToList();
 
             // Uses MultiGenerator by default
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(1, list[0].ItemId);
             Assert.AreEqual("thingamajig", list[0].ItemName);
             Assert.IsInstanceOf<Item>(list[0]);
@@ -185,7 +185,7 @@ namespace SeedPacket.Tests
             var list = seedCore.SeedList(iEnumerable).ToList();
 
             // Uses MultiGenerator by default
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
 
             // 'Name' does not match any specific rules but the basic String rule
             // and  Name is not in the xml sourcedata so is propertyName + rownumber
@@ -202,7 +202,7 @@ namespace SeedPacket.Tests
             var multiGenerator = new MultiGenerator(xmlDataSource);
             var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual("thingamabob", list[0].ItemName);
         }
 
@@ -215,7 +215,7 @@ namespace SeedPacket.Tests
             var multiGenerator = new MultiGenerator(xmlDataSource);
             var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual("thingamajig", list[0].ItemName);
         }
 
@@ -228,7 +228,7 @@ namespace SeedPacket.Tests
             var multiGenerator = new MultiGenerator(xmlDataSource);
             var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual("gadget", list[0].ItemName);
         }
 
@@ -242,7 +242,7 @@ namespace SeedPacket.Tests
             var multiGenerator = new MultiGenerator(jsonDataSource);
             var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual("thingamabob", list[0].ItemName);
         }
 
@@ -255,7 +255,7 @@ namespace SeedPacket.Tests
             var multiGenerator = new MultiGenerator(jsonDataSource);
             var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual("thingamajig", list[0].ItemName);
         }
 
@@ -268,7 +268,7 @@ namespace SeedPacket.Tests
             var multiGenerator = new MultiGenerator(jsonDataSource);
             var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual("gadget", list[0].ItemName);
         }
 
@@ -281,7 +281,7 @@ namespace SeedPacket.Tests
             var multiGenerator = new MultiGenerator(jsonDataSource);
             var list = new SeedCore(multiGenerator).SeedList(iEnumerable).ToList();
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual("thingamajig", list[0].ItemName);
         }
 
@@ -292,7 +292,7 @@ namespace SeedPacket.Tests
             var gen = new MultiGenerator() { SeedBegin = 1, SeedEnd = 10 };
             list = new SeedCore(gen).SeedList(list);
 
-            Assert.AreEqual(10, list.Count());
+            Assert.AreEqual(10, list.Count);
             Assert.AreEqual(1, list[1].ItemId);
             Assert.AreEqual("thingamabob", list[1].ItemName);
             Assert.IsInstanceOf<Item>(list[1]);
@@ -306,7 +306,7 @@ namespace SeedPacket.Tests
             var gen = new MultiGenerator(pathToTestJsonFile) { SeedBegin = 1, SeedEnd = count, CustomName = "City" };
             list = new SeedCore(gen).SeedList(list);
 
-            Assert.AreEqual(count, list.Count());
+            Assert.AreEqual(count, list.Count);
             // NOTE How 10 rows of a Dictionary using the CustomName 'City' works, 
             // but CustomName 'County' throws an error. This is because the 'County'
             // rule is randomly picked from the json datasource and the 4th default 
@@ -322,7 +322,7 @@ namespace SeedPacket.Tests
             var gen     = new MultiGenerator() { SeedBegin = 1, SeedEnd = count, CustomName = "FirstName" };
             list        = new SeedCore(gen).SeedList(list).ToList();
 
-            Assert.AreEqual(count, list.Count());
+            Assert.AreEqual(count, list.Count);
 
             Assert.AreEqual("Tiffany",      list[0]);
             Assert.AreEqual("Robert",       list[1]);
@@ -342,7 +342,7 @@ namespace SeedPacket.Tests
             var gen = new MultiGenerator(pathToTestJsonFile) { SeedBegin = 1, SeedEnd = count, CustomName = "City" };
             list = new SeedCore(gen).SeedList(list).ToList();
 
-            Assert.AreEqual(count, list.Count());
+            Assert.AreEqual(count, list.Count);
 
             Assert.AreEqual("Brighton",     list[0]);
             Assert.AreEqual("Lincolnton",   list[1]);
@@ -369,8 +369,8 @@ namespace SeedPacket.Tests
 
             var keys = dict.Keys.ToList();
 
-            Assert.AreEqual(5, dict.Count());
-            Assert.AreEqual(5, keys.Count());
+            Assert.AreEqual(5, dict.Count);
+            Assert.AreEqual(5, keys.Count);
             Assert.AreEqual(3, dict.Keys.Where(w => w.ConfId == 1).Count());
             Assert.AreEqual(3, dict.Keys.Where(w => w.Item1 == 1).Count());
             Assert.AreEqual("Atlanta Falcons", dict.Where(w => w.Key.ConfId == 1).ElementAt(0).Value);
@@ -400,7 +400,7 @@ namespace SeedPacket.Tests
          * PRIVATE METHODS
          * ================================================================================== */
 
-        private string GetValidXml()
+        private static string GetValidXml()
         {
             return @"<Root>
                         <FirstNames>
@@ -418,12 +418,12 @@ namespace SeedPacket.Tests
                     </Root>";
         }
 
-        private string GetEmptyXml()
+        private static string GetEmptyXml()
         {
             return @"<Root></Root>";
         }
 
-        private string GetValidJson()
+        private static string GetValidJson()
         {
             return @"{ ""Root"": 
                          {
@@ -447,7 +447,7 @@ namespace SeedPacket.Tests
                     }";
         }
 
-        private string GetEmptyJson()
+        private static string GetEmptyJson()
         {
             return @"{""Root"": {}}";
         }

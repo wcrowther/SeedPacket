@@ -9,8 +9,6 @@ namespace SeedPacket.Generators
 {
     public abstract class Generator : IGenerator 
     {
-        IRules rules;
-
         public Generator (IRules rules =  null, Random baseRandom = null, DateTime? baseDateTime = null)
         {
             RowNumber = SeedBegin;
@@ -20,11 +18,13 @@ namespace SeedPacket.Generators
             GetNextRowRandom();
         }
 
-        private int defaultSeed = 123456789;
-        private Random baseRandom;
-        private DateTime? baseDateTime;
         private readonly DateTime defaultDateTime = DateTime.Parse("1/1/2020");
         private ExpandoObject cache = new ExpandoObject();
+
+        protected IRules rules;
+        protected int defaultSeed = 123456789;
+        protected Random baseRandom;
+        protected DateTime? baseDateTime;
         protected IDataSource dataSource;
 
         public int SeedBegin { get; set; } = 1;
