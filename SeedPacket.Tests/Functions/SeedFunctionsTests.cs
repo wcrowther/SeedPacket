@@ -209,30 +209,39 @@ namespace SeedPacket.Tests
             Assert.AreEqual(9, diceRoll);
         }
 
-        [TestCase(3432, 9, Description = "")]
-        [TestCase(3433, 3, Description = "")]
-        [TestCase(3434, 7, Description = "")]
-        [TestCase(3435, 2, Description = "")]
-        [TestCase(3436, 7, Description = "")]
-        [TestCase(3437, 1, Description = "")]
-        [TestCase(3438, 4, Description = "")]
-        [TestCase(3439, 7, Description = "")]
-        [TestCase(3440, 3, Description = "")]
-        [TestCase(3441, 6, Description = "")]
-        [TestCase(3442, 2, Description = "")]
+        [TestCase(3432, 9,  Description = "")]
+        [TestCase(3433, 3,  Description = "")]
+        [TestCase(3434, 7,  Description = "")]
+        [TestCase(3435, 2,  Description = "")]
+        [TestCase(3436, 7,  Description = "")]
+        [TestCase(3437, 1,  Description = "")]
+        [TestCase(3438, 4,  Description = "")]
+        [TestCase(3439, 7,  Description = "")]
+        [TestCase(3440, 3,  Description = "")]
+        [TestCase(3441, 6,  Description = "")]
+        [TestCase(3442, 2,  Description = "")]
         [TestCase(3443, 29, Description = "")]
-        [TestCase(3444, 1, Description = "")]
-        [TestCase(3445, 4, Description = "")]
+        [TestCase(3444, 1,  Description = "")]
+        [TestCase(3445, 4,  Description = "")]
         [TestCase(3446, 48, Description = "")]
-        [TestCase(3447, 3, Description = "")]
+        [TestCase(3447, 3,  Description = "")]
         [TestCase(3448, 22, Description = "")]
-        [TestCase(3449, 2, Description = "")]
+        [TestCase(3449, 2,  Description = "")]
         [TestCase(3450, 17, Description = "")]
-        [TestCase(3451, 1, Description = "")]
-        [TestCase(3452, 4, Description = "")]
+        [TestCase(3451, 1,  Description = "")]
+        [TestCase(3452, 4,  Description = "")]
         [TestCase(3453, 55, Description = "")]
-        [TestCase(3454, 3, Description = "")]
-        [TestCase(3456, 2, Description = "")]
+        [TestCase(3454, 3,  Description = "")]
+        [TestCase(3456, 2,  Description = "")]
+        [TestCase(3457, 51, Description = "")]
+        [TestCase(3458, 1,  Description = "")]
+        [TestCase(3459, 4,  Description = "")]
+        [TestCase(3460, 9,  Description = "")]
+        [TestCase(3461, 3,  Description = "")]
+        [TestCase(3462, 9,  Description = "")]
+        [TestCase(3463, 2,  Description = "")]
+        [TestCase(3464, 7,  Description = "")]
+        [TestCase(3465, 1,  Description = "")]
 
         public void Test_Multiple_RunDiceRoll(int seed, int result)
         {
@@ -252,7 +261,7 @@ namespace SeedPacket.Tests
 
         // ==============================================================================================
 
-        private int AddDiceBonusesToRoll(IGenerator gen, int total, int roll, int level)
+        private int AddDiceBonusesToRoll(IGenerator gen, int total, int roll, int level, bool subtract = false)
         {
             if (total >= 100)
                 return total;
@@ -260,16 +269,25 @@ namespace SeedPacket.Tests
             if(level == 0)
                 roll = Funcs.DiceRoll(gen);
 
-            total += roll;
+            total = total + roll;
 
-            if (roll >= 5-level && roll > 1)
+            // Add BONUS if needed
+            if (roll > 1)
             {
-                gen.GetNextRowRandom();
-
-                int diceRoll = Funcs.DiceRoll(gen);
-
-                total = AddDiceBonusesToRoll(gen, total, diceRoll, level + 1);
+                if (roll >= 5-level)
+                {
+                    gen.GetNextRowRandom();
+                    int diceRoll = Funcs.DiceRoll(gen);
+                    total = AddDiceBonusesToRoll(gen, total, diceRoll, level + 1);
+                }
             }
+            else // ie: 1
+            {
+                // gen.GetNextRowRandom();
+                // int diceRoll = -1 * Funcs.DiceRoll(gen);
+                // total = AddDiceBonusesToRoll(gen, total, diceRoll, level + 1, true);
+            }
+
             return total;
         }
 
