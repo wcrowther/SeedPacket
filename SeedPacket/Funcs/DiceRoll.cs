@@ -20,7 +20,7 @@ namespace SeedPacket.Functions
                 diceSum += generator.RowRandom.Next(1, diceSides + 1 );
             }
 
-            Debug.WriteLine("DiceSum: " + diceSum);
+            // Debug.WriteLine("DiceSum: " + diceSum);
 
             return diceSum;
         }

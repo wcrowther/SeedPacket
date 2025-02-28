@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Dynamic;
+using System.Linq;
 using WildHare;
 using WildHare.Extensions;
 
@@ -19,7 +20,10 @@ namespace SeedPacket
         {
             DebugSeedType(typeof(T).Name);
 
-            if (generator.CustomName != null)
+			var timer = Stopwatch.StartNew();
+
+
+			if (generator.CustomName != null)
             {
                 // for simple value type like string[] or int[] where CustomName is used for Rule selector.
 
@@ -38,7 +42,8 @@ namespace SeedPacket
                 iEnumerable = CreateValueTypeList<T>();  
             }
 
-            DebugWrite("-", 25);
+			DebugWrite($"SeedList Count: {iEnumerable.Count()} in {timer.ElapsedMilliseconds} ms");
+			DebugWrite("-", 25);
 
             return iEnumerable;
         }
@@ -207,9 +212,9 @@ namespace SeedPacket
 
         private void DebugSeedType(string name)
         {
-            DebugWrite("-", 25);
+            DebugWrite("-", 50);
             DebugWrite("Begin Seed Creation for Type: " + name);
-            DebugWrite("-", 25);
+            DebugWrite("-", 50);
         }
 
         private void DebugWrite(string str, int repeat = 1)
