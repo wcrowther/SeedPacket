@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
 	<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel> 
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
     <UserSecretsId>1ca52874-88d8-400f-a2dc-9e73c0f144a3</UserSecretsId>
