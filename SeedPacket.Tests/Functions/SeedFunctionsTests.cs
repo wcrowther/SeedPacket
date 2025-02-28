@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Assert = NUnit.Framework.Legacy.ClassicAssert;
 using SeedPacket.Functions;
 using SeedPacket.Generators;
 using System;
@@ -11,6 +12,7 @@ using SeedPacket.Tests.Model;
 using SeedPacket.Interfaces;
 using System.Diagnostics;
 using WildHare.Extensions;
+
 
 namespace SeedPacket.Tests
 {

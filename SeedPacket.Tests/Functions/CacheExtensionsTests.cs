@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Assert = NUnit.Framework.Legacy.ClassicAssert;
 using SeedPacket.Extensions;
 using SeedPacket.Functions;
 using SeedPacket.Generators;

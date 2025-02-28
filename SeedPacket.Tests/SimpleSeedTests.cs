@@ -1,8 +1,8 @@
 using NUnit.Framework;
+using Assert = NUnit.Framework.Legacy.ClassicAssert;
 using SeedPacket.Exceptions;
 using System.IO;
 using static SeedPacket.Tests.Common;
-
 
 namespace SeedPacket.Tests
 {
