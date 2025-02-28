@@ -19,7 +19,7 @@ namespace SeedPacket.Generators
         }
 
         private readonly DateTime defaultDateTime = DateTime.Parse("1/1/2020");
-        private ExpandoObject cache = new ExpandoObject();
+        private ExpandoObject cache = [];
 
         protected IRules rules;
         protected int defaultSeed = 123456789;
@@ -79,7 +79,7 @@ namespace SeedPacket.Generators
 
         /// <summary>Temp dictionary of values generated for current row. Only contains previously generated values <br/>
         /// for that row. Values are cleared at beginning of new row.</summary>
-        public Dictionary<string, object> CurrentRowValues { get; } = new Dictionary<string, object>();
+        public Dictionary<string, object> CurrentRowValues { get; } = [];
 
         public MetaProperty CurrentProperty { get; set; }
 

@@ -11,16 +11,11 @@ namespace SeedPacket
 {
     // NOTE: SeedCore in this context is the core of the SeedPacket application NOT .NET CORE.
 
-    public class SeedCore
-    {
-        private IGenerator generator; 
+    public class SeedCore(IGenerator generator = null)
+	{
+        private readonly IGenerator generator = generator ?? new MultiGenerator();
 
-        public SeedCore (IGenerator generator = null)
-        {
-            this.generator = generator ?? new MultiGenerator(); 
-        }
-
-        public IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable) 
+		public IEnumerable<T> SeedList<T> (IEnumerable<T> iEnumerable) 
         {
             DebugSeedType(typeof(T).Name);
 
@@ -82,11 +77,10 @@ namespace SeedPacket
         private Dictionary<TKey, TValue> CreateDictionaryList<TKey, TValue>()
 
         {
-            string keyName, valueName;
-            var dictionary = new Dictionary<TKey, TValue>();
-            bool isFirstRow = true;
+			var dictionary = new Dictionary<TKey, TValue>();
+			bool isFirstRow = true;
 
-            GetDictionaryNames(out keyName, out valueName);
+            GetDictionaryNames(out string keyName, out string valueName);
 
             Rule keyRule = generator.Rules.GetRuleByTypeAndName(typeof(TKey), keyName);
             Rule valueTypeRule = generator.Rules.GetRuleByTypeAndName(typeof(TValue), valueName);

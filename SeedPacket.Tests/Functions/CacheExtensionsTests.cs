@@ -62,10 +62,11 @@ namespace SeedPacket.Tests
             generator.Cache.Invoice = new Invoice {
                 InvoiceId = 1,
                 AccountId = 7890,
-                InvoiceItems = new List<InvoiceItem> {
-                    new InvoiceItem{ InvoiceItemId = 1234 , Fee = 99.99M },
-                    new InvoiceItem{ InvoiceItemId = 5678 , Fee = 2.22M }
-                }
+                InvoiceItems = 
+				[
+                    new(){ InvoiceItemId = 1234 , Fee = 99.99M },
+                    new(){ InvoiceItemId = 5678 , Fee = 2.22M }
+                ]
             };
             ExpandoObject cache = generator.Cache;
 

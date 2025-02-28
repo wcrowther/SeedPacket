@@ -24,7 +24,7 @@ namespace SeedPacket.Examples.Logic.Generators
                 throw new Exception("BaseDateTime must be set to the first Sunday of the season.");
         }
 
-        private List<ScheduleSlot> ScheduleSlots = GetScheduleSlots();
+        private readonly List<ScheduleSlot> ScheduleSlots = GetScheduleSlots();
 
         public List<FootballTeam> Teams { get; set; }
 
@@ -39,8 +39,8 @@ namespace SeedPacket.Examples.Logic.Generators
         {
             var footballRules = new List<Rule>()
             {
-                new Rule(typeof(FootballGame), "", g => GetGame(g), "Get Football Game w/ 2 FootballTeams"),
-                new Rule(typeof(FootballTeam), "", g => GetTeam(g), "Get Football Team")
+                new(typeof(FootballGame), "", g => GetGame(g), "Get Football Game w/ 2 FootballTeams"),
+                new(typeof(FootballTeam), "", g => GetTeam(g), "Get Football Team")
             };
             Rules.AddRange(footballRules, true);
 

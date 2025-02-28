@@ -17,24 +17,14 @@ namespace SeedPacket.Tests
     {
         private string pathToTestXmlFile;
         private string pathToTestJsonFile;
-        private string xmlFile = @"SimpleSeedSource.xml";
-        private string jsonFile = @"JsonSeedSource.json";
-
-        private string testValidXml;
-        private string testEmptyXml;
-        private string testValidJson;
-        private string testEmptyJson;
+        private readonly string xmlFile  = @"SimpleSeedSource.xml";
+        private readonly string jsonFile = @"JsonSeedSource.json";
 
         [SetUp]
         public void Setup()
         {
             pathToTestXmlFile = Path.Combine(GetApplicationRoot() + "\\Source\\", xmlFile);
             pathToTestJsonFile = Path.Combine(GetApplicationRoot() + "\\Source\\", jsonFile);
-
-            testValidXml = GetValidXml();
-            testEmptyXml = GetEmptyXml();
-            testValidJson = GetValidJson();
-            testEmptyJson = GetEmptyJson();
         }
 
         [Test]

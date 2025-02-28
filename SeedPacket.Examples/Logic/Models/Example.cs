@@ -33,7 +33,7 @@ namespace SeedPacket.Examples.Logic.Models
 
         public List<Item> Products 
         {
-            get { return products ?? new List<Item>(); }
+            get { return products ?? []; }
             set { products = value; }
         }
         public string Notes { get; set; }

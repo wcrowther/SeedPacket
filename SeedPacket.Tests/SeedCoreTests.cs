@@ -373,7 +373,7 @@ namespace SeedPacket.Tests
             Assert.AreEqual(5, dict.Count);
             Assert.AreEqual(5, keys.Count);
             Assert.AreEqual(3, dict.Keys.Where(w => w.ConfId == 1).Count());
-            Assert.AreEqual(3, dict.Keys.Where(w => w.Item1 == 1).Count());
+            Assert.AreEqual(3, dict.Keys.Where(w => w.ConfId == 1).Count());
             Assert.AreEqual("Atlanta Falcons", dict.Where(w => w.Key.ConfId == 1).ElementAt(0).Value);
         }
 
