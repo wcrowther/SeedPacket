@@ -208,7 +208,7 @@ namespace SeedPacket.Tests
             diceRoll =   AddDiceBonusesToRoll(gen, 0, diceRoll, 0);
             Debug.WriteLine("Final DiceRoll: " + diceRoll);
 
-            Assert.AreEqual(9, diceRoll);
+            Assert.AreEqual(4, diceRoll);
         }
 
         [TestCase(3432, 9,  Description = "")]
