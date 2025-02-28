@@ -9,7 +9,7 @@
                 <th>FirstName</th>
                 <th>LastName</th>
                 <th>Email</th>
-                <th>Created</th>
+                @* <th>Created</th> *@
             </tr>
         </thead>
         <tbody>
@@ -20,7 +20,7 @@
                     <td>@(!string.IsNullOrEmpty(user.FirstName) ? user.FirstName : "---")</td>
                     <td>@user.LastName</td>
                     <td>@user.Email</td>
-                    <td>@user.Created.ToString("MM/dd/yyyy")</td>
+                    @* <td>@user.Created.ToString("MM/dd/yyyy")</td> *@
                 </tr>
             }
         </tbody>

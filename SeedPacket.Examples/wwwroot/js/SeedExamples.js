@@ -19,8 +19,10 @@
 
     seedExamples.refreshRowResults = function (evt)
     {
-        var seed = $randomSeed.val() || 1234;
-        $results.load("/Data/GetResultRows/?rows=" + $resultsNumber.val() + "&seed=" + seed );
+		var seed = $randomSeed.val() || 1234;
+		$results.load("/Data/GetResultRows/?rows=" + $resultsNumber.val() + "&seed=" + seed);
+
+		console.log(`refreshRowResults ${$resultsNumber.val()} seed: ${ seed }`);
     }
 
 })(window.seedExamples = window.seedExamples || {}, jQuery);
