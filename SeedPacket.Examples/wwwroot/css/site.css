@@ -233,7 +233,7 @@ code i {
     border-color: transparent;
 }
 .mainContent .navbar-inverse {
-    background: linear-gradient( 20deg, #000 60%, #873f87 100%);
+    background: linear-gradient( 45deg, #000 00%, #873f87 80%);
     border: none;
 }
 footer {
