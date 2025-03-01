@@ -12,6 +12,11 @@ using SeedPacket.Tests.Model;
 using SeedPacket.Interfaces;
 using System.Diagnostics;
 using WildHare.Extensions;
+using NUnit.Framework.Internal;
+using System.Reflection.Emit;
+using System.Drawing;
+using System.Runtime.Intrinsics.X86;
+using Microsoft.Testing.Platform.OutputDevice;
 
 
 namespace SeedPacket.Tests
@@ -95,19 +100,22 @@ namespace SeedPacket.Tests
         [Test]
         public void SeedFunctions_RandomText_One_Sentence_One_Word()
         {
-            var gen = new MultiGenerator();
-            string loremText = Funcs.RandomLoremText(gen, 1, 1, 1, 1);
+            var gen = new MultiGenerator(baseRandom: new Random(1234));
+            string loremText = Funcs.RandomLoremText(gen, 1, 1);
 
-            Assert.AreEqual("Lorem.", loremText);
+            Assert.AreEqual("Duis aute irure dolor in reprehenderit in voluptate velit " +
+				"esse cillum dolore eu fugiat nulla pariatur.", loremText);
         }
 
         [Test]
-        public void SeedFunctions_RandomText_With_MultiDataSource_Empty_Data()
+        public void SeedFunctions_RandomText_With_MultiDataSource()
         {
-            var gen = new MultiGenerator(sourceString: GetEmptyXml());
-            string loremText = Funcs.RandomLoremText(gen, 5, 5, 1, 1);
+            var gen = new MultiGenerator(baseRandom: new Random(45633));
+            string loremText = Funcs.RandomLoremText(gen);
 
-            Assert.AreEqual("Lorem lorem lorem lorem lorem.", loremText);
+            Assert.AreEqual("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip " +
+				"ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse " +
+				"cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.", loremText);
         }
 
         [Test]
@@ -115,15 +123,76 @@ namespace SeedPacket.Tests
         {
             var gen = new MultiGenerator();
             string loremText = Funcs.RandomLoremText(gen);
-            string lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eisumod. Tempor incidicunt ut labore et dolore, magna aliqua ut enim ad minim veniam. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor. In reprehenderit in voluptate velit, esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est. Laborum lorem ipsum dolor sit amet consectetur adipiscing. Elit sed do eisumod tempor incidicunt ut.";
 
-
-            Assert.AreEqual(lorem, loremText);
+            Assert.AreEqual("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor " +
+				"incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation " +
+				"ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit " +
+				"in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint " +
+				"occaecat cupidatat non proident.", loremText);
         }
 
-        [Test]
-        public void SeedFunctions_GetObjectNext_FromJson_Throws_Exception()
-        {
+
+		[Test]
+		public void SeedFunctions_RandomBodyCopy_With_Defaults()
+		{
+			var gen = new MultiGenerator();
+			var bodyCopyList = Funcs.RandomBodyCopy(gen);
+
+			Assert.AreEqual(8, bodyCopyList.Count);
+
+			Assert.AreEqual("Sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, " +
+				"consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim " +
+				"ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
+				"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore " +
+				"eu fugiat nulla pariatur.", bodyCopyList[0]);
+
+			Assert.AreEqual("Excepteur sint occaecat cupidatat non proident. Sunt in culpa qui officia deserunt mollit " +
+				"anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor " +
+				"incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation " +
+				"ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit " +
+				"in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", bodyCopyList[3]);
+
+			Assert.AreEqual("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea " +
+				"commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu " +
+				"fugiat nulla pariatur.", bodyCopyList[7]);
+		}
+
+
+		[Test]
+		public void SeedFunctions_RandomBodyCopy_With_Params()
+		{
+			var gen = new MultiGenerator(baseRandom: new Random(5678));
+			var bodyCopyList = Funcs.RandomBodyCopy(gen, 1, 4, 1, 4);
+
+			Assert.AreEqual(2, bodyCopyList.Count);
+
+			Assert.AreEqual("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do " +
+				"eiusmod tempor incididunt ut labore et dolore magna aliqua.", bodyCopyList[0]);
+
+			Assert.AreEqual("Duis aute irure dolor in reprehenderit in voluptate velit esse " +
+				"cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat " +
+				"non proident. Sunt in culpa qui officia deserunt mollit " +
+				"anim id est laborum.", bodyCopyList[1]);
+		}
+
+		[Test]
+		public void SeedFunctions_RandomBodyCopy_AsString()
+		{
+			var gen = new MultiGenerator(baseRandom: new Random(5678));
+			var bodyCopyList = Funcs.RandomBodyCopy(gen, 1, 4, 1, 4);
+
+			string bodyCopy = bodyCopyList.AsString(" ");
+
+			Assert.AreEqual("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do " +
+				"eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor " +
+				"in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
+				"Excepteur sint occaecat cupidatat non proident. Sunt in culpa qui officia " +
+				"deserunt mollit anim id est laborum.", bodyCopy);
+		}
+
+		[Test]
+		public void SeedFunctions_GetObjectNext_FromJson_Throws_Exception()
+		{
             void ExceptionIfInvalidObjectName()
             {
                 var gen = new MultiGenerator(sourceFilepath: pathToTestJsonFile);

@@ -17,6 +17,6 @@ namespace SeedPacket.Examples.Logic.Models
 
         public string Notes { get; set; }
 
-        public List<string> BodyCopy { get; set; }
+		public List<string> BodyCopy { get; set; }
     }
 }
