@@ -14,14 +14,14 @@ namespace SeedPacket.Functions
 
             // Will loop back to beginning if rownumber is greater than number of elements in list
             List<T> objects = generator.Datasource.GetObjectList<T>(propertyName);
-            int count = objects.Count;
-            if (count == 0)
+
+            if (objects.Count == 0)
                 return null;
 
             // By default goes to first record in 0-based list. Offset allows to start offset from the row.
             //  Will always add 1 for each row so it remains sequential. Will loop back if past the end.
             int rowNumberWithOffset = (generator.RowNumber - 1) + offset;
-            int mod = (rowNumberWithOffset) % count;
+            int mod = (rowNumberWithOffset) % objects.Count;
             int position = mod;
 
             return objects?.ElementAtOrDefault(position);

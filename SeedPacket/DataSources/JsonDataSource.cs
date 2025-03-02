@@ -15,7 +15,6 @@ namespace SeedPacket.DataSources
     {
         private JObject jsonData;
         private readonly CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
-        private readonly ListOfList<string, string> Data = new ListOfList<string, string>(); // For change
 
         public JsonDataSource()
         {
@@ -62,7 +61,7 @@ namespace SeedPacket.DataSources
                 // Gets embedded json file Update 'Build Action' property to 'embedded Resource'
                 Assembly a = Assembly.GetExecutingAssembly();
 
-                using (var stream = a.GetManifestResourceStream(GetDefaultJsonResource()))
+				using (var stream = a.GetManifestResourceStream(GetDefaultJsonResource()))
                 using (var reader = new StreamReader(stream))
                 {
                     string result = reader.ReadToEnd();
@@ -79,12 +78,11 @@ namespace SeedPacket.DataSources
         {
             if (jsonData != null)
             {
-                return jsonData
-                    .SelectToken($"..{identifier}")
-                    ?.Select(p => p.Value<string>())
-                    ?.ToList() ?? new List<string>();
+                return jsonData.SelectToken($"..{identifier}")
+							  ?.Select(p => p.Value<string>())
+							  ?.ToList() ?? [];
             }
-            return new List<string>();
+            return [];
         }
 
         public List<T> GetObjectList<T>(string identifier) where T : class, new()
@@ -93,7 +91,7 @@ namespace SeedPacket.DataSources
             {
                 var list = jsonData.SelectToken($"..{identifier}")
                     .Select(p => p.ToObject<T>())
-                    .ToList() ?? new List<T>();
+                    .ToList() ?? [];
 
                 int parsingErrors = list.Count(l => l == null);
                 if (parsingErrors > 0)
@@ -103,22 +101,18 @@ namespace SeedPacket.DataSources
 
                 return list;
             }
-            return new List<T>();
+            return [];
         }
 
         private string GetDefaultJsonResource()
         {
-            string sourceName;
-            switch (currentCulture.Name)
-            {
-                case "en-US": sourceName = "SeedPacket.Source.JsonGeneratorSource.json"; break;
-
-                // Potentially other languages as
-                // case "en-GB":  sourceName = "SeedPacket.Source.JsonGeneratorSource.json"; break;
-
-                default: sourceName = "SeedPacket.Source.JsonGeneratorSource.json"; break;
-            }
-            return sourceName;
+			string sourceName = currentCulture.Name switch
+			{
+				"en-US" => "SeedPacket.Source.JsonGeneratorSource.json",
+				// EX: case "en-GB" => "SeedPacket.Source.JsonGeneratorSource.json",
+				_ => "SeedPacket.Source.JsonGeneratorSource.json",
+			};
+			return sourceName;
         }
     }
 }

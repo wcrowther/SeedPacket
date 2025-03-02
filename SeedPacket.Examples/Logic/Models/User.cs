@@ -15,8 +15,8 @@ namespace SeedPacket.Examples.Logic.Models
 
         public DateTime Created { get; set; }
 
-        public string Notes { get; set; }
+		// public string Notes { get; set; }
 
-		public List<string> BodyCopy { get; set; }
+		// public List<string> BodyCopy { get; set; }
     }
 }
