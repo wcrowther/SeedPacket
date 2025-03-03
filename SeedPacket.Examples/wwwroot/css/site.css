@@ -23,7 +23,7 @@ body {
     right: 0;
 }
 .background-gradation-right-corner {
-    position: fixed;
+    position: absolute;
     background: linear-gradient( 45deg, transparent 60%, #6e83dadb);
     height: 100%;
     top: 0;
@@ -98,14 +98,16 @@ input[type="checkbox"].input-validation-error {
 .hotBox {
     overflow: hidden;
     position: relative;
-    margin-bottom: 20px;
     min-height: 100px;
-    padding: 30px 20px 20px 20px;
+    padding: 20px;
     background: linear-gradient( 15deg, #bedcea 50%, whitesmoke);
 }
 .byline {
     line-height: 1.3;
     color: red;
+}
+.highlight {
+	color: red;
 }
 .side-scroll {
     overflow-x: auto;
@@ -330,6 +332,9 @@ table thead {
     background: url(Images/simpleSeedSplash.png) no-repeat;
 }
 
+.navbar-inverse .navbar-toggle {
+	border-color: transparent;
+}
 /*  
 =========================================================================== 
     Documentation
@@ -337,7 +342,7 @@ table thead {
 /* Namespace H3
 .documentation h3 {} */
 .documentation h4, .documentation h5, .documentation strong {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .documentation h4 {
     font-size: 18px;
