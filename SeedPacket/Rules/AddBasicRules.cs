@@ -10,7 +10,8 @@ namespace SeedPacket
     {
         public static void AddBasicRules (this IRules rules, bool overwrite = false)
         {
-            var basicRules = new List<Rule>(){
+            var basicRules = new List<Rule>()
+			{
                 new (typeof(string),        "", g => (g.CurrentProperty?.Name ?? "") + g.RowNumber.ToString(),  "String",    "Returns propertyName + RowNumber." ),
                 new (typeof(bool),          "", g => g.RowNumber % 2 == 0 ? true : false,                       "Bool",      "Returns alternating true & false."),
                 new (typeof(int),           "", g => g.RowNumber,                                               "Int",       "Returns RowNumber"),

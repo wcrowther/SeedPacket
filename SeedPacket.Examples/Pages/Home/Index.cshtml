@@ -1,6 +1,8 @@
 ﻿@page   "/"
 @model IndexModel
 
+@* NOTE: '<partial />' syntax does not work so have to use  @await Html.PartialAsync("_TryItOut_Box", (Name: "Simple Example"...)) *@
+
 @{
     ViewData["Title"] = "Home";
 }
@@ -11,7 +13,7 @@
 		<img class="pull-right" style="margin: 20px 0 20px 10px; height: 300px;" src="~/images/SeedPacketImage.png" alt="SeedPacket Illustration" />
 
         <h2>SeedPacket</h2>
-		<h4 class="byline">Lightning-Fast LINQ Data Generation for .NET</h4><br/>
+		<h4 class="byline">Lightning-Fast LINQ Data Generation for .NET 8/9</h4><br/>
         <h3>Overview</h3>
         <p>
 			SeedPacket quickly seeds data in .NET for mockups, RAD, testing, prototyping, and database seeding. Written in C#, 
@@ -31,69 +33,56 @@
 	</div>
 </div>
 
-<div class="row">
+<div class="row border">
 
 	<div class="col-md-6 bottom-margin">
-        <h3>Simple Examples</h3>
+
+        <h3>Simple Example</h3>
         <p>
             Creating seed data is as simple as importing SeedPacket from Nuget, adding the SeedPacket.Extensions namespace, and calling .Seed()
-            on an existing an IEnumerable such as List, etc. The <b>table on the right</b> was generated the code in the second example below.
+            on an existing an IEnumerable such as List, etc. 
+		</p>
+		<p>
+			The adjacent <b>User Data Example</b> is generated using the second example below. 
+			Adjust the <b>Rows</b> and <b>Seed</b> values in the <b>Try it out!</b> box to update in real time.
         </p>
 
         <partial name="_Example_Simple_Code" />
 
-        <div class="randomSeed">
-            Seed<input id="randomSeed" type="text" value="1234" maxlength="4" style="width:60px; text-align: center;" />
-        </div>
-        <div class="rowCounter">
-            Rows<input id="numberOfRowResults" type="text" value="20" maxlength="4" style="width:60px; text-align: center;" />
-        </div>
-		<p class="highlight">
-			<b>You can adjust the number of generated rows by changing the "Rows" input, which triggers JavaScript to fetch new data from SeedPacket 
-			on the server.</b>
-		</p>
-		<p class="margin-top">
-			<b>			
-			Although the data appears random, using the same "seed" value ensures consistent results. Change the "Seed" number input
-			to see how it always produces the same output for that seed value.
-			</b>
-		</p>
+		@await Html.PartialAsync("_TryItOut_Box", (Name: "Users Example", RowsId: "numberOfRows", SeedId: "randomSeed", RowsMax: 999))
+
         <p>
-			Customization is simple—SeedPacket’s rules engine can modify generated data using custom rules. The base data comes from an embedded 
-			source but can be overridden with an external XML/JSON file or string.
+			Customization is simple—SeedPacket’s rules engine can modify generated data using custom rules. The base data comes from embedded 
+			source code but can be overridden with an external XML/JSON file or string.
         </p>
         <p>
 			By default, well-formed usernames and emails are generated based on property types and names. For example, if a property is a string 
 			containing "email" or "username," it generates appropriate data, even constructing usernames from first and last names. Other types, 
 			like DateTime (e.g., "Created") or int (e.g., "Id"), are also handled. Rules prioritize matches by data type first, then property name.
         </p>
-        <p>
-			For uncommon fields, basic rules apply, such as using PropertyName + RowNumber for strings. If no match is found, a type default is used.
-        </p>
+		<p>
+			By default, the data remains consistent between each call as it determined by a base RandomNumber that is seeded with a static value. All other random
+			values are derived from this number for each row of data, creating a "random tree". Passing in a non-static random value at the root of the tree 
+			will cause all values to be different each time.
+		</p>
+
         <p>
 			<b>The real power lies in custom rules, which we'll explore next—first, let’s look at a more advanced example.</b>
         </p>
-
-		<partial name="_Source_Code" />
 
     </div>
 
     <div class="col-md-6">
 
-		<partial name="_HotBox" />
+		<partial name="_Result_Simple" model="Model.UserList" />
 
-        <div class="code-scrolls-div top-margin"> 
-            <span class="code-scrolls-span">&#8592 Table Scrolls &#8594</span>
-        </div>
+		<partial name="_Installing_SeedPacket" />
 
-        <partial name="_Result_Simple" model="Model.UserList" />
-    </div>
+	</div>
 </div>
 
 <div class="row">
     <div class="col-md-12">
-
-        <partial name="_Example_Advanced_Code" />
 
         <h3>Advanced Example</h3>
 		<div class="bottom-margin">
@@ -102,9 +91,13 @@
 			into the Seed method. 
 		</div>
 
+		<partial name="_Example_Advanced_Code" />
+
 		<div class="bottom-margin">
-			 We are adding five new rules to modify how the data is created:
+			 <b>We are adding five new rules to modify how the data is created:</b>
 		</div>
+
+		@await Html.PartialAsync("_TryItOut_Box", (Name: "Companys Example", RowsId: "advNumberOfRows", SeedId: "advRandomSeed", RowsMax: 999))
 
 		<ol class="bottom-margin">
 			<li>
@@ -128,16 +121,21 @@
 				the generator's Cache. We can populate this generated list from another .Seed call and this allows us to have complex, hierarchical data when needed.
 				Note how we can initially declare the rules, but then need to make sure we fill the cached data before the rules are actually run.
 			</li>
+			<li>
+				Notice how we set <b>BaseDateTime</b> as the starting point for all generated DateTime values. Similarly, <b>BaseRandom</b> serves as the root of the "Random Tree," 
+				influencing all other random values like <b>RowRandom</b>.
+			</li>
 		</ol>
 
-		<div class="bottom-margin">
-			Notice how we set <b>BaseDateTime</b> as the starting point for all generated DateTime values. Similarly, <b>BaseRandom</b> serves as the root of the "Random Tree," 
-			influencing all other random values like <b>RowRandom</b>.
-		</div>
-
-        <partial name="_Result_Advanced" />
+		<partial name="_Result_Advanced" model="Model.ExampleList" />
 
     </div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<partial name="_HotBox" />
+	</div>
 </div>
 
 <div class="row">
@@ -158,4 +156,10 @@
         });
     </script>
 }
+
+
+
+@* <div class="code-scrolls-div top-margin"> *@
+@* 	<span class="code-scrolls-span">&#8592 Table Scrolls &#8594</span> *@
+@* </div> *@
 

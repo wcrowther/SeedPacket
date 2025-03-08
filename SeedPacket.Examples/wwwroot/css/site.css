@@ -10,9 +10,10 @@ new alternating blue for table: #e5f4fb
 
 
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    background-color: whitesmoke;
+	padding-top: 50px;
+	padding-bottom: 20px;
+	background-color: whitesmoke;
+	font-family: 'Merriweather', serif;
 }
 .background-gradation {
     position: absolute;
@@ -24,7 +25,7 @@ body {
 }
 .background-gradation-right-corner {
     position: absolute;
-    background: linear-gradient( 45deg, transparent 60%, #6e83dadb);
+    background: linear-gradient( 35deg, transparent 50%, #6e83dadb 100%);
     height: 100%;
     top: 0;
     left: 0;
@@ -96,11 +97,11 @@ input[type="checkbox"].input-validation-error {
     margin-top: 10px;
 }
 .hotBox {
-    overflow: hidden;
-    position: relative;
-    min-height: 100px;
-    padding: 20px;
-    background: linear-gradient( 15deg, #bedcea 50%, whitesmoke);
+	overflow: hidden;
+	position: relative;
+	min-height: 100px;
+	padding: 20px;
+	background: linear-gradient(193deg, #bedcea 5%, whitesmoke 68%);
 }
 .byline {
     line-height: 1.3;
@@ -164,7 +165,7 @@ input[type="checkbox"].input-validation-error {
     background-color: #eee;
 }
 .codeExample div.codeTitleBlue {
-    background-color: #bedcea;
+	background: linear-gradient(90deg, #bedcea 50%, whitesmoke 100%);
 }
 .codeExample div.codeTitleGreen {
     background-color: #F5DEDB;
@@ -211,19 +212,30 @@ code i {
     color: red;
 }
 
-.rowCounter,
-.randomSeed {
-    float: right;
-    width: 80px;
-    padding: 10px;
-    margin-left: 10px;
-    text-align: center;
-    font-weight: bold;
-    background: linear-gradient( 360deg, #bedcea 50%, whitesmoke);
+.try-it-out-box {
+	float: right;
+	width: 175px;
+	padding: 20px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+	font-size: 13px;
+	background: linear-gradient(193deg, #bedcea 5%, whitesmoke 50%);
+	border: solid 1px #bedcea;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 10px;
 }
-.randomSeed { 
-    margin-left:0;
+.try-it-out-box div {
+	display:flex;
+	flex-direction: column;
+	flex-grow:1;
+	justify-content:center;
 }
+.try-it-out-box input {
+	text-align: center;
+}
+
 .top-margin {
     margin-top: 30px;
 }
@@ -249,12 +261,26 @@ footer {
     height: 24px;
     margin-right: 10px;
 }
+.example-bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	padding: 10px 0;
+	width: 100%;
+}
+.example-title {
+	color: #63b3d8;
+}
+.example-scrolls {
+	color: #63b3d8;
+	font-size: 10px;
+}
 
 /*  =========================================================================== 
     Bootstrap Overrides / Additions 
 =========================================================================== */
 .navbar-nav > li > a {
-    line-height: 31px;
+	line-height: 31px;
 }
 table {
     border: solid 1px #bedcea;
@@ -264,6 +290,9 @@ table thead {
     background-color: #63b3d8;
     color: white;
     letter-spacing: .5px;
+}
+.table {
+	margin-bottom: 0;
 }
 .table thead > tr > th {
     border-bottom: none;
@@ -280,7 +309,6 @@ table thead {
 .table-striped > tbody > tr:nth-child(odd) > th {
     background-color: #e5f4fb;
 }
-
 
 /* Green table */
 
@@ -334,6 +362,10 @@ table thead {
 
 .navbar-inverse .navbar-toggle {
 	border-color: transparent;
+}
+
+.nav {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /*  
 =========================================================================== 
@@ -651,16 +683,16 @@ nav.navTabs li a {
         display: none;
     }
     .background-gradation-right-corner {
-        background: linear-gradient( 45deg, transparent 75%, #6e83dadb);
+        background: linear-gradient( 55deg, transparent 55%, #6e83dadb 100%);
     }
 }
 
-@media only screen and (min-width: 575.98px) and (max-width: 768px) {
+/*@media only screen and (min-width: 575.98px) and (max-width: 768px) {
 
     .background-gradation-right-corner {
         background: linear-gradient( 45deg, transparent 68%, #6e83dadb);
     }
-}
+}*/
 
 /* md  >=  768px ------------------------------------------------------------------------------------------- */
 

@@ -5,33 +5,15 @@
 @using SeedPacket
 @using SeedPacket.Generators
 @inject IWebHostEnvironment env
+@model List<Company>
 
+<div id="advRowResults" class="side-scroll bottom-margin">
 
-@{  // inline in view for RAD or web pages purposes
+	<div class="example-bar">
+		<h4 class="example-title">Company Example</h4>
+		<span class="example-scrolls">Table Scrolls Left / Right</span>
+	</div>
 
-    var root = env.ContentRootPath;
-    var generator = new MultiGenerator($@"{root}\Logic\SourceFiles\xmlSeedSourcePlus.xml")
-    {
-        Rules = {
-            new Rule(typeof(string), "ItemName",      g => Funcs.GetElementNext(g, "ProductName"), "ItemName"),
-            new Rule(typeof(int), "SelectedProduct",  g => g.RowRandom.Next(0, 11),"Random product id"),
-            new Rule(typeof(string), "Ceo",           g => Funcs.GetElementNext(g, "FirstName") + " " + Funcs.GetElementNext(g, "LastName"), "Random CEO Name"),
-            new Rule(typeof(string),"Description%",   g => Funcs.GetElementNext(g, "Description"), "Description", "Gets Description from custom XML file" ),
-            new Rule(typeof(List<Item>), "",          g => Funcs.GetListFromCacheNext<Item>(g, g.Cache.Items, 10, 10, false), "ItemList")
-        },
-        BaseDateTime = DateTime.Today,
-        BaseRandom = new Random(1234567)
-    };
-    generator.Cache.Items = new List<Item>().Seed(1, 10, generator);
-
-    var examples = new List<Example>().Seed(100, 115, generator);
-}
-
-@*<div class="scroll-pill-div top-margin bottom-margin-small"> 
-    <span class="scroll-pill">&#8592 Table Scrolls &#8594</span>
-</div>*@
-
-<div class="side-scroll">
     <table id="home-advanced-example-table" class="table table-striped table-collapse">
         <thead>
             <tr>
@@ -47,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var ex in examples)
+            @foreach (var ex in Model)
             {
             <tr>
                 <td>@ex.Id</td>
@@ -64,8 +46,32 @@
             }
         </tbody>
     </table>
+
 </div>
 
 
+
+
+@*  Below is an inline version inside view instead of using controller - for Rapid Application Development
+@@{ 
+
+    var root = env.ContentRootPath;
+    var generator = new MultiGenerator($@@"{root}\Logic\SourceFiles\xmlSeedSourcePlus.xml")
+    {
+        Rules = {
+            new Rule(typeof(string), "ItemName",      g => Funcs.GetElementNext(g, "ProductName"), "ItemName"),
+            new Rule(typeof(int), "SelectedProduct",  g => g.RowRandom.Next(0, 11),"Random product id"),
+            new Rule(typeof(string), "Ceo",           g => Funcs.GetElementNext(g, "FirstName") + " " + Funcs.GetElementNext(g, "LastName"), "Random CEO Name"),
+            new Rule(typeof(string),"Description%",   g => Funcs.GetElementNext(g, "Description"), "Description", "Gets Description from custom XML file" ),
+            new Rule(typeof(List<Item>), "",          g => Funcs.GetListFromCacheNext<Item>(g, g.Cache.Items, 10, 10, false), "ItemList")
+        },
+        BaseDateTime = DateTime.Today,
+        BaseRandom = new Random(1234567)
+    };
+    generator.Cache.Items = new List<Item>().Seed(1, 10, generator);
+
+    var examples = new List<Example>().Seed(100, 115, generator);
+}
+*@
 
 

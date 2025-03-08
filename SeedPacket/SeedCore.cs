@@ -48,7 +48,7 @@ namespace SeedPacket
             return iEnumerable;
         }
 
-        public IDictionary<TKey, TValue> SeedList<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
+		public IDictionary<TKey, TValue> SeedList<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
         {
             DebugSeedType($"Dictionary<{typeof(TKey).Name}, {typeof(TValue).Name}>");
 

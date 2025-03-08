@@ -9,21 +9,13 @@ using System.Collections.Generic;
 
 namespace SeedPacket.Examples.Controllers
 {
-    public class DataController : Controller
+    public class DataController(ITeamsManager teamManager, IExampleManager exampleManager) : Controller
     {
-        private readonly ITeamsManager _teamsManager;
-
-        public DataController(ITeamsManager teamManager)
-        {
-            this._teamsManager = teamManager;
-        }
-
-        //[HttpPost]
-        public JsonResult GetFootballInfo(int seed, int year, DateTime? customSunday = null)
+		public JsonResult GetFootballInfo(int seed, int year, DateTime? customSunday = null)
         {
             var openingSunday = new DateTime(year, 1, 1).SecondSundayInSeptember(); // Usual start of season
 
-            var info = _teamsManager.GetGamesInfo(new Random(seed), customSunday ?? openingSunday);
+            var info = teamManager.GetGamesInfo(new Random(seed), customSunday ?? openingSunday);
 
             return new JsonResult(info);
         }
@@ -36,5 +28,12 @@ namespace SeedPacket.Examples.Controllers
 
             return PartialView("_Result_Simple", users);
         }
-    }
+
+		public IActionResult GetAdvancedResultRows(int? rows = 10, int? seed = 1234)
+		{
+			var exampleList = exampleManager.GetExampleList(rows, seed);
+
+			return PartialView("_Result_Advanced", exampleList);
+		}
+	}
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SeedPacket.Examples.Logic.Models
 {
-    public class Example
+    public class Company
     {
         private List<Item> products;
         

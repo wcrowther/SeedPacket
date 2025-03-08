@@ -4,23 +4,19 @@
 
 <div class="codeTitle codeTitleBlue">This example passes in 5 additional custom rules into the Rules engine</div>
 
-@*<div class="scroll-pill-div top-margin-small hide-bigger-than-md"> 
-    <span class="scroll-pill-blue">&#8592 Code Scrolls &#8594</span>
-</div>*@
-
 <code class="side-scroll">
 var generator = new MultiGenerator("~/SourceFiles/xmlSeedSourcePlus.xml")
 {
-    Rules = 
-    {
-        new Rule(typeof(string), "ItemName",      g =&gt; Funcs.GetNextElement(g, "ProductName"), "ItemName"),
-        new Rule(typeof(int), "SelectedProduct",  g =&gt; g.RowRandom.Next(0, 11), "Random product id"),
-        new Rule(typeof(string), "Ceo",           g =&gt; Funcs.GetNextElement(g, "FirstName") + " " + func.NextElement(g, "LastName"), "Random CEO Name"),
-        new Rule(typeof(string),"Description%",   g =&gt; Funcs.GetRandomElement(g, "Description"), "Description", "Gets Description from custom XML file" ),
-        new Rule(typeof(List&lt;Item&gt;), "",    g =&gt; Funcs.GetCacheItemsNext&lt;Item&gt;(g, g.Cache.Items, 10, 10, false), "ItemList"),
-    },
-    BaseDateTime = DateTime.Today,
-    BaseRandom = new Random(1234567)
+	Rules =
+	{
+		new Rule(typeof(string), "ItemName",	 g =&gt; Funcs.GetNextElement(g, "ProductName"), "ItemName"),
+		new Rule(typeof(int), "SelectedProduct", g =&gt; g.RowRandom.Next(0, 11), "Random product id"),
+		new Rule(typeof(string), "Ceo",		 g =&gt; Funcs.GetNextElement(g, "FirstName") + " " + func.NextElement(g, "LastName"), "Random CEO Name"),
+		new Rule(typeof(string),"Description%",	 g =&gt; Funcs.GetRandomElement(g, "Description"), "Description", "Gets Description from custom XML file" ),
+		new Rule(typeof(List&lt;Item&gt;), "",	 g =&gt; Funcs.GetCacheItemsNext&lt;Item&gt;(g, g.Cache.Items, 10, 10, false), "ItemList"),
+	},
+	BaseDateTime = DateTime.Today,
+	BaseRandom = new Random(1234567)
 };
 generator.Cache.Items = new List&lt;Item&gt;().Seed(1, 10, generator);
 

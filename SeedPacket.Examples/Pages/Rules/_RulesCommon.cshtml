@@ -6,6 +6,12 @@
     var gen = new MultiGenerator(rulesSet: RulesSet.None);
     gen.Rules.AddCommonRules();
     var commonRules = gen.Rules;
+
+	var wraps = new Dictionary<string, string>
+	{
+		{ "Nullable`1", "Nullable`1<br />" },
+		{ "Generic",    "Generic<br />" }
+	};
 }
 
 <div class="code-scrolls-div top-margin"> 
@@ -28,7 +34,7 @@
                 <tr>
                     <td>@rule.RuleName</td>
                     <td>@rule.Description</td>
-                    <td>@rule.TypeMatch</td>
+					<td>@Html.Raw(rule.TypeMatch.ToString().Replace(wraps))</td>
                     <td>@rule.NameMatch.IfNullOrEmpty("Any")</td>
                 </tr>
             }

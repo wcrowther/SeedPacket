@@ -1,29 +1,22 @@
 ﻿
-(function (seedExamples, $, undefined) {
+(function (seedExamples, $, undefined)
+{
+	seedExamples.alert = (msg) => alert(msg); 
 
-    var self = this;
+	seedExamples.init = function (){
 
-    seedExamples.init = function ()
-    {
-        self.$resultsNumber = $('#numberOfRowResults');
-        self.$randomSeed = $('#randomSeed');
-        self.$results = $('#rowResults');
+		$('#numberOfRows, #randomSeed').on('change',
+			() => $('#rowResults').load(`/Data/GetResultRows/
+											?rows=${ $('#numberOfRows').val() }
+											&seed=${ $('#randomSeed').val() || 1234 }`)
+        )
 
-        $resultsNumber.on('change', function () {
-            seedExamples.refreshRowResults();
-        })
-        $randomSeed.on('change', function () {
-            seedExamples.refreshRowResults();
-        })
-    };
-
-    seedExamples.refreshRowResults = function (evt)
-    {
-		var seed = $randomSeed.val() || 1234;
-		$results.load("/Data/GetResultRows/?rows=" + $resultsNumber.val() + "&seed=" + seed);
-
-		console.log(`refreshRowResults ${$resultsNumber.val()} seed: ${ seed }`);
-    }
+		$('#advNumberOfRows, #advRandomSeed').on('change',
+			() => $('#advRowResults').load(`/Data/GetAdvancedResultRows/
+												?rows=${ $('#advNumberOfRows').val() }
+												&seed=${ $('#advRandomSeed').val() || 1234 }`)
+		)
+	}
 
 })(window.seedExamples = window.seedExamples || {}, jQuery);
 

@@ -1,0 +1,16 @@
+﻿@model (string Name, string RowsId, string SeedId, int RowsMax)
+
+<div class="try-it-out-box">
+	<p style="font-weight: bold; width: 100%;">Try it out!</p>
+	<div style="width: 50px; font-weight: bold; display: flex; flex-direction: column; align-items: center;">
+		Rows
+		<input id="@Model.RowsId" type="number" value="20" min="0" max="@Model.RowsMax" style="width: 66px; margin-top: 7px;" />
+	</div>
+	<div style="width: 50px; font-weight: bold; display: flex; flex-direction: column; align-items: center">
+		Seed
+		<input id="@Model.SeedId" type="number" value="1234" min="0" max="9999" style="width: 66px; margin-top: 7px;" />
+	</div>
+	<p style="font-size: 11.5px; line-height: 18px; width: 100%; margin-top: 20px; padding-bottom: 0;">
+		Update these values to see the <i>@Model.Name</i> update in real time.
+	</p>
+</div>

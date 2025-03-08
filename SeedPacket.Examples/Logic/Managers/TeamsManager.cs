@@ -5,35 +5,27 @@ using SeedPacket.Examples.Logic.Models;
 using System;
 using System.Diagnostics;
 
-namespace SeedPacket.Examples.Logic.Managers
+namespace SeedPacket.Examples.Logic.Managers;
+
+public class TeamsManager(IWebHostEnvironment webHostEnvironment) : ITeamsManager
 {
-    public class TeamsManager : ITeamsManager
+	public FootballInfo GetGamesInfo(Random random = null, DateTime? openingDate = null)
     {
-        private readonly IWebHostEnvironment _webHostEnvironment;
+        var footballInfo = new FootballInfo(openingDate);
+        string footballSource = $"{webHostEnvironment.ContentRootPath}/Logic/SourceFiles/FootballSource.xml";             
 
-        public TeamsManager(IWebHostEnvironment webHostEnvironment)
-        {
-            _webHostEnvironment = webHostEnvironment;
-        }
+        var stopwatch = Stopwatch.StartNew();
 
-        public FootballInfo GetGamesInfo(Random random = null, DateTime? openingDate = null)
-        {
-            var footballInfo = new FootballInfo(openingDate);
-            string footballSource = $"{_webHostEnvironment.ContentRootPath}/Logic/SourceFiles/FootballSource.xml";             
+        var gen = new FootballGenerator (footballInfo.OpeningSunday, footballSource, random);
 
-            var stopwatch = Stopwatch.StartNew();
+        stopwatch.Stop();
 
-            var gen = new FootballGenerator (footballInfo.OpeningSunday, footballSource, random);
+        footballInfo.Teams = gen.Teams; 
+        footballInfo.Games = gen.Games;       
 
-            stopwatch.Stop();
+        footballInfo.ElapsedTime    = stopwatch.Elapsed.TotalSeconds.ToString("#.0000");
+        Debug.WriteLine($"ElapsedTime: { footballInfo.ElapsedTime }");
 
-            footballInfo.Teams = gen.Teams; 
-            footballInfo.Games = gen.Games;       
-
-            footballInfo.ElapsedTime    = stopwatch.Elapsed.TotalSeconds.ToString("#.0000");
-            Debug.WriteLine($"ElapsedTime: { footballInfo.ElapsedTime }");
-
-            return footballInfo;
-        }
+        return footballInfo;
     }
 }

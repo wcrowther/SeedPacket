@@ -33,11 +33,12 @@ namespace SeedPacket.Examples
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(Configuration.GetSection("App").Get<AppSettings>());
-            
-            // Add Services here
-            services.AddScoped<ITeamsManager, TeamsManager>();
 
-            services.AddControllersWithViews();
+			// Add Services here
+			services.AddScoped<ITeamsManager,	TeamsManager>();
+			services.AddScoped<IExampleManager, ExampleManager>();
+
+			services.AddControllersWithViews();
             services.AddRazorPages() //.AddRazorRuntimeCompilation()
                     .AddNewtonsoftJson(opt => // Stops return json from automatically being pascal-cased
                             opt.SerializerSettings.ContractResolver = new DefaultContractResolver()
