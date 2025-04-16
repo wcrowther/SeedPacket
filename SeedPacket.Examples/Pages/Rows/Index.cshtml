@@ -2,41 +2,36 @@
 @model RowsModel
 
 @{
-    ViewData["Title"] = "Generate 25,000 Rows";
+    ViewData["Title"] = "Generate 25k Rows";
 }
 
 <div class="row">
     <div class="col-md-12">
         <h2>@ViewData["Title"]</h2>
-        <h4 class="byline">this Sample Generates 1000 Accounts,<br />
-            with 4000 Invoices & 20,000 Line Items</h4>
-        <p>
-            This example shows how you can create 1000 Account records, that each have from 0 to 4 Invoices, which each have 
-            from 1 to 8 InvoiceItems. The intention here is to show that you can have some complex nested data structures with
-            large numbers of seeded items and the result will still be performant. 
-        </p>
-        <p>
-            If you look at the code in the controller, we are pre-generating a list containing 20,000 rows of InvoiceItems
-            and 4000 rows of invoices. These cached lists are then used by the "getRandomInvoiceItems" and "getRandomInvoices" rules
-            which utilize the <b>Funcs.GetCacheItemsRandom()</b> and <b>Funcs.GetCacheItemsNext()</b> methods to get either a number of random
-            items or a number of the next sequential items from a cached list. The <b>Funcs.GetCacheItemsRandom()</b> menthod usually 
-            takes 150% longer (or more) to process due to the overhead of randomizing the order of items returned.
-        </p>
-        <p>
-            The number of items taken is driven by the min and max parameters. To get a static number of items, just set
-            both parameters to the same number. The item is removed from the cached list by default after being retrieved. 
-            Setting the "remove" parmeter to false if will leave the item in the cached list, if that is desired. If there 
-            are no more items in the cached list, the method will fail silently, so it is best practice to manually estimate
-            how many rows are required ahead of time.
-        </p>
-        <p>
-            <b>Calculated on the fly, it took <i class="emphasis">@Model.ElapsedTime milliseconds</i> to generate these 25,000 rows of data.</b>
-        </p>
-        <p>
-            The source code also shows an example that breaks out the GetInvoices() rule into an external function. This example shows
-            how to apply extra logic to make the Invoice.AccountId match the actual AccountId in the Account it is nested under. Breaking 
-            the logic into an external function is also useful for debugging the logic...
-        </p>
+        <h4 class="byline bottom-margin-big">
+			This example generates 1k Accounts with 4k Invoices & 20k InvoiceItems
+		</h4>
+
+		<p>
+			This example demonstrates generating <b>1000 Account records</b>, each with <b>0-4 Invoices</b>, and each Invoice with
+			<b>1-8 InvoiceItems</b>. It highlights the ability to efficiently handle complex nested data with large volumes.
+		</p>
+		<p>
+			The controller pre-generates 20,000 InvoiceItems and 4000 Invoices. These cached lists are accessed via 
+			<b>Funcs.GetCacheItemsRandom()</b> and <b>Funcs.GetCacheItemsNext()</b> to retrieve random or sequential items. 
+			Random retrieval is slower—about 150% longer—due to shuffling overhead.
+		</p>
+		<p>Item count is controlled by min/max parameters; setting both equal ensures a fixed number. Items are removed
+			from the cache by default unless remove = false. If the cache runs out of items, the method fails silently,
+			so estimating row counts beforehand is recommended.
+		</p>
+		<p>
+			<b>Generating 25,000 rows took <i class="emphasis">@Model.ElapsedTime ms.</i></b>
+		</p>
+		<p>
+			The code also includes an example of extracting the <b>GetInvoices()</b> rule into an external function, which applies 
+			logic to match <b>Invoice.AccountId</b> with its parent <b>AccountId</b>, aiding both organization and debugging.
+		</p>
     </div>
 </div>
 

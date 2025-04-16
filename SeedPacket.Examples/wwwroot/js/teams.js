@@ -15,7 +15,7 @@ const vueApp = new Vue({
         Games: [],
         ElapsedTime: '',
         CustomSunday: null,
-        Year: 2020,
+		Year: new Date().getFullYear(),
         YearList: []
     },
     mounted: function ()

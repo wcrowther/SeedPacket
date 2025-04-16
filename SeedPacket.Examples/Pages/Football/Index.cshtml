@@ -2,7 +2,7 @@
 @model FootballModel
 
 @{
-    ViewData["Title"] = "NFL Season Generator";
+    ViewData["Title"] = "Football Season Generator";
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -14,38 +14,40 @@
     <div class="row">
         <div class="col-md-8">
             <h2>@ViewData["Title"]</h2>
-            <h4 class="byline">Generate a Random Season</h4>
+            <h4 class="byline bottom-margin-big">
+				Example to generate a Random Football Season
+			</h4>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-xs-12">
-            <div class="elapsedTime pull-right">
-				<span class="hidden-xs">Generator Elapsed Time is </span>{{ ElapsedTime }} secs
-			</div>
-            <p>Created by Will Crowther</p>
-        </div>
+
+        <div class="col-xs-12 bottom-margin">
+
+			<partial name="_TryItOut_Football" />
+			
+			<p>
+				<b>This SeedPacket example takes data generation to the next level!</b> It showcases a complete football schedule 
+				for an entire season, organized by team, date, or week.
+			</p>
+			<p>
+				We've incorporated complex scheduling rules, such as division matchups and rotating non-division 
+				games — just like real-world schedules. This demonstrates how SeedPacket can handle intricate 
+				data scenarios with ease.
+			</p>
+			<p>
+				Try adjusting the Year and Seed inputs to generate different schedule variations and explore 
+				the flexibility of SeedPacket!
+			</p>
+		
+		</div>
+
     </div>
 
-    <div class="row">
-        <div class="col-md-offset-6 col-md-6">
-            <div class="teamsSeed" v-cloak>
-                <div style="display:inline-block">
-                    <span>Seed:</span>
-                    <input id="randomSeed" v-model="Seed" type="number" @@change="getFootballInfo()" style="width: 100px;" />
-                </div>
-                <div style="display:inline-block; margin-left: 20px;">Year:</div>
-                <div style="display:inline-block; margin-left: 10px;">
-                    <select id="openingSundayId" class="form-control" v-model="Year" @@change="getFootballInfo()">
-                        <option disabled value="">- Select one -</option>
-                        <option v-for="year in yearList" :value="year.value">{{year.text}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    @*<button id="testButton" style="z-index: 1000;" @@click="showTestButtonId()" >TestButton</button>*@
+	<span class="pull-right" style="position: relative; top: 10px;">
+		<span class="hidden-xs">Generator Elapsed Time is </span>
+		{{ ElapsedTime }} secs
+	</span>
 
     <ul class="nav nav-tabs">
         <li><a @@click="activeTab=0" :class="{'activeTab' : ActiveTab == 0}" style="color: black;">By Date</a></li>
@@ -56,7 +58,8 @@
     <div class="row gameBox" v-if="ActiveTab == 0" id="GamesByDate" v-cloak>
         <div class="col-xs-12 sectionHeader">Games</div>
         <div class="col-xs-12 sectionContent">
-            <table class="table table-striped top-margin table-collapse football-table">
+
+            <table class="table table-striped top-margin bottom-margin table-collapse football-table">
                 <thead>
                     <tr>
                         <th style="text-align: right;"></th>
@@ -80,15 +83,19 @@
                             <football-icon :team="game.AwayTeam"></football-icon>
                         </td>
                     </tr>
+				</tbody>
             </table>
+
         </div>
     </div>
 
     <div class="row gameBox" v-if="ActiveTab == 1" id="GamesByWeek" v-cloak>
+
         <template v-for="week in gamesByWeek">
             <div class="col-xs-12 sectionHeader" :key="week.key">Week {{ week.key }}</div>
             <div class="col-xs-12 sectionContent">
-                <table class="table table-striped top-margin table-collapse football-table">
+
+				<table class="table table-striped top-margin bottom-margin table-collapse football-table">
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
@@ -113,6 +120,7 @@
                         </tr>
                     </tbody>
                 </table>
+
             </div>
         </template>
     </div>
@@ -137,15 +145,19 @@
         </div>
 
         <template v-for="team in Teams" v-if="ActiveTeam ? team.Id == ActiveTeam.Id : true">
+
             <div class="col-xs-9 sectionHeader" :key="team.Id">
                 <football-icon size="medium" :team="team"></football-icon> &nbsp; 
                 <span>{{team.Location}} {{team.Name}}</span>
                 <span> - {{team.Conference}} {{team.Division}}</span>
             </div>
+
             <div class="col-xs-3 sectionHeader team-conf-div">
                 <button id="team-show-all" v-show="ActiveTab == 2" class="bubble" @@click="setActiveTeam()">Show All</button>
             </div>
+
             <div class="col-xs-12">
+
                 <table class="table table-striped top-margin bottom-margin table-collapse football-table">
                     <thead>
                         <tr>
@@ -172,7 +184,9 @@
                         </tr>
                     </tbody>
                 </table>
+
             </div>
+
         </template>
     </div>
 

@@ -1,0 +1,25 @@
+﻿
+<div class="try-it-out-box" style="width: 250px;">
+
+	<p style="font-weight: bold; width: 100%;">Try it out!</p>
+
+	<div style="width: 50px; font-weight: bold; display: flex; flex-direction: column; align-items: center;">
+		Year
+		<select id="openingSundayId" class="form-control" v-model="Year" @@change="getFootballInfo()"
+			style="width: 80px; height: 32px; border: solid 1px; margin-top: 7px; border-radius: 0; ">
+			<option disabled value="">- Select one -</option>
+			<option v-for="year in yearList" :value="year.value">{{year.text}}</option>
+		</select>
+	</div>
+
+	<div style="width: 50px; font-weight: bold; display: flex; flex-direction: column; align-items: center">
+		Seed
+		<input id="randomSeed" v-model="Seed"  @@change="getFootballInfo()"  maxlength="4"
+			style="width: 80px; margin-top: 7px;" />
+	</div>
+
+	<p style="font-size: 11.5px; line-height: 18px; width: 100%; margin-top: 20px; padding-bottom: 0;">
+		Update these values to see the Football teams update in real time.
+	</p>
+
+</div>

@@ -13,8 +13,7 @@
 		<img class="pull-right" style="margin: 20px 0 20px 10px; height: 300px;" src="~/images/SeedPacketImage.png" alt="SeedPacket Illustration" />
 
         <h2>SeedPacket</h2>
-		<h4 class="byline">Lightning-Fast LINQ Data Generation for .NET 8/9</h4><br/>
-        <h3>Overview</h3>
+		<h4 class="byline bottom-margin-big">Lightning-Fast LINQ Data Generation for .NET 8/9</h4>
         <p>
 			SeedPacket quickly seeds data in .NET for mockups, RAD, testing, prototyping, and database seeding. Written in C#, 
 			it features an easy-to-use, customizable rules engine that supports external data sources like XML, JSON, or strings.
@@ -85,57 +84,59 @@
     <div class="col-md-12">
 
         <h3>Advanced Example</h3>
-		<div class="bottom-margin">
+		<p class="bottom-margin">
 			For more advanced situations, you can pass in a generator class that contains a customizable rules engine.  By default,  the "Advanced" ruleset is
 			used which contains about thirty common rules and the data is loaded from an internal resource. In the example below a "MultiGenerator" is injected
 			into the Seed method. 
-		</div>
+		</p>
 
 		<partial name="_Example_Advanced_Code" />
 
 		<div class="bottom-margin">
-			 <b>We are adding five new rules to modify how the data is created:</b>
+			 <b>We add five new rules to modify how the data is created:</b>
 		</div>
 
-		@await Html.PartialAsync("_TryItOut_Box", (Name: "Companys Example", RowsId: "advNumberOfRows", SeedId: "advRandomSeed", RowsMax: 999))
 
 		<ol class="bottom-margin">
+
 			<li>
 				The first rule applies to the "ItemName" field uses a built-in seedpacket function (Func) that gets the next element from the datasource list
 				"ProductName". It actually overrides a rule that gets random (fake) products and replaces it with one that gets the next item in the sequence.
 				This insures the values will all be unique, if the number of items requested is less than in the source.
 			</li>
+
 			<li>
 				The second rule, randomly picks a selected value for the dropdown from 0 to 10 (the C# Random() method picks values <i>less than</i> the max value).
 			</li>
+
 			<li>
 				The third rule, randomly picks a first and last name for any string fields matching "CEO"
 			</li>
+
+			@await Html.PartialAsync("_TryItOut_Box", (Name: "Companys Example", RowsId: "advNumberOfRows", SeedId: "advRandomSeed", RowsMax: 999))
+
 			<li>
 				The fourth rule, matches any string starting with "Description" and gets a random value from the datasoure called "Description". This is not in the
 				default lists that are "built-in" in SeedPacket. In the constructor for the MultiGenerator, you will see that we are now passing in a custom xml file
 				that has all the source data for our lists. Now we have complete control of our source data and Funcs.RandomElement() can pull from any named element.
 			</li>
+
 			<li>
 				The fifth custom rule is the most interesting and makes sure that any List&lt;Item&gt; fields are filled from a generated list that has been saved in
 				the generator's Cache. We can populate this generated list from another .Seed call and this allows us to have complex, hierarchical data when needed.
 				Note how we can initially declare the rules, but then need to make sure we fill the cached data before the rules are actually run.
 			</li>
+
 			<li>
 				Notice how we set <b>BaseDateTime</b> as the starting point for all generated DateTime values. Similarly, <b>BaseRandom</b> serves as the root of the "Random Tree," 
 				influencing all other random values like <b>RowRandom</b>.
 			</li>
+
 		</ol>
 
 		<partial name="_Result_Advanced" model="Model.ExampleList" />
 
     </div>
-</div>
-
-<div class="row">
-	<div class="col-md-12">
-		<partial name="_HotBox" />
-	</div>
 </div>
 
 <div class="row">
@@ -159,7 +160,11 @@
 
 
 
-@* <div class="code-scrolls-div top-margin"> *@
-@* 	<span class="code-scrolls-span">&#8592 Table Scrolls &#8594</span> *@
-@* </div> *@
+@* Remove for now ==========================================
 
+<div class="row">
+	<div class="col-md-12">
+		<partial name="_HotBox" />
+	</div>
+</div>
+*@

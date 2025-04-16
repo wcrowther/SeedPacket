@@ -43,7 +43,7 @@ public class RowsModel(IWebHostEnvironment webHostEnvironment) : PageModel
 		var baseRandom					= new Random(2342789);
         int baseAccountId				= 3464, baseInvoiceId = 12799, baseItemId = 1098887;
 
-		var basicRules = new List<Rule>()
+		var accountingRules = new List<Rule>()
 		{
 			new (typeof(int),				"AccountId",	g => baseAccountId + g.RowNumber, "AccountId"),
 			new (typeof(DateTime),			"Create%",		g => g.BaseDateTime.AddDays(g.RowRandom.Next(-30, 1)), "DateTimeInLastMonth"),
@@ -53,7 +53,7 @@ public class RowsModel(IWebHostEnvironment webHostEnvironment) : PageModel
 		};
 
 		var gen = new MultiGenerator(xmlSeedSourcePlusPath, baseRandom: baseRandom);
-		gen.Rules.AddRange(basicRules, true);
+		gen.Rules.AddRange(accountingRules, false);
 
 		gen.Cache.InvoiceItems = new List<InvoiceItem>().Seed(baseItemId, baseItemId + (rowCount * 20), gen);
         gen.Cache.Invoices     = new List<Invoice>().Seed(baseInvoiceId, baseInvoiceId + (rowCount * 4), gen);

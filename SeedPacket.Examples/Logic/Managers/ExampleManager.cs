@@ -39,4 +39,16 @@ public class ExampleManager(IWebHostEnvironment webHostEnvironment) : IExampleMa
 
 		return examples;
 	}
+
+	public List<User> GetExampleUsersList(int? rows = 20, int? seed = 1234)
+	{
+		var genRows = rows > 999 || rows < 0 ? 20 : rows;
+		var gen = new MultiGenerator()
+		{
+			BaseRandom = new Random(seed ?? 1234)
+		};
+		var users = new List<User>().Seed(1, genRows, gen);
+
+		return users.ToList();
+	}
 }

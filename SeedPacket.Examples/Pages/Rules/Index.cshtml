@@ -7,7 +7,9 @@
 <div class="row">
     <div class="col-md-12">
         <h2>Rules</h2>
-        <h4 class="byline">the default rule sets without customization</h4>
+        <h4 class="byline bottom-margin-big">
+			How SeedPacket knows which data to create
+		</h4>
     </div>
 </div>
 
@@ -35,9 +37,9 @@
     <div class="col-md-12">
         <h3>Basic Rules Set</h3>
         <p>
-            This set of Rules is one of the choices for the default MultiGenerator, is deterministic, and covers basic default data types.
-            For instance, for a string type, the "String" rule just returns the name of the property that it is running for with the rownumber
-            appended onto the end. Nullable types act in a similar way, but with 1 in 6 null.
+			This set of deterministic rules is a default option for the MultiGenerator, covering basic data 
+			types. For strings, the "String" rule returns the property name with the row number appended. 
+			Nullable types follow the same pattern, with a 1 in 6 chance of being null.
         </p>
     </div>
 </div>
@@ -51,7 +53,8 @@
     <div class="col-md-12">
         <h3>Common Rules Set</h3>
         <p>
-            The Common Rules Set loads the Basic Rules Set and then these additional, more specific, rules are loaded after.
+            The Common Rules Set loads the Basic Rules Set and then these additional, more specific rules 
+			to simulate common scenarios like names, address information, usernames, etc.
         </p>
     </div>
 </div>
@@ -61,7 +64,7 @@
     </div>
 </div>
 
-
+@*
 <div class="row">
     <div class="col-md-12">
         <h3>Creating Custom Rules</h3>
@@ -71,6 +74,7 @@
         </p>
     </div>
 </div>
+*@
 
 <div class="row">
     <div class="col-md-12">
