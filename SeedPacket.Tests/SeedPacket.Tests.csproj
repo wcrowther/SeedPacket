@@ -31,7 +31,7 @@
     <PackageReference Include="NUnit" Version="4.3.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-    <PackageReference Include="WildHare" Version="2.0.1" />
+    <PackageReference Include="WildHare" Version="8.0.0.1" />
   </ItemGroup>
 
   <ItemGroup>

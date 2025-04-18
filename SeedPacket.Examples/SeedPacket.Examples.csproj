@@ -53,7 +53,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.13" />
-    <PackageReference Include="WildHare" Version="2.0.1" />
+    <PackageReference Include="WildHare" Version="8.0.0.1" />
   </ItemGroup>
 
   <ItemGroup>
