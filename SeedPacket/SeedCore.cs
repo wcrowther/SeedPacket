@@ -22,25 +22,19 @@ namespace SeedPacket
 
 			var timer = Stopwatch.StartNew();
 
-
+			// (1) for simple value type like string[] or int[] where CustomName is used for Rule selector.
 			if (generator.CustomName != null)
-            {
-                // for simple value type like string[] or int[] where CustomName is used for Rule selector.
-
-                iEnumerable = CreateValueTypeList<T>(); 
-            }
-            else if (typeof(T).GetConstructor(Type.EmptyTypes) != null) 
-            {
-                // for complex types w/ no CustomName
-
-                iEnumerable = CreateComplexTypeList<T>();
-            }
-            else
-            {
-                // for simpleTypes
-
-                iEnumerable = CreateValueTypeList<T>();  
-            }
+			{
+				iEnumerable = CreateValueTypeList<T>();
+			}
+			else if (typeof(T).GetConstructor(Type.EmptyTypes) != null) // (2) for complex types w/ no CustomName
+			{
+				iEnumerable = CreateComplexTypeList<T>();
+			}
+			else
+			{
+				iEnumerable = CreateValueTypeList<T>();  // (3) for simpleTypes
+			}
 
 			DebugWrite($"SeedList Count: {iEnumerable.Count()} in {timer.ElapsedMilliseconds} ms");
 			DebugWrite("-", 25);
