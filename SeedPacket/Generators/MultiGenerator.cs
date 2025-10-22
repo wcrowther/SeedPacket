@@ -41,10 +41,10 @@ namespace SeedPacket.Generators
                     // No rules loaded. Add rules manually
                     break;
                 case RulesSet.Basic:
-                    Rules.AddBasicRules();
+                    Rules.AddBasicRulesSet();
                     break;
                 case RulesSet.Common:
-                    Rules.AddBasicRules();
+                    Rules.AddBasicRulesSet();
                     AddCommonRulesByCulture(Rules);
                     break;
                 default:

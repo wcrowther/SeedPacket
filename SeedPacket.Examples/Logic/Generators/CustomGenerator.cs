@@ -27,27 +27,27 @@ namespace SeedPacket.Examples.Logic.Generators
                     break;
 
                 case RulesSet.Basic:
-                    Rules.AddBasicRules();
+                    Rules.AddBasicRulesSet();
                     break;
 
                 case RulesSet.Common:
-                    Rules.AddBasicRules();
+                    Rules.AddBasicRulesSet();
                     Rules.AddCommonRules();
                     break;
 
                 case RulesSet.Advanced:  // <-- Used by default
-                    Rules.AddBasicRules();
+                    Rules.AddBasicRulesSet();
                     Rules.AddCommonRules();
                     AddAdvancedRules(Rules);
                     break;
 
                 case RulesSet.UnitTest:
-                    Rules.AddBasicRules();
+                    Rules.AddBasicRulesSet();
                         // --> Can Add or change Rules here
                     break;
 
                 case RulesSet.Custom:
-                    Rules.AddBasicRules();
+                    Rules.AddBasicRulesSet();
                     Rules.AddCommonRules();
                         // --> Can Add or change Rules here
                     break;

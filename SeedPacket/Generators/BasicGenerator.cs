@@ -15,7 +15,7 @@ namespace SeedPacket.Generators
             base.baseDateTime = baseDateTime;
             GetNextRowRandom();
 
-            Rules.AddBasicRules();
+            Rules.AddBasicRulesSet();
         }
     }
 } 

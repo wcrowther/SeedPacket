@@ -12,9 +12,6 @@ namespace SeedPacket.Tests.Model
 
         public DateTime? Created { get; set; }
 
-        public override string ToString()
-        {
-            return $"{ItemName} ({ItemId})";
-        }
-    }
+		public override string ToString() => $"{ItemName} ({ItemId})";
+	}
 }
