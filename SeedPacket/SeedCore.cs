@@ -1,3 +1,4 @@
+using SeedPacket.Extensions;
 using SeedPacket.Generators;
 using SeedPacket.Interfaces;
 using System;
@@ -27,7 +28,7 @@ namespace SeedPacket
 			{
 				iEnumerable = CreateValueTypeList<T>();
 			}
-			else if (typeof(T).GetConstructor(Type.EmptyTypes) != null) // (2) for complex types w/ no CustomName
+			else if (typeof(T).HasEmptyConstructor()) // (2) for complex types (with new()) w/ no CustomName
 			{
 				iEnumerable = CreateComplexTypeList<T>();
 			}
@@ -97,7 +98,7 @@ namespace SeedPacket
                 TValue seedValue;
 
 
-                if (typeof(TValue).GetConstructor(Type.EmptyTypes) != null)
+                if (typeof(TValue).HasEmptyConstructor())
                 {
                     seedValue = CreateComplexClassRow<TValue>(generator, isFirstRow);
                 }
