@@ -37,6 +37,18 @@ namespace SeedPacket
 
         public bool IsMatch (Type propType, string propName)
         {
+            // Special case: typeof(object) as a catch-all for any class type
+            // This allows CreateComplexObject to work as a fallback rule
+            if (typeMatch == typeof(object))
+            {
+                // Only match class types (not value types, not strings)
+                if (propType.IsClass && propType != typeof(string))
+                {
+                    return NameMatches(nameMatch, propName.IfNullOrEmpty().ToLower());
+                }
+                return false;
+            }
+
             // Try to match on Interface if typeMatch is interface
             if (typeMatch.IsInterface && propType.GetInterfaces().Any(a => a.Name == typeMatch.Name))
             {

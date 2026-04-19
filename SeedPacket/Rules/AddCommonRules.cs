@@ -7,11 +7,14 @@ using System.Collections.Generic;
 namespace SeedPacket
 {
 	public static partial class RulesExtensions
-    {
-        public static void AddCommonRules (this IRules rules, bool overwrite =  true )
-        {
-            var commonRules = new List<Rule>(){
-                new (typeof(string),    "",                                 g => g.GetElementRandom(),                  "String",               "Random string from data or default" ),
+	{
+		public static void AddCommonRules (this IRules rules, bool overwrite =  true )
+		{
+			var commonRules = new List<Rule>(){
+				// Complex Object rule - catch-all for any class type without a specific rule (checked last)
+				new (typeof(object),    "",                                 g => g.CreateComplexObject(),               "ComplexObject",        "Recursively populate complex objects using existing rules" ),
+
+				new (typeof(string),    "",                                 g => g.GetElementRandom(),                  "String",               "Random string from data or default" ),
                 new (typeof(string),    "%firstname%,%givenname%",          g => g.GetElementRandom("FirstName"),       "FirstName",            "Random firstName" ),
                 new (typeof(string),    "%lastname%,%surname%",             g => g.GetElementRandom("LastName"),        "LastName",             "Random lastname" ),
                 new (typeof(string),    "%fullname%",                       g => g.RandomFullName(),                    "FullName",             "Random fullName" ),
